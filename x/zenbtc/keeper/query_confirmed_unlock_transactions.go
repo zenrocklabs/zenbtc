@@ -10,7 +10,8 @@ import (
 	"google.golang.org/grpc/status"
 
 	validationtypes "github.com/Zenrock-Foundation/zrchain/v4/x/validation/types"
-	"types"
+
+	"github.com/zenrocklabs/zenbtc/x/zenbtc/types"
 )
 
 func (k Keeper) ConfirmedUnlockTransactions(goCtx context.Context, req *types.QueryConfirmedUnlockTransactionsRequest) (*types.QueryConfirmedUnlockTransactionsResponse, error) {

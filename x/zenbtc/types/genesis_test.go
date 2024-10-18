@@ -3,8 +3,9 @@ package types_test
 import (
 	"testing"
 
-	"types"
 	"github.com/stretchr/testify/require"
+
+	"github.com/zenrocklabs/zenbtc/x/zenbtc/types"
 )
 
 func TestGenesisState_Validate(t *testing.T) {

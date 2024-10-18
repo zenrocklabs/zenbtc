@@ -7,8 +7,9 @@ import (
 	"github.com/stretchr/testify/require"
 
 	keepertest "github.com/Zenrock-Foundation/zrchain/v4/testutil/keeper"
-	"keeper"
-	"types"
+
+	"github.com/zenrocklabs/zenbtc/x/zenbtc/keeper"
+	"github.com/zenrocklabs/zenbtc/x/zenbtc/types"
 )
 
 func setupMsgServer(t testing.TB) (keeper.Keeper, types.MsgServer, context.Context) {

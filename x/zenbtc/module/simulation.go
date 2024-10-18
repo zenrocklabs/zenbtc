@@ -9,8 +9,10 @@ import (
 	"github.com/cosmos/cosmos-sdk/x/simulation"
 
 	"github.com/Zenrock-Foundation/zrchain/v4/testutil/sample"
-	zenbtcsimulation "simulation"
-	"types"
+
+	zenbtcsimulation "github.com/zenrocklabs/zenbtc/x/zenbtc/simulation"
+
+	"github.com/zenrocklabs/zenbtc/x/zenbtc/types"
 )
 
 // avoid unused import issue

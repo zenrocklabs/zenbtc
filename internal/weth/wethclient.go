@@ -10,8 +10,8 @@ import (
 	"github.com/ethereum/go-ethereum/ethclient"
 	"github.com/pkg/errors"
 
-	"chain"
-	"contracts"
+	"github.com/zenrocklabs/zenbtc/internal/chain"
+	"github.com/zenrocklabs/zenbtc/internal/contracts"
 
 	"github.com/Layr-Labs/eigensdk-go/chainio/clients/wallet"
 	"github.com/Layr-Labs/eigensdk-go/chainio/txmgr"

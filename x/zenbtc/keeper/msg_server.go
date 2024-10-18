@@ -1,8 +1,6 @@
 package keeper
 
-import (
-	"types"
-)
+import "github.com/zenrocklabs/zenbtc/x/zenbtc/types"
 
 type msgServer struct {
 	Keeper

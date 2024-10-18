@@ -7,9 +7,8 @@ import (
 	"net/http"
 	"time"
 
-	"chain"
-
 	"github.com/pkg/errors"
+	"github.com/zenrocklabs/zenbtc/internal/chain"
 
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/core/types"

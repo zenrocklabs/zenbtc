@@ -5,9 +5,11 @@ import (
 	"fmt"
 
 	"cosmossdk.io/collections"
-	validationtypes "github.com/Zenrock-Foundation/zrchain/v4/x/validation/types"
-	"types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
+
+	validationtypes "github.com/Zenrock-Foundation/zrchain/v4/x/validation/types"
+
+	"github.com/zenrocklabs/zenbtc/x/zenbtc/types"
 )
 
 func (k msgServer) SubmitUnlockTransaction(goCtx context.Context, msg *types.MsgSubmitUnlockTransaction) (*types.MsgSubmitUnlockTransactionResponse, error) {

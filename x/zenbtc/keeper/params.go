@@ -5,7 +5,7 @@ import (
 
 	"github.com/cosmos/cosmos-sdk/runtime"
 
-	"types"
+	"github.com/zenrocklabs/zenbtc/x/zenbtc/types"
 )
 
 // GetParams get all parameters as types.Params

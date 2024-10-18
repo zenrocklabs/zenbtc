@@ -3,11 +3,12 @@ package keeper
 import (
 	"context"
 
-	sdk "github.com/cosmos/cosmos-sdk/types"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 
-	"types"
+	sdk "github.com/cosmos/cosmos-sdk/types"
+
+	"github.com/zenrocklabs/zenbtc/x/zenbtc/types"
 )
 
 func (k Keeper) Params(goCtx context.Context, req *types.QueryParamsRequest) (*types.QueryParamsResponse, error) {

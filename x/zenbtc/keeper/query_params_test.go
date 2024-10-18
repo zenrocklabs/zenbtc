@@ -6,7 +6,8 @@ import (
 	"github.com/stretchr/testify/require"
 
 	keepertest "github.com/Zenrock-Foundation/zrchain/v4/testutil/keeper"
-	"types"
+
+	"github.com/zenrocklabs/zenbtc/x/zenbtc/types"
 )
 
 func TestParamsQuery(t *testing.T) {

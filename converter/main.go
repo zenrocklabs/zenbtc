@@ -9,13 +9,13 @@ import (
 
 	"github.com/ethereum/go-ethereum/ethclient"
 
-	eigensdkLogger "github.com/Layr-Labs/eigensdk-go/logging"
+	"github.com/zenrocklabs/zenbtc/internal/chain"
+	"github.com/zenrocklabs/zenbtc/internal/config"
+	"github.com/zenrocklabs/zenbtc/internal/eigenlayer"
+	"github.com/zenrocklabs/zenbtc/internal/thorchain"
+	"github.com/zenrocklabs/zenbtc/internal/weth"
 
-	"chain"
-	"config"
-	"eigenlayer"
-	"thorchain"
-	"weth"
+	eigensdkLogger "github.com/Layr-Labs/eigensdk-go/logging"
 
 	"github.com/pkg/errors"
 	"github.com/urfave/cli/v2"

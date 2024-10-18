@@ -3,11 +3,12 @@ package simulation
 import (
 	"math/rand"
 
-	"keeper"
-	"types"
 	"github.com/cosmos/cosmos-sdk/baseapp"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	simtypes "github.com/cosmos/cosmos-sdk/types/simulation"
+
+	"github.com/zenrocklabs/zenbtc/x/zenbtc/keeper"
+	"github.com/zenrocklabs/zenbtc/x/zenbtc/types"
 )
 
 func SimulateMsgSubmitUnlockTransaction(

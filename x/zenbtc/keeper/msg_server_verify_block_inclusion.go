@@ -12,7 +12,8 @@ import (
 
 	"github.com/Zenrock-Foundation/zrchain/v4/bitcoin"
 	treasurytypes "github.com/Zenrock-Foundation/zrchain/v4/x/treasury/types"
-	"types"
+
+	"github.com/zenrocklabs/zenbtc/x/zenbtc/types"
 )
 
 func (k msgServer) VerifyDepositBlockInclusion(goCtx context.Context, msg *types.MsgVerifyDepositBlockInclusion) (*types.MsgVerifyDepositBlockInclusionResponse, error) {

@@ -3,10 +3,12 @@ package keeper
 import (
 	"context"
 
-	"types"
-	sdk "github.com/cosmos/cosmos-sdk/types"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
+
+	sdk "github.com/cosmos/cosmos-sdk/types"
+
+	"github.com/zenrocklabs/zenbtc/x/zenbtc/types"
 )
 
 func (k Keeper) LockTransactions(goCtx context.Context, req *types.QueryLockTransactionsRequest) (*types.QueryLockTransactionsResponse, error) {

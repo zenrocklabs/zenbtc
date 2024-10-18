@@ -17,8 +17,9 @@ import (
 
 	treasury "github.com/Zenrock-Foundation/zrchain/v4/x/treasury/keeper"
 	validation "github.com/Zenrock-Foundation/zrchain/v4/x/validation/keeper"
-	"keeper"
-	"types"
+
+	"github.com/zenrocklabs/zenbtc/x/zenbtc/keeper"
+	"github.com/zenrocklabs/zenbtc/x/zenbtc/types"
 )
 
 var (
