@@ -8,6 +8,7 @@ import (
 	// "github.com/Zenrock-Foundation/zrchain/v4/sidecar/proto/api"
 	// "github.com/btcsuite/btcd/chaincfg/chainhash"
 
+	"cosmossdk.io/collections"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
 	"github.com/Zenrock-Foundation/zrchain/v4/bitcoin"
@@ -29,7 +30,6 @@ func (k msgServer) VerifyDepositBlockInclusion(goCtx context.Context, msg *types
 	// 	}
 	// }
 	// END of debug code
-
 	if err != nil {
 		return nil, err
 	}
@@ -81,7 +81,10 @@ func (k msgServer) VerifyDepositBlockInclusion(goCtx context.Context, msg *types
 
 	pendingTxs, err := k.validationKeeper.PendingMintTransactions.Get(ctx)
 	if err != nil {
-		return nil, err
+		if !errors.Is(err, collections.ErrNotFound) {
+			return nil, err
+		}
+		pendingTxs = treasurytypes.PendingMintTransactions{Txs: make([]*treasurytypes.PendingMintTransaction, 1)}
 	}
 	pendingTxs.Txs = append(pendingTxs.Txs, &treasurytypes.PendingMintTransaction{
 		ChainId:          q.Response.Key.ZenbtcMetadata.ChainId,
