@@ -3,8 +3,10 @@ package keeper
 import (
 	"context"
 	"errors"
+	"github.com/Zenrock-Foundation/zrchain/v4/sidecar/proto/api"
+	"github.com/btcsuite/btcd/chaincfg/chainhash"
 
-	// "net/rpc"
+	"net/rpc"
 	// "github.com/Zenrock-Foundation/zrchain/v4/sidecar/proto/api"
 	// "github.com/btcsuite/btcd/chaincfg/chainhash"
 
@@ -22,13 +24,13 @@ func (k msgServer) VerifyDepositBlockInclusion(goCtx context.Context, msg *types
 
 	blockHeader, err := k.validationKeeper.BtcBlockHeaders.Get(ctx, msg.BlockHeight)
 	//try and get missing Blockheader over RPC - WARNING for debugging only!!!!
-	// if err != nil {
-	// 	bh, _ := debugRetrieveBlockHeaderViaRPC(msg.ChainName, msg.BlockHeight)
-	// 	if bh != nil {
-	// 		err = nil
-	// 		blockHeader = *bh
-	// 	}
-	// }
+	if err != nil {
+		bh, _ := debugRetrieveBlockHeaderViaRPC(msg.ChainName, msg.BlockHeight)
+		if bh != nil {
+			err = nil
+			blockHeader = *bh
+		}
+	}
 	// END of debug code
 	if err != nil {
 		return nil, err
@@ -84,7 +86,7 @@ func (k msgServer) VerifyDepositBlockInclusion(goCtx context.Context, msg *types
 		if !errors.Is(err, collections.ErrNotFound) {
 			return nil, err
 		}
-		pendingTxs = treasurytypes.PendingMintTransactions{Txs: make([]*treasurytypes.PendingMintTransaction, 1)}
+		pendingTxs = treasurytypes.PendingMintTransactions{Txs: []*treasurytypes.PendingMintTransaction{}}
 	}
 	pendingTxs.Txs = append(pendingTxs.Txs, &treasurytypes.PendingMintTransaction{
 		ChainId:          q.Response.Key.ZenbtcMetadata.ChainId,
@@ -105,31 +107,34 @@ func (k msgServer) VerifyDepositBlockInclusion(goCtx context.Context, msg *types
 	return &types.MsgVerifyDepositBlockInclusionResponse{}, nil
 }
 
-// func debugRetrieveBlockHeaderViaRPC(chainName string, blockHeight int64) (*api.BTCBlockHeader, error) {
-// 	type GetBlockHeaderByHeightArgs struct {
-// 		ChainName string
-// 		Height    int64
-// 	}
+func debugRetrieveBlockHeaderViaRPC(chainName string, blockHeight int64) (*api.BTCBlockHeader, error) {
+	if chainName == "mainnet" {
+		return nil, errors.New("cannot retrieve block header from mainnet")
+	}
+	type GetBlockHeaderByHeightArgs struct {
+		ChainName string
+		Height    int64
+	}
 
-// 	type GetBlockHeaderByHeightReply struct {
-// 		BlockHeader *api.BTCBlockHeader
-// 		BlockHash   *chainhash.Hash
-// 		Height      int32
-// 	}
+	type GetBlockHeaderByHeightReply struct {
+		BlockHeader *api.BTCBlockHeader
+		BlockHash   *chainhash.Hash
+		Height      int32
+	}
 
-// 	args := GetBlockHeaderByHeightArgs{
-// 		ChainName: chainName,
-// 		Height:    blockHeight,
-// 	}
-// 	var resp GetBlockHeaderByHeightReply
-// 	client, err := rpc.DialHTTP("tcp", "localhost"+":12345")
-// 	if err != nil {
-// 		return nil, err
-// 	}
+	args := GetBlockHeaderByHeightArgs{
+		ChainName: chainName,
+		Height:    blockHeight,
+	}
+	var resp GetBlockHeaderByHeightReply
+	client, err := rpc.DialHTTP("tcp", "localhost"+":12345")
+	if err != nil {
+		return nil, err
+	}
 
-// 	err = client.Call("NeutrinoServer.BlockHeaderByHeight", args, &resp)
-// 	if err != nil {
-// 		return nil, err
-// 	}
-// 	return resp.BlockHeader, nil
-// }
+	err = client.Call("NeutrinoServer.BlockHeaderByHeight", args, &resp)
+	if err != nil {
+		return nil, err
+	}
+	return resp.BlockHeader, nil
+}
