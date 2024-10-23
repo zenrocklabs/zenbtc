@@ -3,6 +3,7 @@ package keeper
 import (
 	"context"
 	"errors"
+
 	"github.com/Zenrock-Foundation/zrchain/v4/sidecar/proto/api"
 	"github.com/btcsuite/btcd/chaincfg/chainhash"
 
@@ -99,6 +100,10 @@ func (k msgServer) VerifyDepositBlockInclusion(goCtx context.Context, msg *types
 	if err := k.validationKeeper.PendingMintTransactions.Set(ctx, pendingTxs); err != nil {
 		return nil, err
 	}
+
+	if err := k.validationKeeper.RequestedEthereumNonceHeights.Set(ctx, uint64(ctx.BlockHeight())); err != nil {
+		return nil, err
+	} // TODO: change this to store a bool instead of heights
 
 	if err := k.LockTransactionStore.Set(ctx, msg.RawTx); err != nil {
 		return nil, err
