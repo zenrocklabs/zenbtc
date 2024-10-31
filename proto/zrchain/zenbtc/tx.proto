@@ -18,7 +18,6 @@ service Msg {
   // parameters. The authority defaults to the x/gov module account.
   rpc UpdateParams(MsgUpdateParams) returns (MsgUpdateParamsResponse);
   rpc VerifyDepositBlockInclusion(MsgVerifyDepositBlockInclusion) returns (MsgVerifyDepositBlockInclusionResponse);
-  rpc SubmitUnlockTransaction(MsgSubmitUnlockTransaction) returns (MsgSubmitUnlockTransactionResponse);
 }
 
 // MsgUpdateParams is the Msg/UpdateParams request type.
@@ -55,14 +54,3 @@ message MsgVerifyDepositBlockInclusion {
 }
 
 message MsgVerifyDepositBlockInclusionResponse {}
-
-message MsgSubmitUnlockTransaction {
-  option (cosmos.msg.v1.signer) = "creator";
-  string creator = 1;
-  string chain = 2;
-  string txID = 3;
-  string withdrawalAddr = 4;
-  uint64 amount = 5;
-}
-
-message MsgSubmitUnlockTransactionResponse {}

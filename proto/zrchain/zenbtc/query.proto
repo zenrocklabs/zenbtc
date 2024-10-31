@@ -14,17 +14,17 @@ option go_package = "github.com/zenrocklabs/zenbtc/x/zenbtc/types";
 service Query {
   // Parameters queries the parameters of the module.
   rpc Params(QueryParamsRequest) returns (QueryParamsResponse) {
-    option (google.api.http).get = "/zrchain/v4/zenbtc/params";
+    option (google.api.http).get = "/zenbtc/params";
   }
 
   // Queries a list of LockTransactions items.
   rpc LockTransactions(QueryLockTransactionsRequest) returns (QueryLockTransactionsResponse) {
-    option (google.api.http).get = "/zrchain/v4/zenbtc/lock_transactions";
+    option (google.api.http).get = "/zenbtc/lock_transactions";
   }
 
   // Queries a list of ConfirmedUnlockTransactions items.
   rpc ConfirmedUnlockTransactions(QueryConfirmedUnlockTransactionsRequest) returns (QueryConfirmedUnlockTransactionsResponse) {
-    option (google.api.http).get = "/zrchain/v4/zenbtc/confirmed_solana_unlock_transactions";
+    option (google.api.http).get = "/zenbtc/confirmed_solana_unlock_transactions";
   }
 }
 
