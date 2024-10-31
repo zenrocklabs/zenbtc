@@ -94,14 +94,6 @@ func (am AppModule) ProposalMsgs(simState module.SimulationState) []simtypes.Wei
 				return nil
 			},
 		),
-		simulation.NewWeightedProposalMsg(
-			opWeightMsgSubmitUnlockTransaction,
-			defaultWeightMsgSubmitUnlockTransaction,
-			func(r *rand.Rand, ctx sdk.Context, accs []simtypes.Account) sdk.Msg {
-				zenbtcsimulation.SimulateMsgSubmitUnlockTransaction(am.accountKeeper, am.bankKeeper, am.keeper)
-				return nil
-			},
-		),
 		// this line is used by starport scaffolding # simapp/module/OpMsg
 	}
 }

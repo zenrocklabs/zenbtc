@@ -56,17 +56,6 @@ func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 						{ProtoField: "amount"},
 					},
 				},
-				{
-					RpcMethod: "SubmitUnlockTransaction",
-					Use:       "submit-unlock-transaction",
-					Short:     "Send a SubmitUnlockTransaction tx",
-					PositionalArgs: []*autocliv1.PositionalArgDescriptor{
-						{ProtoField: "chain"},
-						{ProtoField: "txID"},
-						{ProtoField: "withdrawalAddr"},
-						{ProtoField: "amount"},
-					},
-				},
 				// this line is used by ignite scaffolding # autocli/tx
 			},
 		},
