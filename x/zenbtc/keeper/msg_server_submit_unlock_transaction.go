@@ -7,7 +7,7 @@ import (
 	"cosmossdk.io/collections"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	validationtypes "github.com/Zenrock-Foundation/zrchain/v4/x/validation/types"
+	validationtypes "github.com/Zenrock-Foundation/zrchain/v5/x/validation/types"
 
 	"github.com/zenrocklabs/zenbtc/x/zenbtc/types"
 )
