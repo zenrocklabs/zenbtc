@@ -3,18 +3,15 @@ package keeper
 import (
 	"context"
 	"errors"
-
-	"github.com/Zenrock-Foundation/zrchain/v5/sidecar/proto/api"
-	"github.com/btcsuite/btcd/chaincfg/chainhash"
-
 	"net/rpc"
-	// "github.com/Zenrock-Foundation/zrchain/v5/sidecar/proto/api"
-	// "github.com/btcsuite/btcd/chaincfg/chainhash"
+
+	"github.com/btcsuite/btcd/chaincfg/chainhash"
 
 	"cosmossdk.io/collections"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
 	"github.com/Zenrock-Foundation/zrchain/v5/bitcoin"
+	"github.com/Zenrock-Foundation/zrchain/v5/sidecar/proto/api"
 	treasurytypes "github.com/Zenrock-Foundation/zrchain/v5/x/treasury/types"
 
 	"github.com/zenrocklabs/zenbtc/x/zenbtc/types"
@@ -25,13 +22,13 @@ func (k msgServer) VerifyDepositBlockInclusion(goCtx context.Context, msg *types
 
 	blockHeader, err := k.validationKeeper.BtcBlockHeaders.Get(ctx, msg.BlockHeight)
 	//try and get missing Blockheader over RPC - WARNING for debugging only!!!!
-	if err != nil {
-		bh, _ := debugRetrieveBlockHeaderViaRPC(msg.ChainName, msg.BlockHeight)
-		if bh != nil {
-			err = nil
-			blockHeader = *bh
-		}
-	}
+	// if err != nil {
+	// 	bh, _ := debugRetrieveBlockHeaderViaRPC(msg.ChainName, msg.BlockHeight)
+	// 	if bh != nil {
+	// 		err = nil
+	// 		blockHeader = *bh
+	// 	}
+	// }
 	// END of debug code
 	if err != nil {
 		return nil, err
