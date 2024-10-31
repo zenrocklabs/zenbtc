@@ -98,9 +98,9 @@ func (k msgServer) VerifyDepositBlockInclusion(goCtx context.Context, msg *types
 		return nil, err
 	}
 
-	if err := k.validationKeeper.RequestedEthereumNonceHeights.Set(ctx, uint64(ctx.BlockHeight())); err != nil {
+	if err := k.validationKeeper.EthereumNonceRequested.Set(ctx, true); err != nil {
 		return nil, err
-	} // TODO: change this to store a bool instead of heights
+	}
 
 	if err := k.LockTransactionStore.Set(ctx, msg.RawTx); err != nil {
 		return nil, err

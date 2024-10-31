@@ -32,9 +32,9 @@ require (
 	google.golang.org/genproto/googleapis/api v0.0.0-20241007155032-5fefd90f89a9
 	google.golang.org/grpc v1.67.1
 	gopkg.in/yaml.v2 v2.4.0
+	github.com/Zenrock-Foundation/zrchain/v5 v5.0.0
+	gopkg.in/yaml.v3 v3.0.1
 )
-
-require github.com/Zenrock-Foundation/zrchain/v5 v5.0.0
 
 require (
 	cosmossdk.io/depinject v1.0.0 // indirect
@@ -235,7 +235,6 @@ require (
 	google.golang.org/genproto/googleapis/rpc v0.0.0-20241007155032-5fefd90f89a9 // indirect
 	google.golang.org/protobuf v1.35.1 // indirect
 	gopkg.in/ini.v1 v1.67.0 // indirect
-	gopkg.in/yaml.v3 v3.0.1 // indirect
 	gotest.tools/v3 v3.5.1 // indirect
 	nhooyr.io/websocket v1.8.17 // indirect
 	pgregory.net/rapid v1.1.0 // indirect
