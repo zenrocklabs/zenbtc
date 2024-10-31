@@ -5,8 +5,8 @@ import (
 
 	"github.com/stretchr/testify/require"
 
-	keepertest "github.com/Zenrock-Foundation/zrchain/v4/testutil/keeper"
-	"github.com/Zenrock-Foundation/zrchain/v4/testutil/nullify"
+	keepertest "github.com/Zenrock-Foundation/zrchain/v5/testutil/keeper"
+	"github.com/Zenrock-Foundation/zrchain/v5/testutil/nullify"
 
 	zenbtc "github.com/zenrocklabs/zenbtc/x/zenbtc/module"
 	"github.com/zenrocklabs/zenbtc/x/zenbtc/types"

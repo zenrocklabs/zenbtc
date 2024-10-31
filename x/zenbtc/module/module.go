@@ -15,12 +15,14 @@ import (
 
 	// this line is used by starport scaffolding # 1
 
-	treasury "github.com/Zenrock-Foundation/zrchain/v4/x/treasury/keeper"
-	validation "github.com/Zenrock-Foundation/zrchain/v4/x/validation/keeper"
+	treasury "github.com/Zenrock-Foundation/zrchain/v5/x/treasury/keeper"
+	validation "github.com/Zenrock-Foundation/zrchain/v5/x/validation/keeper"
 
 	"github.com/zenrocklabs/zenbtc/x/zenbtc/keeper"
 	"github.com/zenrocklabs/zenbtc/x/zenbtc/types"
 )
+
+const consensusVersion = 1
 
 var (
 	_ module.AppModuleBasic      = (*AppModule)(nil)
@@ -144,7 +146,7 @@ func (am AppModule) ExportGenesis(ctx sdk.Context, cdc codec.JSONCodec) json.Raw
 // ConsensusVersion is a sequence number for state-breaking change of the module.
 // It should be incremented on each consensus-breaking change introduced by the module.
 // To avoid wrong/empty versions, the initial version should be set to 1.
-func (AppModule) ConsensusVersion() uint64 { return 1 }
+func (AppModule) ConsensusVersion() uint64 { return consensusVersion }
 
 // BeginBlock contains the logic that is automatically triggered at the beginning of each block.
 // The begin block implementation is optional.
