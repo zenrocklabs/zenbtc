@@ -8,7 +8,7 @@ import (
 	simtypes "github.com/cosmos/cosmos-sdk/types/simulation"
 	"github.com/cosmos/cosmos-sdk/x/simulation"
 
-	"github.com/Zenrock-Foundation/zrchain/v5/testutil/sample"
+	"github.com/Zenrock-Foundation/zrchain/v4/testutil/sample"
 
 	zenbtcsimulation "github.com/zenrocklabs/zenbtc/x/zenbtc/simulation"
 
@@ -65,17 +65,6 @@ func (am AppModule) WeightedOperations(simState module.SimulationState) []simtyp
 	operations = append(operations, simulation.NewWeightedOperation(
 		weightMsgVerifyDepositBlockInclusion,
 		zenbtcsimulation.SimulateMsgVerifyDepositBlockInclusion(am.accountKeeper, am.bankKeeper, am.keeper),
-	))
-
-	var weightMsgSubmitUnlockTransaction int
-	simState.AppParams.GetOrGenerate(opWeightMsgSubmitUnlockTransaction, &weightMsgSubmitUnlockTransaction, nil,
-		func(_ *rand.Rand) {
-			weightMsgSubmitUnlockTransaction = defaultWeightMsgSubmitUnlockTransaction
-		},
-	)
-	operations = append(operations, simulation.NewWeightedOperation(
-		weightMsgSubmitUnlockTransaction,
-		zenbtcsimulation.SimulateMsgSubmitUnlockTransaction(am.accountKeeper, am.bankKeeper, am.keeper),
 	))
 
 	// this line is used by starport scaffolding # simapp/module/operation

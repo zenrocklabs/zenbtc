@@ -18,6 +18,7 @@ require (
 	github.com/Layr-Labs/eigenlayer-contracts v0.4.1-holesky-pepe.0.20240813143901-00fc4b95e9c1
 	github.com/Layr-Labs/eigenlayer-rewards-proofs v0.2.13
 	github.com/Layr-Labs/eigensdk-go v0.1.12
+	github.com/Zenrock-Foundation/zrchain/v4 v4.0.2
 	github.com/btcsuite/btcd/chaincfg/chainhash v1.1.0
 	github.com/cosmos/cosmos-proto v1.0.0-beta.5
 	github.com/cosmos/cosmos-sdk v0.50.9
@@ -31,8 +32,8 @@ require (
 	github.com/urfave/cli/v2 v2.27.4
 	google.golang.org/genproto/googleapis/api v0.0.0-20241007155032-5fefd90f89a9
 	google.golang.org/grpc v1.67.1
+	google.golang.org/protobuf v1.35.1
 	gopkg.in/yaml.v2 v2.4.0
-	github.com/Zenrock-Foundation/zrchain/v5 v5.0.0
 	gopkg.in/yaml.v3 v3.0.1
 )
 
@@ -233,7 +234,6 @@ require (
 	golang.org/x/text v0.19.0 // indirect
 	google.golang.org/genproto v0.0.0-20240903143218-8af14fe29dc1 // indirect
 	google.golang.org/genproto/googleapis/rpc v0.0.0-20241007155032-5fefd90f89a9 // indirect
-	google.golang.org/protobuf v1.35.1 // indirect
 	gopkg.in/ini.v1 v1.67.0 // indirect
 	gotest.tools/v3 v3.5.1 // indirect
 	nhooyr.io/websocket v1.8.17 // indirect

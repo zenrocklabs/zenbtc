@@ -10,8 +10,8 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/zenrocklabs/zenbtc/x/zenbtc/types"
 
-	treasury "github.com/Zenrock-Foundation/zrchain/v5/x/treasury/keeper"
-	validation "github.com/Zenrock-Foundation/zrchain/v5/x/validation/keeper"
+	treasury "github.com/Zenrock-Foundation/zrchain/v4/x/treasury/keeper"
+	validation "github.com/Zenrock-Foundation/zrchain/v4/x/validation/keeper"
 )
 
 type (

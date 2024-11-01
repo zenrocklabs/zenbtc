@@ -10,9 +10,9 @@ import (
 	"cosmossdk.io/collections"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	"github.com/Zenrock-Foundation/zrchain/v5/bitcoin"
-	"github.com/Zenrock-Foundation/zrchain/v5/sidecar/proto/api"
-	treasurytypes "github.com/Zenrock-Foundation/zrchain/v5/x/treasury/types"
+	"github.com/Zenrock-Foundation/zrchain/v4/bitcoin"
+	"github.com/Zenrock-Foundation/zrchain/v4/sidecar/proto/api"
+	treasurytypes "github.com/Zenrock-Foundation/zrchain/v4/x/treasury/types"
 
 	"github.com/zenrocklabs/zenbtc/x/zenbtc/types"
 )
@@ -98,9 +98,9 @@ func (k msgServer) VerifyDepositBlockInclusion(goCtx context.Context, msg *types
 		return nil, err
 	}
 
-	if err := k.validationKeeper.EthereumNonceRequested.Set(ctx, true); err != nil {
-		return nil, err
-	}
+	// if err := k.validationKeeper.EthereumNonceRequested.Set(ctx, true); err != nil {
+	// 	return nil, err
+	// }
 
 	if err := k.LockTransactionStore.Set(ctx, msg.RawTx); err != nil {
 		return nil, err

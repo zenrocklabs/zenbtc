@@ -446,7 +446,6 @@ type MsgClient interface {
 	// parameters. The authority defaults to the x/gov module account.
 	UpdateParams(ctx context.Context, in *MsgUpdateParams, opts ...grpc.CallOption) (*MsgUpdateParamsResponse, error)
 	VerifyDepositBlockInclusion(ctx context.Context, in *MsgVerifyDepositBlockInclusion, opts ...grpc.CallOption) (*MsgVerifyDepositBlockInclusionResponse, error)
-	SubmitUnlockTransaction(ctx context.Context, in *MsgSubmitUnlockTransaction, opts ...grpc.CallOption) (*MsgSubmitUnlockTransactionResponse, error)
 }
 
 type msgClient struct {
@@ -475,22 +474,12 @@ func (c *msgClient) VerifyDepositBlockInclusion(ctx context.Context, in *MsgVeri
 	return out, nil
 }
 
-func (c *msgClient) SubmitUnlockTransaction(ctx context.Context, in *MsgSubmitUnlockTransaction, opts ...grpc.CallOption) (*MsgSubmitUnlockTransactionResponse, error) {
-	out := new(MsgSubmitUnlockTransactionResponse)
-	err := c.cc.Invoke(ctx, "/zrchain.zenbtc.Msg/SubmitUnlockTransaction", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 // MsgServer is the server API for Msg service.
 type MsgServer interface {
 	// UpdateParams defines a (governance) operation for updating the module
 	// parameters. The authority defaults to the x/gov module account.
 	UpdateParams(context.Context, *MsgUpdateParams) (*MsgUpdateParamsResponse, error)
 	VerifyDepositBlockInclusion(context.Context, *MsgVerifyDepositBlockInclusion) (*MsgVerifyDepositBlockInclusionResponse, error)
-	SubmitUnlockTransaction(context.Context, *MsgSubmitUnlockTransaction) (*MsgSubmitUnlockTransactionResponse, error)
 }
 
 // UnimplementedMsgServer can be embedded to have forward compatible implementations.
@@ -547,24 +536,6 @@ func _Msg_VerifyDepositBlockInclusion_Handler(srv interface{}, ctx context.Conte
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Msg_SubmitUnlockTransaction_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(MsgSubmitUnlockTransaction)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(MsgServer).SubmitUnlockTransaction(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/zrchain.zenbtc.Msg/SubmitUnlockTransaction",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(MsgServer).SubmitUnlockTransaction(ctx, req.(*MsgSubmitUnlockTransaction))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 var Msg_serviceDesc = _Msg_serviceDesc
 var _Msg_serviceDesc = grpc.ServiceDesc{
 	ServiceName: "zrchain.zenbtc.Msg",
@@ -577,10 +548,6 @@ var _Msg_serviceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "VerifyDepositBlockInclusion",
 			Handler:    _Msg_VerifyDepositBlockInclusion_Handler,
-		},
-		{
-			MethodName: "SubmitUnlockTransaction",
-			Handler:    _Msg_SubmitUnlockTransaction_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

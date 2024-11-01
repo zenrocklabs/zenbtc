@@ -9,7 +9,7 @@ import (
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 
-	validationtypes "github.com/Zenrock-Foundation/zrchain/v5/x/validation/types"
+	validationtypes "github.com/Zenrock-Foundation/zrchain/v4/x/validation/types"
 
 	"github.com/zenrocklabs/zenbtc/x/zenbtc/types"
 )

@@ -5,7 +5,7 @@ import (
 
 	"github.com/stretchr/testify/require"
 
-	keepertest "github.com/Zenrock-Foundation/zrchain/v5/testutil/keeper"
+	keepertest "github.com/Zenrock-Foundation/zrchain/v4/testutil/keeper"
 
 	"github.com/zenrocklabs/zenbtc/x/zenbtc/types"
 )

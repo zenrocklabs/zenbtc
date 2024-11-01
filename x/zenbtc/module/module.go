@@ -15,8 +15,8 @@ import (
 
 	// this line is used by starport scaffolding # 1
 
-	treasury "github.com/Zenrock-Foundation/zrchain/v5/x/treasury/keeper"
-	validation "github.com/Zenrock-Foundation/zrchain/v5/x/validation/keeper"
+	treasury "github.com/Zenrock-Foundation/zrchain/v4/x/treasury/keeper"
+	validation "github.com/Zenrock-Foundation/zrchain/v4/x/validation/keeper"
 
 	"github.com/zenrocklabs/zenbtc/x/zenbtc/keeper"
 	"github.com/zenrocklabs/zenbtc/x/zenbtc/types"
