@@ -98,9 +98,9 @@ func (k msgServer) VerifyDepositBlockInclusion(goCtx context.Context, msg *types
 		return nil, err
 	}
 
-	// if err := k.validationKeeper.EthereumNonceRequested.Set(ctx, true); err != nil {
-	// 	return nil, err
-	// }
+	if err := k.validationKeeper.EthereumNonceRequested.Set(ctx, true); err != nil {
+		return nil, err
+	}
 
 	if err := k.LockTransactionStore.Set(ctx, msg.RawTx); err != nil {
 		return nil, err
