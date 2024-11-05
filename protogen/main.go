@@ -8,7 +8,16 @@ import (
 	"os/exec"
 	"path/filepath"
 	"regexp"
+	"sync"
+
+	"gopkg.in/yaml.v3"
 )
+
+type BufConfig struct {
+	Deps []string `yaml:"deps"`
+}
+
+const maxConcurrentProcesses = 4 // Adjust based on your system's capabilities
 
 func main() {
 	processProtoFiles()
@@ -40,38 +49,84 @@ func processProtoFiles() {
 
 	fmt.Println(protoFiles)
 
-	// Process each proto file
+	// Create a semaphore to limit concurrent processes
+	sem := make(chan struct{}, maxConcurrentProcesses)
+	var wg sync.WaitGroup
+	errorsChan := make(chan error, len(protoFiles))
+
+	// Process each proto file concurrently with rate limiting
 	for _, file := range protoFiles {
-		content, err := os.ReadFile(file)
-		if err != nil {
-			log.Printf("Failed to read file %s: %v", file, err)
-			continue
-		}
+		wg.Add(1)
+		go func(file string) {
+			defer wg.Done()
 
-		matched, err := regexp.Match(`(?i)option\s+go_package\s*=\s*".*github\.com/zenrocklabs/zenbtc.*"`, content)
-		if err != nil {
-			log.Printf("Failed to match regex in file %s: %v", file, err)
-			continue
-		}
+			// Acquire semaphore
+			sem <- struct{}{}
+			defer func() { <-sem }() // Release semaphore
 
-		if matched {
-			fmt.Printf("Processing file %s\n", file)
-
-			cmd1 := exec.Command("buf", "generate", "--template", "proto/buf.gen.gogo.yaml", file)
-			cmd1.Stdout = os.Stdout
-			cmd1.Stderr = os.Stderr
-			if err := cmd1.Run(); err != nil {
-				log.Printf("Failed to run buf generate for file %s: %v", file, err)
-				continue
+			content, err := os.ReadFile(file)
+			if err != nil {
+				errorsChan <- fmt.Errorf("failed to read file %s: %v", file, err)
+				return
 			}
 
-			cmd2 := exec.Command("buf", "generate", "--template", "proto/buf.gen.python.yaml", file)
-			cmd2.Stdout = os.Stdout
-			cmd2.Stderr = os.Stderr
-			if err := cmd2.Run(); err != nil {
-				log.Printf("Failed to run buf generate for file %s: %v", file, err)
-				continue
+			matched, err := regexp.Match(`(?i)option\s+go_package\s*=\s*".*github\.com/zenrocklabs/zenbtc.*"`, content)
+			if err != nil {
+				errorsChan <- fmt.Errorf("failed to match regex in file %s: %v", file, err)
+				return
 			}
+
+			if matched {
+				fmt.Printf("Processing file %s\n", file)
+
+				// Process buf commands concurrently
+				var cmdWg sync.WaitGroup
+				cmdWg.Add(2)
+
+				go func() {
+					defer cmdWg.Done()
+					cmd := exec.Command("buf", "generate", "--template", "proto/buf.gen.gogo.yaml", file)
+					cmd.Stdout = os.Stdout
+					cmd.Stderr = os.Stderr
+					if err := cmd.Run(); err != nil {
+						errorsChan <- fmt.Errorf("failed to run buf generate (gogo) for file %s: %v", file, err)
+					}
+				}()
+
+				go func() {
+					defer cmdWg.Done()
+					cmd := exec.Command("buf", "generate", "--template", "proto/buf.gen.python.yaml", file)
+					cmd.Stdout = os.Stdout
+					cmd.Stderr = os.Stderr
+					if err := cmd.Run(); err != nil {
+						errorsChan <- fmt.Errorf("failed to run buf generate (python) for file %s: %v", file, err)
+					}
+				}()
+
+				cmdWg.Wait()
+			}
+		}(file)
+	}
+
+	// Wait for all goroutines to finish
+	go func() {
+		wg.Wait()
+		close(errorsChan)
+	}()
+
+	// Collect and handle errors
+	var errors []error
+	for err := range errorsChan {
+		errors = append(errors, err)
+	}
+
+	if len(errors) > 0 {
+		fmt.Println("\nEncountered errors during processing:")
+		for _, err := range errors {
+			fmt.Printf("- %v\n", err)
+		}
+		if len(errors) == len(protoFiles) {
+			log.Fatal("All file processing failed")
 		}
 	}
 
@@ -93,7 +148,12 @@ func processProtoFiles() {
 }
 
 func copyDir(src string, dst string) error {
-	return filepath.Walk(src, func(path string, info os.FileInfo, err error) error {
+	// Create a buffered channel as a semaphore
+	sem := make(chan struct{}, maxConcurrentProcesses)
+	var wg sync.WaitGroup
+	errorsChan := make(chan error, 100) // Buffer for potential errors
+
+	err := filepath.Walk(src, func(path string, info os.FileInfo, err error) error {
 		if err != nil {
 			return err
 		}
@@ -106,13 +166,43 @@ func copyDir(src string, dst string) error {
 		dstPath := filepath.Join(dst, relPath)
 
 		if info.IsDir() {
-			// Create the directory in the destination
 			return os.MkdirAll(dstPath, info.Mode())
-		} else {
-			// Copy the file
-			return copyFile(path, dstPath)
 		}
+
+		// Handle file copy concurrently
+		wg.Add(1)
+		go func() {
+			defer wg.Done()
+
+			// Acquire semaphore
+			sem <- struct{}{}
+			defer func() { <-sem }() // Release semaphore
+
+			if err := copyFile(path, dstPath); err != nil {
+				errorsChan <- fmt.Errorf("failed to copy %s to %s: %v", path, dstPath, err)
+			}
+		}()
+
+		return nil
 	})
+
+	// Wait for all copies to complete
+	go func() {
+		wg.Wait()
+		close(errorsChan)
+	}()
+
+	// Collect any errors
+	var errors []error
+	for err := range errorsChan {
+		errors = append(errors, err)
+	}
+
+	if len(errors) > 0 {
+		return fmt.Errorf("multiple errors during copy: %v", errors)
+	}
+
+	return err
 }
 
 func copyFile(src, dst string) error {
@@ -163,4 +253,64 @@ func generatePulsarFiles(protoFiles []string) error {
 		}
 	}
 	return nil
+}
+
+func generatePythonDependencies() {
+	bufYamlPath := "proto/buf.yaml"
+	bufYamlContent, err := os.ReadFile(bufYamlPath)
+	if err != nil {
+		log.Fatalf("Failed to read %s: %v", bufYamlPath, err)
+	}
+
+	var bufConfig BufConfig
+	if err = yaml.Unmarshal(bufYamlContent, &bufConfig); err != nil {
+		log.Fatalf("Failed to parse %s: %v", bufYamlPath, err)
+	}
+
+	sem := make(chan struct{}, maxConcurrentProcesses)
+	var wg sync.WaitGroup
+	errorsChan := make(chan error, len(bufConfig.Deps))
+
+	for _, dep := range bufConfig.Deps {
+		wg.Add(1)
+		go func(dep string) {
+			defer wg.Done()
+
+			// Acquire semaphore
+			sem <- struct{}{}
+			defer func() { <-sem }() // Release semaphore
+
+			fmt.Printf("Generating python dependencies for %s\n", dep)
+			cmd := exec.Command("buf", "generate", "--template", "proto/buf.gen.python.yaml", dep)
+			cmd.Stdout = os.Stdout
+			cmd.Stderr = os.Stderr
+			if err := cmd.Run(); err != nil {
+				errorsChan <- fmt.Errorf("failed to generate dependencies for %s: %v", dep, err)
+			}
+		}(dep)
+	}
+
+	// Wait for all goroutines to finish
+	go func() {
+		wg.Wait()
+		close(errorsChan)
+	}()
+
+	// Collect and handle errors
+	var errors []error
+	for err := range errorsChan {
+		errors = append(errors, err)
+	}
+
+	if len(errors) > 0 {
+		fmt.Println("\nEncountered errors during Python dependency generation:")
+		for _, err := range errors {
+			fmt.Printf("- %v\n", err)
+		}
+		if len(errors) == len(bufConfig.Deps) {
+			log.Fatal("All Python dependency generation failed")
+		}
+	}
+
+	fmt.Println("Python dependencies generated.")
 }
