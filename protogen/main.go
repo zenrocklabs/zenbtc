@@ -77,6 +77,11 @@ func processProtoFiles() {
 
 	fmt.Println("Proto files generated.")
 
+	// Generate Pulsar files
+	if err := generatePulsarFiles(protoFiles); err != nil {
+		log.Fatalf("Failed to generate Pulsar files: %v", err)
+	}
+
 	// Move proto files to the right places
 	srcDir := filepath.Join("github.com", "zenrocklabs", "zenbtc")
 	if err := copyDir(srcDir, "./"); err != nil {
@@ -128,4 +133,34 @@ func copyFile(src, dst string) error {
 		return err
 	}
 	return out.Close()
+}
+
+func generatePulsarFiles(protoFiles []string) error {
+	// Check if protoc-gen-go-pulsar is installed
+	if _, err := exec.LookPath("protoc-gen-go-pulsar"); err != nil {
+		return fmt.Errorf("protoc-gen-go-pulsar is not installed: %v", err)
+	}
+
+	for _, file := range protoFiles {
+		content, err := os.ReadFile(file)
+		if err != nil {
+			return fmt.Errorf("failed to read file %s: %v", file, err)
+		}
+
+		matched, err := regexp.Match(`(?i)package\s+zrchain\.zenbtc`, content)
+		if err != nil {
+			return fmt.Errorf("failed to match regex in file %s: %v", file, err)
+		}
+
+		if matched {
+			fmt.Printf("Generating Pulsar files for %s\n", file)
+			cmd := exec.Command("buf", "generate", "-v", "--template", "proto/buf.gen.pulsar.yaml", file)
+			cmd.Stdout = os.Stdout
+			cmd.Stderr = os.Stderr
+			if err := cmd.Run(); err != nil {
+				return fmt.Errorf("failed to generate Pulsar files for %s: %v", file, err)
+			}
+		}
+	}
+	return nil
 }
