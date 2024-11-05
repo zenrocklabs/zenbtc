@@ -285,11 +285,11 @@ func RegisterQueryHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 }
 
 var (
-	pattern_Query_Params_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"zrchain", "v4", "zenbtc", "params"}, "", runtime.AssumeColonVerbOpt(false)))
+	pattern_Query_Params_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"zenbtc", "params"}, "", runtime.AssumeColonVerbOpt(false)))
 
-	pattern_Query_LockTransactions_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"zrchain", "v4", "zenbtc", "lock_transactions"}, "", runtime.AssumeColonVerbOpt(false)))
+	pattern_Query_LockTransactions_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"zenbtc", "lock_transactions"}, "", runtime.AssumeColonVerbOpt(false)))
 
-	pattern_Query_ConfirmedUnlockTransactions_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"zrchain", "v4", "zenbtc", "confirmed_solana_unlock_transactions"}, "", runtime.AssumeColonVerbOpt(false)))
+	pattern_Query_ConfirmedUnlockTransactions_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"zenbtc", "confirmed_solana_unlock_transactions"}, "", runtime.AssumeColonVerbOpt(false)))
 )
 
 var (
