@@ -1,3 +1,15 @@
+# [1.2.0](https://github.com/zenrocklabs/zenbtc/compare/v1.1.0...v1.2.0) (2024-11-06)
+
+
+### Bug Fixes
+
+* generate pulsar files ([5a3379c](https://github.com/zenrocklabs/zenbtc/commit/5a3379cb7e5e5a6555380df0804f49e5c3f1a360))
+
+
+### Features
+
+* better error handling and performance ([67383da](https://github.com/zenrocklabs/zenbtc/commit/67383dad7d6bb85a7ad2dd82b20142b649d7042b))
+
 # [1.1.0](https://github.com/zenrocklabs/zenbtc/compare/v1.0.3...v1.1.0) (2024-11-06)
 
 
