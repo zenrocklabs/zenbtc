@@ -105,6 +105,7 @@ func NewThorchainClient(logger eigensdkLogger.Logger, ethClient *ethclient.Clien
 }
 
 func (c *thorChainClient) GetSwapQuote(destination string, amount *big.Int, toleranceBPS int) (*ThorchainQuote, error) {
+	// TODO: fix panic from below line
 	inboundAddresses, err := executeRequest[[]thorchainInboundAddress](fmt.Sprintf("%s/thorchain/inbound_addresses", c.thorNodeUrl))
 	if err != nil {
 		return nil, err
