@@ -1,3 +1,11 @@
+## [1.2.1](https://github.com/zenrocklabs/zenbtc/compare/v1.2.0...v1.2.1) (2024-11-07)
+
+
+### Bug Fixes
+
+* override ([88e80cf](https://github.com/zenrocklabs/zenbtc/commit/88e80cff8e3656a449e76fc4a99bb11182ce1049))
+* pulsar generation ([755b6c6](https://github.com/zenrocklabs/zenbtc/commit/755b6c6dd9dc04365f060cb42f40b2db983852c7))
+
 # [1.2.0](https://github.com/zenrocklabs/zenbtc/compare/v1.1.0...v1.2.0) (2024-11-06)
 
 
