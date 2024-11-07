@@ -8,6 +8,7 @@ import (
 	"os/exec"
 	"path/filepath"
 	"regexp"
+	"strings"
 	"sync"
 
 	"gopkg.in/yaml.v3"
@@ -16,8 +17,6 @@ import (
 type BufConfig struct {
 	Deps []string `yaml:"deps"`
 }
-
-const maxConcurrentProcesses = 4 // Adjust based on your system's capabilities
 
 func main() {
 	processProtoFiles()
@@ -49,20 +48,14 @@ func processProtoFiles() {
 
 	fmt.Println(protoFiles)
 
-	// Create a semaphore to limit concurrent processes
-	sem := make(chan struct{}, maxConcurrentProcesses)
 	var wg sync.WaitGroup
 	errorsChan := make(chan error, len(protoFiles))
 
-	// Process each proto file concurrently with rate limiting
+	// Process each proto file concurrently
 	for _, file := range protoFiles {
 		wg.Add(1)
 		go func(file string) {
 			defer wg.Done()
-
-			// Acquire semaphore
-			sem <- struct{}{}
-			defer func() { <-sem }() // Release semaphore
 
 			content, err := os.ReadFile(file)
 			if err != nil {
@@ -133,23 +126,25 @@ func processProtoFiles() {
 	fmt.Println("Proto files generated.")
 
 	// Generate Pulsar files
-	if err := generatePulsarFiles(protoFiles); err != nil {
+	if err := generatePulsarFiles(); err != nil {
 		log.Fatalf("Failed to generate Pulsar files: %v", err)
 	}
 
 	// Move proto files to the right places
-	srcDir := filepath.Join("github.com", "zenrocklabs", "zenbtc")
-	if err := copyDir(srcDir, "./"); err != nil {
+	srcDir := filepath.Join("../github.com", "zenrocklabs", "zenbtc", "x", "zenbtc", "types")
+	dstDir := filepath.Join("../", "x", "zenbtc", "types")
+
+	if err := copyDir(srcDir, dstDir); err != nil {
 		log.Fatalf("Failed to copy files: %v", err)
 	}
-	if err := os.RemoveAll("./github.com"); err != nil {
+
+	// Clean up only if the directory exists
+	if err := os.RemoveAll("../github.com"); err != nil && !os.IsNotExist(err) {
 		log.Fatalf("Failed to remove github.com directory: %v", err)
 	}
 }
 
 func copyDir(src string, dst string) error {
-	// Create a buffered channel as a semaphore
-	sem := make(chan struct{}, maxConcurrentProcesses)
 	var wg sync.WaitGroup
 	errorsChan := make(chan error, 100) // Buffer for potential errors
 
@@ -173,10 +168,6 @@ func copyDir(src string, dst string) error {
 		wg.Add(1)
 		go func() {
 			defer wg.Done()
-
-			// Acquire semaphore
-			sem <- struct{}{}
-			defer func() { <-sem }() // Release semaphore
 
 			if err := copyFile(path, dstPath); err != nil {
 				errorsChan <- fmt.Errorf("failed to copy %s to %s: %v", path, dstPath, err)
@@ -225,33 +216,51 @@ func copyFile(src, dst string) error {
 	return out.Close()
 }
 
-func generatePulsarFiles(protoFiles []string) error {
+func generatePulsarFiles() error {
 	// Check if protoc-gen-go-pulsar is installed
 	if _, err := exec.LookPath("protoc-gen-go-pulsar"); err != nil {
-		return fmt.Errorf("protoc-gen-go-pulsar is not installed: %v", err)
+		return fmt.Errorf("protoc-gen-go-pulsar is not installed. Please run: go install github.com/cosmos/cosmos-proto/cmd/protoc-gen-go-pulsar")
 	}
 
-	for _, file := range protoFiles {
-		content, err := os.ReadFile(file)
-		if err != nil {
-			return fmt.Errorf("failed to read file %s: %v", file, err)
-		}
-
-		matched, err := regexp.Match(`(?i)package\s+zrchain\.zenbtc`, content)
-		if err != nil {
-			return fmt.Errorf("failed to match regex in file %s: %v", file, err)
-		}
-
-		if matched {
-			fmt.Printf("Generating Pulsar files for %s\n", file)
-			cmd := exec.Command("buf", "generate", "-v", "--template", "proto/buf.gen.pulsar.yaml", file)
-			cmd.Stdout = os.Stdout
-			cmd.Stderr = os.Stderr
-			if err := cmd.Run(); err != nil {
-				return fmt.Errorf("failed to generate Pulsar files for %s: %v", file, err)
-			}
-		}
+	// Get project root directory using git
+	cmd := exec.Command("git", "rev-parse", "--show-toplevel")
+	projectRoot, err := cmd.Output()
+	if err != nil {
+		return fmt.Errorf("failed to get project root: %v", err)
 	}
+	protoRoot := strings.TrimSpace(string(projectRoot))
+
+	// Change to proto directory
+	protoDir := filepath.Join(protoRoot, "proto")
+	if err := os.Chdir(protoDir); err != nil {
+		return fmt.Errorf("failed to change to proto directory: %v", err)
+	}
+
+	// Update buf modules
+	cmd = exec.Command("buf", "dep", "update")
+	cmd.Stdout = os.Stdout
+	cmd.Stderr = os.Stderr
+	if err := cmd.Run(); err != nil {
+		return fmt.Errorf("failed to update buf modules: %v", err)
+	}
+
+	// Build buf
+	cmd = exec.Command("buf", "build", "-v")
+	cmd.Stdout = os.Stdout
+	cmd.Stderr = os.Stderr
+	if err := cmd.Run(); err != nil {
+		return fmt.Errorf("failed to build buf: %v", err)
+	}
+
+	// Generate proto pulsar code
+	cmd = exec.Command("buf", "generate", "-v", "--template", "buf.gen.pulsar.yaml")
+	cmd.Stdout = os.Stdout
+	cmd.Stderr = os.Stderr
+	if err := cmd.Run(); err != nil {
+		return fmt.Errorf("failed to generate pulsar files: %v", err)
+	}
+
+	fmt.Println("Pulsar files generated.")
 	return nil
 }
 
@@ -267,7 +276,6 @@ func generatePythonDependencies() {
 		log.Fatalf("Failed to parse %s: %v", bufYamlPath, err)
 	}
 
-	sem := make(chan struct{}, maxConcurrentProcesses)
 	var wg sync.WaitGroup
 	errorsChan := make(chan error, len(bufConfig.Deps))
 
@@ -275,10 +283,6 @@ func generatePythonDependencies() {
 		wg.Add(1)
 		go func(dep string) {
 			defer wg.Done()
-
-			// Acquire semaphore
-			sem <- struct{}{}
-			defer func() { <-sem }() // Release semaphore
 
 			fmt.Printf("Generating python dependencies for %s\n", dep)
 			cmd := exec.Command("buf", "generate", "--template", "proto/buf.gen.python.yaml", dep)
