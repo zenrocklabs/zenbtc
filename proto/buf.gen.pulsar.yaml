@@ -12,11 +12,13 @@ managed:
       - buf.build/googleapis/googleapis
       - buf.build/cosmos/gogo-proto
       - buf.build/cosmos/cosmos-proto
+      - buf.build/cometbft/cometbft
     override:
+      github.com/zenrocklabs/zenbtc: github.com/zenrocklabs/zenbtc
 plugins:
   - name: go-pulsar
-    out: ./api
+    out: ../api
     opt: paths=source_relative
   - name: go-grpc
-    out: ./api
+    out: ../api
     opt: paths=source_relative
