@@ -31,7 +31,7 @@ var (
 
 // RedemptionTrackerMetaData contains all meta data concerning the RedemptionTracker contract.
 var RedemptionTrackerMetaData = &bind.MetaData{
-	ABI: "[{\"inputs\":[],\"name\":\"InvalidInitialization\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"NotInitializing\",\"type\":\"error\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint64\",\"name\":\"version\",\"type\":\"uint64\"}],\"name\":\"Initialized\",\"type\":\"event\"},{\"inputs\":[{\"internalType\":\"uint16\",\"name\":\"numBlocks\",\"type\":\"uint16\"}],\"name\":\"getRecentRedeems\",\"outputs\":[{\"internalType\":\"address[]\",\"name\":\"users\",\"type\":\"address[]\"},{\"internalType\":\"uint256[]\",\"name\":\"amounts\",\"type\":\"uint256[]\"}],\"stateMutability\":\"view\",\"type\":\"function\"}]",
+	ABI: "[{\"inputs\":[],\"name\":\"InvalidInitialization\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"NotInitializing\",\"type\":\"error\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint64\",\"name\":\"version\",\"type\":\"uint64\"}],\"name\":\"Initialized\",\"type\":\"event\"},{\"inputs\":[{\"internalType\":\"uint8\",\"name\":\"numBlocks\",\"type\":\"uint8\"}],\"name\":\"getRecentRedemptions\",\"outputs\":[{\"internalType\":\"bytes[]\",\"name\":\"btcAddresses\",\"type\":\"bytes[]\"},{\"internalType\":\"uint64[]\",\"name\":\"amounts\",\"type\":\"uint64[]\"}],\"stateMutability\":\"view\",\"type\":\"function\"}]",
 }
 
 // RedemptionTrackerABI is the input ABI used to generate the binding from.
@@ -180,49 +180,49 @@ func (_RedemptionTracker *RedemptionTrackerTransactorRaw) Transact(opts *bind.Tr
 	return _RedemptionTracker.Contract.contract.Transact(opts, method, params...)
 }
 
-// GetRecentRedeems is a free data retrieval call binding the contract method 0x697e8438.
+// GetRecentRedemptions is a free data retrieval call binding the contract method 0xe7332f55.
 //
-// Solidity: function getRecentRedeems(uint16 numBlocks) view returns(address[] users, uint256[] amounts)
-func (_RedemptionTracker *RedemptionTrackerCaller) GetRecentRedeems(opts *bind.CallOpts, numBlocks uint16) (struct {
-	Users   []common.Address
-	Amounts []*big.Int
+// Solidity: function getRecentRedemptions(uint8 numBlocks) view returns(bytes[] btcAddresses, uint64[] amounts)
+func (_RedemptionTracker *RedemptionTrackerCaller) GetRecentRedemptions(opts *bind.CallOpts, numBlocks uint8) (struct {
+	BtcAddresses [][]byte
+	Amounts      []uint64
 }, error) {
 	var out []interface{}
-	err := _RedemptionTracker.contract.Call(opts, &out, "getRecentRedeems", numBlocks)
+	err := _RedemptionTracker.contract.Call(opts, &out, "getRecentRedemptions", numBlocks)
 
 	outstruct := new(struct {
-		Users   []common.Address
-		Amounts []*big.Int
+		BtcAddresses [][]byte
+		Amounts      []uint64
 	})
 	if err != nil {
 		return *outstruct, err
 	}
 
-	outstruct.Users = *abi.ConvertType(out[0], new([]common.Address)).(*[]common.Address)
-	outstruct.Amounts = *abi.ConvertType(out[1], new([]*big.Int)).(*[]*big.Int)
+	outstruct.BtcAddresses = *abi.ConvertType(out[0], new([][]byte)).(*[][]byte)
+	outstruct.Amounts = *abi.ConvertType(out[1], new([]uint64)).(*[]uint64)
 
 	return *outstruct, err
 
 }
 
-// GetRecentRedeems is a free data retrieval call binding the contract method 0x697e8438.
+// GetRecentRedemptions is a free data retrieval call binding the contract method 0xe7332f55.
 //
-// Solidity: function getRecentRedeems(uint16 numBlocks) view returns(address[] users, uint256[] amounts)
-func (_RedemptionTracker *RedemptionTrackerSession) GetRecentRedeems(numBlocks uint16) (struct {
-	Users   []common.Address
-	Amounts []*big.Int
+// Solidity: function getRecentRedemptions(uint8 numBlocks) view returns(bytes[] btcAddresses, uint64[] amounts)
+func (_RedemptionTracker *RedemptionTrackerSession) GetRecentRedemptions(numBlocks uint8) (struct {
+	BtcAddresses [][]byte
+	Amounts      []uint64
 }, error) {
-	return _RedemptionTracker.Contract.GetRecentRedeems(&_RedemptionTracker.CallOpts, numBlocks)
+	return _RedemptionTracker.Contract.GetRecentRedemptions(&_RedemptionTracker.CallOpts, numBlocks)
 }
 
-// GetRecentRedeems is a free data retrieval call binding the contract method 0x697e8438.
+// GetRecentRedemptions is a free data retrieval call binding the contract method 0xe7332f55.
 //
-// Solidity: function getRecentRedeems(uint16 numBlocks) view returns(address[] users, uint256[] amounts)
-func (_RedemptionTracker *RedemptionTrackerCallerSession) GetRecentRedeems(numBlocks uint16) (struct {
-	Users   []common.Address
-	Amounts []*big.Int
+// Solidity: function getRecentRedemptions(uint8 numBlocks) view returns(bytes[] btcAddresses, uint64[] amounts)
+func (_RedemptionTracker *RedemptionTrackerCallerSession) GetRecentRedemptions(numBlocks uint8) (struct {
+	BtcAddresses [][]byte
+	Amounts      []uint64
 }, error) {
-	return _RedemptionTracker.Contract.GetRecentRedeems(&_RedemptionTracker.CallOpts, numBlocks)
+	return _RedemptionTracker.Contract.GetRecentRedemptions(&_RedemptionTracker.CallOpts, numBlocks)
 }
 
 // RedemptionTrackerInitializedIterator is returned from FilterInitialized and is used to iterate over the raw logs and unpacked data for Initialized events raised by the RedemptionTracker contract.
