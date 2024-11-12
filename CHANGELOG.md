@@ -1,3 +1,10 @@
+## [1.3.1](https://github.com/zenrocklabs/zenbtc/compare/v1.3.0...v1.3.1) (2024-11-12)
+
+
+### Bug Fixes
+
+* update `RedemptionTracker` binding ([b0ab8b9](https://github.com/zenrocklabs/zenbtc/commit/b0ab8b94278e74addd1161054a2a41adfec443ab))
+
 # [1.3.0](https://github.com/zenrocklabs/zenbtc/compare/v1.2.1...v1.3.0) (2024-11-12)
 
 
