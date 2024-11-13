@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+package zrchain.zenbtc;
+
+option go_package = "github.com/zenrocklabs/zenbtc/x/zenbtc/types";
+
+// Network is the network that the redemption request originated from.
+enum Network {
+  ETHEREUM = 0;
+  SOLANA = 1;
+}
+
+// Redemption is the metadata for a redemption transaction.
+message Redemption {
+  string recipient_address = 1;
+  uint64 amount = 2;
+  Network origin_chain = 3;
+  uint64 block_height = 4;
+  uint64 tx_index = 5;
+}
+
+// Redemptions is a collection of redemption transactions.
+message Redemptions {
+  repeated Redemption redemptions = 1;
+}
