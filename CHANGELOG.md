@@ -1,3 +1,10 @@
+## [1.4.1](https://github.com/zenrocklabs/zenbtc/compare/v1.4.0...v1.4.1) (2024-11-13)
+
+
+### Bug Fixes
+
+* add ids to redemptions ([f4c62cf](https://github.com/zenrocklabs/zenbtc/commit/f4c62cf89e4e95df5f116fa7ab10cc1342895c39))
+
 # [1.4.0](https://github.com/zenrocklabs/zenbtc/compare/v1.3.1...v1.4.0) (2024-11-13)
 
 
