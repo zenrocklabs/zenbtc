@@ -1,3 +1,10 @@
+# [1.4.0](https://github.com/zenrocklabs/zenbtc/compare/v1.3.1...v1.4.0) (2024-11-13)
+
+
+### Features
+
+* redemption types ([e81d8e3](https://github.com/zenrocklabs/zenbtc/commit/e81d8e3c575209c462e7782922b4c34f79264554))
+
 ## [1.3.1](https://github.com/zenrocklabs/zenbtc/compare/v1.3.0...v1.3.1) (2024-11-12)
 
 
