@@ -1,3 +1,10 @@
+## [1.4.2](https://github.com/zenrocklabs/zenbtc/compare/v1.4.1...v1.4.2) (2024-11-13)
+
+
+### Bug Fixes
+
+* update proto for redemptions ([0f4b8fa](https://github.com/zenrocklabs/zenbtc/commit/0f4b8fa73203459f01e8675c1b1f239ce6cf1249))
+
 ## [1.4.1](https://github.com/zenrocklabs/zenbtc/compare/v1.4.0...v1.4.1) (2024-11-13)
 
 
