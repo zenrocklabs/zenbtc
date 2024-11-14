@@ -45,3 +45,15 @@ class MsgVerifyDepositBlockInclusion(_message.Message):
 class MsgVerifyDepositBlockInclusionResponse(_message.Message):
     __slots__ = ()
     def __init__(self) -> None: ...
+
+class MsgSubmitUnsignedRedemptionTx(_message.Message):
+    __slots__ = ("creator", "outputs")
+    CREATOR_FIELD_NUMBER: _ClassVar[int]
+    OUTPUTS_FIELD_NUMBER: _ClassVar[int]
+    creator: str
+    outputs: str
+    def __init__(self, creator: _Optional[str] = ..., outputs: _Optional[str] = ...) -> None: ...
+
+class MsgSubmitUnsignedRedemptionTxResponse(_message.Message):
+    __slots__ = ()
+    def __init__(self) -> None: ...
