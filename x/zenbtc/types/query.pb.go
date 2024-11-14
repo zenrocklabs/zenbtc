@@ -31,6 +31,34 @@ var _ = math.Inf
 // proto package needs to be updated.
 const _ = proto.GoGoProtoPackageIsVersion3 // please upgrade the proto package
 
+type CompletionFilter int32
+
+const (
+	CompletionFilter_ALL       CompletionFilter = 0
+	CompletionFilter_PENDING   CompletionFilter = 1
+	CompletionFilter_COMPLETED CompletionFilter = 2
+)
+
+var CompletionFilter_name = map[int32]string{
+	0: "ALL",
+	1: "PENDING",
+	2: "COMPLETED",
+}
+
+var CompletionFilter_value = map[string]int32{
+	"ALL":       0,
+	"PENDING":   1,
+	"COMPLETED": 2,
+}
+
+func (x CompletionFilter) String() string {
+	return proto.EnumName(CompletionFilter_name, int32(x))
+}
+
+func (CompletionFilter) EnumDescriptor() ([]byte, []int) {
+	return fileDescriptor_d8cea4d05ef3f869, []int{0}
+}
+
 // QueryParamsRequest is request type for the Query/Params RPC method.
 type QueryParamsRequest struct {
 }
@@ -194,24 +222,23 @@ func (m *QueryLockTransactionsResponse) GetLockTransactions() []string {
 	return nil
 }
 
-type QueryConfirmedUnlockTransactionsRequest struct {
-	Chain string `protobuf:"bytes,1,opt,name=chain,proto3" json:"chain,omitempty"`
+type QueryRedemptionsRequest struct {
+	StartIndex       uint64           `protobuf:"varint,1,opt,name=start_index,json=startIndex,proto3" json:"start_index,omitempty"`
+	CompletionFilter CompletionFilter `protobuf:"varint,2,opt,name=completion_filter,json=completionFilter,proto3,enum=zrchain.zenbtc.CompletionFilter" json:"completion_filter,omitempty"`
 }
 
-func (m *QueryConfirmedUnlockTransactionsRequest) Reset() {
-	*m = QueryConfirmedUnlockTransactionsRequest{}
-}
-func (m *QueryConfirmedUnlockTransactionsRequest) String() string { return proto.CompactTextString(m) }
-func (*QueryConfirmedUnlockTransactionsRequest) ProtoMessage()    {}
-func (*QueryConfirmedUnlockTransactionsRequest) Descriptor() ([]byte, []int) {
+func (m *QueryRedemptionsRequest) Reset()         { *m = QueryRedemptionsRequest{} }
+func (m *QueryRedemptionsRequest) String() string { return proto.CompactTextString(m) }
+func (*QueryRedemptionsRequest) ProtoMessage()    {}
+func (*QueryRedemptionsRequest) Descriptor() ([]byte, []int) {
 	return fileDescriptor_d8cea4d05ef3f869, []int{4}
 }
-func (m *QueryConfirmedUnlockTransactionsRequest) XXX_Unmarshal(b []byte) error {
+func (m *QueryRedemptionsRequest) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
-func (m *QueryConfirmedUnlockTransactionsRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *QueryRedemptionsRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
-		return xxx_messageInfo_QueryConfirmedUnlockTransactionsRequest.Marshal(b, m, deterministic)
+		return xxx_messageInfo_QueryRedemptionsRequest.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
 		n, err := m.MarshalToSizedBuffer(b)
@@ -221,43 +248,48 @@ func (m *QueryConfirmedUnlockTransactionsRequest) XXX_Marshal(b []byte, determin
 		return b[:n], nil
 	}
 }
-func (m *QueryConfirmedUnlockTransactionsRequest) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_QueryConfirmedUnlockTransactionsRequest.Merge(m, src)
+func (m *QueryRedemptionsRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_QueryRedemptionsRequest.Merge(m, src)
 }
-func (m *QueryConfirmedUnlockTransactionsRequest) XXX_Size() int {
+func (m *QueryRedemptionsRequest) XXX_Size() int {
 	return m.Size()
 }
-func (m *QueryConfirmedUnlockTransactionsRequest) XXX_DiscardUnknown() {
-	xxx_messageInfo_QueryConfirmedUnlockTransactionsRequest.DiscardUnknown(m)
+func (m *QueryRedemptionsRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_QueryRedemptionsRequest.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_QueryConfirmedUnlockTransactionsRequest proto.InternalMessageInfo
+var xxx_messageInfo_QueryRedemptionsRequest proto.InternalMessageInfo
 
-func (m *QueryConfirmedUnlockTransactionsRequest) GetChain() string {
+func (m *QueryRedemptionsRequest) GetStartIndex() uint64 {
 	if m != nil {
-		return m.Chain
+		return m.StartIndex
 	}
-	return ""
+	return 0
 }
 
-type QueryConfirmedUnlockTransactionsResponse struct {
-	UnlockTransactions []string `protobuf:"bytes,1,rep,name=unlock_transactions,json=unlockTransactions,proto3" json:"unlock_transactions,omitempty"`
+func (m *QueryRedemptionsRequest) GetCompletionFilter() CompletionFilter {
+	if m != nil {
+		return m.CompletionFilter
+	}
+	return CompletionFilter_ALL
 }
 
-func (m *QueryConfirmedUnlockTransactionsResponse) Reset() {
-	*m = QueryConfirmedUnlockTransactionsResponse{}
+type QueryRedemptionsResponse struct {
+	Redemptions []Redemption `protobuf:"bytes,1,rep,name=redemptions,proto3" json:"redemptions"`
 }
-func (m *QueryConfirmedUnlockTransactionsResponse) String() string { return proto.CompactTextString(m) }
-func (*QueryConfirmedUnlockTransactionsResponse) ProtoMessage()    {}
-func (*QueryConfirmedUnlockTransactionsResponse) Descriptor() ([]byte, []int) {
+
+func (m *QueryRedemptionsResponse) Reset()         { *m = QueryRedemptionsResponse{} }
+func (m *QueryRedemptionsResponse) String() string { return proto.CompactTextString(m) }
+func (*QueryRedemptionsResponse) ProtoMessage()    {}
+func (*QueryRedemptionsResponse) Descriptor() ([]byte, []int) {
 	return fileDescriptor_d8cea4d05ef3f869, []int{5}
 }
-func (m *QueryConfirmedUnlockTransactionsResponse) XXX_Unmarshal(b []byte) error {
+func (m *QueryRedemptionsResponse) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
-func (m *QueryConfirmedUnlockTransactionsResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *QueryRedemptionsResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
-		return xxx_messageInfo_QueryConfirmedUnlockTransactionsResponse.Marshal(b, m, deterministic)
+		return xxx_messageInfo_QueryRedemptionsResponse.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
 		n, err := m.MarshalToSizedBuffer(b)
@@ -267,69 +299,75 @@ func (m *QueryConfirmedUnlockTransactionsResponse) XXX_Marshal(b []byte, determi
 		return b[:n], nil
 	}
 }
-func (m *QueryConfirmedUnlockTransactionsResponse) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_QueryConfirmedUnlockTransactionsResponse.Merge(m, src)
+func (m *QueryRedemptionsResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_QueryRedemptionsResponse.Merge(m, src)
 }
-func (m *QueryConfirmedUnlockTransactionsResponse) XXX_Size() int {
+func (m *QueryRedemptionsResponse) XXX_Size() int {
 	return m.Size()
 }
-func (m *QueryConfirmedUnlockTransactionsResponse) XXX_DiscardUnknown() {
-	xxx_messageInfo_QueryConfirmedUnlockTransactionsResponse.DiscardUnknown(m)
+func (m *QueryRedemptionsResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_QueryRedemptionsResponse.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_QueryConfirmedUnlockTransactionsResponse proto.InternalMessageInfo
+var xxx_messageInfo_QueryRedemptionsResponse proto.InternalMessageInfo
 
-func (m *QueryConfirmedUnlockTransactionsResponse) GetUnlockTransactions() []string {
+func (m *QueryRedemptionsResponse) GetRedemptions() []Redemption {
 	if m != nil {
-		return m.UnlockTransactions
+		return m.Redemptions
 	}
 	return nil
 }
 
 func init() {
+	proto.RegisterEnum("zrchain.zenbtc.CompletionFilter", CompletionFilter_name, CompletionFilter_value)
 	proto.RegisterType((*QueryParamsRequest)(nil), "zrchain.zenbtc.QueryParamsRequest")
 	proto.RegisterType((*QueryParamsResponse)(nil), "zrchain.zenbtc.QueryParamsResponse")
 	proto.RegisterType((*QueryLockTransactionsRequest)(nil), "zrchain.zenbtc.QueryLockTransactionsRequest")
 	proto.RegisterType((*QueryLockTransactionsResponse)(nil), "zrchain.zenbtc.QueryLockTransactionsResponse")
-	proto.RegisterType((*QueryConfirmedUnlockTransactionsRequest)(nil), "zrchain.zenbtc.QueryConfirmedUnlockTransactionsRequest")
-	proto.RegisterType((*QueryConfirmedUnlockTransactionsResponse)(nil), "zrchain.zenbtc.QueryConfirmedUnlockTransactionsResponse")
+	proto.RegisterType((*QueryRedemptionsRequest)(nil), "zrchain.zenbtc.QueryRedemptionsRequest")
+	proto.RegisterType((*QueryRedemptionsResponse)(nil), "zrchain.zenbtc.QueryRedemptionsResponse")
 }
 
 func init() { proto.RegisterFile("zrchain/zenbtc/query.proto", fileDescriptor_d8cea4d05ef3f869) }
 
 var fileDescriptor_d8cea4d05ef3f869 = []byte{
-	// 487 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x94, 0x53, 0xcd, 0x6a, 0x14, 0x41,
-	0x10, 0xde, 0x36, 0x64, 0x61, 0x5b, 0x08, 0x9b, 0xce, 0x12, 0xe2, 0x6c, 0x1c, 0xe3, 0x78, 0x70,
-	0x89, 0xeb, 0x34, 0x89, 0x82, 0x7a, 0x12, 0x22, 0x78, 0xca, 0x21, 0x2e, 0x7a, 0xd1, 0xc3, 0xd2,
-	0xd3, 0xb6, 0x93, 0x61, 0x67, 0xba, 0x26, 0xd3, 0x3d, 0x62, 0x72, 0xf4, 0x09, 0x44, 0x5f, 0xc2,
-	0xa3, 0x4f, 0x21, 0x39, 0x2e, 0x78, 0xf1, 0x24, 0xb2, 0x2b, 0xf8, 0x1a, 0xb2, 0xdd, 0x3d, 0xe0,
-	0xfe, 0x25, 0x7a, 0x19, 0x6a, 0xea, 0xab, 0xef, 0xab, 0xaf, 0xaa, 0x68, 0xec, 0x9d, 0x15, 0xfc,
-	0x98, 0x25, 0x92, 0x9e, 0x09, 0x19, 0x69, 0x4e, 0x4f, 0x4a, 0x51, 0x9c, 0x86, 0x79, 0x01, 0x1a,
-	0xc8, 0x9a, 0xc3, 0x42, 0x8b, 0x79, 0xeb, 0x2c, 0x4b, 0x24, 0x50, 0xf3, 0xb5, 0x25, 0xde, 0x2e,
-	0x07, 0x95, 0x81, 0xa2, 0x11, 0x53, 0xc2, 0x72, 0xe9, 0xdb, 0xbd, 0x48, 0x68, 0xb6, 0x47, 0x73,
-	0x16, 0x27, 0x92, 0xe9, 0x04, 0xa4, 0xab, 0x6d, 0xc5, 0x10, 0x83, 0x09, 0xe9, 0x24, 0x72, 0xd9,
-	0xed, 0x18, 0x20, 0x4e, 0x05, 0x65, 0x79, 0x42, 0x99, 0x94, 0xa0, 0x0d, 0x45, 0x39, 0xb4, 0x3d,
-	0x63, 0x2f, 0x67, 0x05, 0xcb, 0x1c, 0x18, 0xb4, 0x30, 0x79, 0x36, 0x69, 0x79, 0x64, 0x92, 0x3d,
-	0x71, 0x52, 0x0a, 0xa5, 0x83, 0x23, 0xbc, 0x31, 0x95, 0x55, 0x39, 0x48, 0x25, 0xc8, 0x23, 0x5c,
-	0xb7, 0xe4, 0x2d, 0xb4, 0x83, 0x3a, 0x57, 0xf7, 0x37, 0xc3, 0xe9, 0xe9, 0x42, 0x5b, 0x7f, 0xd0,
-	0x38, 0xff, 0x71, 0xa3, 0xf6, 0xf9, 0xf7, 0x97, 0x5d, 0xd4, 0x73, 0x84, 0xc0, 0xc7, 0xdb, 0x46,
-	0xf1, 0x10, 0xf8, 0xe0, 0x79, 0xc1, 0xa4, 0x62, 0xdc, 0x78, 0xac, 0x3a, 0x1e, 0xe2, 0xeb, 0x4b,
-	0x70, 0xd7, 0xfb, 0x0e, 0x5e, 0x4f, 0x81, 0x0f, 0xfa, 0xfa, 0x2f, 0x70, 0x0b, 0xed, 0xac, 0x74,
-	0x1a, 0xbd, 0x66, 0x3a, 0x43, 0x0a, 0x1e, 0xe3, 0xdb, 0x46, 0xed, 0x09, 0xc8, 0x37, 0x49, 0x91,
-	0x89, 0xd7, 0x2f, 0x64, 0xba, 0xb8, 0x31, 0x69, 0xe1, 0x55, 0x33, 0x82, 0x19, 0xa9, 0xd1, 0xb3,
-	0x3f, 0xc1, 0x2b, 0xdc, 0xb9, 0x5c, 0xc0, 0x39, 0xa3, 0x78, 0xa3, 0x94, 0xcb, 0xbc, 0x91, 0x72,
-	0x8e, 0xb8, 0x3f, 0x5c, 0xc1, 0xab, 0x46, 0x9d, 0x24, 0xb8, 0x6e, 0x57, 0x46, 0x82, 0xd9, 0x55,
-	0xce, 0x5f, 0xc5, 0xbb, 0x75, 0x61, 0x8d, 0x75, 0x13, 0x6c, 0xbe, 0xff, 0xf6, 0xeb, 0xd3, 0x95,
-	0x26, 0x59, 0x9b, 0x3e, 0x37, 0xf9, 0x88, 0x70, 0x73, 0x76, 0xb9, 0xa4, 0xbb, 0x50, 0x71, 0xc9,
-	0x8d, 0xbc, 0xbb, 0xff, 0x58, 0xed, 0x9c, 0xdc, 0x34, 0x4e, 0xda, 0xe4, 0x5a, 0xe5, 0x64, 0x6e,
-	0x47, 0xe4, 0x2b, 0xc2, 0xed, 0x0b, 0x56, 0x4c, 0x1e, 0x2c, 0xec, 0x78, 0xf9, 0x55, 0xbd, 0x87,
-	0xff, 0x4f, 0x74, 0xae, 0xef, 0x1b, 0xd7, 0x21, 0xe9, 0x56, 0xae, 0x79, 0x45, 0xea, 0x2b, 0x48,
-	0x99, 0x64, 0xfd, 0x05, 0xc7, 0x3e, 0x78, 0x7a, 0x3e, 0xf2, 0xd1, 0x70, 0xe4, 0xa3, 0x9f, 0x23,
-	0x1f, 0x7d, 0x18, 0xfb, 0xb5, 0xe1, 0xd8, 0xaf, 0x7d, 0x1f, 0xfb, 0xb5, 0x97, 0xdd, 0x38, 0xd1,
-	0xc7, 0x65, 0x14, 0x72, 0xc8, 0x26, 0x8a, 0x05, 0xf0, 0x41, 0xca, 0x22, 0x55, 0xa9, 0xbf, 0xab,
-	0x02, 0x7d, 0x9a, 0x0b, 0x15, 0xd5, 0xcd, 0xab, 0xbc, 0xf7, 0x27, 0x00, 0x00, 0xff, 0xff, 0x7e,
-	0x14, 0x62, 0x2f, 0x53, 0x04, 0x00, 0x00,
+	// 576 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x8c, 0x53, 0x31, 0x6f, 0xd3, 0x40,
+	0x14, 0xce, 0x35, 0x25, 0x55, 0xce, 0x22, 0x72, 0xae, 0xa5, 0x04, 0xa7, 0xb8, 0xc1, 0x0c, 0x44,
+	0xa1, 0xc4, 0x6a, 0x18, 0x10, 0x23, 0x69, 0x53, 0x54, 0x29, 0x2d, 0xc1, 0xea, 0xc4, 0x40, 0x74,
+	0x76, 0x0f, 0xd7, 0x8a, 0xed, 0x73, 0x7d, 0x17, 0xd4, 0x56, 0x62, 0x61, 0x40, 0x62, 0x43, 0xf0,
+	0x27, 0x18, 0xf9, 0x19, 0x1d, 0x2b, 0xb1, 0x30, 0x21, 0x94, 0x20, 0xf1, 0x37, 0x90, 0xcf, 0x0e,
+	0x75, 0x9c, 0x14, 0x58, 0xa2, 0xd3, 0xfb, 0xbe, 0xef, 0xbd, 0xef, 0xcb, 0x7b, 0x86, 0xca, 0x59,
+	0x68, 0x1d, 0x61, 0xc7, 0xd7, 0xcf, 0x88, 0x6f, 0x72, 0x4b, 0x3f, 0x1e, 0x92, 0xf0, 0xb4, 0x19,
+	0x84, 0x94, 0x53, 0x54, 0x4a, 0xb0, 0x66, 0x8c, 0x29, 0x65, 0xec, 0x39, 0x3e, 0xd5, 0xc5, 0x6f,
+	0x4c, 0x51, 0x1a, 0x16, 0x65, 0x1e, 0x65, 0xba, 0x89, 0x19, 0x89, 0xb5, 0xfa, 0xeb, 0x4d, 0x93,
+	0x70, 0xbc, 0xa9, 0x07, 0xd8, 0x76, 0x7c, 0xcc, 0x1d, 0xea, 0x27, 0xdc, 0x15, 0x9b, 0xda, 0x54,
+	0x3c, 0xf5, 0xe8, 0x95, 0x54, 0xd7, 0x6c, 0x4a, 0x6d, 0x97, 0xe8, 0x38, 0x70, 0x74, 0xec, 0xfb,
+	0x94, 0x0b, 0x09, 0x4b, 0xd0, 0x6a, 0xc6, 0x5e, 0x80, 0x43, 0xec, 0x4d, 0xc0, 0x5a, 0x06, 0x0c,
+	0xc9, 0x21, 0xf1, 0x82, 0x94, 0x5c, 0x5b, 0x81, 0xe8, 0x79, 0x64, 0xaa, 0x27, 0x64, 0x06, 0x39,
+	0x1e, 0x12, 0xc6, 0xb5, 0x1e, 0x5c, 0x9e, 0xaa, 0xb2, 0x80, 0xfa, 0x8c, 0xa0, 0xc7, 0xb0, 0x10,
+	0xb7, 0xaf, 0x80, 0x1a, 0xa8, 0x4b, 0xad, 0xd5, 0xe6, 0x74, 0xfe, 0x66, 0xcc, 0x6f, 0x17, 0xcf,
+	0xbf, 0xaf, 0xe7, 0x3e, 0xff, 0xfa, 0xd2, 0x00, 0x46, 0x22, 0xd0, 0x54, 0xb8, 0x26, 0x3a, 0x76,
+	0xa9, 0x35, 0x38, 0x08, 0xb1, 0xcf, 0xb0, 0x25, 0x6c, 0x4c, 0x26, 0x76, 0xe1, 0xed, 0x2b, 0xf0,
+	0x64, 0xf6, 0x7d, 0x58, 0x76, 0xa9, 0x35, 0xe8, 0xf3, 0x14, 0x58, 0x01, 0xb5, 0x7c, 0xbd, 0x68,
+	0xc8, 0x6e, 0x46, 0xa4, 0xbd, 0x07, 0xf0, 0xa6, 0x68, 0x67, 0x5c, 0x06, 0x4e, 0x26, 0xa1, 0x75,
+	0x28, 0x31, 0x8e, 0x43, 0xde, 0x77, 0xfc, 0x43, 0x72, 0x22, 0x92, 0x2c, 0x1a, 0x50, 0x94, 0x76,
+	0xa3, 0x0a, 0xda, 0x83, 0x65, 0x8b, 0x7a, 0x81, 0x4b, 0x22, 0x59, 0xff, 0x95, 0xe3, 0x72, 0x12,
+	0x56, 0x16, 0x6a, 0xa0, 0x5e, 0x6a, 0xd5, 0xb2, 0x81, 0xb7, 0xfe, 0x10, 0x77, 0x04, 0xcf, 0x90,
+	0xad, 0x4c, 0x45, 0x7b, 0x09, 0x2b, 0xb3, 0x56, 0x92, 0x50, 0x6d, 0x28, 0xa5, 0x56, 0x22, 0xe2,
+	0x48, 0x2d, 0x25, 0x3b, 0xe4, 0x52, 0xd9, 0x5e, 0x8c, 0xfe, 0x59, 0x23, 0x2d, 0x6a, 0x3c, 0x82,
+	0x72, 0xd6, 0x05, 0x5a, 0x82, 0xf9, 0x27, 0xdd, 0xae, 0x9c, 0x43, 0x12, 0x5c, 0xea, 0x75, 0xf6,
+	0xb7, 0x77, 0xf7, 0x9f, 0xca, 0x00, 0x5d, 0x87, 0xc5, 0xad, 0x67, 0x7b, 0xbd, 0x6e, 0xe7, 0xa0,
+	0xb3, 0x2d, 0x2f, 0xb4, 0xde, 0xe5, 0xe1, 0x35, 0xe1, 0x0c, 0x39, 0xb0, 0x10, 0x6f, 0x0e, 0x69,
+	0xd9, 0xd9, 0xb3, 0xc7, 0xa1, 0xdc, 0xfd, 0x2b, 0x27, 0x4e, 0xa6, 0xad, 0xbe, 0xfd, 0xfa, 0xf3,
+	0xd3, 0x82, 0x8c, 0x4a, 0xd3, 0x77, 0x89, 0x3e, 0x02, 0x28, 0x67, 0x77, 0x8c, 0x36, 0xe6, 0x76,
+	0xbc, 0xe2, 0x54, 0x94, 0x07, 0xff, 0xc9, 0x4e, 0x9c, 0xdc, 0x11, 0x4e, 0xaa, 0xe8, 0xd6, 0xc4,
+	0xc9, 0xcc, 0x19, 0xa1, 0x37, 0x50, 0x4a, 0x6d, 0x07, 0xdd, 0x9b, 0x3b, 0x60, 0xf6, 0x94, 0x94,
+	0xfa, 0xbf, 0x89, 0x89, 0x89, 0xaa, 0x30, 0x71, 0x03, 0x2d, 0xcf, 0xf9, 0x12, 0xdb, 0x3b, 0xe7,
+	0x23, 0x15, 0x5c, 0x8c, 0x54, 0xf0, 0x63, 0xa4, 0x82, 0x0f, 0x63, 0x35, 0x77, 0x31, 0x56, 0x73,
+	0xdf, 0xc6, 0x6a, 0xee, 0xc5, 0x86, 0xed, 0xf0, 0xa3, 0xa1, 0xd9, 0xb4, 0xa8, 0x17, 0x09, 0x43,
+	0x6a, 0x0d, 0x5c, 0x6c, 0xb2, 0x49, 0x93, 0x93, 0xc9, 0x83, 0x9f, 0x06, 0x84, 0x99, 0x05, 0xf1,
+	0x49, 0x3f, 0xfc, 0x1d, 0x00, 0x00, 0xff, 0xff, 0xed, 0x39, 0x74, 0xa2, 0xb2, 0x04, 0x00, 0x00,
 }
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -348,8 +386,8 @@ type QueryClient interface {
 	Params(ctx context.Context, in *QueryParamsRequest, opts ...grpc.CallOption) (*QueryParamsResponse, error)
 	// Queries a list of LockTransactions items.
 	LockTransactions(ctx context.Context, in *QueryLockTransactionsRequest, opts ...grpc.CallOption) (*QueryLockTransactionsResponse, error)
-	// Queries a list of ConfirmedUnlockTransactions items.
-	ConfirmedUnlockTransactions(ctx context.Context, in *QueryConfirmedUnlockTransactionsRequest, opts ...grpc.CallOption) (*QueryConfirmedUnlockTransactionsResponse, error)
+	// Queries a list of Redemptions items.
+	Redemptions(ctx context.Context, in *QueryRedemptionsRequest, opts ...grpc.CallOption) (*QueryRedemptionsResponse, error)
 }
 
 type queryClient struct {
@@ -378,9 +416,9 @@ func (c *queryClient) LockTransactions(ctx context.Context, in *QueryLockTransac
 	return out, nil
 }
 
-func (c *queryClient) ConfirmedUnlockTransactions(ctx context.Context, in *QueryConfirmedUnlockTransactionsRequest, opts ...grpc.CallOption) (*QueryConfirmedUnlockTransactionsResponse, error) {
-	out := new(QueryConfirmedUnlockTransactionsResponse)
-	err := c.cc.Invoke(ctx, "/zrchain.zenbtc.Query/ConfirmedUnlockTransactions", in, out, opts...)
+func (c *queryClient) Redemptions(ctx context.Context, in *QueryRedemptionsRequest, opts ...grpc.CallOption) (*QueryRedemptionsResponse, error) {
+	out := new(QueryRedemptionsResponse)
+	err := c.cc.Invoke(ctx, "/zrchain.zenbtc.Query/Redemptions", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -393,8 +431,8 @@ type QueryServer interface {
 	Params(context.Context, *QueryParamsRequest) (*QueryParamsResponse, error)
 	// Queries a list of LockTransactions items.
 	LockTransactions(context.Context, *QueryLockTransactionsRequest) (*QueryLockTransactionsResponse, error)
-	// Queries a list of ConfirmedUnlockTransactions items.
-	ConfirmedUnlockTransactions(context.Context, *QueryConfirmedUnlockTransactionsRequest) (*QueryConfirmedUnlockTransactionsResponse, error)
+	// Queries a list of Redemptions items.
+	Redemptions(context.Context, *QueryRedemptionsRequest) (*QueryRedemptionsResponse, error)
 }
 
 // UnimplementedQueryServer can be embedded to have forward compatible implementations.
@@ -407,8 +445,8 @@ func (*UnimplementedQueryServer) Params(ctx context.Context, req *QueryParamsReq
 func (*UnimplementedQueryServer) LockTransactions(ctx context.Context, req *QueryLockTransactionsRequest) (*QueryLockTransactionsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method LockTransactions not implemented")
 }
-func (*UnimplementedQueryServer) ConfirmedUnlockTransactions(ctx context.Context, req *QueryConfirmedUnlockTransactionsRequest) (*QueryConfirmedUnlockTransactionsResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ConfirmedUnlockTransactions not implemented")
+func (*UnimplementedQueryServer) Redemptions(ctx context.Context, req *QueryRedemptionsRequest) (*QueryRedemptionsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Redemptions not implemented")
 }
 
 func RegisterQueryServer(s grpc1.Server, srv QueryServer) {
@@ -451,20 +489,20 @@ func _Query_LockTransactions_Handler(srv interface{}, ctx context.Context, dec f
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Query_ConfirmedUnlockTransactions_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(QueryConfirmedUnlockTransactionsRequest)
+func _Query_Redemptions_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryRedemptionsRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(QueryServer).ConfirmedUnlockTransactions(ctx, in)
+		return srv.(QueryServer).Redemptions(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/zrchain.zenbtc.Query/ConfirmedUnlockTransactions",
+		FullMethod: "/zrchain.zenbtc.Query/Redemptions",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(QueryServer).ConfirmedUnlockTransactions(ctx, req.(*QueryConfirmedUnlockTransactionsRequest))
+		return srv.(QueryServer).Redemptions(ctx, req.(*QueryRedemptionsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -483,8 +521,8 @@ var _Query_serviceDesc = grpc.ServiceDesc{
 			Handler:    _Query_LockTransactions_Handler,
 		},
 		{
-			MethodName: "ConfirmedUnlockTransactions",
-			Handler:    _Query_ConfirmedUnlockTransactions_Handler,
+			MethodName: "Redemptions",
+			Handler:    _Query_Redemptions_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
@@ -602,7 +640,7 @@ func (m *QueryLockTransactionsResponse) MarshalToSizedBuffer(dAtA []byte) (int, 
 	return len(dAtA) - i, nil
 }
 
-func (m *QueryConfirmedUnlockTransactionsRequest) Marshal() (dAtA []byte, err error) {
+func (m *QueryRedemptionsRequest) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
 	n, err := m.MarshalToSizedBuffer(dAtA[:size])
@@ -612,27 +650,30 @@ func (m *QueryConfirmedUnlockTransactionsRequest) Marshal() (dAtA []byte, err er
 	return dAtA[:n], nil
 }
 
-func (m *QueryConfirmedUnlockTransactionsRequest) MarshalTo(dAtA []byte) (int, error) {
+func (m *QueryRedemptionsRequest) MarshalTo(dAtA []byte) (int, error) {
 	size := m.Size()
 	return m.MarshalToSizedBuffer(dAtA[:size])
 }
 
-func (m *QueryConfirmedUnlockTransactionsRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+func (m *QueryRedemptionsRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	i := len(dAtA)
 	_ = i
 	var l int
 	_ = l
-	if len(m.Chain) > 0 {
-		i -= len(m.Chain)
-		copy(dAtA[i:], m.Chain)
-		i = encodeVarintQuery(dAtA, i, uint64(len(m.Chain)))
+	if m.CompletionFilter != 0 {
+		i = encodeVarintQuery(dAtA, i, uint64(m.CompletionFilter))
 		i--
-		dAtA[i] = 0xa
+		dAtA[i] = 0x10
+	}
+	if m.StartIndex != 0 {
+		i = encodeVarintQuery(dAtA, i, uint64(m.StartIndex))
+		i--
+		dAtA[i] = 0x8
 	}
 	return len(dAtA) - i, nil
 }
 
-func (m *QueryConfirmedUnlockTransactionsResponse) Marshal() (dAtA []byte, err error) {
+func (m *QueryRedemptionsResponse) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
 	n, err := m.MarshalToSizedBuffer(dAtA[:size])
@@ -642,21 +683,26 @@ func (m *QueryConfirmedUnlockTransactionsResponse) Marshal() (dAtA []byte, err e
 	return dAtA[:n], nil
 }
 
-func (m *QueryConfirmedUnlockTransactionsResponse) MarshalTo(dAtA []byte) (int, error) {
+func (m *QueryRedemptionsResponse) MarshalTo(dAtA []byte) (int, error) {
 	size := m.Size()
 	return m.MarshalToSizedBuffer(dAtA[:size])
 }
 
-func (m *QueryConfirmedUnlockTransactionsResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+func (m *QueryRedemptionsResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	i := len(dAtA)
 	_ = i
 	var l int
 	_ = l
-	if len(m.UnlockTransactions) > 0 {
-		for iNdEx := len(m.UnlockTransactions) - 1; iNdEx >= 0; iNdEx-- {
-			i -= len(m.UnlockTransactions[iNdEx])
-			copy(dAtA[i:], m.UnlockTransactions[iNdEx])
-			i = encodeVarintQuery(dAtA, i, uint64(len(m.UnlockTransactions[iNdEx])))
+	if len(m.Redemptions) > 0 {
+		for iNdEx := len(m.Redemptions) - 1; iNdEx >= 0; iNdEx-- {
+			{
+				size, err := m.Redemptions[iNdEx].MarshalToSizedBuffer(dAtA[:i])
+				if err != nil {
+					return 0, err
+				}
+				i -= size
+				i = encodeVarintQuery(dAtA, i, uint64(size))
+			}
 			i--
 			dAtA[i] = 0xa
 		}
@@ -719,28 +765,30 @@ func (m *QueryLockTransactionsResponse) Size() (n int) {
 	return n
 }
 
-func (m *QueryConfirmedUnlockTransactionsRequest) Size() (n int) {
+func (m *QueryRedemptionsRequest) Size() (n int) {
 	if m == nil {
 		return 0
 	}
 	var l int
 	_ = l
-	l = len(m.Chain)
-	if l > 0 {
-		n += 1 + l + sovQuery(uint64(l))
+	if m.StartIndex != 0 {
+		n += 1 + sovQuery(uint64(m.StartIndex))
+	}
+	if m.CompletionFilter != 0 {
+		n += 1 + sovQuery(uint64(m.CompletionFilter))
 	}
 	return n
 }
 
-func (m *QueryConfirmedUnlockTransactionsResponse) Size() (n int) {
+func (m *QueryRedemptionsResponse) Size() (n int) {
 	if m == nil {
 		return 0
 	}
 	var l int
 	_ = l
-	if len(m.UnlockTransactions) > 0 {
-		for _, s := range m.UnlockTransactions {
-			l = len(s)
+	if len(m.Redemptions) > 0 {
+		for _, e := range m.Redemptions {
+			l = e.Size()
 			n += 1 + l + sovQuery(uint64(l))
 		}
 	}
@@ -1018,7 +1066,7 @@ func (m *QueryLockTransactionsResponse) Unmarshal(dAtA []byte) error {
 	}
 	return nil
 }
-func (m *QueryConfirmedUnlockTransactionsRequest) Unmarshal(dAtA []byte) error {
+func (m *QueryRedemptionsRequest) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -1041,17 +1089,17 @@ func (m *QueryConfirmedUnlockTransactionsRequest) Unmarshal(dAtA []byte) error {
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
-			return fmt.Errorf("proto: QueryConfirmedUnlockTransactionsRequest: wiretype end group for non-group")
+			return fmt.Errorf("proto: QueryRedemptionsRequest: wiretype end group for non-group")
 		}
 		if fieldNum <= 0 {
-			return fmt.Errorf("proto: QueryConfirmedUnlockTransactionsRequest: illegal tag %d (wire type %d)", fieldNum, wire)
+			return fmt.Errorf("proto: QueryRedemptionsRequest: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		case 1:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Chain", wireType)
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field StartIndex", wireType)
 			}
-			var stringLen uint64
+			m.StartIndex = 0
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
 					return ErrIntOverflowQuery
@@ -1061,24 +1109,30 @@ func (m *QueryConfirmedUnlockTransactionsRequest) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
+				m.StartIndex |= uint64(b&0x7F) << shift
 				if b < 0x80 {
 					break
 				}
 			}
-			intStringLen := int(stringLen)
-			if intStringLen < 0 {
-				return ErrInvalidLengthQuery
+		case 2:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field CompletionFilter", wireType)
 			}
-			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return ErrInvalidLengthQuery
+			m.CompletionFilter = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowQuery
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.CompletionFilter |= CompletionFilter(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
 			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.Chain = string(dAtA[iNdEx:postIndex])
-			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
 			skippy, err := skipQuery(dAtA[iNdEx:])
@@ -1100,7 +1154,7 @@ func (m *QueryConfirmedUnlockTransactionsRequest) Unmarshal(dAtA []byte) error {
 	}
 	return nil
 }
-func (m *QueryConfirmedUnlockTransactionsResponse) Unmarshal(dAtA []byte) error {
+func (m *QueryRedemptionsResponse) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -1123,17 +1177,17 @@ func (m *QueryConfirmedUnlockTransactionsResponse) Unmarshal(dAtA []byte) error 
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
-			return fmt.Errorf("proto: QueryConfirmedUnlockTransactionsResponse: wiretype end group for non-group")
+			return fmt.Errorf("proto: QueryRedemptionsResponse: wiretype end group for non-group")
 		}
 		if fieldNum <= 0 {
-			return fmt.Errorf("proto: QueryConfirmedUnlockTransactionsResponse: illegal tag %d (wire type %d)", fieldNum, wire)
+			return fmt.Errorf("proto: QueryRedemptionsResponse: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		case 1:
 			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field UnlockTransactions", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field Redemptions", wireType)
 			}
-			var stringLen uint64
+			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
 					return ErrIntOverflowQuery
@@ -1143,23 +1197,25 @@ func (m *QueryConfirmedUnlockTransactionsResponse) Unmarshal(dAtA []byte) error 
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
+				msglen |= int(b&0x7F) << shift
 				if b < 0x80 {
 					break
 				}
 			}
-			intStringLen := int(stringLen)
-			if intStringLen < 0 {
+			if msglen < 0 {
 				return ErrInvalidLengthQuery
 			}
-			postIndex := iNdEx + intStringLen
+			postIndex := iNdEx + msglen
 			if postIndex < 0 {
 				return ErrInvalidLengthQuery
 			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.UnlockTransactions = append(m.UnlockTransactions, string(dAtA[iNdEx:postIndex]))
+			m.Redemptions = append(m.Redemptions, Redemption{})
+			if err := m.Redemptions[len(m.Redemptions)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
