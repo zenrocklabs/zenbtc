@@ -47,12 +47,22 @@ class MsgVerifyDepositBlockInclusionResponse(_message.Message):
     def __init__(self) -> None: ...
 
 class MsgSubmitUnsignedRedemptionTx(_message.Message):
-    __slots__ = ("creator", "outputs")
+    __slots__ = ("creator", "inputs", "txbytes")
     CREATOR_FIELD_NUMBER: _ClassVar[int]
-    OUTPUTS_FIELD_NUMBER: _ClassVar[int]
+    INPUTS_FIELD_NUMBER: _ClassVar[int]
+    TXBYTES_FIELD_NUMBER: _ClassVar[int]
     creator: str
-    outputs: str
-    def __init__(self, creator: _Optional[str] = ..., outputs: _Optional[str] = ...) -> None: ...
+    inputs: InputHashes
+    txbytes: bytes
+    def __init__(self, creator: _Optional[str] = ..., inputs: _Optional[_Union[InputHashes, _Mapping]] = ..., txbytes: _Optional[bytes] = ...) -> None: ...
+
+class InputHashes(_message.Message):
+    __slots__ = ("hash", "keyid")
+    HASH_FIELD_NUMBER: _ClassVar[int]
+    KEYID_FIELD_NUMBER: _ClassVar[int]
+    hash: str
+    keyid: int
+    def __init__(self, hash: _Optional[str] = ..., keyid: _Optional[int] = ...) -> None: ...
 
 class MsgSubmitUnsignedRedemptionTxResponse(_message.Message):
     __slots__ = ()
