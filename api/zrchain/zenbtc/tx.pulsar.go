@@ -2107,6 +2107,57 @@ func (x *fastReflection_MsgVerifyDepositBlockInclusionResponse) ProtoMethods() *
 	}
 }
 
+var _ protoreflect.List = (*_MsgSubmitUnsignedRedemptionTx_2_list)(nil)
+
+type _MsgSubmitUnsignedRedemptionTx_2_list struct {
+	list *[]*InputHashes
+}
+
+func (x *_MsgSubmitUnsignedRedemptionTx_2_list) Len() int {
+	if x.list == nil {
+		return 0
+	}
+	return len(*x.list)
+}
+
+func (x *_MsgSubmitUnsignedRedemptionTx_2_list) Get(i int) protoreflect.Value {
+	return protoreflect.ValueOfMessage((*x.list)[i].ProtoReflect())
+}
+
+func (x *_MsgSubmitUnsignedRedemptionTx_2_list) Set(i int, value protoreflect.Value) {
+	valueUnwrapped := value.Message()
+	concreteValue := valueUnwrapped.Interface().(*InputHashes)
+	(*x.list)[i] = concreteValue
+}
+
+func (x *_MsgSubmitUnsignedRedemptionTx_2_list) Append(value protoreflect.Value) {
+	valueUnwrapped := value.Message()
+	concreteValue := valueUnwrapped.Interface().(*InputHashes)
+	*x.list = append(*x.list, concreteValue)
+}
+
+func (x *_MsgSubmitUnsignedRedemptionTx_2_list) AppendMutable() protoreflect.Value {
+	v := new(InputHashes)
+	*x.list = append(*x.list, v)
+	return protoreflect.ValueOfMessage(v.ProtoReflect())
+}
+
+func (x *_MsgSubmitUnsignedRedemptionTx_2_list) Truncate(n int) {
+	for i := n; i < len(*x.list); i++ {
+		(*x.list)[i] = nil
+	}
+	*x.list = (*x.list)[:n]
+}
+
+func (x *_MsgSubmitUnsignedRedemptionTx_2_list) NewElement() protoreflect.Value {
+	v := new(InputHashes)
+	return protoreflect.ValueOfMessage(v.ProtoReflect())
+}
+
+func (x *_MsgSubmitUnsignedRedemptionTx_2_list) IsValid() bool {
+	return x.list != nil
+}
+
 var (
 	md_MsgSubmitUnsignedRedemptionTx         protoreflect.MessageDescriptor
 	fd_MsgSubmitUnsignedRedemptionTx_creator protoreflect.FieldDescriptor
@@ -2193,8 +2244,8 @@ func (x *fastReflection_MsgSubmitUnsignedRedemptionTx) Range(f func(protoreflect
 			return
 		}
 	}
-	if x.Inputs != nil {
-		value := protoreflect.ValueOfMessage(x.Inputs.ProtoReflect())
+	if len(x.Inputs) != 0 {
+		value := protoreflect.ValueOfList(&_MsgSubmitUnsignedRedemptionTx_2_list{list: &x.Inputs})
 		if !f(fd_MsgSubmitUnsignedRedemptionTx_inputs, value) {
 			return
 		}
@@ -2223,7 +2274,7 @@ func (x *fastReflection_MsgSubmitUnsignedRedemptionTx) Has(fd protoreflect.Field
 	case "zrchain.zenbtc.MsgSubmitUnsignedRedemptionTx.creator":
 		return x.Creator != ""
 	case "zrchain.zenbtc.MsgSubmitUnsignedRedemptionTx.inputs":
-		return x.Inputs != nil
+		return len(x.Inputs) != 0
 	case "zrchain.zenbtc.MsgSubmitUnsignedRedemptionTx.txbytes":
 		return len(x.Txbytes) != 0
 	default:
@@ -2268,8 +2319,11 @@ func (x *fastReflection_MsgSubmitUnsignedRedemptionTx) Get(descriptor protorefle
 		value := x.Creator
 		return protoreflect.ValueOfString(value)
 	case "zrchain.zenbtc.MsgSubmitUnsignedRedemptionTx.inputs":
-		value := x.Inputs
-		return protoreflect.ValueOfMessage(value.ProtoReflect())
+		if len(x.Inputs) == 0 {
+			return protoreflect.ValueOfList(&_MsgSubmitUnsignedRedemptionTx_2_list{})
+		}
+		listValue := &_MsgSubmitUnsignedRedemptionTx_2_list{list: &x.Inputs}
+		return protoreflect.ValueOfList(listValue)
 	case "zrchain.zenbtc.MsgSubmitUnsignedRedemptionTx.txbytes":
 		value := x.Txbytes
 		return protoreflect.ValueOfBytes(value)
@@ -2296,7 +2350,9 @@ func (x *fastReflection_MsgSubmitUnsignedRedemptionTx) Set(fd protoreflect.Field
 	case "zrchain.zenbtc.MsgSubmitUnsignedRedemptionTx.creator":
 		x.Creator = value.Interface().(string)
 	case "zrchain.zenbtc.MsgSubmitUnsignedRedemptionTx.inputs":
-		x.Inputs = value.Message().Interface().(*InputHashes)
+		lv := value.List()
+		clv := lv.(*_MsgSubmitUnsignedRedemptionTx_2_list)
+		x.Inputs = *clv.list
 	case "zrchain.zenbtc.MsgSubmitUnsignedRedemptionTx.txbytes":
 		x.Txbytes = value.Bytes()
 	default:
@@ -2321,9 +2377,10 @@ func (x *fastReflection_MsgSubmitUnsignedRedemptionTx) Mutable(fd protoreflect.F
 	switch fd.FullName() {
 	case "zrchain.zenbtc.MsgSubmitUnsignedRedemptionTx.inputs":
 		if x.Inputs == nil {
-			x.Inputs = new(InputHashes)
+			x.Inputs = []*InputHashes{}
 		}
-		return protoreflect.ValueOfMessage(x.Inputs.ProtoReflect())
+		value := &_MsgSubmitUnsignedRedemptionTx_2_list{list: &x.Inputs}
+		return protoreflect.ValueOfList(value)
 	case "zrchain.zenbtc.MsgSubmitUnsignedRedemptionTx.creator":
 		panic(fmt.Errorf("field creator of message zrchain.zenbtc.MsgSubmitUnsignedRedemptionTx is not mutable"))
 	case "zrchain.zenbtc.MsgSubmitUnsignedRedemptionTx.txbytes":
@@ -2344,8 +2401,8 @@ func (x *fastReflection_MsgSubmitUnsignedRedemptionTx) NewField(fd protoreflect.
 	case "zrchain.zenbtc.MsgSubmitUnsignedRedemptionTx.creator":
 		return protoreflect.ValueOfString("")
 	case "zrchain.zenbtc.MsgSubmitUnsignedRedemptionTx.inputs":
-		m := new(InputHashes)
-		return protoreflect.ValueOfMessage(m.ProtoReflect())
+		list := []*InputHashes{}
+		return protoreflect.ValueOfList(&_MsgSubmitUnsignedRedemptionTx_2_list{list: &list})
 	case "zrchain.zenbtc.MsgSubmitUnsignedRedemptionTx.txbytes":
 		return protoreflect.ValueOfBytes(nil)
 	default:
@@ -2421,9 +2478,11 @@ func (x *fastReflection_MsgSubmitUnsignedRedemptionTx) ProtoMethods() *protoifac
 		if l > 0 {
 			n += 1 + l + runtime.Sov(uint64(l))
 		}
-		if x.Inputs != nil {
-			l = options.Size(x.Inputs)
-			n += 1 + l + runtime.Sov(uint64(l))
+		if len(x.Inputs) > 0 {
+			for _, e := range x.Inputs {
+				l = options.Size(e)
+				n += 1 + l + runtime.Sov(uint64(l))
+			}
 		}
 		l = len(x.Txbytes)
 		if l > 0 {
@@ -2465,19 +2524,21 @@ func (x *fastReflection_MsgSubmitUnsignedRedemptionTx) ProtoMethods() *protoifac
 			i--
 			dAtA[i] = 0x1a
 		}
-		if x.Inputs != nil {
-			encoded, err := options.Marshal(x.Inputs)
-			if err != nil {
-				return protoiface.MarshalOutput{
-					NoUnkeyedLiterals: input.NoUnkeyedLiterals,
-					Buf:               input.Buf,
-				}, err
+		if len(x.Inputs) > 0 {
+			for iNdEx := len(x.Inputs) - 1; iNdEx >= 0; iNdEx-- {
+				encoded, err := options.Marshal(x.Inputs[iNdEx])
+				if err != nil {
+					return protoiface.MarshalOutput{
+						NoUnkeyedLiterals: input.NoUnkeyedLiterals,
+						Buf:               input.Buf,
+					}, err
+				}
+				i -= len(encoded)
+				copy(dAtA[i:], encoded)
+				i = runtime.EncodeVarint(dAtA, i, uint64(len(encoded)))
+				i--
+				dAtA[i] = 0x12
 			}
-			i -= len(encoded)
-			copy(dAtA[i:], encoded)
-			i = runtime.EncodeVarint(dAtA, i, uint64(len(encoded)))
-			i--
-			dAtA[i] = 0x12
 		}
 		if len(x.Creator) > 0 {
 			i -= len(x.Creator)
@@ -2596,10 +2657,8 @@ func (x *fastReflection_MsgSubmitUnsignedRedemptionTx) ProtoMethods() *protoifac
 				if postIndex > l {
 					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
 				}
-				if x.Inputs == nil {
-					x.Inputs = &InputHashes{}
-				}
-				if err := options.Unmarshal(dAtA[iNdEx:postIndex], x.Inputs); err != nil {
+				x.Inputs = append(x.Inputs, &InputHashes{})
+				if err := options.Unmarshal(dAtA[iNdEx:postIndex], x.Inputs[len(x.Inputs)-1]); err != nil {
 					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, err
 				}
 				iNdEx = postIndex
@@ -3705,9 +3764,9 @@ type MsgSubmitUnsignedRedemptionTx struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Creator string       `protobuf:"bytes,1,opt,name=creator,proto3" json:"creator,omitempty"`
-	Inputs  *InputHashes `protobuf:"bytes,2,opt,name=inputs,proto3" json:"inputs,omitempty"`
-	Txbytes []byte       `protobuf:"bytes,3,opt,name=txbytes,proto3" json:"txbytes,omitempty"`
+	Creator string         `protobuf:"bytes,1,opt,name=creator,proto3" json:"creator,omitempty"`
+	Inputs  []*InputHashes `protobuf:"bytes,2,rep,name=inputs,proto3" json:"inputs,omitempty"`
+	Txbytes []byte         `protobuf:"bytes,3,opt,name=txbytes,proto3" json:"txbytes,omitempty"`
 }
 
 func (x *MsgSubmitUnsignedRedemptionTx) Reset() {
@@ -3737,7 +3796,7 @@ func (x *MsgSubmitUnsignedRedemptionTx) GetCreator() string {
 	return ""
 }
 
-func (x *MsgSubmitUnsignedRedemptionTx) GetInputs() *InputHashes {
+func (x *MsgSubmitUnsignedRedemptionTx) GetInputs() []*InputHashes {
 	if x != nil {
 		return x.Inputs
 	}
@@ -3870,7 +3929,7 @@ var file_zrchain_zenbtc_tx_proto_rawDesc = []byte{
 	0x69, 0x67, 0x6e, 0x65, 0x64, 0x52, 0x65, 0x64, 0x65, 0x6d, 0x70, 0x74, 0x69, 0x6f, 0x6e, 0x54,
 	0x78, 0x12, 0x18, 0x0a, 0x07, 0x63, 0x72, 0x65, 0x61, 0x74, 0x6f, 0x72, 0x18, 0x01, 0x20, 0x01,
 	0x28, 0x09, 0x52, 0x07, 0x63, 0x72, 0x65, 0x61, 0x74, 0x6f, 0x72, 0x12, 0x33, 0x0a, 0x06, 0x69,
-	0x6e, 0x70, 0x75, 0x74, 0x73, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1b, 0x2e, 0x7a, 0x72,
+	0x6e, 0x70, 0x75, 0x74, 0x73, 0x18, 0x02, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x1b, 0x2e, 0x7a, 0x72,
 	0x63, 0x68, 0x61, 0x69, 0x6e, 0x2e, 0x7a, 0x65, 0x6e, 0x62, 0x74, 0x63, 0x2e, 0x49, 0x6e, 0x70,
 	0x75, 0x74, 0x48, 0x61, 0x73, 0x68, 0x65, 0x73, 0x52, 0x06, 0x69, 0x6e, 0x70, 0x75, 0x74, 0x73,
 	0x12, 0x18, 0x0a, 0x07, 0x74, 0x78, 0x62, 0x79, 0x74, 0x65, 0x73, 0x18, 0x03, 0x20, 0x01, 0x28,

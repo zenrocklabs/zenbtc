@@ -52,9 +52,9 @@ class MsgSubmitUnsignedRedemptionTx(_message.Message):
     INPUTS_FIELD_NUMBER: _ClassVar[int]
     TXBYTES_FIELD_NUMBER: _ClassVar[int]
     creator: str
-    inputs: InputHashes
+    inputs: _containers.RepeatedCompositeFieldContainer[InputHashes]
     txbytes: bytes
-    def __init__(self, creator: _Optional[str] = ..., inputs: _Optional[_Union[InputHashes, _Mapping]] = ..., txbytes: _Optional[bytes] = ...) -> None: ...
+    def __init__(self, creator: _Optional[str] = ..., inputs: _Optional[_Iterable[_Union[InputHashes, _Mapping]]] = ..., txbytes: _Optional[bytes] = ...) -> None: ...
 
 class InputHashes(_message.Message):
     __slots__ = ("hash", "keyid")
