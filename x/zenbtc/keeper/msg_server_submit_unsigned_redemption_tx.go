@@ -2,6 +2,7 @@ package keeper
 
 import (
 	"context"
+	"strings"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
@@ -18,10 +19,17 @@ func (k msgServer) SubmitUnsignedRedemptionTx(goCtx context.Context, msg *types.
 	// TODO: verification against k.validationKeeper.ZenBTCRedemptions goes here
 	//
 
+	keyIDs := make([]uint64, len(msg.Inputs))
+	hashes := make([]string, len(msg.Inputs))
+	for i, input := range msg.Inputs {
+		keyIDs[i] = input.Keyid
+		hashes[i] = input.Hash
+	}
+
 	k.treasuryKeeper.HandleSignatureRequest(ctx, &treasurytypes.MsgNewSignatureRequest{
 		Creator:        msg.Creator,
-		KeyId:          k.validationKeeper.GetZenBTCWithdrawerKeyID(ctx),
-		DataForSigning: msg.Outputs, // hex string, each unsigned utxo is separated by comma
+		KeyIds:         keyIDs,
+		DataForSigning: strings.Join(hashes, ","), // hex string, each unsigned utxo is separated by comma
 	})
 
 	return &types.MsgSubmitUnsignedRedemptionTxResponse{}, nil
