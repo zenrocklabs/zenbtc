@@ -57,11 +57,11 @@ func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 					},
 				},
 				{
-					RpcMethod: "SubmitUnsignedRedemptionTx",
-					Use:       "submit-unsigned-redemption-tx [outputs]",
-					Short:     "Send a SubmitUnsignedRedemptionTx tx",
+					RpcMethod:      "SubmitUnsignedRedemptionTx",
+					Use:            "submit-unsigned-redemption-tx [outputs]",
+					Short:          "Send a SubmitUnsignedRedemptionTx tx",
 					PositionalArgs: []*autocliv1.PositionalArgDescriptor{
-						{ProtoField: "outputs"},
+						//{ProtoField: "outputs"},
 					},
 				},
 				// this line is used by ignite scaffolding # autocli/tx
