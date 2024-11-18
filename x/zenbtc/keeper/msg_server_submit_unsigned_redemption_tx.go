@@ -30,6 +30,7 @@ func (k msgServer) SubmitUnsignedRedemptionTx(goCtx context.Context, msg *types.
 		Creator:        msg.Creator,
 		KeyIds:         keyIDs,
 		DataForSigning: strings.Join(hashes, ","), // hex string, each unsigned utxo is separated by comma
+		CacheId:        msg.CacheId,
 	})
 
 	return &types.MsgSubmitUnsignedRedemptionTxResponse{}, nil
