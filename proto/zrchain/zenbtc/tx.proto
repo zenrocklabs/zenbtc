@@ -62,6 +62,7 @@ message MsgSubmitUnsignedRedemptionTx {
   repeated InputHashes inputs =2;
   bytes txbytes = 3;
   bytes cacheId = 4;
+  string chain_name = 5;
 }
 
 message InputHashes {
