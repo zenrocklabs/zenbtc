@@ -36,12 +36,10 @@ func (k msgServer) SubmitUnsignedRedemptionTx(goCtx context.Context, msg *types.
 	// TODO: verification against k.validationKeeper.ZenBTCRedemptions goes here
 	//
 
-	//get redemptio
-
-	//err := k.VerifyUnsignedRedemptionTX(ctx, msg)
-	//if err != nil {
-	//	return nil, err
-	//	}
+	err := k.VerifyUnsignedRedemptionTX(ctx, msg)
+	if err != nil {
+		return nil, err
+	}
 
 	keyIDs := make([]uint64, len(msg.Inputs))
 	hashes := make([]string, len(msg.Inputs))
@@ -118,17 +116,20 @@ func (k msgServer) VerifyUnsignedRedemptionTX(ctx context.Context, msg *types.Ms
 
 	//TODO: We need to check that all the Output correspond to pending Redemptions
 
-	//redemptions := k.Keeper.Redemptions()
-	//
-	//for i, output := range msgTX.TxOut[1:] {
-	//	//Dervice output address
-	//	_, addrs, _, err := txscript.ExtractPkScriptAddrs(output.PkScript, chaincfg)
-	//	if err != nil || addrs == nil || len(addrs) != 1 {
-	//		return fmt.Errorf("Redemption: Invalid Output Address %d output #", i)
-	//	}
-	//	//Check Output is in redemption list
-	//
-	//}
+	//Loop the outputs, derive the address for the chain
+	//Get the redemptions - get that each address is in pending redemptiopn adn amount is correct
+
+	redemptions := k.Keeper.Redemptions()
+
+	for i, output := range msgTX.TxOut[1:] {
+		//Dervice output address
+		_, addrs, _, err := txscript.ExtractPkScriptAddrs(output.PkScript, chaincfg)
+		if err != nil || addrs == nil || len(addrs) != 1 {
+			return fmt.Errorf("Redemption: Invalid Output Address %d output #", i)
+		}
+		//Check Output is in redemption list
+
+	}
 
 	return nil
 }
