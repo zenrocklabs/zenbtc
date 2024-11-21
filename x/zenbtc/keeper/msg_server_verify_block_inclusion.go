@@ -3,6 +3,7 @@ package keeper
 import (
 	"context"
 	"errors"
+	"github.com/zenrocklabs/zenrock/bitcoinproxy/libs/utils"
 	"net/rpc"
 
 	"github.com/btcsuite/btcd/chaincfg/chainhash"
@@ -22,20 +23,26 @@ func (k msgServer) VerifyDepositBlockInclusion(goCtx context.Context, msg *types
 
 	blockHeader, err := k.validationKeeper.BtcBlockHeaders.Get(ctx, msg.BlockHeight)
 	//try and get missing Blockheader over RPC - WARNING for debugging only!!!!
-	// if err != nil {
-	// 	bh, _ := debugRetrieveBlockHeaderViaRPC(msg.ChainName, msg.BlockHeight)
-	// 	if bh != nil {
-	// 		err = nil
-	// 		blockHeader = *bh
-	// 	}
-	// }
+	if err != nil {
+		bh, _ := debugRetrieveBlockHeaderViaRPC(msg.ChainName, msg.BlockHeight)
+		if bh != nil {
+			err = nil
+			blockHeader = *bh
+		}
+	}
 	// END of debug code
 	if err != nil {
 		return nil, err
 	}
 
 	found := false
-	outputs, _, err := bitcoin.VerifyBTCLockTransaction(msg.RawTx, msg.ChainName, int(msg.Index), msg.Proof, &blockHeader)
+
+	ignoreAddresses, err := k.ZenBTCChangeAddresses(ctx, msg.ChainName)
+	if err != nil {
+		return nil, errors.New("Error Retrieving the Change Addresses")
+	}
+
+	outputs, _, err := bitcoin.VerifyBTCLockTransaction(msg.RawTx, msg.ChainName, int(msg.Index), msg.Proof, &blockHeader, ignoreAddresses)
 	if err != nil {
 		return nil, err
 	}
@@ -139,4 +146,25 @@ func debugRetrieveBlockHeaderViaRPC(chainName string, blockHeight int64) (*api.B
 		return nil, err
 	}
 	return resp.BlockHeader, nil
+}
+
+/*
+Get the list of Change KeyID and derive the addresses for the correct Chain
+*/
+func (k msgServer) ZenBTCChangeAddresses(ctx context.Context, chainName string) ([]string, error) {
+	keyIDs := k.validationKeeper.GetZenBTCChangeAddressKeyIDs(ctx)
+	chaincfg := utils.ChainFromString(chainName)
+	result := make([]string, 0)
+	for _, keyID := range keyIDs {
+		key, err := k.Keeper.treasuryKeeper.KeyStore.Get(ctx, keyID)
+		if err != nil {
+			return nil, err
+		}
+		address, err := treasurytypes.BitcoinP2WPKH(&key, chaincfg)
+		if err != nil {
+			return nil, err
+		}
+		result = append(result, address)
+	}
+	return result, nil
 }
