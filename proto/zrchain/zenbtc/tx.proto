@@ -59,7 +59,7 @@ message MsgVerifyDepositBlockInclusionResponse {}
 message MsgSubmitUnsignedRedemptionTx {
   option (cosmos.msg.v1.signer) = "creator";
   string creator = 1;
-  repeated InputHashes inputs =2;
+  repeated InputHashes inputs = 2;
   bytes txbytes = 3;
   bytes cacheId = 4;
   string chain_name = 5;
@@ -70,7 +70,5 @@ message InputHashes {
   string hash = 1;
   uint64 keyid = 2;
 }
-
-
 
 message MsgSubmitUnsignedRedemptionTxResponse {}

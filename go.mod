@@ -6,7 +6,7 @@ replace (
 	cosmossdk.io/core => cosmossdk.io/core v0.11.0
 	// TODO: Remove local replace once sasha/unwrapflow is merged on zrchain repo
 	github.com/Zenrock-Foundation/zrchain/v5 => ../zrchain
-	// github.com/Zenrock-Foundation/zrchain/v5 => github.com/zenrocklabs/zrchain/v5 v5.2.1
+	// github.com/zenrocklabs/zenrock => ../zenrock
 	github.com/btcsuite/btcd/btcec => github.com/btcsuite/btcd/btcec/v2 v2.0.0
 	github.com/cosmos/cosmos-sdk => github.com/zenrocklabs/cosmos-sdk v0.50.10-zenrock
 	github.com/gogo/protobuf => github.com/gogo/protobuf v1.3.2

@@ -3,8 +3,9 @@ package keeper
 import (
 	"context"
 	"errors"
-	"github.com/zenrocklabs/zenrock/bitcoinproxy/libs/utils"
 	"net/rpc"
+
+	"github.com/zenrocklabs/zenrock/bitcoinproxy/libs/utils"
 
 	"github.com/btcsuite/btcd/chaincfg/chainhash"
 
@@ -86,6 +87,20 @@ func (k msgServer) VerifyDepositBlockInclusion(goCtx context.Context, msg *types
 		return nil, errors.New("lock tx was already previously used to mint zenBTC tokens")
 	}
 
+	supply, err := k.validationKeeper.ZenBTCSupply.Get(ctx)
+	if err != nil {
+		if !errors.Is(err, collections.ErrNotFound) {
+			return nil, err
+		}
+		supply = types.Supply{CustodiedBTC: 0, MintedZenBTC: 0}
+	}
+
+	supply.CustodiedBTC += msg.Amount
+
+	if err := k.validationKeeper.ZenBTCSupply.Set(ctx, supply); err != nil {
+		return nil, err
+	}
+
 	pendingTxs, err := k.validationKeeper.PendingMintTransactions.Get(ctx)
 	if err != nil {
 		if !errors.Is(err, collections.ErrNotFound) {
@@ -93,11 +108,21 @@ func (k msgServer) VerifyDepositBlockInclusion(goCtx context.Context, msg *types
 		}
 		pendingTxs = treasurytypes.PendingMintTransactions{Txs: []*treasurytypes.PendingMintTransaction{}}
 	}
+
+	// Calculate amount of zenBTC to mint based on current exchange rate
+	exchangeRate, err := k.validationKeeper.GetZenBTCExchangeRate(ctx)
+	if err != nil {
+		return nil, err
+	}
+
+	// Amount of zenBTC to mint is the BTC amount divided by BTC/zenBTC exchange rate
+	amount := float64(msg.Amount) / exchangeRate
+
 	pendingTxs.Txs = append(pendingTxs.Txs, &treasurytypes.PendingMintTransaction{
 		ChainId:          q.Response.Key.ZenbtcMetadata.ChainId,
 		ChainType:        q.Response.Key.ZenbtcMetadata.ChainType,
 		RecipientAddress: q.Response.Key.ZenbtcMetadata.RecipientAddr,
-		Amount:           msg.Amount,
+		Amount:           uint64(amount),
 		Creator:          msg.Creator,
 		KeyId:            k.validationKeeper.GetZenBTCMinterKeyID(ctx),
 	})
