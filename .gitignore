@@ -1,4 +1,4 @@
-config.yaml
+converter/config.yaml
 __debug*
 *.abi
 *.bin

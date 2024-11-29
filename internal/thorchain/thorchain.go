@@ -9,6 +9,7 @@ import (
 	"net/http"
 	"time"
 
+	"github.com/ethereum/go-ethereum"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/core/types"
 	"github.com/ethereum/go-ethereum/ethclient"
@@ -105,7 +106,6 @@ func NewThorchainClient(logger eigensdkLogger.Logger, ethClient *ethclient.Clien
 }
 
 func (c *thorChainClient) GetSwapQuote(destination string, amount *big.Int, toleranceBPS int) (*ThorchainQuote, error) {
-	// TODO: fix panic from below line
 	inboundAddresses, err := executeRequest[[]thorchainInboundAddress](fmt.Sprintf("%s/thorchain/inbound_addresses", c.thorNodeUrl))
 	if err != nil {
 		return nil, err
@@ -152,15 +152,17 @@ func (c *thorChainClient) Swap(destination string, amount *big.Int, toleranceBPS
 		return nil, err
 	}
 
-	routerAddress := common.HexToAddress(quote.Router)
 	vaultAddress := common.HexToAddress(quote.Address)
+	routerAddress := common.HexToAddress(quote.Router)
 	memo := quote.Memo
 	expiry := time.Now().Add(time.Hour * 2).Unix()
 
-	tr, err := contracts.NewThorchainrouter(routerAddress, c.ethClient)
-	if err != nil {
-		return nil, err
-	}
+	// Convert amount from 1e8 (THORChain precision) to 1e18 (ETH Wei)
+	// Multiple by 1e10 since 1e18/1e8 = 1e10
+	nativeAmount := new(big.Int).Mul(amount, big.NewInt(1e10))
+
+	// First send ETH to vault with memo
+	memoData := common.Hex2Bytes(common.Bytes2Hex([]byte(memo)))
 
 	txMgr, err := c.getTxMgr()
 	if err != nil {
@@ -172,14 +174,79 @@ func (c *thorChainClient) Swap(destination string, amount *big.Int, toleranceBPS
 		return nil, err
 	}
 
-	nativeAmount := new(big.Int).Mul(amount, big.NewInt(1e10))
-	tx, err := tr.DepositWithExpiry(noSend, vaultAddress, common.Address{}, nativeAmount, memo, big.NewInt(expiry))
+	// Get nonce for the sender
+	nonce, err := c.ethClient.PendingNonceAt(context.Background(), noSend.From)
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("failed to get nonce: %w", err)
 	}
 
+	// Get gas price suggestions
+	gasTipCap, err := c.ethClient.SuggestGasTipCap(context.Background())
+	if err != nil {
+		return nil, fmt.Errorf("failed to get gas tip cap: %w", err)
+	}
+
+	baseFee, err := c.ethClient.HeaderByNumber(context.Background(), nil)
+	if err != nil {
+		return nil, fmt.Errorf("failed to get base fee: %w", err)
+	}
+
+	// Calculate fee cap as baseFee*2 + tip
+	gasFeeCap := new(big.Int).Add(
+		new(big.Int).Mul(baseFee.BaseFee, big.NewInt(2)),
+		gasTipCap,
+	)
+
+	// Create transaction data for sending ETH
+	ethTx := &types.DynamicFeeTx{
+		To:        &vaultAddress,
+		Value:     nativeAmount, // Use converted amount for ETH transfer
+		Data:      memoData,
+		Nonce:     nonce,
+		GasFeeCap: gasFeeCap,
+		GasTipCap: gasTipCap,
+	}
+
+	// Estimate gas for ETH transfer
+	gasLimit, err := c.ethClient.EstimateGas(context.Background(), ethereum.CallMsg{
+		From:  noSend.From,
+		To:    ethTx.To,
+		Value: ethTx.Value,
+		Data:  ethTx.Data,
+	})
+	if err != nil {
+		return nil, fmt.Errorf("failed to estimate gas for ETH transfer: %w", err)
+	}
+	ethTx.Gas = gasLimit
+
+	tx := types.NewTx(ethTx)
+
+	// Send ETH transaction and wait for receipt
 	if broadcast {
-		receipt, err := txMgr.Send(context.Background(), tx, true)
+		_, err := txMgr.Send(context.Background(), tx, true)
+		if err != nil {
+			return nil, fmt.Errorf("failed to send ETH: %w", err)
+		}
+
+		// Then call router
+		tr, err := contracts.NewThorchainrouter(routerAddress, c.ethClient)
+		if err != nil {
+			return nil, err
+		}
+
+		noSend, err = txMgr.GetNoSendTxOpts()
+		if err != nil {
+			return nil, err
+		}
+
+		// Use same nativeAmount for router call since both need 1e18 precision
+		routerTx, err := tr.DepositWithExpiry(noSend, vaultAddress, common.Address{}, nativeAmount, memo, big.NewInt(expiry))
+		if err != nil {
+			return nil, fmt.Errorf("failed to call router: %w", err)
+		}
+
+		// Send router transaction and wait for receipt
+		receipt, err := txMgr.Send(context.Background(), routerTx, true)
 		return receipt, err
 	}
 
