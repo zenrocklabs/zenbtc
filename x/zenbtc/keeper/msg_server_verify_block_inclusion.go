@@ -101,6 +101,15 @@ func (k msgServer) VerifyDepositBlockInclusion(goCtx context.Context, msg *types
 		return nil, err
 	}
 
+	if err := k.LockTransactionStore.Set(ctx, msg.RawTx); err != nil {
+		return nil, err
+	}
+
+	// Don't mint zenBTC tokens for rewards deposits; return early
+	if q.Response.Key.Id == k.validationKeeper.GetZenBTCRewardsDepositKeyID(ctx) {
+		return &types.MsgVerifyDepositBlockInclusionResponse{}, nil
+	}
+
 	pendingTxs, err := k.validationKeeper.PendingMintTransactions.Get(ctx)
 	if err != nil {
 		if !errors.Is(err, collections.ErrNotFound) {
@@ -131,10 +140,6 @@ func (k msgServer) VerifyDepositBlockInclusion(goCtx context.Context, msg *types
 	}
 
 	if err := k.validationKeeper.EthereumNonceRequested.Set(ctx, true); err != nil {
-		return nil, err
-	}
-
-	if err := k.LockTransactionStore.Set(ctx, msg.RawTx); err != nil {
 		return nil, err
 	}
 
