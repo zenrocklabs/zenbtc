@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+package zrchain.zenbtc;
+
+option go_package = "github.com/zenrocklabs/zenbtc/x/zenbtc/types";
+
+// Redemption is the metadata for a redemption transaction.
+message Redemption {
+  string recipient_address = 1;
+  uint64 amount = 2;
+}

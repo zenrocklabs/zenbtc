@@ -1,0 +1,45 @@
+{
+    "branches": ["master"],
+    "plugins": [
+      [
+        "@semantic-release/commit-analyzer",
+        {
+          "releaseRules": [
+            {"type": "feat", "release": "minor"},
+            {"type": "fix", "release": "patch"},
+            {"type": "docs", "release": "patch"},
+            {"type": "style", "release": "patch"},
+            {"type": "refactor", "release": "patch"},
+            {"type": "perf", "release": "patch"},
+            {"type": "test", "release": "patch"},
+            {"type": "build", "release": "patch"},
+            {"type": "ci", "release": "patch"},
+            {"type": "chore", "release": "patch"}
+          ],
+          "parserOpts": {
+            "headerPattern": "^\\s*(\\w+)(?:\\((.*)\\))?\\s*(!)?\\s*:"
+          }
+        }
+      ],
+      "@semantic-release/release-notes-generator",
+      "@semantic-release/changelog",
+      [
+        "@semantic-release/git",
+        {
+          "message": "chore(release): ${nextRelease.gitTag} [skip ci]\n\n${nextRelease.notes}"
+        }
+      ],
+      [
+        "@semantic-release/github",
+        {
+          "assets": [
+            { "path": "CHANGELOG.md", "label": "CHANGELOG" }
+          ],
+          "successComment": false,
+          "failComment": false
+        }
+      ]
+    ],
+    "noCi": true
+  }
+

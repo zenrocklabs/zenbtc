@@ -1,0 +1,12 @@
+{
+    "name": "ZenBTC",
+    "description": "ZenBTC Library",
+    "version": "v1.0.0",
+    "author": "Zenrock Laboratories",
+    "license": "Apache2",
+    "devDependencies": {
+      "@semantic-release/changelog": "^6.0.3",
+      "@semantic-release/git": "^10.0.1",
+      "semantic-release": "^23.0.6"
+    }
+}
