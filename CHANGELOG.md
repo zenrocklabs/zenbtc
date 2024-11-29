@@ -1,3 +1,16 @@
+# [1.5.0](https://github.com/zenrocklabs/zenbtc/compare/v1.4.2...v1.5.0) (2024-11-29)
+
+
+### Bug Fixes
+
+* get converter running + identify failure source ([e948360](https://github.com/zenrocklabs/zenbtc/commit/e948360ab382998b05f0ff334a398dea5cc3734d))
+
+
+### Features
+
+* implement working thorchain swaps ([a621592](https://github.com/zenrocklabs/zenbtc/commit/a6215923bf059117442c17ccdbcda7967c393087))
+* THORChain Rewards Conversion ([240294e](https://github.com/zenrocklabs/zenbtc/commit/240294e8144d31f669d514d4c8a4acafdd75ee42))
+
 ## [1.4.2](https://github.com/zenrocklabs/zenbtc/compare/v1.4.1...v1.4.2) (2024-11-13)
 
 

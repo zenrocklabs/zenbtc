@@ -4,10 +4,9 @@ go 1.23.2
 
 replace (
 	cosmossdk.io/core => cosmossdk.io/core v0.11.0
-	// TODO: Remove local replace once sasha/unwrapflow is merged on zrchain repo
 	github.com/Zenrock-Foundation/zrchain/v5 => ../zrchain
-	// github.com/zenrocklabs/zenrock => ../zenrock
-	github.com/btcsuite/btcd/btcec => github.com/btcsuite/btcd/btcec/v2 v2.0.0
+	github.com/btcsuite/btcd/btcec => github.com/btcsuite/btcd/btcec/v2 v2.3.3
+	github.com/btcsuite/btcutil => github.com/btcsuite/btcd/btcutil v1.1.5
 	github.com/cosmos/cosmos-sdk => github.com/zenrocklabs/cosmos-sdk v0.50.10-zenrock
 	github.com/gogo/protobuf => github.com/gogo/protobuf v1.3.2
 )
@@ -37,7 +36,6 @@ require (
 	google.golang.org/grpc v1.67.1
 	google.golang.org/protobuf v1.35.1
 	gopkg.in/yaml.v2 v2.4.0
-	gopkg.in/yaml.v3 v3.0.1
 )
 
 require (
@@ -72,7 +70,6 @@ require (
 	github.com/bits-and-blooms/bitset v1.14.3 // indirect
 	github.com/blendle/zapdriver v1.3.1 // indirect
 	github.com/btcsuite/btcd v0.24.2 // indirect
-	github.com/btcsuite/btcd/btcec v0.0.0-00010101000000-000000000000 // indirect
 	github.com/btcsuite/btcd/btcec/v2 v2.3.4 // indirect
 	github.com/btcsuite/btcd/btcutil v1.1.6 // indirect
 	github.com/btcsuite/btclog v0.0.0-20241017175713-3428138b75c7 // indirect
@@ -238,6 +235,7 @@ require (
 	google.golang.org/genproto v0.0.0-20241021214115-324edc3d5d38 // indirect
 	google.golang.org/genproto/googleapis/rpc v0.0.0-20241021214115-324edc3d5d38 // indirect
 	gopkg.in/ini.v1 v1.67.0 // indirect
+	gopkg.in/yaml.v3 v3.0.1 // indirect
 	gotest.tools/v3 v3.5.1 // indirect
 	nhooyr.io/websocket v1.8.17 // indirect
 	pgregory.net/rapid v1.1.0 // indirect
