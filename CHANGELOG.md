@@ -1,3 +1,11 @@
+## [1.5.1](https://github.com/zenrocklabs/zenbtc/compare/v1.5.0...v1.5.1) (2024-12-02)
+
+
+### Bug Fixes
+
+* remove obsolete proto ([8e86adb](https://github.com/zenrocklabs/zenbtc/commit/8e86adb40d73d143de41853d1895ca467aaac1c0))
+* remove obsolete proto ([8bf062f](https://github.com/zenrocklabs/zenbtc/commit/8bf062f5be13add3fd04f96000f4bdb2d8559726))
+
 # [1.5.0](https://github.com/zenrocklabs/zenbtc/compare/v1.4.2...v1.5.0) (2024-11-29)
 
 
