@@ -5,7 +5,7 @@ import (
 	"errors"
 	"net/rpc"
 
-	"github.com/zenrocklabs/zenrock/bitcoinproxy/libs/utils"
+	bitcoinutils "github.com/zenrocklabs/zenrock/bitcoinproxy/libs/bitcoin"
 
 	"github.com/btcsuite/btcd/chaincfg/chainhash"
 
@@ -183,7 +183,7 @@ Get the list of Change KeyID and derive the addresses for the correct Chain
 */
 func (k msgServer) ZenBTCChangeAddresses(ctx context.Context, chainName string) ([]string, error) {
 	keyIDs := k.validationKeeper.GetZenBTCChangeAddressKeyIDs(ctx)
-	chaincfg := utils.ChainFromString(chainName)
+	chaincfg := bitcoinutils.ChainFromString(chainName)
 	result := make([]string, 0)
 	for _, keyID := range keyIDs {
 		key, err := k.Keeper.treasuryKeeper.KeyStore.Get(ctx, keyID)

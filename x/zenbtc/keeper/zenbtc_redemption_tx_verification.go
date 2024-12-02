@@ -12,7 +12,7 @@ import (
 	"github.com/btcsuite/btcd/txscript"
 	"github.com/btcsuite/btcd/wire"
 	"github.com/zenrocklabs/zenbtc/x/zenbtc/types"
-	"github.com/zenrocklabs/zenrock/bitcoinproxy/libs/utils"
+	bitcoinutils "github.com/zenrocklabs/zenrock/bitcoinproxy/libs/bitcoin"
 )
 
 func (k msgServer) VerifyUnsignedRedemptionTX(ctx sdk.Context, msg *types.MsgSubmitUnsignedRedemptionTx) error {
@@ -112,7 +112,7 @@ func (k msgServer) checkChangeAddress(ctx context.Context, msg *types.MsgSubmitU
 	if len(msgTX.TxOut) == 0 {
 		return nil, fmt.Errorf("BTC transaction has zero outputs")
 	}
-	chaincfg := utils.ChainFromString(msg.ChainName)
+	chaincfg := bitcoinutils.ChainFromString(msg.ChainName)
 	changeOutput := msgTX.TxOut[0]
 
 	// Extract and validate change address from Output 0
@@ -157,7 +157,7 @@ func (k msgServer) checkRedemptionTXCreator(ctx context.Context, msg *types.MsgS
 }
 
 func (k msgServer) verifyOutputsAgainstRedemptions(ctx context.Context, msg *types.MsgSubmitUnsignedRedemptionTx, msgTX *wire.MsgTx) error {
-	chaincfg := utils.ChainFromString(msg.ChainName)
+	chaincfg := bitcoinutils.ChainFromString(msg.ChainName)
 	req := &types.QueryRedemptionsRequest{
 		StartIndex:       0,
 		CompletionFilter: types.CompletionFilter_PENDING,
