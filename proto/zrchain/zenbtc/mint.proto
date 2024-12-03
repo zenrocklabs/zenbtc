@@ -1,0 +1,10 @@
+syntax = "proto3";
+
+package zrchain.zenbtc;
+
+option go_package = "github.com/zenrocklabs/zenbtc/x/zenbtc/types";
+
+message NonceData {
+  uint64 nonce = 1;
+  uint64 counter = 2;
+}
