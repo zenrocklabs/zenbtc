@@ -12,7 +12,7 @@ import (
 	"github.com/btcsuite/btcd/txscript"
 	"github.com/btcsuite/btcd/wire"
 	"github.com/zenrocklabs/zenbtc/x/zenbtc/types"
-	bitcoinutils "github.com/zenrocklabs/zenrock/bitcoinproxy/libs/bitcoin"
+	bitcoinutils "github.com/zenrocklabs/zenrock/bitcoinproxy/libs/utils"
 )
 
 func (k msgServer) VerifyUnsignedRedemptionTX(ctx sdk.Context, msg *types.MsgSubmitUnsignedRedemptionTx) error {

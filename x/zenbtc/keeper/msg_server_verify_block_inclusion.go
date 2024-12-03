@@ -5,7 +5,7 @@ import (
 	"errors"
 	"net/rpc"
 
-	bitcoinutils "github.com/zenrocklabs/zenrock/bitcoinproxy/libs/bitcoin"
+	bitcoinutils "github.com/zenrocklabs/zenrock/bitcoinproxy/libs/utils"
 
 	"github.com/btcsuite/btcd/chaincfg/chainhash"
 
