@@ -74,25 +74,73 @@ func (m *NonceData) GetCounter() uint64 {
 	return 0
 }
 
+type RequestedBitcoinHeaders struct {
+	Heights []int64 `protobuf:"varint,1,rep,packed,name=heights,proto3" json:"heights,omitempty"`
+}
+
+func (m *RequestedBitcoinHeaders) Reset()         { *m = RequestedBitcoinHeaders{} }
+func (m *RequestedBitcoinHeaders) String() string { return proto.CompactTextString(m) }
+func (*RequestedBitcoinHeaders) ProtoMessage()    {}
+func (*RequestedBitcoinHeaders) Descriptor() ([]byte, []int) {
+	return fileDescriptor_8855381be8e1a27d, []int{1}
+}
+func (m *RequestedBitcoinHeaders) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *RequestedBitcoinHeaders) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_RequestedBitcoinHeaders.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *RequestedBitcoinHeaders) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_RequestedBitcoinHeaders.Merge(m, src)
+}
+func (m *RequestedBitcoinHeaders) XXX_Size() int {
+	return m.Size()
+}
+func (m *RequestedBitcoinHeaders) XXX_DiscardUnknown() {
+	xxx_messageInfo_RequestedBitcoinHeaders.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_RequestedBitcoinHeaders proto.InternalMessageInfo
+
+func (m *RequestedBitcoinHeaders) GetHeights() []int64 {
+	if m != nil {
+		return m.Heights
+	}
+	return nil
+}
+
 func init() {
 	proto.RegisterType((*NonceData)(nil), "zrchain.zenbtc.NonceData")
+	proto.RegisterType((*RequestedBitcoinHeaders)(nil), "zrchain.zenbtc.RequestedBitcoinHeaders")
 }
 
 func init() { proto.RegisterFile("zrchain/zenbtc/mint.proto", fileDescriptor_8855381be8e1a27d) }
 
 var fileDescriptor_8855381be8e1a27d = []byte{
-	// 168 bytes of a gzipped FileDescriptorProto
+	// 213 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0x92, 0xac, 0x2a, 0x4a, 0xce,
 	0x48, 0xcc, 0xcc, 0xd3, 0xaf, 0x4a, 0xcd, 0x4b, 0x2a, 0x49, 0xd6, 0xcf, 0xcd, 0xcc, 0x2b, 0xd1,
 	0x2b, 0x28, 0xca, 0x2f, 0xc9, 0x17, 0xe2, 0x83, 0x4a, 0xe9, 0x41, 0xa4, 0x94, 0xac, 0xb9, 0x38,
 	0xfd, 0xf2, 0xf3, 0x92, 0x53, 0x5d, 0x12, 0x4b, 0x12, 0x85, 0x44, 0xb8, 0x58, 0xf3, 0x40, 0x1c,
 	0x09, 0x46, 0x05, 0x46, 0x0d, 0x96, 0x20, 0x08, 0x47, 0x48, 0x82, 0x8b, 0x3d, 0x39, 0xbf, 0x34,
-	0xaf, 0x24, 0xb5, 0x48, 0x82, 0x09, 0x2c, 0x0e, 0xe3, 0x3a, 0xb9, 0x9d, 0x78, 0x24, 0xc7, 0x78,
-	0xe1, 0x91, 0x1c, 0xe3, 0x83, 0x47, 0x72, 0x8c, 0x13, 0x1e, 0xcb, 0x31, 0x5c, 0x78, 0x2c, 0xc7,
-	0x70, 0xe3, 0xb1, 0x1c, 0x43, 0x94, 0x4e, 0x7a, 0x66, 0x49, 0x46, 0x69, 0x92, 0x5e, 0x72, 0x7e,
-	0x2e, 0xc8, 0x11, 0x45, 0xf9, 0xc9, 0xd9, 0x39, 0x89, 0x49, 0xc5, 0x30, 0x07, 0x55, 0xc0, 0x18,
-	0x25, 0x95, 0x05, 0xa9, 0xc5, 0x49, 0x6c, 0x60, 0xb7, 0x19, 0x03, 0x02, 0x00, 0x00, 0xff, 0xff,
-	0xd8, 0x94, 0xfc, 0xa6, 0xb8, 0x00, 0x00, 0x00,
+	0xaf, 0x24, 0xb5, 0x48, 0x82, 0x09, 0x2c, 0x0e, 0xe3, 0x2a, 0x19, 0x73, 0x89, 0x07, 0xa5, 0x16,
+	0x96, 0xa6, 0x16, 0x97, 0xa4, 0xa6, 0x38, 0x65, 0x96, 0x24, 0xe7, 0x67, 0xe6, 0x79, 0xa4, 0x26,
+	0xa6, 0xa4, 0x16, 0x15, 0x83, 0x34, 0x65, 0xa4, 0x66, 0xa6, 0x67, 0x94, 0x14, 0x4b, 0x30, 0x2a,
+	0x30, 0x6b, 0x30, 0x07, 0xc1, 0xb8, 0x4e, 0x6e, 0x27, 0x1e, 0xc9, 0x31, 0x5e, 0x78, 0x24, 0xc7,
+	0xf8, 0xe0, 0x91, 0x1c, 0xe3, 0x84, 0xc7, 0x72, 0x0c, 0x17, 0x1e, 0xcb, 0x31, 0xdc, 0x78, 0x2c,
+	0xc7, 0x10, 0xa5, 0x93, 0x9e, 0x59, 0x92, 0x51, 0x9a, 0xa4, 0x97, 0x9c, 0x9f, 0x0b, 0x72, 0x79,
+	0x51, 0x7e, 0x72, 0x76, 0x4e, 0x62, 0x52, 0x31, 0xcc, 0x17, 0x15, 0x30, 0x46, 0x49, 0x65, 0x41,
+	0x6a, 0x71, 0x12, 0x1b, 0xd8, 0x43, 0xc6, 0x80, 0x00, 0x00, 0x00, 0xff, 0xff, 0x90, 0xd6, 0xb7,
+	0x14, 0xed, 0x00, 0x00, 0x00,
 }
 
 func (m *NonceData) Marshal() (dAtA []byte, err error) {
@@ -128,6 +176,48 @@ func (m *NonceData) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	return len(dAtA) - i, nil
 }
 
+func (m *RequestedBitcoinHeaders) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *RequestedBitcoinHeaders) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *RequestedBitcoinHeaders) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if len(m.Heights) > 0 {
+		dAtA2 := make([]byte, len(m.Heights)*10)
+		var j1 int
+		for _, num1 := range m.Heights {
+			num := uint64(num1)
+			for num >= 1<<7 {
+				dAtA2[j1] = uint8(uint64(num)&0x7f | 0x80)
+				num >>= 7
+				j1++
+			}
+			dAtA2[j1] = uint8(num)
+			j1++
+		}
+		i -= j1
+		copy(dAtA[i:], dAtA2[:j1])
+		i = encodeVarintMint(dAtA, i, uint64(j1))
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
 func encodeVarintMint(dAtA []byte, offset int, v uint64) int {
 	offset -= sovMint(v)
 	base := offset
@@ -150,6 +240,22 @@ func (m *NonceData) Size() (n int) {
 	}
 	if m.Counter != 0 {
 		n += 1 + sovMint(uint64(m.Counter))
+	}
+	return n
+}
+
+func (m *RequestedBitcoinHeaders) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	if len(m.Heights) > 0 {
+		l = 0
+		for _, e := range m.Heights {
+			l += sovMint(uint64(e))
+		}
+		n += 1 + sovMint(uint64(l)) + l
 	}
 	return n
 }
@@ -226,6 +332,132 @@ func (m *NonceData) Unmarshal(dAtA []byte) error {
 				if b < 0x80 {
 					break
 				}
+			}
+		default:
+			iNdEx = preIndex
+			skippy, err := skipMint(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthMint
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *RequestedBitcoinHeaders) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowMint
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: RequestedBitcoinHeaders: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: RequestedBitcoinHeaders: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType == 0 {
+				var v int64
+				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return ErrIntOverflowMint
+					}
+					if iNdEx >= l {
+						return io.ErrUnexpectedEOF
+					}
+					b := dAtA[iNdEx]
+					iNdEx++
+					v |= int64(b&0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+				m.Heights = append(m.Heights, v)
+			} else if wireType == 2 {
+				var packedLen int
+				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return ErrIntOverflowMint
+					}
+					if iNdEx >= l {
+						return io.ErrUnexpectedEOF
+					}
+					b := dAtA[iNdEx]
+					iNdEx++
+					packedLen |= int(b&0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+				if packedLen < 0 {
+					return ErrInvalidLengthMint
+				}
+				postIndex := iNdEx + packedLen
+				if postIndex < 0 {
+					return ErrInvalidLengthMint
+				}
+				if postIndex > l {
+					return io.ErrUnexpectedEOF
+				}
+				var elementCount int
+				var count int
+				for _, integer := range dAtA[iNdEx:postIndex] {
+					if integer < 128 {
+						count++
+					}
+				}
+				elementCount = count
+				if elementCount != 0 && len(m.Heights) == 0 {
+					m.Heights = make([]int64, 0, elementCount)
+				}
+				for iNdEx < postIndex {
+					var v int64
+					for shift := uint(0); ; shift += 7 {
+						if shift >= 64 {
+							return ErrIntOverflowMint
+						}
+						if iNdEx >= l {
+							return io.ErrUnexpectedEOF
+						}
+						b := dAtA[iNdEx]
+						iNdEx++
+						v |= int64(b&0x7F) << shift
+						if b < 0x80 {
+							break
+						}
+					}
+					m.Heights = append(m.Heights, v)
+				}
+			} else {
+				return fmt.Errorf("proto: wrong wireType = %d for field Heights", wireType)
 			}
 		default:
 			iNdEx = preIndex
