@@ -7,6 +7,7 @@ import "cosmos/base/query/v1beta1/pagination.proto";
 import "gogoproto/gogo.proto";
 import "google/api/annotations.proto";
 import "zrchain/zenbtc/params.proto";
+import "zrchain/zenbtc/redemptions.proto";
 
 option go_package = "github.com/zenrocklabs/zenbtc/x/zenbtc/types";
 
@@ -22,9 +23,9 @@ service Query {
     option (google.api.http).get = "/zenbtc/lock_transactions";
   }
 
-  // Queries a list of ConfirmedUnlockTransactions items.
-  rpc ConfirmedUnlockTransactions(QueryConfirmedUnlockTransactionsRequest) returns (QueryConfirmedUnlockTransactionsResponse) {
-    option (google.api.http).get = "/zenbtc/confirmed_solana_unlock_transactions";
+  // Queries a list of Redemptions items.
+  rpc Redemptions(QueryRedemptionsRequest) returns (QueryRedemptionsResponse) {
+    option (google.api.http).get = "/zenbtc/redemptions";
   }
 }
 
@@ -46,10 +47,17 @@ message QueryLockTransactionsResponse {
   repeated string lock_transactions = 1;
 }
 
-message QueryConfirmedUnlockTransactionsRequest {
-  string chain = 1;
+enum CompletionFilter {
+  ALL = 0;
+  PENDING = 1;
+  COMPLETED = 2;
 }
 
-message QueryConfirmedUnlockTransactionsResponse {
-  repeated string unlock_transactions = 1;
+message QueryRedemptionsRequest {
+  uint64 start_index = 1;
+  CompletionFilter completion_filter = 2;
+}
+
+message QueryRedemptionsResponse {
+  repeated Redemption redemptions = 1 [(gogoproto.nullable) = false];
 }

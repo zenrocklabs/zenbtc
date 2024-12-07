@@ -22,8 +22,8 @@ type QueryClient interface {
 	Params(ctx context.Context, in *QueryParamsRequest, opts ...grpc.CallOption) (*QueryParamsResponse, error)
 	// Queries a list of LockTransactions items.
 	LockTransactions(ctx context.Context, in *QueryLockTransactionsRequest, opts ...grpc.CallOption) (*QueryLockTransactionsResponse, error)
-	// Queries a list of ConfirmedUnlockTransactions items.
-	ConfirmedUnlockTransactions(ctx context.Context, in *QueryConfirmedUnlockTransactionsRequest, opts ...grpc.CallOption) (*QueryConfirmedUnlockTransactionsResponse, error)
+	// Queries a list of Redemptions items.
+	Redemptions(ctx context.Context, in *QueryRedemptionsRequest, opts ...grpc.CallOption) (*QueryRedemptionsResponse, error)
 }
 
 type queryClient struct {
@@ -52,9 +52,9 @@ func (c *queryClient) LockTransactions(ctx context.Context, in *QueryLockTransac
 	return out, nil
 }
 
-func (c *queryClient) ConfirmedUnlockTransactions(ctx context.Context, in *QueryConfirmedUnlockTransactionsRequest, opts ...grpc.CallOption) (*QueryConfirmedUnlockTransactionsResponse, error) {
-	out := new(QueryConfirmedUnlockTransactionsResponse)
-	err := c.cc.Invoke(ctx, "/zrchain.zenbtc.Query/ConfirmedUnlockTransactions", in, out, opts...)
+func (c *queryClient) Redemptions(ctx context.Context, in *QueryRedemptionsRequest, opts ...grpc.CallOption) (*QueryRedemptionsResponse, error) {
+	out := new(QueryRedemptionsResponse)
+	err := c.cc.Invoke(ctx, "/zrchain.zenbtc.Query/Redemptions", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -69,8 +69,8 @@ type QueryServer interface {
 	Params(context.Context, *QueryParamsRequest) (*QueryParamsResponse, error)
 	// Queries a list of LockTransactions items.
 	LockTransactions(context.Context, *QueryLockTransactionsRequest) (*QueryLockTransactionsResponse, error)
-	// Queries a list of ConfirmedUnlockTransactions items.
-	ConfirmedUnlockTransactions(context.Context, *QueryConfirmedUnlockTransactionsRequest) (*QueryConfirmedUnlockTransactionsResponse, error)
+	// Queries a list of Redemptions items.
+	Redemptions(context.Context, *QueryRedemptionsRequest) (*QueryRedemptionsResponse, error)
 	mustEmbedUnimplementedQueryServer()
 }
 
@@ -84,8 +84,8 @@ func (UnimplementedQueryServer) Params(context.Context, *QueryParamsRequest) (*Q
 func (UnimplementedQueryServer) LockTransactions(context.Context, *QueryLockTransactionsRequest) (*QueryLockTransactionsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method LockTransactions not implemented")
 }
-func (UnimplementedQueryServer) ConfirmedUnlockTransactions(context.Context, *QueryConfirmedUnlockTransactionsRequest) (*QueryConfirmedUnlockTransactionsResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ConfirmedUnlockTransactions not implemented")
+func (UnimplementedQueryServer) Redemptions(context.Context, *QueryRedemptionsRequest) (*QueryRedemptionsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Redemptions not implemented")
 }
 func (UnimplementedQueryServer) mustEmbedUnimplementedQueryServer() {}
 
@@ -136,20 +136,20 @@ func _Query_LockTransactions_Handler(srv interface{}, ctx context.Context, dec f
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Query_ConfirmedUnlockTransactions_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(QueryConfirmedUnlockTransactionsRequest)
+func _Query_Redemptions_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryRedemptionsRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(QueryServer).ConfirmedUnlockTransactions(ctx, in)
+		return srv.(QueryServer).Redemptions(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/zrchain.zenbtc.Query/ConfirmedUnlockTransactions",
+		FullMethod: "/zrchain.zenbtc.Query/Redemptions",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(QueryServer).ConfirmedUnlockTransactions(ctx, req.(*QueryConfirmedUnlockTransactionsRequest))
+		return srv.(QueryServer).Redemptions(ctx, req.(*QueryRedemptionsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -170,8 +170,8 @@ var Query_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Query_LockTransactions_Handler,
 		},
 		{
-			MethodName: "ConfirmedUnlockTransactions",
-			Handler:    _Query_ConfirmedUnlockTransactions_Handler,
+			MethodName: "Redemptions",
+			Handler:    _Query_Redemptions_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
