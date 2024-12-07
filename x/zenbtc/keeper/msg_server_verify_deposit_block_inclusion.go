@@ -67,6 +67,10 @@ func (k msgServer) VerifyDepositBlockInclusion(goCtx context.Context, msg *types
 		return nil, err
 	}
 
+	if q.Response == nil || q.Response.Wallets == nil {
+		return nil, errors.New("zenBTC deposit address does not correspond to correct key (no wallets returned)")
+	}
+
 	found = false
 	for _, wallet := range q.Response.Wallets {
 		if wallet.Address == msg.DepositAddr {
@@ -75,7 +79,7 @@ func (k msgServer) VerifyDepositBlockInclusion(goCtx context.Context, msg *types
 		}
 	}
 	if !found {
-		return nil, errors.New("zenBTC deposit address not found in key wallets")
+		return nil, errors.New("zenBTC deposit address does not correspond to correct key (no matching wallet)")
 	}
 
 	// Deposit/lock txs are stored in zenBTC module so they can't be used to mint zenBTC tokens more than once
