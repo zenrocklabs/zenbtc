@@ -28,7 +28,7 @@ func main() {
 	// Define command line flags
 	privateKeyHex := flag.String("private-key", "", "Private key in hex format (with or without 0x prefix)")
 	btcAddress := flag.String("btc-address", "tb1qypwjx7yj5jz0gw0vh76348ypa2ns7tfwsnhlh9", "Bitcoin testnet address")
-	amount := flag.String("amount", "100000000000000", "Amount to unwrap (in smallest unit)")
+	amount := flag.String("amount", "100000", "Amount to unwrap (in satoshis)")
 	rpcURL := flag.String("rpc-url", "https://rpc.ankr.com/eth_holesky", "Ethereum RPC URL")
 	contractAddr := flag.String("contract", "0xEe6dd71ccf66E3F920a4D49a57020e0F89659407", "ZenBTC contract address")
 
