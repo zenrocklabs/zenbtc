@@ -45,3 +45,31 @@ class MsgVerifyDepositBlockInclusion(_message.Message):
 class MsgVerifyDepositBlockInclusionResponse(_message.Message):
     __slots__ = ()
     def __init__(self) -> None: ...
+
+class MsgSubmitUnsignedRedemptionTx(_message.Message):
+    __slots__ = ("creator", "inputs", "txbytes", "cacheId", "chain_name", "redemption_indexes")
+    CREATOR_FIELD_NUMBER: _ClassVar[int]
+    INPUTS_FIELD_NUMBER: _ClassVar[int]
+    TXBYTES_FIELD_NUMBER: _ClassVar[int]
+    CACHEID_FIELD_NUMBER: _ClassVar[int]
+    CHAIN_NAME_FIELD_NUMBER: _ClassVar[int]
+    REDEMPTION_INDEXES_FIELD_NUMBER: _ClassVar[int]
+    creator: str
+    inputs: _containers.RepeatedCompositeFieldContainer[InputHashes]
+    txbytes: bytes
+    cacheId: bytes
+    chain_name: str
+    redemption_indexes: _containers.RepeatedScalarFieldContainer[int]
+    def __init__(self, creator: _Optional[str] = ..., inputs: _Optional[_Iterable[_Union[InputHashes, _Mapping]]] = ..., txbytes: _Optional[bytes] = ..., cacheId: _Optional[bytes] = ..., chain_name: _Optional[str] = ..., redemption_indexes: _Optional[_Iterable[int]] = ...) -> None: ...
+
+class InputHashes(_message.Message):
+    __slots__ = ("hash", "keyid")
+    HASH_FIELD_NUMBER: _ClassVar[int]
+    KEYID_FIELD_NUMBER: _ClassVar[int]
+    hash: str
+    keyid: int
+    def __init__(self, hash: _Optional[str] = ..., keyid: _Optional[int] = ...) -> None: ...
+
+class MsgSubmitUnsignedRedemptionTxResponse(_message.Message):
+    __slots__ = ()
+    def __init__(self) -> None: ...

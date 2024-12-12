@@ -1644,25 +1644,27 @@ func (x *fastReflection_QueryLockTransactionsResponse) ProtoMethods() *protoifac
 }
 
 var (
-	md_QueryConfirmedUnlockTransactionsRequest       protoreflect.MessageDescriptor
-	fd_QueryConfirmedUnlockTransactionsRequest_chain protoreflect.FieldDescriptor
+	md_QueryRedemptionsRequest                   protoreflect.MessageDescriptor
+	fd_QueryRedemptionsRequest_start_index       protoreflect.FieldDescriptor
+	fd_QueryRedemptionsRequest_completion_filter protoreflect.FieldDescriptor
 )
 
 func init() {
 	file_zrchain_zenbtc_query_proto_init()
-	md_QueryConfirmedUnlockTransactionsRequest = File_zrchain_zenbtc_query_proto.Messages().ByName("QueryConfirmedUnlockTransactionsRequest")
-	fd_QueryConfirmedUnlockTransactionsRequest_chain = md_QueryConfirmedUnlockTransactionsRequest.Fields().ByName("chain")
+	md_QueryRedemptionsRequest = File_zrchain_zenbtc_query_proto.Messages().ByName("QueryRedemptionsRequest")
+	fd_QueryRedemptionsRequest_start_index = md_QueryRedemptionsRequest.Fields().ByName("start_index")
+	fd_QueryRedemptionsRequest_completion_filter = md_QueryRedemptionsRequest.Fields().ByName("completion_filter")
 }
 
-var _ protoreflect.Message = (*fastReflection_QueryConfirmedUnlockTransactionsRequest)(nil)
+var _ protoreflect.Message = (*fastReflection_QueryRedemptionsRequest)(nil)
 
-type fastReflection_QueryConfirmedUnlockTransactionsRequest QueryConfirmedUnlockTransactionsRequest
+type fastReflection_QueryRedemptionsRequest QueryRedemptionsRequest
 
-func (x *QueryConfirmedUnlockTransactionsRequest) ProtoReflect() protoreflect.Message {
-	return (*fastReflection_QueryConfirmedUnlockTransactionsRequest)(x)
+func (x *QueryRedemptionsRequest) ProtoReflect() protoreflect.Message {
+	return (*fastReflection_QueryRedemptionsRequest)(x)
 }
 
-func (x *QueryConfirmedUnlockTransactionsRequest) slowProtoReflect() protoreflect.Message {
+func (x *QueryRedemptionsRequest) slowProtoReflect() protoreflect.Message {
 	mi := &file_zrchain_zenbtc_query_proto_msgTypes[4]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1674,43 +1676,43 @@ func (x *QueryConfirmedUnlockTransactionsRequest) slowProtoReflect() protoreflec
 	return mi.MessageOf(x)
 }
 
-var _fastReflection_QueryConfirmedUnlockTransactionsRequest_messageType fastReflection_QueryConfirmedUnlockTransactionsRequest_messageType
-var _ protoreflect.MessageType = fastReflection_QueryConfirmedUnlockTransactionsRequest_messageType{}
+var _fastReflection_QueryRedemptionsRequest_messageType fastReflection_QueryRedemptionsRequest_messageType
+var _ protoreflect.MessageType = fastReflection_QueryRedemptionsRequest_messageType{}
 
-type fastReflection_QueryConfirmedUnlockTransactionsRequest_messageType struct{}
+type fastReflection_QueryRedemptionsRequest_messageType struct{}
 
-func (x fastReflection_QueryConfirmedUnlockTransactionsRequest_messageType) Zero() protoreflect.Message {
-	return (*fastReflection_QueryConfirmedUnlockTransactionsRequest)(nil)
+func (x fastReflection_QueryRedemptionsRequest_messageType) Zero() protoreflect.Message {
+	return (*fastReflection_QueryRedemptionsRequest)(nil)
 }
-func (x fastReflection_QueryConfirmedUnlockTransactionsRequest_messageType) New() protoreflect.Message {
-	return new(fastReflection_QueryConfirmedUnlockTransactionsRequest)
+func (x fastReflection_QueryRedemptionsRequest_messageType) New() protoreflect.Message {
+	return new(fastReflection_QueryRedemptionsRequest)
 }
-func (x fastReflection_QueryConfirmedUnlockTransactionsRequest_messageType) Descriptor() protoreflect.MessageDescriptor {
-	return md_QueryConfirmedUnlockTransactionsRequest
+func (x fastReflection_QueryRedemptionsRequest_messageType) Descriptor() protoreflect.MessageDescriptor {
+	return md_QueryRedemptionsRequest
 }
 
 // Descriptor returns message descriptor, which contains only the protobuf
 // type information for the message.
-func (x *fastReflection_QueryConfirmedUnlockTransactionsRequest) Descriptor() protoreflect.MessageDescriptor {
-	return md_QueryConfirmedUnlockTransactionsRequest
+func (x *fastReflection_QueryRedemptionsRequest) Descriptor() protoreflect.MessageDescriptor {
+	return md_QueryRedemptionsRequest
 }
 
 // Type returns the message type, which encapsulates both Go and protobuf
 // type information. If the Go type information is not needed,
 // it is recommended that the message descriptor be used instead.
-func (x *fastReflection_QueryConfirmedUnlockTransactionsRequest) Type() protoreflect.MessageType {
-	return _fastReflection_QueryConfirmedUnlockTransactionsRequest_messageType
+func (x *fastReflection_QueryRedemptionsRequest) Type() protoreflect.MessageType {
+	return _fastReflection_QueryRedemptionsRequest_messageType
 }
 
 // New returns a newly allocated and mutable empty message.
-func (x *fastReflection_QueryConfirmedUnlockTransactionsRequest) New() protoreflect.Message {
-	return new(fastReflection_QueryConfirmedUnlockTransactionsRequest)
+func (x *fastReflection_QueryRedemptionsRequest) New() protoreflect.Message {
+	return new(fastReflection_QueryRedemptionsRequest)
 }
 
 // Interface unwraps the message reflection interface and
 // returns the underlying ProtoMessage interface.
-func (x *fastReflection_QueryConfirmedUnlockTransactionsRequest) Interface() protoreflect.ProtoMessage {
-	return (*QueryConfirmedUnlockTransactionsRequest)(x)
+func (x *fastReflection_QueryRedemptionsRequest) Interface() protoreflect.ProtoMessage {
+	return (*QueryRedemptionsRequest)(x)
 }
 
 // Range iterates over every populated field in an undefined order,
@@ -1718,10 +1720,16 @@ func (x *fastReflection_QueryConfirmedUnlockTransactionsRequest) Interface() pro
 // Range returns immediately if f returns false.
 // While iterating, mutating operations may only be performed
 // on the current field descriptor.
-func (x *fastReflection_QueryConfirmedUnlockTransactionsRequest) Range(f func(protoreflect.FieldDescriptor, protoreflect.Value) bool) {
-	if x.Chain != "" {
-		value := protoreflect.ValueOfString(x.Chain)
-		if !f(fd_QueryConfirmedUnlockTransactionsRequest_chain, value) {
+func (x *fastReflection_QueryRedemptionsRequest) Range(f func(protoreflect.FieldDescriptor, protoreflect.Value) bool) {
+	if x.StartIndex != uint64(0) {
+		value := protoreflect.ValueOfUint64(x.StartIndex)
+		if !f(fd_QueryRedemptionsRequest_start_index, value) {
+			return
+		}
+	}
+	if x.CompletionFilter != 0 {
+		value := protoreflect.ValueOfEnum((protoreflect.EnumNumber)(x.CompletionFilter))
+		if !f(fd_QueryRedemptionsRequest_completion_filter, value) {
 			return
 		}
 	}
@@ -1738,15 +1746,17 @@ func (x *fastReflection_QueryConfirmedUnlockTransactionsRequest) Range(f func(pr
 // In other cases (aside from the nullable cases above),
 // a proto3 scalar field is populated if it contains a non-zero value, and
 // a repeated field is populated if it is non-empty.
-func (x *fastReflection_QueryConfirmedUnlockTransactionsRequest) Has(fd protoreflect.FieldDescriptor) bool {
+func (x *fastReflection_QueryRedemptionsRequest) Has(fd protoreflect.FieldDescriptor) bool {
 	switch fd.FullName() {
-	case "zrchain.zenbtc.QueryConfirmedUnlockTransactionsRequest.chain":
-		return x.Chain != ""
+	case "zrchain.zenbtc.QueryRedemptionsRequest.start_index":
+		return x.StartIndex != uint64(0)
+	case "zrchain.zenbtc.QueryRedemptionsRequest.completion_filter":
+		return x.CompletionFilter != 0
 	default:
 		if fd.IsExtension() {
-			panic(fmt.Errorf("proto3 declared messages do not support extensions: zrchain.zenbtc.QueryConfirmedUnlockTransactionsRequest"))
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: zrchain.zenbtc.QueryRedemptionsRequest"))
 		}
-		panic(fmt.Errorf("message zrchain.zenbtc.QueryConfirmedUnlockTransactionsRequest does not contain field %s", fd.FullName()))
+		panic(fmt.Errorf("message zrchain.zenbtc.QueryRedemptionsRequest does not contain field %s", fd.FullName()))
 	}
 }
 
@@ -1756,15 +1766,17 @@ func (x *fastReflection_QueryConfirmedUnlockTransactionsRequest) Has(fd protoref
 // associated with the given field number.
 //
 // Clear is a mutating operation and unsafe for concurrent use.
-func (x *fastReflection_QueryConfirmedUnlockTransactionsRequest) Clear(fd protoreflect.FieldDescriptor) {
+func (x *fastReflection_QueryRedemptionsRequest) Clear(fd protoreflect.FieldDescriptor) {
 	switch fd.FullName() {
-	case "zrchain.zenbtc.QueryConfirmedUnlockTransactionsRequest.chain":
-		x.Chain = ""
+	case "zrchain.zenbtc.QueryRedemptionsRequest.start_index":
+		x.StartIndex = uint64(0)
+	case "zrchain.zenbtc.QueryRedemptionsRequest.completion_filter":
+		x.CompletionFilter = 0
 	default:
 		if fd.IsExtension() {
-			panic(fmt.Errorf("proto3 declared messages do not support extensions: zrchain.zenbtc.QueryConfirmedUnlockTransactionsRequest"))
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: zrchain.zenbtc.QueryRedemptionsRequest"))
 		}
-		panic(fmt.Errorf("message zrchain.zenbtc.QueryConfirmedUnlockTransactionsRequest does not contain field %s", fd.FullName()))
+		panic(fmt.Errorf("message zrchain.zenbtc.QueryRedemptionsRequest does not contain field %s", fd.FullName()))
 	}
 }
 
@@ -1774,16 +1786,19 @@ func (x *fastReflection_QueryConfirmedUnlockTransactionsRequest) Clear(fd protor
 // the default value of a bytes scalar is guaranteed to be a copy.
 // For unpopulated composite types, it returns an empty, read-only view
 // of the value; to obtain a mutable reference, use Mutable.
-func (x *fastReflection_QueryConfirmedUnlockTransactionsRequest) Get(descriptor protoreflect.FieldDescriptor) protoreflect.Value {
+func (x *fastReflection_QueryRedemptionsRequest) Get(descriptor protoreflect.FieldDescriptor) protoreflect.Value {
 	switch descriptor.FullName() {
-	case "zrchain.zenbtc.QueryConfirmedUnlockTransactionsRequest.chain":
-		value := x.Chain
-		return protoreflect.ValueOfString(value)
+	case "zrchain.zenbtc.QueryRedemptionsRequest.start_index":
+		value := x.StartIndex
+		return protoreflect.ValueOfUint64(value)
+	case "zrchain.zenbtc.QueryRedemptionsRequest.completion_filter":
+		value := x.CompletionFilter
+		return protoreflect.ValueOfEnum((protoreflect.EnumNumber)(value))
 	default:
 		if descriptor.IsExtension() {
-			panic(fmt.Errorf("proto3 declared messages do not support extensions: zrchain.zenbtc.QueryConfirmedUnlockTransactionsRequest"))
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: zrchain.zenbtc.QueryRedemptionsRequest"))
 		}
-		panic(fmt.Errorf("message zrchain.zenbtc.QueryConfirmedUnlockTransactionsRequest does not contain field %s", descriptor.FullName()))
+		panic(fmt.Errorf("message zrchain.zenbtc.QueryRedemptionsRequest does not contain field %s", descriptor.FullName()))
 	}
 }
 
@@ -1797,15 +1812,17 @@ func (x *fastReflection_QueryConfirmedUnlockTransactionsRequest) Get(descriptor 
 // empty, read-only value, then it panics.
 //
 // Set is a mutating operation and unsafe for concurrent use.
-func (x *fastReflection_QueryConfirmedUnlockTransactionsRequest) Set(fd protoreflect.FieldDescriptor, value protoreflect.Value) {
+func (x *fastReflection_QueryRedemptionsRequest) Set(fd protoreflect.FieldDescriptor, value protoreflect.Value) {
 	switch fd.FullName() {
-	case "zrchain.zenbtc.QueryConfirmedUnlockTransactionsRequest.chain":
-		x.Chain = value.Interface().(string)
+	case "zrchain.zenbtc.QueryRedemptionsRequest.start_index":
+		x.StartIndex = value.Uint()
+	case "zrchain.zenbtc.QueryRedemptionsRequest.completion_filter":
+		x.CompletionFilter = (CompletionFilter)(value.Enum())
 	default:
 		if fd.IsExtension() {
-			panic(fmt.Errorf("proto3 declared messages do not support extensions: zrchain.zenbtc.QueryConfirmedUnlockTransactionsRequest"))
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: zrchain.zenbtc.QueryRedemptionsRequest"))
 		}
-		panic(fmt.Errorf("message zrchain.zenbtc.QueryConfirmedUnlockTransactionsRequest does not contain field %s", fd.FullName()))
+		panic(fmt.Errorf("message zrchain.zenbtc.QueryRedemptionsRequest does not contain field %s", fd.FullName()))
 	}
 }
 
@@ -1819,40 +1836,44 @@ func (x *fastReflection_QueryConfirmedUnlockTransactionsRequest) Set(fd protoref
 // It panics if the field does not contain a composite type.
 //
 // Mutable is a mutating operation and unsafe for concurrent use.
-func (x *fastReflection_QueryConfirmedUnlockTransactionsRequest) Mutable(fd protoreflect.FieldDescriptor) protoreflect.Value {
+func (x *fastReflection_QueryRedemptionsRequest) Mutable(fd protoreflect.FieldDescriptor) protoreflect.Value {
 	switch fd.FullName() {
-	case "zrchain.zenbtc.QueryConfirmedUnlockTransactionsRequest.chain":
-		panic(fmt.Errorf("field chain of message zrchain.zenbtc.QueryConfirmedUnlockTransactionsRequest is not mutable"))
+	case "zrchain.zenbtc.QueryRedemptionsRequest.start_index":
+		panic(fmt.Errorf("field start_index of message zrchain.zenbtc.QueryRedemptionsRequest is not mutable"))
+	case "zrchain.zenbtc.QueryRedemptionsRequest.completion_filter":
+		panic(fmt.Errorf("field completion_filter of message zrchain.zenbtc.QueryRedemptionsRequest is not mutable"))
 	default:
 		if fd.IsExtension() {
-			panic(fmt.Errorf("proto3 declared messages do not support extensions: zrchain.zenbtc.QueryConfirmedUnlockTransactionsRequest"))
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: zrchain.zenbtc.QueryRedemptionsRequest"))
 		}
-		panic(fmt.Errorf("message zrchain.zenbtc.QueryConfirmedUnlockTransactionsRequest does not contain field %s", fd.FullName()))
+		panic(fmt.Errorf("message zrchain.zenbtc.QueryRedemptionsRequest does not contain field %s", fd.FullName()))
 	}
 }
 
 // NewField returns a new value that is assignable to the field
 // for the given descriptor. For scalars, this returns the default value.
 // For lists, maps, and messages, this returns a new, empty, mutable value.
-func (x *fastReflection_QueryConfirmedUnlockTransactionsRequest) NewField(fd protoreflect.FieldDescriptor) protoreflect.Value {
+func (x *fastReflection_QueryRedemptionsRequest) NewField(fd protoreflect.FieldDescriptor) protoreflect.Value {
 	switch fd.FullName() {
-	case "zrchain.zenbtc.QueryConfirmedUnlockTransactionsRequest.chain":
-		return protoreflect.ValueOfString("")
+	case "zrchain.zenbtc.QueryRedemptionsRequest.start_index":
+		return protoreflect.ValueOfUint64(uint64(0))
+	case "zrchain.zenbtc.QueryRedemptionsRequest.completion_filter":
+		return protoreflect.ValueOfEnum(0)
 	default:
 		if fd.IsExtension() {
-			panic(fmt.Errorf("proto3 declared messages do not support extensions: zrchain.zenbtc.QueryConfirmedUnlockTransactionsRequest"))
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: zrchain.zenbtc.QueryRedemptionsRequest"))
 		}
-		panic(fmt.Errorf("message zrchain.zenbtc.QueryConfirmedUnlockTransactionsRequest does not contain field %s", fd.FullName()))
+		panic(fmt.Errorf("message zrchain.zenbtc.QueryRedemptionsRequest does not contain field %s", fd.FullName()))
 	}
 }
 
 // WhichOneof reports which field within the oneof is populated,
 // returning nil if none are populated.
 // It panics if the oneof descriptor does not belong to this message.
-func (x *fastReflection_QueryConfirmedUnlockTransactionsRequest) WhichOneof(d protoreflect.OneofDescriptor) protoreflect.FieldDescriptor {
+func (x *fastReflection_QueryRedemptionsRequest) WhichOneof(d protoreflect.OneofDescriptor) protoreflect.FieldDescriptor {
 	switch d.FullName() {
 	default:
-		panic(fmt.Errorf("%s is not a oneof field in zrchain.zenbtc.QueryConfirmedUnlockTransactionsRequest", d.FullName()))
+		panic(fmt.Errorf("%s is not a oneof field in zrchain.zenbtc.QueryRedemptionsRequest", d.FullName()))
 	}
 	panic("unreachable")
 }
@@ -1860,7 +1881,7 @@ func (x *fastReflection_QueryConfirmedUnlockTransactionsRequest) WhichOneof(d pr
 // GetUnknown retrieves the entire list of unknown fields.
 // The caller may only mutate the contents of the RawFields
 // if the mutated bytes are stored back into the message with SetUnknown.
-func (x *fastReflection_QueryConfirmedUnlockTransactionsRequest) GetUnknown() protoreflect.RawFields {
+func (x *fastReflection_QueryRedemptionsRequest) GetUnknown() protoreflect.RawFields {
 	return x.unknownFields
 }
 
@@ -1871,7 +1892,7 @@ func (x *fastReflection_QueryConfirmedUnlockTransactionsRequest) GetUnknown() pr
 // An empty RawFields may be passed to clear the fields.
 //
 // SetUnknown is a mutating operation and unsafe for concurrent use.
-func (x *fastReflection_QueryConfirmedUnlockTransactionsRequest) SetUnknown(fields protoreflect.RawFields) {
+func (x *fastReflection_QueryRedemptionsRequest) SetUnknown(fields protoreflect.RawFields) {
 	x.unknownFields = fields
 }
 
@@ -1883,7 +1904,7 @@ func (x *fastReflection_QueryConfirmedUnlockTransactionsRequest) SetUnknown(fiel
 // message type, but the details are implementation dependent.
 // Validity is not part of the protobuf data model, and may not
 // be preserved in marshaling or other operations.
-func (x *fastReflection_QueryConfirmedUnlockTransactionsRequest) IsValid() bool {
+func (x *fastReflection_QueryRedemptionsRequest) IsValid() bool {
 	return x != nil
 }
 
@@ -1893,9 +1914,9 @@ func (x *fastReflection_QueryConfirmedUnlockTransactionsRequest) IsValid() bool 
 // The returned methods type is identical to
 // "google.golang.org/protobuf/runtime/protoiface".Methods.
 // Consult the protoiface package documentation for details.
-func (x *fastReflection_QueryConfirmedUnlockTransactionsRequest) ProtoMethods() *protoiface.Methods {
+func (x *fastReflection_QueryRedemptionsRequest) ProtoMethods() *protoiface.Methods {
 	size := func(input protoiface.SizeInput) protoiface.SizeOutput {
-		x := input.Message.Interface().(*QueryConfirmedUnlockTransactionsRequest)
+		x := input.Message.Interface().(*QueryRedemptionsRequest)
 		if x == nil {
 			return protoiface.SizeOutput{
 				NoUnkeyedLiterals: input.NoUnkeyedLiterals,
@@ -1907,9 +1928,11 @@ func (x *fastReflection_QueryConfirmedUnlockTransactionsRequest) ProtoMethods() 
 		var n int
 		var l int
 		_ = l
-		l = len(x.Chain)
-		if l > 0 {
-			n += 1 + l + runtime.Sov(uint64(l))
+		if x.StartIndex != 0 {
+			n += 1 + runtime.Sov(uint64(x.StartIndex))
+		}
+		if x.CompletionFilter != 0 {
+			n += 1 + runtime.Sov(uint64(x.CompletionFilter))
 		}
 		if x.unknownFields != nil {
 			n += len(x.unknownFields)
@@ -1921,7 +1944,7 @@ func (x *fastReflection_QueryConfirmedUnlockTransactionsRequest) ProtoMethods() 
 	}
 
 	marshal := func(input protoiface.MarshalInput) (protoiface.MarshalOutput, error) {
-		x := input.Message.Interface().(*QueryConfirmedUnlockTransactionsRequest)
+		x := input.Message.Interface().(*QueryRedemptionsRequest)
 		if x == nil {
 			return protoiface.MarshalOutput{
 				NoUnkeyedLiterals: input.NoUnkeyedLiterals,
@@ -1940,12 +1963,15 @@ func (x *fastReflection_QueryConfirmedUnlockTransactionsRequest) ProtoMethods() 
 			i -= len(x.unknownFields)
 			copy(dAtA[i:], x.unknownFields)
 		}
-		if len(x.Chain) > 0 {
-			i -= len(x.Chain)
-			copy(dAtA[i:], x.Chain)
-			i = runtime.EncodeVarint(dAtA, i, uint64(len(x.Chain)))
+		if x.CompletionFilter != 0 {
+			i = runtime.EncodeVarint(dAtA, i, uint64(x.CompletionFilter))
 			i--
-			dAtA[i] = 0xa
+			dAtA[i] = 0x10
+		}
+		if x.StartIndex != 0 {
+			i = runtime.EncodeVarint(dAtA, i, uint64(x.StartIndex))
+			i--
+			dAtA[i] = 0x8
 		}
 		if input.Buf != nil {
 			input.Buf = append(input.Buf, dAtA...)
@@ -1958,7 +1984,7 @@ func (x *fastReflection_QueryConfirmedUnlockTransactionsRequest) ProtoMethods() 
 		}, nil
 	}
 	unmarshal := func(input protoiface.UnmarshalInput) (protoiface.UnmarshalOutput, error) {
-		x := input.Message.Interface().(*QueryConfirmedUnlockTransactionsRequest)
+		x := input.Message.Interface().(*QueryRedemptionsRequest)
 		if x == nil {
 			return protoiface.UnmarshalOutput{
 				NoUnkeyedLiterals: input.NoUnkeyedLiterals,
@@ -1990,17 +2016,17 @@ func (x *fastReflection_QueryConfirmedUnlockTransactionsRequest) ProtoMethods() 
 			fieldNum := int32(wire >> 3)
 			wireType := int(wire & 0x7)
 			if wireType == 4 {
-				return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: QueryConfirmedUnlockTransactionsRequest: wiretype end group for non-group")
+				return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: QueryRedemptionsRequest: wiretype end group for non-group")
 			}
 			if fieldNum <= 0 {
-				return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: QueryConfirmedUnlockTransactionsRequest: illegal tag %d (wire type %d)", fieldNum, wire)
+				return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: QueryRedemptionsRequest: illegal tag %d (wire type %d)", fieldNum, wire)
 			}
 			switch fieldNum {
 			case 1:
-				if wireType != 2 {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field Chain", wireType)
+				if wireType != 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field StartIndex", wireType)
 				}
-				var stringLen uint64
+				x.StartIndex = 0
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
 						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
@@ -2010,24 +2036,30 @@ func (x *fastReflection_QueryConfirmedUnlockTransactionsRequest) ProtoMethods() 
 					}
 					b := dAtA[iNdEx]
 					iNdEx++
-					stringLen |= uint64(b&0x7F) << shift
+					x.StartIndex |= uint64(b&0x7F) << shift
 					if b < 0x80 {
 						break
 					}
 				}
-				intStringLen := int(stringLen)
-				if intStringLen < 0 {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+			case 2:
+				if wireType != 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field CompletionFilter", wireType)
 				}
-				postIndex := iNdEx + intStringLen
-				if postIndex < 0 {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				x.CompletionFilter = 0
+				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
+					}
+					if iNdEx >= l {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+					}
+					b := dAtA[iNdEx]
+					iNdEx++
+					x.CompletionFilter |= CompletionFilter(b&0x7F) << shift
+					if b < 0x80 {
+						break
+					}
 				}
-				if postIndex > l {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
-				}
-				x.Chain = string(dAtA[iNdEx:postIndex])
-				iNdEx = postIndex
 			default:
 				iNdEx = preIndex
 				skippy, err := runtime.Skip(dAtA[iNdEx:])
@@ -2063,72 +2095,77 @@ func (x *fastReflection_QueryConfirmedUnlockTransactionsRequest) ProtoMethods() 
 	}
 }
 
-var _ protoreflect.List = (*_QueryConfirmedUnlockTransactionsResponse_1_list)(nil)
+var _ protoreflect.List = (*_QueryRedemptionsResponse_1_list)(nil)
 
-type _QueryConfirmedUnlockTransactionsResponse_1_list struct {
-	list *[]string
+type _QueryRedemptionsResponse_1_list struct {
+	list *[]*Redemption
 }
 
-func (x *_QueryConfirmedUnlockTransactionsResponse_1_list) Len() int {
+func (x *_QueryRedemptionsResponse_1_list) Len() int {
 	if x.list == nil {
 		return 0
 	}
 	return len(*x.list)
 }
 
-func (x *_QueryConfirmedUnlockTransactionsResponse_1_list) Get(i int) protoreflect.Value {
-	return protoreflect.ValueOfString((*x.list)[i])
+func (x *_QueryRedemptionsResponse_1_list) Get(i int) protoreflect.Value {
+	return protoreflect.ValueOfMessage((*x.list)[i].ProtoReflect())
 }
 
-func (x *_QueryConfirmedUnlockTransactionsResponse_1_list) Set(i int, value protoreflect.Value) {
-	valueUnwrapped := value.String()
-	concreteValue := valueUnwrapped
+func (x *_QueryRedemptionsResponse_1_list) Set(i int, value protoreflect.Value) {
+	valueUnwrapped := value.Message()
+	concreteValue := valueUnwrapped.Interface().(*Redemption)
 	(*x.list)[i] = concreteValue
 }
 
-func (x *_QueryConfirmedUnlockTransactionsResponse_1_list) Append(value protoreflect.Value) {
-	valueUnwrapped := value.String()
-	concreteValue := valueUnwrapped
+func (x *_QueryRedemptionsResponse_1_list) Append(value protoreflect.Value) {
+	valueUnwrapped := value.Message()
+	concreteValue := valueUnwrapped.Interface().(*Redemption)
 	*x.list = append(*x.list, concreteValue)
 }
 
-func (x *_QueryConfirmedUnlockTransactionsResponse_1_list) AppendMutable() protoreflect.Value {
-	panic(fmt.Errorf("AppendMutable can not be called on message QueryConfirmedUnlockTransactionsResponse at list field UnlockTransactions as it is not of Message kind"))
+func (x *_QueryRedemptionsResponse_1_list) AppendMutable() protoreflect.Value {
+	v := new(Redemption)
+	*x.list = append(*x.list, v)
+	return protoreflect.ValueOfMessage(v.ProtoReflect())
 }
 
-func (x *_QueryConfirmedUnlockTransactionsResponse_1_list) Truncate(n int) {
+func (x *_QueryRedemptionsResponse_1_list) Truncate(n int) {
+	for i := n; i < len(*x.list); i++ {
+		(*x.list)[i] = nil
+	}
 	*x.list = (*x.list)[:n]
 }
 
-func (x *_QueryConfirmedUnlockTransactionsResponse_1_list) NewElement() protoreflect.Value {
-	v := ""
-	return protoreflect.ValueOfString(v)
+func (x *_QueryRedemptionsResponse_1_list) NewElement() protoreflect.Value {
+	v := new(Redemption)
+	return protoreflect.ValueOfMessage(v.ProtoReflect())
 }
 
-func (x *_QueryConfirmedUnlockTransactionsResponse_1_list) IsValid() bool {
+func (x *_QueryRedemptionsResponse_1_list) IsValid() bool {
 	return x.list != nil
 }
 
 var (
-	md_QueryConfirmedUnlockTransactionsResponse                     protoreflect.MessageDescriptor
-	fd_QueryConfirmedUnlockTransactionsResponse_unlock_transactions protoreflect.FieldDescriptor
+	md_QueryRedemptionsResponse             protoreflect.MessageDescriptor
+	fd_QueryRedemptionsResponse_redemptions protoreflect.FieldDescriptor
 )
 
 func init() {
 	file_zrchain_zenbtc_query_proto_init()
-	md_QueryConfirmedUnlockTransactionsResponse = File_zrchain_zenbtc_query_proto.Messages().ByName("QueryConfirmedUnlockTransactionsResponse")
-	fd_QueryConfirmedUnlockTransactionsResponse_unlock_transactions = md_QueryConfirmedUnlockTransactionsResponse.Fields().ByName("unlock_transactions")
+	md_QueryRedemptionsResponse = File_zrchain_zenbtc_query_proto.Messages().ByName("QueryRedemptionsResponse")
+	fd_QueryRedemptionsResponse_redemptions = md_QueryRedemptionsResponse.Fields().ByName("redemptions")
 }
 
-var _ protoreflect.Message = (*fastReflection_QueryConfirmedUnlockTransactionsResponse)(nil)
+var _ protoreflect.Message = (*fastReflection_QueryRedemptionsResponse)(nil)
 
-type fastReflection_QueryConfirmedUnlockTransactionsResponse QueryConfirmedUnlockTransactionsResponse
+type fastReflection_QueryRedemptionsResponse QueryRedemptionsResponse
 
-func (x *QueryConfirmedUnlockTransactionsResponse) ProtoReflect() protoreflect.Message {
-	return (*fastReflection_QueryConfirmedUnlockTransactionsResponse)(x)
+func (x *QueryRedemptionsResponse) ProtoReflect() protoreflect.Message {
+	return (*fastReflection_QueryRedemptionsResponse)(x)
 }
 
-func (x *QueryConfirmedUnlockTransactionsResponse) slowProtoReflect() protoreflect.Message {
+func (x *QueryRedemptionsResponse) slowProtoReflect() protoreflect.Message {
 	mi := &file_zrchain_zenbtc_query_proto_msgTypes[5]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -2140,43 +2177,43 @@ func (x *QueryConfirmedUnlockTransactionsResponse) slowProtoReflect() protorefle
 	return mi.MessageOf(x)
 }
 
-var _fastReflection_QueryConfirmedUnlockTransactionsResponse_messageType fastReflection_QueryConfirmedUnlockTransactionsResponse_messageType
-var _ protoreflect.MessageType = fastReflection_QueryConfirmedUnlockTransactionsResponse_messageType{}
+var _fastReflection_QueryRedemptionsResponse_messageType fastReflection_QueryRedemptionsResponse_messageType
+var _ protoreflect.MessageType = fastReflection_QueryRedemptionsResponse_messageType{}
 
-type fastReflection_QueryConfirmedUnlockTransactionsResponse_messageType struct{}
+type fastReflection_QueryRedemptionsResponse_messageType struct{}
 
-func (x fastReflection_QueryConfirmedUnlockTransactionsResponse_messageType) Zero() protoreflect.Message {
-	return (*fastReflection_QueryConfirmedUnlockTransactionsResponse)(nil)
+func (x fastReflection_QueryRedemptionsResponse_messageType) Zero() protoreflect.Message {
+	return (*fastReflection_QueryRedemptionsResponse)(nil)
 }
-func (x fastReflection_QueryConfirmedUnlockTransactionsResponse_messageType) New() protoreflect.Message {
-	return new(fastReflection_QueryConfirmedUnlockTransactionsResponse)
+func (x fastReflection_QueryRedemptionsResponse_messageType) New() protoreflect.Message {
+	return new(fastReflection_QueryRedemptionsResponse)
 }
-func (x fastReflection_QueryConfirmedUnlockTransactionsResponse_messageType) Descriptor() protoreflect.MessageDescriptor {
-	return md_QueryConfirmedUnlockTransactionsResponse
+func (x fastReflection_QueryRedemptionsResponse_messageType) Descriptor() protoreflect.MessageDescriptor {
+	return md_QueryRedemptionsResponse
 }
 
 // Descriptor returns message descriptor, which contains only the protobuf
 // type information for the message.
-func (x *fastReflection_QueryConfirmedUnlockTransactionsResponse) Descriptor() protoreflect.MessageDescriptor {
-	return md_QueryConfirmedUnlockTransactionsResponse
+func (x *fastReflection_QueryRedemptionsResponse) Descriptor() protoreflect.MessageDescriptor {
+	return md_QueryRedemptionsResponse
 }
 
 // Type returns the message type, which encapsulates both Go and protobuf
 // type information. If the Go type information is not needed,
 // it is recommended that the message descriptor be used instead.
-func (x *fastReflection_QueryConfirmedUnlockTransactionsResponse) Type() protoreflect.MessageType {
-	return _fastReflection_QueryConfirmedUnlockTransactionsResponse_messageType
+func (x *fastReflection_QueryRedemptionsResponse) Type() protoreflect.MessageType {
+	return _fastReflection_QueryRedemptionsResponse_messageType
 }
 
 // New returns a newly allocated and mutable empty message.
-func (x *fastReflection_QueryConfirmedUnlockTransactionsResponse) New() protoreflect.Message {
-	return new(fastReflection_QueryConfirmedUnlockTransactionsResponse)
+func (x *fastReflection_QueryRedemptionsResponse) New() protoreflect.Message {
+	return new(fastReflection_QueryRedemptionsResponse)
 }
 
 // Interface unwraps the message reflection interface and
 // returns the underlying ProtoMessage interface.
-func (x *fastReflection_QueryConfirmedUnlockTransactionsResponse) Interface() protoreflect.ProtoMessage {
-	return (*QueryConfirmedUnlockTransactionsResponse)(x)
+func (x *fastReflection_QueryRedemptionsResponse) Interface() protoreflect.ProtoMessage {
+	return (*QueryRedemptionsResponse)(x)
 }
 
 // Range iterates over every populated field in an undefined order,
@@ -2184,10 +2221,10 @@ func (x *fastReflection_QueryConfirmedUnlockTransactionsResponse) Interface() pr
 // Range returns immediately if f returns false.
 // While iterating, mutating operations may only be performed
 // on the current field descriptor.
-func (x *fastReflection_QueryConfirmedUnlockTransactionsResponse) Range(f func(protoreflect.FieldDescriptor, protoreflect.Value) bool) {
-	if len(x.UnlockTransactions) != 0 {
-		value := protoreflect.ValueOfList(&_QueryConfirmedUnlockTransactionsResponse_1_list{list: &x.UnlockTransactions})
-		if !f(fd_QueryConfirmedUnlockTransactionsResponse_unlock_transactions, value) {
+func (x *fastReflection_QueryRedemptionsResponse) Range(f func(protoreflect.FieldDescriptor, protoreflect.Value) bool) {
+	if len(x.Redemptions) != 0 {
+		value := protoreflect.ValueOfList(&_QueryRedemptionsResponse_1_list{list: &x.Redemptions})
+		if !f(fd_QueryRedemptionsResponse_redemptions, value) {
 			return
 		}
 	}
@@ -2204,15 +2241,15 @@ func (x *fastReflection_QueryConfirmedUnlockTransactionsResponse) Range(f func(p
 // In other cases (aside from the nullable cases above),
 // a proto3 scalar field is populated if it contains a non-zero value, and
 // a repeated field is populated if it is non-empty.
-func (x *fastReflection_QueryConfirmedUnlockTransactionsResponse) Has(fd protoreflect.FieldDescriptor) bool {
+func (x *fastReflection_QueryRedemptionsResponse) Has(fd protoreflect.FieldDescriptor) bool {
 	switch fd.FullName() {
-	case "zrchain.zenbtc.QueryConfirmedUnlockTransactionsResponse.unlock_transactions":
-		return len(x.UnlockTransactions) != 0
+	case "zrchain.zenbtc.QueryRedemptionsResponse.redemptions":
+		return len(x.Redemptions) != 0
 	default:
 		if fd.IsExtension() {
-			panic(fmt.Errorf("proto3 declared messages do not support extensions: zrchain.zenbtc.QueryConfirmedUnlockTransactionsResponse"))
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: zrchain.zenbtc.QueryRedemptionsResponse"))
 		}
-		panic(fmt.Errorf("message zrchain.zenbtc.QueryConfirmedUnlockTransactionsResponse does not contain field %s", fd.FullName()))
+		panic(fmt.Errorf("message zrchain.zenbtc.QueryRedemptionsResponse does not contain field %s", fd.FullName()))
 	}
 }
 
@@ -2222,15 +2259,15 @@ func (x *fastReflection_QueryConfirmedUnlockTransactionsResponse) Has(fd protore
 // associated with the given field number.
 //
 // Clear is a mutating operation and unsafe for concurrent use.
-func (x *fastReflection_QueryConfirmedUnlockTransactionsResponse) Clear(fd protoreflect.FieldDescriptor) {
+func (x *fastReflection_QueryRedemptionsResponse) Clear(fd protoreflect.FieldDescriptor) {
 	switch fd.FullName() {
-	case "zrchain.zenbtc.QueryConfirmedUnlockTransactionsResponse.unlock_transactions":
-		x.UnlockTransactions = nil
+	case "zrchain.zenbtc.QueryRedemptionsResponse.redemptions":
+		x.Redemptions = nil
 	default:
 		if fd.IsExtension() {
-			panic(fmt.Errorf("proto3 declared messages do not support extensions: zrchain.zenbtc.QueryConfirmedUnlockTransactionsResponse"))
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: zrchain.zenbtc.QueryRedemptionsResponse"))
 		}
-		panic(fmt.Errorf("message zrchain.zenbtc.QueryConfirmedUnlockTransactionsResponse does not contain field %s", fd.FullName()))
+		panic(fmt.Errorf("message zrchain.zenbtc.QueryRedemptionsResponse does not contain field %s", fd.FullName()))
 	}
 }
 
@@ -2240,19 +2277,19 @@ func (x *fastReflection_QueryConfirmedUnlockTransactionsResponse) Clear(fd proto
 // the default value of a bytes scalar is guaranteed to be a copy.
 // For unpopulated composite types, it returns an empty, read-only view
 // of the value; to obtain a mutable reference, use Mutable.
-func (x *fastReflection_QueryConfirmedUnlockTransactionsResponse) Get(descriptor protoreflect.FieldDescriptor) protoreflect.Value {
+func (x *fastReflection_QueryRedemptionsResponse) Get(descriptor protoreflect.FieldDescriptor) protoreflect.Value {
 	switch descriptor.FullName() {
-	case "zrchain.zenbtc.QueryConfirmedUnlockTransactionsResponse.unlock_transactions":
-		if len(x.UnlockTransactions) == 0 {
-			return protoreflect.ValueOfList(&_QueryConfirmedUnlockTransactionsResponse_1_list{})
+	case "zrchain.zenbtc.QueryRedemptionsResponse.redemptions":
+		if len(x.Redemptions) == 0 {
+			return protoreflect.ValueOfList(&_QueryRedemptionsResponse_1_list{})
 		}
-		listValue := &_QueryConfirmedUnlockTransactionsResponse_1_list{list: &x.UnlockTransactions}
+		listValue := &_QueryRedemptionsResponse_1_list{list: &x.Redemptions}
 		return protoreflect.ValueOfList(listValue)
 	default:
 		if descriptor.IsExtension() {
-			panic(fmt.Errorf("proto3 declared messages do not support extensions: zrchain.zenbtc.QueryConfirmedUnlockTransactionsResponse"))
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: zrchain.zenbtc.QueryRedemptionsResponse"))
 		}
-		panic(fmt.Errorf("message zrchain.zenbtc.QueryConfirmedUnlockTransactionsResponse does not contain field %s", descriptor.FullName()))
+		panic(fmt.Errorf("message zrchain.zenbtc.QueryRedemptionsResponse does not contain field %s", descriptor.FullName()))
 	}
 }
 
@@ -2266,17 +2303,17 @@ func (x *fastReflection_QueryConfirmedUnlockTransactionsResponse) Get(descriptor
 // empty, read-only value, then it panics.
 //
 // Set is a mutating operation and unsafe for concurrent use.
-func (x *fastReflection_QueryConfirmedUnlockTransactionsResponse) Set(fd protoreflect.FieldDescriptor, value protoreflect.Value) {
+func (x *fastReflection_QueryRedemptionsResponse) Set(fd protoreflect.FieldDescriptor, value protoreflect.Value) {
 	switch fd.FullName() {
-	case "zrchain.zenbtc.QueryConfirmedUnlockTransactionsResponse.unlock_transactions":
+	case "zrchain.zenbtc.QueryRedemptionsResponse.redemptions":
 		lv := value.List()
-		clv := lv.(*_QueryConfirmedUnlockTransactionsResponse_1_list)
-		x.UnlockTransactions = *clv.list
+		clv := lv.(*_QueryRedemptionsResponse_1_list)
+		x.Redemptions = *clv.list
 	default:
 		if fd.IsExtension() {
-			panic(fmt.Errorf("proto3 declared messages do not support extensions: zrchain.zenbtc.QueryConfirmedUnlockTransactionsResponse"))
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: zrchain.zenbtc.QueryRedemptionsResponse"))
 		}
-		panic(fmt.Errorf("message zrchain.zenbtc.QueryConfirmedUnlockTransactionsResponse does not contain field %s", fd.FullName()))
+		panic(fmt.Errorf("message zrchain.zenbtc.QueryRedemptionsResponse does not contain field %s", fd.FullName()))
 	}
 }
 
@@ -2290,45 +2327,45 @@ func (x *fastReflection_QueryConfirmedUnlockTransactionsResponse) Set(fd protore
 // It panics if the field does not contain a composite type.
 //
 // Mutable is a mutating operation and unsafe for concurrent use.
-func (x *fastReflection_QueryConfirmedUnlockTransactionsResponse) Mutable(fd protoreflect.FieldDescriptor) protoreflect.Value {
+func (x *fastReflection_QueryRedemptionsResponse) Mutable(fd protoreflect.FieldDescriptor) protoreflect.Value {
 	switch fd.FullName() {
-	case "zrchain.zenbtc.QueryConfirmedUnlockTransactionsResponse.unlock_transactions":
-		if x.UnlockTransactions == nil {
-			x.UnlockTransactions = []string{}
+	case "zrchain.zenbtc.QueryRedemptionsResponse.redemptions":
+		if x.Redemptions == nil {
+			x.Redemptions = []*Redemption{}
 		}
-		value := &_QueryConfirmedUnlockTransactionsResponse_1_list{list: &x.UnlockTransactions}
+		value := &_QueryRedemptionsResponse_1_list{list: &x.Redemptions}
 		return protoreflect.ValueOfList(value)
 	default:
 		if fd.IsExtension() {
-			panic(fmt.Errorf("proto3 declared messages do not support extensions: zrchain.zenbtc.QueryConfirmedUnlockTransactionsResponse"))
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: zrchain.zenbtc.QueryRedemptionsResponse"))
 		}
-		panic(fmt.Errorf("message zrchain.zenbtc.QueryConfirmedUnlockTransactionsResponse does not contain field %s", fd.FullName()))
+		panic(fmt.Errorf("message zrchain.zenbtc.QueryRedemptionsResponse does not contain field %s", fd.FullName()))
 	}
 }
 
 // NewField returns a new value that is assignable to the field
 // for the given descriptor. For scalars, this returns the default value.
 // For lists, maps, and messages, this returns a new, empty, mutable value.
-func (x *fastReflection_QueryConfirmedUnlockTransactionsResponse) NewField(fd protoreflect.FieldDescriptor) protoreflect.Value {
+func (x *fastReflection_QueryRedemptionsResponse) NewField(fd protoreflect.FieldDescriptor) protoreflect.Value {
 	switch fd.FullName() {
-	case "zrchain.zenbtc.QueryConfirmedUnlockTransactionsResponse.unlock_transactions":
-		list := []string{}
-		return protoreflect.ValueOfList(&_QueryConfirmedUnlockTransactionsResponse_1_list{list: &list})
+	case "zrchain.zenbtc.QueryRedemptionsResponse.redemptions":
+		list := []*Redemption{}
+		return protoreflect.ValueOfList(&_QueryRedemptionsResponse_1_list{list: &list})
 	default:
 		if fd.IsExtension() {
-			panic(fmt.Errorf("proto3 declared messages do not support extensions: zrchain.zenbtc.QueryConfirmedUnlockTransactionsResponse"))
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: zrchain.zenbtc.QueryRedemptionsResponse"))
 		}
-		panic(fmt.Errorf("message zrchain.zenbtc.QueryConfirmedUnlockTransactionsResponse does not contain field %s", fd.FullName()))
+		panic(fmt.Errorf("message zrchain.zenbtc.QueryRedemptionsResponse does not contain field %s", fd.FullName()))
 	}
 }
 
 // WhichOneof reports which field within the oneof is populated,
 // returning nil if none are populated.
 // It panics if the oneof descriptor does not belong to this message.
-func (x *fastReflection_QueryConfirmedUnlockTransactionsResponse) WhichOneof(d protoreflect.OneofDescriptor) protoreflect.FieldDescriptor {
+func (x *fastReflection_QueryRedemptionsResponse) WhichOneof(d protoreflect.OneofDescriptor) protoreflect.FieldDescriptor {
 	switch d.FullName() {
 	default:
-		panic(fmt.Errorf("%s is not a oneof field in zrchain.zenbtc.QueryConfirmedUnlockTransactionsResponse", d.FullName()))
+		panic(fmt.Errorf("%s is not a oneof field in zrchain.zenbtc.QueryRedemptionsResponse", d.FullName()))
 	}
 	panic("unreachable")
 }
@@ -2336,7 +2373,7 @@ func (x *fastReflection_QueryConfirmedUnlockTransactionsResponse) WhichOneof(d p
 // GetUnknown retrieves the entire list of unknown fields.
 // The caller may only mutate the contents of the RawFields
 // if the mutated bytes are stored back into the message with SetUnknown.
-func (x *fastReflection_QueryConfirmedUnlockTransactionsResponse) GetUnknown() protoreflect.RawFields {
+func (x *fastReflection_QueryRedemptionsResponse) GetUnknown() protoreflect.RawFields {
 	return x.unknownFields
 }
 
@@ -2347,7 +2384,7 @@ func (x *fastReflection_QueryConfirmedUnlockTransactionsResponse) GetUnknown() p
 // An empty RawFields may be passed to clear the fields.
 //
 // SetUnknown is a mutating operation and unsafe for concurrent use.
-func (x *fastReflection_QueryConfirmedUnlockTransactionsResponse) SetUnknown(fields protoreflect.RawFields) {
+func (x *fastReflection_QueryRedemptionsResponse) SetUnknown(fields protoreflect.RawFields) {
 	x.unknownFields = fields
 }
 
@@ -2359,7 +2396,7 @@ func (x *fastReflection_QueryConfirmedUnlockTransactionsResponse) SetUnknown(fie
 // message type, but the details are implementation dependent.
 // Validity is not part of the protobuf data model, and may not
 // be preserved in marshaling or other operations.
-func (x *fastReflection_QueryConfirmedUnlockTransactionsResponse) IsValid() bool {
+func (x *fastReflection_QueryRedemptionsResponse) IsValid() bool {
 	return x != nil
 }
 
@@ -2369,9 +2406,9 @@ func (x *fastReflection_QueryConfirmedUnlockTransactionsResponse) IsValid() bool
 // The returned methods type is identical to
 // "google.golang.org/protobuf/runtime/protoiface".Methods.
 // Consult the protoiface package documentation for details.
-func (x *fastReflection_QueryConfirmedUnlockTransactionsResponse) ProtoMethods() *protoiface.Methods {
+func (x *fastReflection_QueryRedemptionsResponse) ProtoMethods() *protoiface.Methods {
 	size := func(input protoiface.SizeInput) protoiface.SizeOutput {
-		x := input.Message.Interface().(*QueryConfirmedUnlockTransactionsResponse)
+		x := input.Message.Interface().(*QueryRedemptionsResponse)
 		if x == nil {
 			return protoiface.SizeOutput{
 				NoUnkeyedLiterals: input.NoUnkeyedLiterals,
@@ -2383,9 +2420,9 @@ func (x *fastReflection_QueryConfirmedUnlockTransactionsResponse) ProtoMethods()
 		var n int
 		var l int
 		_ = l
-		if len(x.UnlockTransactions) > 0 {
-			for _, s := range x.UnlockTransactions {
-				l = len(s)
+		if len(x.Redemptions) > 0 {
+			for _, e := range x.Redemptions {
+				l = options.Size(e)
 				n += 1 + l + runtime.Sov(uint64(l))
 			}
 		}
@@ -2399,7 +2436,7 @@ func (x *fastReflection_QueryConfirmedUnlockTransactionsResponse) ProtoMethods()
 	}
 
 	marshal := func(input protoiface.MarshalInput) (protoiface.MarshalOutput, error) {
-		x := input.Message.Interface().(*QueryConfirmedUnlockTransactionsResponse)
+		x := input.Message.Interface().(*QueryRedemptionsResponse)
 		if x == nil {
 			return protoiface.MarshalOutput{
 				NoUnkeyedLiterals: input.NoUnkeyedLiterals,
@@ -2418,11 +2455,18 @@ func (x *fastReflection_QueryConfirmedUnlockTransactionsResponse) ProtoMethods()
 			i -= len(x.unknownFields)
 			copy(dAtA[i:], x.unknownFields)
 		}
-		if len(x.UnlockTransactions) > 0 {
-			for iNdEx := len(x.UnlockTransactions) - 1; iNdEx >= 0; iNdEx-- {
-				i -= len(x.UnlockTransactions[iNdEx])
-				copy(dAtA[i:], x.UnlockTransactions[iNdEx])
-				i = runtime.EncodeVarint(dAtA, i, uint64(len(x.UnlockTransactions[iNdEx])))
+		if len(x.Redemptions) > 0 {
+			for iNdEx := len(x.Redemptions) - 1; iNdEx >= 0; iNdEx-- {
+				encoded, err := options.Marshal(x.Redemptions[iNdEx])
+				if err != nil {
+					return protoiface.MarshalOutput{
+						NoUnkeyedLiterals: input.NoUnkeyedLiterals,
+						Buf:               input.Buf,
+					}, err
+				}
+				i -= len(encoded)
+				copy(dAtA[i:], encoded)
+				i = runtime.EncodeVarint(dAtA, i, uint64(len(encoded)))
 				i--
 				dAtA[i] = 0xa
 			}
@@ -2438,7 +2482,7 @@ func (x *fastReflection_QueryConfirmedUnlockTransactionsResponse) ProtoMethods()
 		}, nil
 	}
 	unmarshal := func(input protoiface.UnmarshalInput) (protoiface.UnmarshalOutput, error) {
-		x := input.Message.Interface().(*QueryConfirmedUnlockTransactionsResponse)
+		x := input.Message.Interface().(*QueryRedemptionsResponse)
 		if x == nil {
 			return protoiface.UnmarshalOutput{
 				NoUnkeyedLiterals: input.NoUnkeyedLiterals,
@@ -2470,17 +2514,17 @@ func (x *fastReflection_QueryConfirmedUnlockTransactionsResponse) ProtoMethods()
 			fieldNum := int32(wire >> 3)
 			wireType := int(wire & 0x7)
 			if wireType == 4 {
-				return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: QueryConfirmedUnlockTransactionsResponse: wiretype end group for non-group")
+				return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: QueryRedemptionsResponse: wiretype end group for non-group")
 			}
 			if fieldNum <= 0 {
-				return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: QueryConfirmedUnlockTransactionsResponse: illegal tag %d (wire type %d)", fieldNum, wire)
+				return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: QueryRedemptionsResponse: illegal tag %d (wire type %d)", fieldNum, wire)
 			}
 			switch fieldNum {
 			case 1:
 				if wireType != 2 {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field UnlockTransactions", wireType)
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field Redemptions", wireType)
 				}
-				var stringLen uint64
+				var msglen int
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
 						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
@@ -2490,23 +2534,25 @@ func (x *fastReflection_QueryConfirmedUnlockTransactionsResponse) ProtoMethods()
 					}
 					b := dAtA[iNdEx]
 					iNdEx++
-					stringLen |= uint64(b&0x7F) << shift
+					msglen |= int(b&0x7F) << shift
 					if b < 0x80 {
 						break
 					}
 				}
-				intStringLen := int(stringLen)
-				if intStringLen < 0 {
+				if msglen < 0 {
 					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
 				}
-				postIndex := iNdEx + intStringLen
+				postIndex := iNdEx + msglen
 				if postIndex < 0 {
 					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
 				}
 				if postIndex > l {
 					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
 				}
-				x.UnlockTransactions = append(x.UnlockTransactions, string(dAtA[iNdEx:postIndex]))
+				x.Redemptions = append(x.Redemptions, &Redemption{})
+				if err := options.Unmarshal(dAtA[iNdEx:postIndex], x.Redemptions[len(x.Redemptions)-1]); err != nil {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, err
+				}
 				iNdEx = postIndex
 			default:
 				iNdEx = preIndex
@@ -2555,6 +2601,55 @@ const (
 	// Verify that runtime/protoimpl is sufficiently up-to-date.
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
+
+type CompletionFilter int32
+
+const (
+	CompletionFilter_ALL       CompletionFilter = 0
+	CompletionFilter_PENDING   CompletionFilter = 1
+	CompletionFilter_COMPLETED CompletionFilter = 2
+)
+
+// Enum value maps for CompletionFilter.
+var (
+	CompletionFilter_name = map[int32]string{
+		0: "ALL",
+		1: "PENDING",
+		2: "COMPLETED",
+	}
+	CompletionFilter_value = map[string]int32{
+		"ALL":       0,
+		"PENDING":   1,
+		"COMPLETED": 2,
+	}
+)
+
+func (x CompletionFilter) Enum() *CompletionFilter {
+	p := new(CompletionFilter)
+	*p = x
+	return p
+}
+
+func (x CompletionFilter) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (CompletionFilter) Descriptor() protoreflect.EnumDescriptor {
+	return file_zrchain_zenbtc_query_proto_enumTypes[0].Descriptor()
+}
+
+func (CompletionFilter) Type() protoreflect.EnumType {
+	return &file_zrchain_zenbtc_query_proto_enumTypes[0]
+}
+
+func (x CompletionFilter) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use CompletionFilter.Descriptor instead.
+func (CompletionFilter) EnumDescriptor() ([]byte, []int) {
+	return file_zrchain_zenbtc_query_proto_rawDescGZIP(), []int{0}
+}
 
 // QueryParamsRequest is request type for the Query/Params RPC method.
 type QueryParamsRequest struct {
@@ -2681,16 +2776,17 @@ func (x *QueryLockTransactionsResponse) GetLockTransactions() []string {
 	return nil
 }
 
-type QueryConfirmedUnlockTransactionsRequest struct {
+type QueryRedemptionsRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Chain string `protobuf:"bytes,1,opt,name=chain,proto3" json:"chain,omitempty"`
+	StartIndex       uint64           `protobuf:"varint,1,opt,name=start_index,json=startIndex,proto3" json:"start_index,omitempty"`
+	CompletionFilter CompletionFilter `protobuf:"varint,2,opt,name=completion_filter,json=completionFilter,proto3,enum=zrchain.zenbtc.CompletionFilter" json:"completion_filter,omitempty"`
 }
 
-func (x *QueryConfirmedUnlockTransactionsRequest) Reset() {
-	*x = QueryConfirmedUnlockTransactionsRequest{}
+func (x *QueryRedemptionsRequest) Reset() {
+	*x = QueryRedemptionsRequest{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_zrchain_zenbtc_query_proto_msgTypes[4]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -2698,34 +2794,41 @@ func (x *QueryConfirmedUnlockTransactionsRequest) Reset() {
 	}
 }
 
-func (x *QueryConfirmedUnlockTransactionsRequest) String() string {
+func (x *QueryRedemptionsRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*QueryConfirmedUnlockTransactionsRequest) ProtoMessage() {}
+func (*QueryRedemptionsRequest) ProtoMessage() {}
 
-// Deprecated: Use QueryConfirmedUnlockTransactionsRequest.ProtoReflect.Descriptor instead.
-func (*QueryConfirmedUnlockTransactionsRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use QueryRedemptionsRequest.ProtoReflect.Descriptor instead.
+func (*QueryRedemptionsRequest) Descriptor() ([]byte, []int) {
 	return file_zrchain_zenbtc_query_proto_rawDescGZIP(), []int{4}
 }
 
-func (x *QueryConfirmedUnlockTransactionsRequest) GetChain() string {
+func (x *QueryRedemptionsRequest) GetStartIndex() uint64 {
 	if x != nil {
-		return x.Chain
+		return x.StartIndex
 	}
-	return ""
+	return 0
 }
 
-type QueryConfirmedUnlockTransactionsResponse struct {
+func (x *QueryRedemptionsRequest) GetCompletionFilter() CompletionFilter {
+	if x != nil {
+		return x.CompletionFilter
+	}
+	return CompletionFilter_ALL
+}
+
+type QueryRedemptionsResponse struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	UnlockTransactions []string `protobuf:"bytes,1,rep,name=unlock_transactions,json=unlockTransactions,proto3" json:"unlock_transactions,omitempty"`
+	Redemptions []*Redemption `protobuf:"bytes,1,rep,name=redemptions,proto3" json:"redemptions,omitempty"`
 }
 
-func (x *QueryConfirmedUnlockTransactionsResponse) Reset() {
-	*x = QueryConfirmedUnlockTransactionsResponse{}
+func (x *QueryRedemptionsResponse) Reset() {
+	*x = QueryRedemptionsResponse{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_zrchain_zenbtc_query_proto_msgTypes[5]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -2733,20 +2836,20 @@ func (x *QueryConfirmedUnlockTransactionsResponse) Reset() {
 	}
 }
 
-func (x *QueryConfirmedUnlockTransactionsResponse) String() string {
+func (x *QueryRedemptionsResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*QueryConfirmedUnlockTransactionsResponse) ProtoMessage() {}
+func (*QueryRedemptionsResponse) ProtoMessage() {}
 
-// Deprecated: Use QueryConfirmedUnlockTransactionsResponse.ProtoReflect.Descriptor instead.
-func (*QueryConfirmedUnlockTransactionsResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use QueryRedemptionsResponse.ProtoReflect.Descriptor instead.
+func (*QueryRedemptionsResponse) Descriptor() ([]byte, []int) {
 	return file_zrchain_zenbtc_query_proto_rawDescGZIP(), []int{5}
 }
 
-func (x *QueryConfirmedUnlockTransactionsResponse) GetUnlockTransactions() []string {
+func (x *QueryRedemptionsResponse) GetRedemptions() []*Redemption {
 	if x != nil {
-		return x.UnlockTransactions
+		return x.Redemptions
 	}
 	return nil
 }
@@ -2765,70 +2868,76 @@ var file_zrchain_zenbtc_query_proto_rawDesc = []byte{
 	0x6f, 0x1a, 0x1c, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x61, 0x6e,
 	0x6e, 0x6f, 0x74, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x1a,
 	0x1b, 0x7a, 0x72, 0x63, 0x68, 0x61, 0x69, 0x6e, 0x2f, 0x7a, 0x65, 0x6e, 0x62, 0x74, 0x63, 0x2f,
-	0x70, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x22, 0x14, 0x0a, 0x12,
-	0x51, 0x75, 0x65, 0x72, 0x79, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x52, 0x65, 0x71, 0x75, 0x65,
-	0x73, 0x74, 0x22, 0x50, 0x0a, 0x13, 0x51, 0x75, 0x65, 0x72, 0x79, 0x50, 0x61, 0x72, 0x61, 0x6d,
-	0x73, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x39, 0x0a, 0x06, 0x70, 0x61, 0x72,
-	0x61, 0x6d, 0x73, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x16, 0x2e, 0x7a, 0x72, 0x63, 0x68,
-	0x61, 0x69, 0x6e, 0x2e, 0x7a, 0x65, 0x6e, 0x62, 0x74, 0x63, 0x2e, 0x50, 0x61, 0x72, 0x61, 0x6d,
-	0x73, 0x42, 0x09, 0xc8, 0xde, 0x1f, 0x00, 0xa8, 0xe7, 0xb0, 0x2a, 0x01, 0x52, 0x06, 0x70, 0x61,
-	0x72, 0x61, 0x6d, 0x73, 0x22, 0x1e, 0x0a, 0x1c, 0x51, 0x75, 0x65, 0x72, 0x79, 0x4c, 0x6f, 0x63,
-	0x6b, 0x54, 0x72, 0x61, 0x6e, 0x73, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x52, 0x65, 0x71,
-	0x75, 0x65, 0x73, 0x74, 0x22, 0x4c, 0x0a, 0x1d, 0x51, 0x75, 0x65, 0x72, 0x79, 0x4c, 0x6f, 0x63,
-	0x6b, 0x54, 0x72, 0x61, 0x6e, 0x73, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x52, 0x65, 0x73,
-	0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x2b, 0x0a, 0x11, 0x6c, 0x6f, 0x63, 0x6b, 0x5f, 0x74, 0x72,
-	0x61, 0x6e, 0x73, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x18, 0x01, 0x20, 0x03, 0x28, 0x09,
-	0x52, 0x10, 0x6c, 0x6f, 0x63, 0x6b, 0x54, 0x72, 0x61, 0x6e, 0x73, 0x61, 0x63, 0x74, 0x69, 0x6f,
-	0x6e, 0x73, 0x22, 0x3f, 0x0a, 0x27, 0x51, 0x75, 0x65, 0x72, 0x79, 0x43, 0x6f, 0x6e, 0x66, 0x69,
-	0x72, 0x6d, 0x65, 0x64, 0x55, 0x6e, 0x6c, 0x6f, 0x63, 0x6b, 0x54, 0x72, 0x61, 0x6e, 0x73, 0x61,
-	0x63, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x14, 0x0a,
-	0x05, 0x63, 0x68, 0x61, 0x69, 0x6e, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x05, 0x63, 0x68,
-	0x61, 0x69, 0x6e, 0x22, 0x5b, 0x0a, 0x28, 0x51, 0x75, 0x65, 0x72, 0x79, 0x43, 0x6f, 0x6e, 0x66,
-	0x69, 0x72, 0x6d, 0x65, 0x64, 0x55, 0x6e, 0x6c, 0x6f, 0x63, 0x6b, 0x54, 0x72, 0x61, 0x6e, 0x73,
-	0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12,
-	0x2f, 0x0a, 0x13, 0x75, 0x6e, 0x6c, 0x6f, 0x63, 0x6b, 0x5f, 0x74, 0x72, 0x61, 0x6e, 0x73, 0x61,
-	0x63, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x18, 0x01, 0x20, 0x03, 0x28, 0x09, 0x52, 0x12, 0x75, 0x6e,
-	0x6c, 0x6f, 0x63, 0x6b, 0x54, 0x72, 0x61, 0x6e, 0x73, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x73,
-	0x32, 0xd0, 0x03, 0x0a, 0x05, 0x51, 0x75, 0x65, 0x72, 0x79, 0x12, 0x69, 0x0a, 0x06, 0x50, 0x61,
-	0x72, 0x61, 0x6d, 0x73, 0x12, 0x22, 0x2e, 0x7a, 0x72, 0x63, 0x68, 0x61, 0x69, 0x6e, 0x2e, 0x7a,
-	0x65, 0x6e, 0x62, 0x74, 0x63, 0x2e, 0x51, 0x75, 0x65, 0x72, 0x79, 0x50, 0x61, 0x72, 0x61, 0x6d,
-	0x73, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x23, 0x2e, 0x7a, 0x72, 0x63, 0x68, 0x61,
-	0x69, 0x6e, 0x2e, 0x7a, 0x65, 0x6e, 0x62, 0x74, 0x63, 0x2e, 0x51, 0x75, 0x65, 0x72, 0x79, 0x50,
-	0x61, 0x72, 0x61, 0x6d, 0x73, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x16, 0x82,
-	0xd3, 0xe4, 0x93, 0x02, 0x10, 0x12, 0x0e, 0x2f, 0x7a, 0x65, 0x6e, 0x62, 0x74, 0x63, 0x2f, 0x70,
-	0x61, 0x72, 0x61, 0x6d, 0x73, 0x12, 0x92, 0x01, 0x0a, 0x10, 0x4c, 0x6f, 0x63, 0x6b, 0x54, 0x72,
-	0x61, 0x6e, 0x73, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x12, 0x2c, 0x2e, 0x7a, 0x72, 0x63,
-	0x68, 0x61, 0x69, 0x6e, 0x2e, 0x7a, 0x65, 0x6e, 0x62, 0x74, 0x63, 0x2e, 0x51, 0x75, 0x65, 0x72,
-	0x79, 0x4c, 0x6f, 0x63, 0x6b, 0x54, 0x72, 0x61, 0x6e, 0x73, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e,
-	0x73, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x2d, 0x2e, 0x7a, 0x72, 0x63, 0x68, 0x61,
-	0x69, 0x6e, 0x2e, 0x7a, 0x65, 0x6e, 0x62, 0x74, 0x63, 0x2e, 0x51, 0x75, 0x65, 0x72, 0x79, 0x4c,
+	0x70, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x1a, 0x20, 0x7a, 0x72,
+	0x63, 0x68, 0x61, 0x69, 0x6e, 0x2f, 0x7a, 0x65, 0x6e, 0x62, 0x74, 0x63, 0x2f, 0x72, 0x65, 0x64,
+	0x65, 0x6d, 0x70, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x22, 0x14,
+	0x0a, 0x12, 0x51, 0x75, 0x65, 0x72, 0x79, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x52, 0x65, 0x71,
+	0x75, 0x65, 0x73, 0x74, 0x22, 0x50, 0x0a, 0x13, 0x51, 0x75, 0x65, 0x72, 0x79, 0x50, 0x61, 0x72,
+	0x61, 0x6d, 0x73, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x39, 0x0a, 0x06, 0x70,
+	0x61, 0x72, 0x61, 0x6d, 0x73, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x16, 0x2e, 0x7a, 0x72,
+	0x63, 0x68, 0x61, 0x69, 0x6e, 0x2e, 0x7a, 0x65, 0x6e, 0x62, 0x74, 0x63, 0x2e, 0x50, 0x61, 0x72,
+	0x61, 0x6d, 0x73, 0x42, 0x09, 0xc8, 0xde, 0x1f, 0x00, 0xa8, 0xe7, 0xb0, 0x2a, 0x01, 0x52, 0x06,
+	0x70, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x22, 0x1e, 0x0a, 0x1c, 0x51, 0x75, 0x65, 0x72, 0x79, 0x4c,
 	0x6f, 0x63, 0x6b, 0x54, 0x72, 0x61, 0x6e, 0x73, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x52,
-	0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x21, 0x82, 0xd3, 0xe4, 0x93, 0x02, 0x1b, 0x12,
-	0x19, 0x2f, 0x7a, 0x65, 0x6e, 0x62, 0x74, 0x63, 0x2f, 0x6c, 0x6f, 0x63, 0x6b, 0x5f, 0x74, 0x72,
-	0x61, 0x6e, 0x73, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x12, 0xc6, 0x01, 0x0a, 0x1b, 0x43,
-	0x6f, 0x6e, 0x66, 0x69, 0x72, 0x6d, 0x65, 0x64, 0x55, 0x6e, 0x6c, 0x6f, 0x63, 0x6b, 0x54, 0x72,
-	0x61, 0x6e, 0x73, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x12, 0x37, 0x2e, 0x7a, 0x72, 0x63,
-	0x68, 0x61, 0x69, 0x6e, 0x2e, 0x7a, 0x65, 0x6e, 0x62, 0x74, 0x63, 0x2e, 0x51, 0x75, 0x65, 0x72,
-	0x79, 0x43, 0x6f, 0x6e, 0x66, 0x69, 0x72, 0x6d, 0x65, 0x64, 0x55, 0x6e, 0x6c, 0x6f, 0x63, 0x6b,
-	0x54, 0x72, 0x61, 0x6e, 0x73, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x52, 0x65, 0x71, 0x75,
-	0x65, 0x73, 0x74, 0x1a, 0x38, 0x2e, 0x7a, 0x72, 0x63, 0x68, 0x61, 0x69, 0x6e, 0x2e, 0x7a, 0x65,
-	0x6e, 0x62, 0x74, 0x63, 0x2e, 0x51, 0x75, 0x65, 0x72, 0x79, 0x43, 0x6f, 0x6e, 0x66, 0x69, 0x72,
-	0x6d, 0x65, 0x64, 0x55, 0x6e, 0x6c, 0x6f, 0x63, 0x6b, 0x54, 0x72, 0x61, 0x6e, 0x73, 0x61, 0x63,
-	0x74, 0x69, 0x6f, 0x6e, 0x73, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x34, 0x82,
-	0xd3, 0xe4, 0x93, 0x02, 0x2e, 0x12, 0x2c, 0x2f, 0x7a, 0x65, 0x6e, 0x62, 0x74, 0x63, 0x2f, 0x63,
-	0x6f, 0x6e, 0x66, 0x69, 0x72, 0x6d, 0x65, 0x64, 0x5f, 0x73, 0x6f, 0x6c, 0x61, 0x6e, 0x61, 0x5f,
-	0x75, 0x6e, 0x6c, 0x6f, 0x63, 0x6b, 0x5f, 0x74, 0x72, 0x61, 0x6e, 0x73, 0x61, 0x63, 0x74, 0x69,
-	0x6f, 0x6e, 0x73, 0x42, 0x9a, 0x01, 0x0a, 0x12, 0x63, 0x6f, 0x6d, 0x2e, 0x7a, 0x72, 0x63, 0x68,
-	0x61, 0x69, 0x6e, 0x2e, 0x7a, 0x65, 0x6e, 0x62, 0x74, 0x63, 0x42, 0x0a, 0x51, 0x75, 0x65, 0x72,
-	0x79, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x50, 0x01, 0x5a, 0x1f, 0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73,
-	0x73, 0x64, 0x6b, 0x2e, 0x69, 0x6f, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x7a, 0x72, 0x63, 0x68, 0x61,
-	0x69, 0x6e, 0x2f, 0x7a, 0x65, 0x6e, 0x62, 0x74, 0x63, 0xa2, 0x02, 0x03, 0x5a, 0x5a, 0x58, 0xaa,
-	0x02, 0x0e, 0x5a, 0x72, 0x63, 0x68, 0x61, 0x69, 0x6e, 0x2e, 0x5a, 0x65, 0x6e, 0x62, 0x74, 0x63,
-	0xca, 0x02, 0x0e, 0x5a, 0x72, 0x63, 0x68, 0x61, 0x69, 0x6e, 0x5c, 0x5a, 0x65, 0x6e, 0x62, 0x74,
-	0x63, 0xe2, 0x02, 0x1a, 0x5a, 0x72, 0x63, 0x68, 0x61, 0x69, 0x6e, 0x5c, 0x5a, 0x65, 0x6e, 0x62,
-	0x74, 0x63, 0x5c, 0x47, 0x50, 0x42, 0x4d, 0x65, 0x74, 0x61, 0x64, 0x61, 0x74, 0x61, 0xea, 0x02,
-	0x0f, 0x5a, 0x72, 0x63, 0x68, 0x61, 0x69, 0x6e, 0x3a, 0x3a, 0x5a, 0x65, 0x6e, 0x62, 0x74, 0x63,
-	0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x22, 0x4c, 0x0a, 0x1d, 0x51, 0x75, 0x65, 0x72, 0x79, 0x4c,
+	0x6f, 0x63, 0x6b, 0x54, 0x72, 0x61, 0x6e, 0x73, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x52,
+	0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x2b, 0x0a, 0x11, 0x6c, 0x6f, 0x63, 0x6b, 0x5f,
+	0x74, 0x72, 0x61, 0x6e, 0x73, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x18, 0x01, 0x20, 0x03,
+	0x28, 0x09, 0x52, 0x10, 0x6c, 0x6f, 0x63, 0x6b, 0x54, 0x72, 0x61, 0x6e, 0x73, 0x61, 0x63, 0x74,
+	0x69, 0x6f, 0x6e, 0x73, 0x22, 0x89, 0x01, 0x0a, 0x17, 0x51, 0x75, 0x65, 0x72, 0x79, 0x52, 0x65,
+	0x64, 0x65, 0x6d, 0x70, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74,
+	0x12, 0x1f, 0x0a, 0x0b, 0x73, 0x74, 0x61, 0x72, 0x74, 0x5f, 0x69, 0x6e, 0x64, 0x65, 0x78, 0x18,
+	0x01, 0x20, 0x01, 0x28, 0x04, 0x52, 0x0a, 0x73, 0x74, 0x61, 0x72, 0x74, 0x49, 0x6e, 0x64, 0x65,
+	0x78, 0x12, 0x4d, 0x0a, 0x11, 0x63, 0x6f, 0x6d, 0x70, 0x6c, 0x65, 0x74, 0x69, 0x6f, 0x6e, 0x5f,
+	0x66, 0x69, 0x6c, 0x74, 0x65, 0x72, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0e, 0x32, 0x20, 0x2e, 0x7a,
+	0x72, 0x63, 0x68, 0x61, 0x69, 0x6e, 0x2e, 0x7a, 0x65, 0x6e, 0x62, 0x74, 0x63, 0x2e, 0x43, 0x6f,
+	0x6d, 0x70, 0x6c, 0x65, 0x74, 0x69, 0x6f, 0x6e, 0x46, 0x69, 0x6c, 0x74, 0x65, 0x72, 0x52, 0x10,
+	0x63, 0x6f, 0x6d, 0x70, 0x6c, 0x65, 0x74, 0x69, 0x6f, 0x6e, 0x46, 0x69, 0x6c, 0x74, 0x65, 0x72,
+	0x22, 0x5e, 0x0a, 0x18, 0x51, 0x75, 0x65, 0x72, 0x79, 0x52, 0x65, 0x64, 0x65, 0x6d, 0x70, 0x74,
+	0x69, 0x6f, 0x6e, 0x73, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x42, 0x0a, 0x0b,
+	0x72, 0x65, 0x64, 0x65, 0x6d, 0x70, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x18, 0x01, 0x20, 0x03, 0x28,
+	0x0b, 0x32, 0x1a, 0x2e, 0x7a, 0x72, 0x63, 0x68, 0x61, 0x69, 0x6e, 0x2e, 0x7a, 0x65, 0x6e, 0x62,
+	0x74, 0x63, 0x2e, 0x52, 0x65, 0x64, 0x65, 0x6d, 0x70, 0x74, 0x69, 0x6f, 0x6e, 0x42, 0x04, 0xc8,
+	0xde, 0x1f, 0x00, 0x52, 0x0b, 0x72, 0x65, 0x64, 0x65, 0x6d, 0x70, 0x74, 0x69, 0x6f, 0x6e, 0x73,
+	0x2a, 0x37, 0x0a, 0x10, 0x43, 0x6f, 0x6d, 0x70, 0x6c, 0x65, 0x74, 0x69, 0x6f, 0x6e, 0x46, 0x69,
+	0x6c, 0x74, 0x65, 0x72, 0x12, 0x07, 0x0a, 0x03, 0x41, 0x4c, 0x4c, 0x10, 0x00, 0x12, 0x0b, 0x0a,
+	0x07, 0x50, 0x45, 0x4e, 0x44, 0x49, 0x4e, 0x47, 0x10, 0x01, 0x12, 0x0d, 0x0a, 0x09, 0x43, 0x4f,
+	0x4d, 0x50, 0x4c, 0x45, 0x54, 0x45, 0x44, 0x10, 0x02, 0x32, 0x86, 0x03, 0x0a, 0x05, 0x51, 0x75,
+	0x65, 0x72, 0x79, 0x12, 0x69, 0x0a, 0x06, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x12, 0x22, 0x2e,
+	0x7a, 0x72, 0x63, 0x68, 0x61, 0x69, 0x6e, 0x2e, 0x7a, 0x65, 0x6e, 0x62, 0x74, 0x63, 0x2e, 0x51,
+	0x75, 0x65, 0x72, 0x79, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73,
+	0x74, 0x1a, 0x23, 0x2e, 0x7a, 0x72, 0x63, 0x68, 0x61, 0x69, 0x6e, 0x2e, 0x7a, 0x65, 0x6e, 0x62,
+	0x74, 0x63, 0x2e, 0x51, 0x75, 0x65, 0x72, 0x79, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x52, 0x65,
+	0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x16, 0x82, 0xd3, 0xe4, 0x93, 0x02, 0x10, 0x12, 0x0e,
+	0x2f, 0x7a, 0x65, 0x6e, 0x62, 0x74, 0x63, 0x2f, 0x70, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x12, 0x92,
+	0x01, 0x0a, 0x10, 0x4c, 0x6f, 0x63, 0x6b, 0x54, 0x72, 0x61, 0x6e, 0x73, 0x61, 0x63, 0x74, 0x69,
+	0x6f, 0x6e, 0x73, 0x12, 0x2c, 0x2e, 0x7a, 0x72, 0x63, 0x68, 0x61, 0x69, 0x6e, 0x2e, 0x7a, 0x65,
+	0x6e, 0x62, 0x74, 0x63, 0x2e, 0x51, 0x75, 0x65, 0x72, 0x79, 0x4c, 0x6f, 0x63, 0x6b, 0x54, 0x72,
+	0x61, 0x6e, 0x73, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73,
+	0x74, 0x1a, 0x2d, 0x2e, 0x7a, 0x72, 0x63, 0x68, 0x61, 0x69, 0x6e, 0x2e, 0x7a, 0x65, 0x6e, 0x62,
+	0x74, 0x63, 0x2e, 0x51, 0x75, 0x65, 0x72, 0x79, 0x4c, 0x6f, 0x63, 0x6b, 0x54, 0x72, 0x61, 0x6e,
+	0x73, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65,
+	0x22, 0x21, 0x82, 0xd3, 0xe4, 0x93, 0x02, 0x1b, 0x12, 0x19, 0x2f, 0x7a, 0x65, 0x6e, 0x62, 0x74,
+	0x63, 0x2f, 0x6c, 0x6f, 0x63, 0x6b, 0x5f, 0x74, 0x72, 0x61, 0x6e, 0x73, 0x61, 0x63, 0x74, 0x69,
+	0x6f, 0x6e, 0x73, 0x12, 0x7d, 0x0a, 0x0b, 0x52, 0x65, 0x64, 0x65, 0x6d, 0x70, 0x74, 0x69, 0x6f,
+	0x6e, 0x73, 0x12, 0x27, 0x2e, 0x7a, 0x72, 0x63, 0x68, 0x61, 0x69, 0x6e, 0x2e, 0x7a, 0x65, 0x6e,
+	0x62, 0x74, 0x63, 0x2e, 0x51, 0x75, 0x65, 0x72, 0x79, 0x52, 0x65, 0x64, 0x65, 0x6d, 0x70, 0x74,
+	0x69, 0x6f, 0x6e, 0x73, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x28, 0x2e, 0x7a, 0x72,
+	0x63, 0x68, 0x61, 0x69, 0x6e, 0x2e, 0x7a, 0x65, 0x6e, 0x62, 0x74, 0x63, 0x2e, 0x51, 0x75, 0x65,
+	0x72, 0x79, 0x52, 0x65, 0x64, 0x65, 0x6d, 0x70, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x52, 0x65, 0x73,
+	0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x1b, 0x82, 0xd3, 0xe4, 0x93, 0x02, 0x15, 0x12, 0x13, 0x2f,
+	0x7a, 0x65, 0x6e, 0x62, 0x74, 0x63, 0x2f, 0x72, 0x65, 0x64, 0x65, 0x6d, 0x70, 0x74, 0x69, 0x6f,
+	0x6e, 0x73, 0x42, 0x9a, 0x01, 0x0a, 0x12, 0x63, 0x6f, 0x6d, 0x2e, 0x7a, 0x72, 0x63, 0x68, 0x61,
+	0x69, 0x6e, 0x2e, 0x7a, 0x65, 0x6e, 0x62, 0x74, 0x63, 0x42, 0x0a, 0x51, 0x75, 0x65, 0x72, 0x79,
+	0x50, 0x72, 0x6f, 0x74, 0x6f, 0x50, 0x01, 0x5a, 0x1f, 0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x73,
+	0x64, 0x6b, 0x2e, 0x69, 0x6f, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x7a, 0x72, 0x63, 0x68, 0x61, 0x69,
+	0x6e, 0x2f, 0x7a, 0x65, 0x6e, 0x62, 0x74, 0x63, 0xa2, 0x02, 0x03, 0x5a, 0x5a, 0x58, 0xaa, 0x02,
+	0x0e, 0x5a, 0x72, 0x63, 0x68, 0x61, 0x69, 0x6e, 0x2e, 0x5a, 0x65, 0x6e, 0x62, 0x74, 0x63, 0xca,
+	0x02, 0x0e, 0x5a, 0x72, 0x63, 0x68, 0x61, 0x69, 0x6e, 0x5c, 0x5a, 0x65, 0x6e, 0x62, 0x74, 0x63,
+	0xe2, 0x02, 0x1a, 0x5a, 0x72, 0x63, 0x68, 0x61, 0x69, 0x6e, 0x5c, 0x5a, 0x65, 0x6e, 0x62, 0x74,
+	0x63, 0x5c, 0x47, 0x50, 0x42, 0x4d, 0x65, 0x74, 0x61, 0x64, 0x61, 0x74, 0x61, 0xea, 0x02, 0x0f,
+	0x5a, 0x72, 0x63, 0x68, 0x61, 0x69, 0x6e, 0x3a, 0x3a, 0x5a, 0x65, 0x6e, 0x62, 0x74, 0x63, 0x62,
+	0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -2843,29 +2952,34 @@ func file_zrchain_zenbtc_query_proto_rawDescGZIP() []byte {
 	return file_zrchain_zenbtc_query_proto_rawDescData
 }
 
+var file_zrchain_zenbtc_query_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
 var file_zrchain_zenbtc_query_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
 var file_zrchain_zenbtc_query_proto_goTypes = []interface{}{
-	(*QueryParamsRequest)(nil),                       // 0: zrchain.zenbtc.QueryParamsRequest
-	(*QueryParamsResponse)(nil),                      // 1: zrchain.zenbtc.QueryParamsResponse
-	(*QueryLockTransactionsRequest)(nil),             // 2: zrchain.zenbtc.QueryLockTransactionsRequest
-	(*QueryLockTransactionsResponse)(nil),            // 3: zrchain.zenbtc.QueryLockTransactionsResponse
-	(*QueryConfirmedUnlockTransactionsRequest)(nil),  // 4: zrchain.zenbtc.QueryConfirmedUnlockTransactionsRequest
-	(*QueryConfirmedUnlockTransactionsResponse)(nil), // 5: zrchain.zenbtc.QueryConfirmedUnlockTransactionsResponse
-	(*Params)(nil), // 6: zrchain.zenbtc.Params
+	(CompletionFilter)(0),                 // 0: zrchain.zenbtc.CompletionFilter
+	(*QueryParamsRequest)(nil),            // 1: zrchain.zenbtc.QueryParamsRequest
+	(*QueryParamsResponse)(nil),           // 2: zrchain.zenbtc.QueryParamsResponse
+	(*QueryLockTransactionsRequest)(nil),  // 3: zrchain.zenbtc.QueryLockTransactionsRequest
+	(*QueryLockTransactionsResponse)(nil), // 4: zrchain.zenbtc.QueryLockTransactionsResponse
+	(*QueryRedemptionsRequest)(nil),       // 5: zrchain.zenbtc.QueryRedemptionsRequest
+	(*QueryRedemptionsResponse)(nil),      // 6: zrchain.zenbtc.QueryRedemptionsResponse
+	(*Params)(nil),                        // 7: zrchain.zenbtc.Params
+	(*Redemption)(nil),                    // 8: zrchain.zenbtc.Redemption
 }
 var file_zrchain_zenbtc_query_proto_depIdxs = []int32{
-	6, // 0: zrchain.zenbtc.QueryParamsResponse.params:type_name -> zrchain.zenbtc.Params
-	0, // 1: zrchain.zenbtc.Query.Params:input_type -> zrchain.zenbtc.QueryParamsRequest
-	2, // 2: zrchain.zenbtc.Query.LockTransactions:input_type -> zrchain.zenbtc.QueryLockTransactionsRequest
-	4, // 3: zrchain.zenbtc.Query.ConfirmedUnlockTransactions:input_type -> zrchain.zenbtc.QueryConfirmedUnlockTransactionsRequest
-	1, // 4: zrchain.zenbtc.Query.Params:output_type -> zrchain.zenbtc.QueryParamsResponse
-	3, // 5: zrchain.zenbtc.Query.LockTransactions:output_type -> zrchain.zenbtc.QueryLockTransactionsResponse
-	5, // 6: zrchain.zenbtc.Query.ConfirmedUnlockTransactions:output_type -> zrchain.zenbtc.QueryConfirmedUnlockTransactionsResponse
-	4, // [4:7] is the sub-list for method output_type
-	1, // [1:4] is the sub-list for method input_type
-	1, // [1:1] is the sub-list for extension type_name
-	1, // [1:1] is the sub-list for extension extendee
-	0, // [0:1] is the sub-list for field type_name
+	7, // 0: zrchain.zenbtc.QueryParamsResponse.params:type_name -> zrchain.zenbtc.Params
+	0, // 1: zrchain.zenbtc.QueryRedemptionsRequest.completion_filter:type_name -> zrchain.zenbtc.CompletionFilter
+	8, // 2: zrchain.zenbtc.QueryRedemptionsResponse.redemptions:type_name -> zrchain.zenbtc.Redemption
+	1, // 3: zrchain.zenbtc.Query.Params:input_type -> zrchain.zenbtc.QueryParamsRequest
+	3, // 4: zrchain.zenbtc.Query.LockTransactions:input_type -> zrchain.zenbtc.QueryLockTransactionsRequest
+	5, // 5: zrchain.zenbtc.Query.Redemptions:input_type -> zrchain.zenbtc.QueryRedemptionsRequest
+	2, // 6: zrchain.zenbtc.Query.Params:output_type -> zrchain.zenbtc.QueryParamsResponse
+	4, // 7: zrchain.zenbtc.Query.LockTransactions:output_type -> zrchain.zenbtc.QueryLockTransactionsResponse
+	6, // 8: zrchain.zenbtc.Query.Redemptions:output_type -> zrchain.zenbtc.QueryRedemptionsResponse
+	6, // [6:9] is the sub-list for method output_type
+	3, // [3:6] is the sub-list for method input_type
+	3, // [3:3] is the sub-list for extension type_name
+	3, // [3:3] is the sub-list for extension extendee
+	0, // [0:3] is the sub-list for field type_name
 }
 
 func init() { file_zrchain_zenbtc_query_proto_init() }
@@ -2874,6 +2988,7 @@ func file_zrchain_zenbtc_query_proto_init() {
 		return
 	}
 	file_zrchain_zenbtc_params_proto_init()
+	file_zrchain_zenbtc_redemptions_proto_init()
 	if !protoimpl.UnsafeEnabled {
 		file_zrchain_zenbtc_query_proto_msgTypes[0].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*QueryParamsRequest); i {
@@ -2924,7 +3039,7 @@ func file_zrchain_zenbtc_query_proto_init() {
 			}
 		}
 		file_zrchain_zenbtc_query_proto_msgTypes[4].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*QueryConfirmedUnlockTransactionsRequest); i {
+			switch v := v.(*QueryRedemptionsRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2936,7 +3051,7 @@ func file_zrchain_zenbtc_query_proto_init() {
 			}
 		}
 		file_zrchain_zenbtc_query_proto_msgTypes[5].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*QueryConfirmedUnlockTransactionsResponse); i {
+			switch v := v.(*QueryRedemptionsResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2953,13 +3068,14 @@ func file_zrchain_zenbtc_query_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_zrchain_zenbtc_query_proto_rawDesc,
-			NumEnums:      0,
+			NumEnums:      1,
 			NumMessages:   6,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
 		GoTypes:           file_zrchain_zenbtc_query_proto_goTypes,
 		DependencyIndexes: file_zrchain_zenbtc_query_proto_depIdxs,
+		EnumInfos:         file_zrchain_zenbtc_query_proto_enumTypes,
 		MessageInfos:      file_zrchain_zenbtc_query_proto_msgTypes,
 	}.Build()
 	File_zrchain_zenbtc_query_proto = out.File
