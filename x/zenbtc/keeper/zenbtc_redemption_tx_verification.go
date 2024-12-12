@@ -27,7 +27,7 @@ func (k msgServer) VerifyUnsignedRedemptionTX(ctx sdk.Context, msg *types.MsgSub
 		return fmt.Errorf("failed to check change address: %w", err)
 	}
 
-	// Verify that the outputs match the redemptions
+	// Verify that the outputs in the supplied BTC TX all match redemptions
 	if err := k.verifyOutputsAgainstRedemptions(ctx, msg, msgTX); err != nil {
 		return fmt.Errorf("failed to verify outputs against redemptions: %w", err)
 	}

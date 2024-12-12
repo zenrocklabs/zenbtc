@@ -38,15 +38,19 @@ func (k msgServer) VerifyDepositBlockInclusion(goCtx context.Context, msg *types
 
 	found := false
 
+	//List of addresses to ignore - we don't want to cause a mint for change
 	ignoreAddresses, err := k.ZenBTCChangeAddresses(ctx, msg.ChainName)
 	if err != nil {
 		return nil, errors.New("Error Retrieving the Change Addresses")
 	}
 
+	//Verify the blockheader is valid and the proof, return a list of outputs in the transaction
 	outputs, _, err := bitcoin.VerifyBTCLockTransaction(msg.RawTx, msg.ChainName, int(msg.Index), msg.Proof, &blockHeader, ignoreAddresses)
 	if err != nil {
 		return nil, err
 	}
+
+	//Check the address & amount specified is actually in the supplied (proven) BTC Transaction
 	for _, output := range outputs {
 		if output.Address == msg.DepositAddr && output.Amount == msg.Amount {
 			found = true
