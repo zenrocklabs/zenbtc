@@ -23,7 +23,10 @@ func (k msgServer) VerifyDepositBlockInclusion(goCtx context.Context, msg *types
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
 	blockHeader, err := k.validationKeeper.BtcBlockHeaders.Get(ctx, msg.BlockHeight)
+
+	//CSM For Debugging Only
 	//try and get missing Blockheader over RPC - WARNING for debugging only!!!!
+
 	if err != nil {
 		bh, _ := debugRetrieveBlockHeaderViaRPC(msg.ChainName, msg.BlockHeight)
 		if bh != nil {
