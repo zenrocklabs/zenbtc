@@ -42,14 +42,13 @@ func (k msgServer) VerifyDepositBlockInclusion(goCtx context.Context, msg *types
 	found := false
 
 	//List of addresses to ignore - we don't want to cause a mint for change
-	// ignoreAddresses, err := k.ZenBTCChangeAddresses(ctx, msg.ChainName)
-	// if err != nil {
-	// 	return nil, errors.New("Error Retrieving the Change Addresses")
-	// }
+	ignoreAddresses, err := k.ZenBTCChangeAddresses(ctx, msg.ChainName)
+	if err != nil {
+		return nil, errors.New("Error Retrieving the Change Addresses")
+	}
 
 	//Verify the blockheader is valid and the proof, return a list of outputs in the transaction
-	// outputs, _, err := bitcoin.VerifyBTCLockTransaction(msg.RawTx, msg.ChainName, int(msg.Index), msg.Proof, &blockHeader, ignoreAddresses)
-	outputs, _, err := bitcoin.VerifyBTCLockTransaction(msg.RawTx, msg.ChainName, int(msg.Index), msg.Proof, &blockHeader)
+	outputs, _, err := bitcoin.VerifyBTCLockTransaction(msg.RawTx, msg.ChainName, int(msg.Index), msg.Proof, &blockHeader, ignoreAddresses)
 	if err != nil {
 		return nil, err
 	}
@@ -99,19 +98,19 @@ func (k msgServer) VerifyDepositBlockInclusion(goCtx context.Context, msg *types
 		return nil, errors.New("lock tx was already previously used to mint zenBTC tokens")
 	}
 
-	// supply, err := k.validationKeeper.ZenBTCSupply.Get(ctx)
-	// if err != nil {
-	// 	if !errors.Is(err, collections.ErrNotFound) {
-	// 		return nil, err
-	// 	}
-	// 	supply = types.Supply{CustodiedBTC: 0, MintedZenBTC: 0}
-	// }
+	supply, err := k.validationKeeper.ZenBTCSupply.Get(ctx)
+	if err != nil {
+		if !errors.Is(err, collections.ErrNotFound) {
+			return nil, err
+		}
+		supply = types.Supply{CustodiedBTC: 0, MintedZenBTC: 0}
+	}
 
-	// supply.CustodiedBTC += msg.Amount
+	supply.CustodiedBTC += msg.Amount
 
-	// if err := k.validationKeeper.ZenBTCSupply.Set(ctx, supply); err != nil {
-	// 	return nil, err
-	// }
+	if err := k.validationKeeper.ZenBTCSupply.Set(ctx, supply); err != nil {
+		return nil, err
+	}
 
 	if err := k.LockTransactionStore.Set(ctx, msg.RawTx); err != nil {
 		return nil, err
@@ -131,22 +130,21 @@ func (k msgServer) VerifyDepositBlockInclusion(goCtx context.Context, msg *types
 	}
 
 	// Calculate amount of zenBTC to mint based on current exchange rate
-	// exchangeRate, err := k.validationKeeper.GetZenBTCExchangeRate(ctx)
-	// if err != nil {
-	// 	return nil, err
-	// }
+	exchangeRate, err := k.validationKeeper.GetZenBTCExchangeRate(ctx)
+	if err != nil {
+		return nil, err
+	}
 
 	// Amount of zenBTC to mint is the BTC amount divided by BTC/zenBTC exchange rate
-	// amount := float64(msg.Amount) / exchangeRate
+	amount := float64(msg.Amount) / exchangeRate
 
 	pendingTxs.Txs = append(pendingTxs.Txs, &treasurytypes.PendingMintTransaction{
 		ChainId:          q.Response.Key.ZenbtcMetadata.ChainId,
 		ChainType:        q.Response.Key.ZenbtcMetadata.ChainType,
 		RecipientAddress: q.Response.Key.ZenbtcMetadata.RecipientAddr,
-		// Amount:           uint64(amount),
-		Amount:  msg.Amount,
-		Creator: msg.Creator,
-		KeyId:   k.validationKeeper.GetZenBTCMinterKeyID(ctx),
+		Amount:           uint64(amount),
+		Creator:          msg.Creator,
+		KeyId:            k.validationKeeper.GetZenBTCMinterKeyID(ctx),
 	})
 	if err := k.validationKeeper.PendingMintTransactions.Set(ctx, pendingTxs); err != nil {
 		return nil, err

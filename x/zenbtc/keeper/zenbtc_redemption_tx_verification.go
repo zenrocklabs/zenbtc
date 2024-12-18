@@ -46,16 +46,16 @@ func (k msgServer) updateCompletedRedemptions(ctx sdk.Context, redemptionIndexes
 	}
 
 	// Get current supply
-	// supply, err := k.validationKeeper.ZenBTCSupply.Get(ctx)
-	// if err != nil {
-	// 	return fmt.Errorf("failed to get zenBTC supply: %w", err)
-	// }
+	supply, err := k.validationKeeper.ZenBTCSupply.Get(ctx)
+	if err != nil {
+		return fmt.Errorf("failed to get zenBTC supply: %w", err)
+	}
 
 	// Get exchange rate for converting BTC amount to zenBTC
-	// exchangeRate, err := k.validationKeeper.GetZenBTCExchangeRate(ctx)
-	// if err != nil {
-	// 	return fmt.Errorf("failed to get exchange rate: %w", err)
-	// }
+	exchangeRate, err := k.validationKeeper.GetZenBTCExchangeRate(ctx)
+	if err != nil {
+		return fmt.Errorf("failed to get exchange rate: %w", err)
+	}
 
 	// Iterate over the redemption indexes, starting from the second element
 	for _, redemptionIndex := range redemptionIndexes[1:] {
@@ -67,17 +67,17 @@ func (k msgServer) updateCompletedRedemptions(ctx sdk.Context, redemptionIndexes
 
 		// Calculate zenBTC amount from BTC amount
 		// redemption.Data.Amount is in BTC, divide by BTC/zenBTC rate to get zenBTC
-		// zenBTCAmount := uint64(float64(redemption.Data.Amount) / exchangeRate)
+		zenBTCAmount := uint64(float64(redemption.Data.Amount) / exchangeRate)
 
 		// Decrease both supplies
-		// if supply.MintedZenBTC < zenBTCAmount {
-		// 	return fmt.Errorf("insufficient minted zenBTC supply for redemption at index %d", redemptionIndex)
-		// }
-		// if supply.CustodiedBTC < redemption.Data.Amount {
-		// 	return fmt.Errorf("insufficient custodied BTC supply for redemption at index %d", redemptionIndex)
-		// }
-		// supply.MintedZenBTC -= zenBTCAmount
-		// supply.CustodiedBTC -= redemption.Data.Amount
+		if supply.MintedZenBTC < zenBTCAmount {
+			return fmt.Errorf("insufficient minted zenBTC supply for redemption at index %d", redemptionIndex)
+		}
+		if supply.CustodiedBTC < redemption.Data.Amount {
+			return fmt.Errorf("insufficient custodied BTC supply for redemption at index %d", redemptionIndex)
+		}
+		supply.MintedZenBTC -= zenBTCAmount
+		supply.CustodiedBTC -= redemption.Data.Amount
 
 		// Mark the redemption as completed
 		redemption.Completed = true
@@ -89,9 +89,9 @@ func (k msgServer) updateCompletedRedemptions(ctx sdk.Context, redemptionIndexes
 	}
 
 	// Save updated supply
-	// if err := k.validationKeeper.ZenBTCSupply.Set(ctx, supply); err != nil {
-	// 	return fmt.Errorf("failed to update zenBTC supply: %w", err)
-	// }
+	if err := k.validationKeeper.ZenBTCSupply.Set(ctx, supply); err != nil {
+		return fmt.Errorf("failed to update zenBTC supply: %w", err)
+	}
 
 	return nil
 }
