@@ -1,3 +1,20 @@
+# [1.6.0](https://github.com/zenrocklabs/zenbtc/compare/v1.5.1...v1.6.0) (2024-12-18)
+
+
+### Bug Fixes
+
+* temporarily comment new zrchain code ([6aec17b](https://github.com/zenrocklabs/zenbtc/commit/6aec17bd108f295181715100921c16031f4ea564))
+* unhappy path `VerifyDepositBlockInclusion` ([d4cdcd9](https://github.com/zenrocklabs/zenbtc/commit/d4cdcd90d510737d83c558ef72c11682184074b9))
+
+
+### Features
+
+* add redemptions query ([af30094](https://github.com/zenrocklabs/zenbtc/commit/af300946b6484884728b2539348442b2650f023f))
+* add rewards deposit key, bypass minting on rewards deposit ([587bff1](https://github.com/zenrocklabs/zenbtc/commit/587bff144ef64fb7db733c05f000d16efcc643e5))
+* add tx handler for `SubmitUnsignedRedemptionTx` ([1190f7c](https://github.com/zenrocklabs/zenbtc/commit/1190f7ce38efdbdb58c75b61dc2adda4acd63e47))
+* unwrap + yield flow wip (w/ temp commented code) ([6da39df](https://github.com/zenrocklabs/zenbtc/commit/6da39df0262f90335c4ab2cf0adcb4be3a3e9743))
+* zenBTC exchange rate ([45b1416](https://github.com/zenrocklabs/zenbtc/commit/45b14165f80f98ed9634077cd8c08527ca6036e8))
+
 ## [1.5.1](https://github.com/zenrocklabs/zenbtc/compare/v1.5.0...v1.5.1) (2024-12-02)
 
 
