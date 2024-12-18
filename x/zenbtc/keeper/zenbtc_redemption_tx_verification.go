@@ -11,8 +11,8 @@ import (
 	treasurytypes "github.com/Zenrock-Foundation/zrchain/v5/x/treasury/types"
 	"github.com/btcsuite/btcd/txscript"
 	"github.com/btcsuite/btcd/wire"
+	"github.com/zenrocklabs/zenbtc/utils"
 	"github.com/zenrocklabs/zenbtc/x/zenbtc/types"
-	bitcoinutils "github.com/zenrocklabs/zenrock/bitcoinproxy/libs/utils"
 )
 
 func (k msgServer) VerifyUnsignedRedemptionTX(ctx sdk.Context, msg *types.MsgSubmitUnsignedRedemptionTx) error {
@@ -46,16 +46,16 @@ func (k msgServer) updateCompletedRedemptions(ctx sdk.Context, redemptionIndexes
 	}
 
 	// Get current supply
-	supply, err := k.validationKeeper.ZenBTCSupply.Get(ctx)
-	if err != nil {
-		return fmt.Errorf("failed to get zenBTC supply: %w", err)
-	}
+	// supply, err := k.validationKeeper.ZenBTCSupply.Get(ctx)
+	// if err != nil {
+	// 	return fmt.Errorf("failed to get zenBTC supply: %w", err)
+	// }
 
 	// Get exchange rate for converting BTC amount to zenBTC
-	exchangeRate, err := k.validationKeeper.GetZenBTCExchangeRate(ctx)
-	if err != nil {
-		return fmt.Errorf("failed to get exchange rate: %w", err)
-	}
+	// exchangeRate, err := k.validationKeeper.GetZenBTCExchangeRate(ctx)
+	// if err != nil {
+	// 	return fmt.Errorf("failed to get exchange rate: %w", err)
+	// }
 
 	// Iterate over the redemption indexes, starting from the second element
 	for _, redemptionIndex := range redemptionIndexes[1:] {
@@ -67,17 +67,17 @@ func (k msgServer) updateCompletedRedemptions(ctx sdk.Context, redemptionIndexes
 
 		// Calculate zenBTC amount from BTC amount
 		// redemption.Data.Amount is in BTC, divide by BTC/zenBTC rate to get zenBTC
-		zenBTCAmount := uint64(float64(redemption.Data.Amount) / exchangeRate)
+		// zenBTCAmount := uint64(float64(redemption.Data.Amount) / exchangeRate)
 
 		// Decrease both supplies
-		if supply.MintedZenBTC < zenBTCAmount {
-			return fmt.Errorf("insufficient minted zenBTC supply for redemption at index %d", redemptionIndex)
-		}
-		if supply.CustodiedBTC < redemption.Data.Amount {
-			return fmt.Errorf("insufficient custodied BTC supply for redemption at index %d", redemptionIndex)
-		}
-		supply.MintedZenBTC -= zenBTCAmount
-		supply.CustodiedBTC -= redemption.Data.Amount
+		// if supply.MintedZenBTC < zenBTCAmount {
+		// 	return fmt.Errorf("insufficient minted zenBTC supply for redemption at index %d", redemptionIndex)
+		// }
+		// if supply.CustodiedBTC < redemption.Data.Amount {
+		// 	return fmt.Errorf("insufficient custodied BTC supply for redemption at index %d", redemptionIndex)
+		// }
+		// supply.MintedZenBTC -= zenBTCAmount
+		// supply.CustodiedBTC -= redemption.Data.Amount
 
 		// Mark the redemption as completed
 		redemption.Completed = true
@@ -89,9 +89,9 @@ func (k msgServer) updateCompletedRedemptions(ctx sdk.Context, redemptionIndexes
 	}
 
 	// Save updated supply
-	if err := k.validationKeeper.ZenBTCSupply.Set(ctx, supply); err != nil {
-		return fmt.Errorf("failed to update zenBTC supply: %w", err)
-	}
+	// if err := k.validationKeeper.ZenBTCSupply.Set(ctx, supply); err != nil {
+	// 	return fmt.Errorf("failed to update zenBTC supply: %w", err)
+	// }
 
 	return nil
 }
@@ -112,7 +112,7 @@ func (k msgServer) checkChangeAddress(ctx context.Context, msg *types.MsgSubmitU
 	if len(msgTX.TxOut) == 0 {
 		return nil, fmt.Errorf("BTC transaction has zero outputs")
 	}
-	chaincfg := bitcoinutils.ChainFromString(msg.ChainName)
+	chaincfg := utils.ChainFromString(msg.ChainName)
 	changeOutput := msgTX.TxOut[0]
 
 	// Extract and validate change address from Output 0
@@ -157,7 +157,7 @@ func (k msgServer) checkRedemptionTXCreator(ctx context.Context, msg *types.MsgS
 }
 
 func (k msgServer) verifyOutputsAgainstRedemptions(ctx context.Context, msg *types.MsgSubmitUnsignedRedemptionTx, msgTX *wire.MsgTx) error {
-	chaincfg := bitcoinutils.ChainFromString(msg.ChainName)
+	chaincfg := utils.ChainFromString(msg.ChainName)
 	req := &types.QueryRedemptionsRequest{
 		StartIndex:       0,
 		CompletionFilter: types.CompletionFilter_PENDING,
