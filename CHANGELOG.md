@@ -1,3 +1,10 @@
+## [1.6.2](https://github.com/zenrocklabs/zenbtc/compare/v1.6.1...v1.6.2) (2024-12-18)
+
+
+### Bug Fixes
+
+* bump zrchain ver ([46d47e3](https://github.com/zenrocklabs/zenbtc/commit/46d47e37f1a75492d16420997ac28bcfae9d8300))
+
 ## [1.6.1](https://github.com/zenrocklabs/zenbtc/compare/v1.6.0...v1.6.1) (2024-12-18)
 
 
