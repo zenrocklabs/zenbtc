@@ -2,10 +2,18 @@ syntax = "proto3";
 
 package zrchain.zenbtc;
 
+import "gogoproto/gogo.proto";
+
 option go_package = "github.com/zenrocklabs/zenbtc/x/zenbtc/types";
 
-// Redemption is the metadata for a redemption transaction.
+// Redemption contains the data for a redemption transaction.
 message Redemption {
-  string recipient_address = 1;
-  uint64 amount = 2;
+  RedemptionData data = 1 [(gogoproto.nullable) = false];
+  bool completed = 2;
+}
+
+message RedemptionData {
+  uint64 id = 1;
+  bytes destination_address = 2;
+  uint64 amount = 3;
 }

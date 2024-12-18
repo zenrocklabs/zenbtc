@@ -25,10 +25,10 @@ class QueryStub(object):
                 request_serializer=zrchain_dot_zenbtc_dot_query__pb2.QueryLockTransactionsRequest.SerializeToString,
                 response_deserializer=zrchain_dot_zenbtc_dot_query__pb2.QueryLockTransactionsResponse.FromString,
                 )
-        self.ConfirmedUnlockTransactions = channel.unary_unary(
-                '/zrchain.zenbtc.Query/ConfirmedUnlockTransactions',
-                request_serializer=zrchain_dot_zenbtc_dot_query__pb2.QueryConfirmedUnlockTransactionsRequest.SerializeToString,
-                response_deserializer=zrchain_dot_zenbtc_dot_query__pb2.QueryConfirmedUnlockTransactionsResponse.FromString,
+        self.Redemptions = channel.unary_unary(
+                '/zrchain.zenbtc.Query/Redemptions',
+                request_serializer=zrchain_dot_zenbtc_dot_query__pb2.QueryRedemptionsRequest.SerializeToString,
+                response_deserializer=zrchain_dot_zenbtc_dot_query__pb2.QueryRedemptionsResponse.FromString,
                 )
 
 
@@ -50,8 +50,8 @@ class QueryServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def ConfirmedUnlockTransactions(self, request, context):
-        """Queries a list of ConfirmedUnlockTransactions items.
+    def Redemptions(self, request, context):
+        """Queries a list of Redemptions items.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -70,10 +70,10 @@ def add_QueryServicer_to_server(servicer, server):
                     request_deserializer=zrchain_dot_zenbtc_dot_query__pb2.QueryLockTransactionsRequest.FromString,
                     response_serializer=zrchain_dot_zenbtc_dot_query__pb2.QueryLockTransactionsResponse.SerializeToString,
             ),
-            'ConfirmedUnlockTransactions': grpc.unary_unary_rpc_method_handler(
-                    servicer.ConfirmedUnlockTransactions,
-                    request_deserializer=zrchain_dot_zenbtc_dot_query__pb2.QueryConfirmedUnlockTransactionsRequest.FromString,
-                    response_serializer=zrchain_dot_zenbtc_dot_query__pb2.QueryConfirmedUnlockTransactionsResponse.SerializeToString,
+            'Redemptions': grpc.unary_unary_rpc_method_handler(
+                    servicer.Redemptions,
+                    request_deserializer=zrchain_dot_zenbtc_dot_query__pb2.QueryRedemptionsRequest.FromString,
+                    response_serializer=zrchain_dot_zenbtc_dot_query__pb2.QueryRedemptionsResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -121,7 +121,7 @@ class Query(object):
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
-    def ConfirmedUnlockTransactions(request,
+    def Redemptions(request,
             target,
             options=(),
             channel_credentials=None,
@@ -131,8 +131,8 @@ class Query(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/zrchain.zenbtc.Query/ConfirmedUnlockTransactions',
-            zrchain_dot_zenbtc_dot_query__pb2.QueryConfirmedUnlockTransactionsRequest.SerializeToString,
-            zrchain_dot_zenbtc_dot_query__pb2.QueryConfirmedUnlockTransactionsResponse.FromString,
+        return grpc.experimental.unary_unary(request, target, '/zrchain.zenbtc.Query/Redemptions',
+            zrchain_dot_zenbtc_dot_query__pb2.QueryRedemptionsRequest.SerializeToString,
+            zrchain_dot_zenbtc_dot_query__pb2.QueryRedemptionsResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

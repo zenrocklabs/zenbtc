@@ -4,7 +4,7 @@ go 1.23.2
 
 replace (
 	cosmossdk.io/core => cosmossdk.io/core v0.11.0
-	github.com/Zenrock-Foundation/zrchain/v5 => github.com/zenrocklabs/zrchain/v5 v5.2.1
+	github.com/Zenrock-Foundation/zrchain/v5 => github.com/zenrocklabs/zrchain/v5 v5.7.0
 	github.com/btcsuite/btcd/btcec => github.com/btcsuite/btcd/btcec/v2 v2.3.3
 	github.com/btcsuite/btcutil => github.com/btcsuite/btcd/btcutil v1.1.5
 	github.com/cosmos/cosmos-sdk => github.com/zenrocklabs/cosmos-sdk v0.50.10-zenrock
@@ -14,14 +14,16 @@ replace (
 require (
 	cosmossdk.io/api v0.7.6
 	cosmossdk.io/collections v0.4.0
-	cosmossdk.io/core v0.12.1-0.20240725072823-6a2d039e1212
+	cosmossdk.io/core v1.0.0-alpha.5
 	cosmossdk.io/errors v1.0.1
 	cosmossdk.io/log v1.4.1
 	github.com/Layr-Labs/eigenlayer-contracts v0.4.1-holesky-pepe.0.20240813143901-00fc4b95e9c1
 	github.com/Layr-Labs/eigenlayer-rewards-proofs v0.2.13
 	github.com/Layr-Labs/eigensdk-go v0.1.12
-	github.com/Zenrock-Foundation/zrchain/v5 v5.0.0
+	github.com/Zenrock-Foundation/zrchain/v5 v5.5.1
+	github.com/btcsuite/btcd v0.24.2
 	github.com/btcsuite/btcd/chaincfg/chainhash v1.1.0
+	github.com/btcsuite/btcutil v1.0.3-0.20201208143702-a53e38424cce
 	github.com/cosmos/cosmos-proto v1.0.0-beta.5
 	github.com/cosmos/cosmos-sdk v0.50.10
 	github.com/cosmos/gogoproto v1.7.0
@@ -32,15 +34,16 @@ require (
 	github.com/pkg/errors v0.9.1
 	github.com/stretchr/testify v1.9.0
 	github.com/urfave/cli/v2 v2.27.4
-	google.golang.org/genproto/googleapis/api v0.0.0-20241021214115-324edc3d5d38
-	google.golang.org/grpc v1.67.1
-	google.golang.org/protobuf v1.35.1
+	google.golang.org/genproto/googleapis/api v0.0.0-20241118233622-e639e219e697
+	google.golang.org/grpc v1.68.0
+	google.golang.org/protobuf v1.35.2
 	gopkg.in/yaml.v2 v2.4.0
+	gopkg.in/yaml.v3 v3.0.1
 )
 
 require (
 	cosmossdk.io/depinject v1.0.0 // indirect
-	cosmossdk.io/math v1.3.0 // indirect
+	cosmossdk.io/math v1.4.0 // indirect
 	cosmossdk.io/store v1.1.1 // indirect
 	cosmossdk.io/x/tx v0.13.5 // indirect
 	cosmossdk.io/x/upgrade v0.1.4 // indirect
@@ -65,15 +68,14 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/sts v1.28.6 // indirect
 	github.com/aws/smithy-go v1.20.2 // indirect
 	github.com/bahlo/generic-list-go v0.2.0 // indirect
+	github.com/benbjohnson/clock v1.3.5 // indirect
 	github.com/beorn7/perks v1.0.1 // indirect
 	github.com/bgentry/speakeasy v0.2.0 // indirect
 	github.com/bits-and-blooms/bitset v1.14.3 // indirect
 	github.com/blendle/zapdriver v1.3.1 // indirect
-	github.com/btcsuite/btcd v0.24.2 // indirect
 	github.com/btcsuite/btcd/btcec/v2 v2.3.4 // indirect
 	github.com/btcsuite/btcd/btcutil v1.1.6 // indirect
 	github.com/btcsuite/btclog v0.0.0-20241017175713-3428138b75c7 // indirect
-	github.com/btcsuite/btcutil v1.0.3-0.20201208143702-a53e38424cce // indirect
 	github.com/buger/jsonparser v1.1.1 // indirect
 	github.com/cenkalti/backoff/v4 v4.3.0 // indirect
 	github.com/cespare/xxhash/v2 v2.3.0 // indirect
@@ -84,7 +86,7 @@ require (
 	github.com/cockroachdb/pebble v1.1.2 // indirect
 	github.com/cockroachdb/redact v1.1.5 // indirect
 	github.com/cockroachdb/tokenbucket v0.0.0-20230807174530-cc333fc44b06 // indirect
-	github.com/cometbft/cometbft v0.38.13 // indirect
+	github.com/cometbft/cometbft v0.38.15 // indirect
 	github.com/cometbft/cometbft-db v1.0.1 // indirect
 	github.com/consensys/bavard v0.1.22 // indirect
 	github.com/consensys/gnark-crypto v0.14.0 // indirect
@@ -106,8 +108,8 @@ require (
 	github.com/decred/dcrd/crypto/blake256 v1.1.0 // indirect
 	github.com/decred/dcrd/dcrec/secp256k1/v4 v4.3.0 // indirect
 	github.com/desertbit/timer v1.0.1 // indirect
-	github.com/dgraph-io/badger/v4 v4.3.1 // indirect
-	github.com/dgraph-io/ristretto v1.0.0 // indirect
+	github.com/dgraph-io/badger/v4 v4.4.0 // indirect
+	github.com/dgraph-io/ristretto/v2 v2.0.0 // indirect
 	github.com/dustin/go-humanize v1.0.1 // indirect
 	github.com/dvsekhvalnov/jose2go v1.7.0 // indirect
 	github.com/emicklei/dot v1.6.2 // indirect
@@ -224,18 +226,19 @@ require (
 	go.mongodb.org/mongo-driver v1.17.1 // indirect
 	go.opencensus.io v0.24.0 // indirect
 	go.uber.org/multierr v1.11.0 // indirect
+	go.uber.org/ratelimit v0.3.0 // indirect
 	go.uber.org/zap v1.27.0 // indirect
-	golang.org/x/crypto v0.28.0 // indirect
+	golang.org/x/crypto v0.31.0 // indirect
 	golang.org/x/exp v0.0.0-20241009180824-f66d83c29e7c // indirect
 	golang.org/x/net v0.30.0 // indirect
-	golang.org/x/sync v0.8.0 // indirect
-	golang.org/x/sys v0.26.0 // indirect
-	golang.org/x/term v0.25.0 // indirect
-	golang.org/x/text v0.19.0 // indirect
+	golang.org/x/sync v0.10.0 // indirect
+	golang.org/x/sys v0.28.0 // indirect
+	golang.org/x/term v0.27.0 // indirect
+	golang.org/x/text v0.21.0 // indirect
+	golang.org/x/time v0.7.0 // indirect
 	google.golang.org/genproto v0.0.0-20241021214115-324edc3d5d38 // indirect
-	google.golang.org/genproto/googleapis/rpc v0.0.0-20241021214115-324edc3d5d38 // indirect
+	google.golang.org/genproto/googleapis/rpc v0.0.0-20241118233622-e639e219e697 // indirect
 	gopkg.in/ini.v1 v1.67.0 // indirect
-	gopkg.in/yaml.v3 v3.0.1 // indirect
 	gotest.tools/v3 v3.5.1 // indirect
 	nhooyr.io/websocket v1.8.17 // indirect
 	pgregory.net/rapid v1.1.0 // indirect

@@ -25,9 +25,9 @@ func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 				},
 
 				{
-					RpcMethod:      "ConfirmedUnlockTransactions",
-					Use:            "confirmed-unlock-transactions",
-					Short:          "Query ConfirmedUnlockTransactions",
+					RpcMethod:      "Redemptions",
+					Use:            "redemptions",
+					Short:          "Query Redemptions",
 					PositionalArgs: []*autocliv1.PositionalArgDescriptor{},
 				},
 
@@ -54,6 +54,14 @@ func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 						{ProtoField: "proof"},
 						{ProtoField: "deposit_addr"},
 						{ProtoField: "amount"},
+					},
+				},
+				{
+					RpcMethod:      "SubmitUnsignedRedemptionTx",
+					Use:            "submit-unsigned-redemption-tx [outputs]",
+					Short:          "Send a SubmitUnsignedRedemptionTx tx",
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{
+						//{ProtoField: "outputs"},
 					},
 				},
 				// this line is used by ignite scaffolding # autocli/tx
