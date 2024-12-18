@@ -1,3 +1,10 @@
+## [1.6.1](https://github.com/zenrocklabs/zenbtc/compare/v1.6.0...v1.6.1) (2024-12-18)
+
+
+### Bug Fixes
+
+* revert temp commit ([#11](https://github.com/zenrocklabs/zenbtc/issues/11)) ([646220d](https://github.com/zenrocklabs/zenbtc/commit/646220d112cfbdc0cde6217aa0a58515f5d1e4c6))
+
 # [1.6.0](https://github.com/zenrocklabs/zenbtc/compare/v1.5.1...v1.6.0) (2024-12-18)
 
 
