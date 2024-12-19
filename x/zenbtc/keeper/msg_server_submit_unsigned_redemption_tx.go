@@ -55,7 +55,9 @@ func (k msgServer) SubmitUnsignedRedemptionTx(goCtx context.Context, msg *types.
 		DataForSigning: strings.Join(hashes, ","), // hex string, each unsigned utxo is separated by comma
 		CacheId:        msg.CacheId,
 	}
-	k.treasuryKeeper.HandleSignatureRequest(ctx, sigReq)
+	if _, err := k.treasuryKeeper.HandleSignatureRequest(ctx, sigReq); err != nil {
+		return nil, err
+	}
 
 	return &types.MsgSubmitUnsignedRedemptionTxResponse{}, nil
 }

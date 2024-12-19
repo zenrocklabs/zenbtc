@@ -150,7 +150,7 @@ func (k msgServer) VerifyDepositBlockInclusion(goCtx context.Context, msg *types
 		return nil, err
 	}
 
-	if err := k.validationKeeper.EthereumNonceRequested.Set(ctx, true); err != nil {
+	if err := k.validationKeeper.EthereumNonceRequested.Set(ctx, k.validationKeeper.GetZenBTCMinterKeyID(ctx), true); err != nil {
 		return nil, err
 	}
 
