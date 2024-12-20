@@ -22,13 +22,21 @@ func (k Keeper) Redemptions(goCtx context.Context, req *types.QueryRedemptionsRe
 	var queryRange collections.Range[uint64]
 
 	if err := k.validationKeeper.ZenBTCRedemptions.Walk(ctx, queryRange.StartInclusive(req.StartIndex), func(key uint64, redemption types.Redemption) (bool, error) {
-		switch req.CompletionFilter {
-		case types.CompletionFilter_COMPLETED:
-			if redemption.Completed {
+		switch req.Status {
+		case types.RedemptionStatus_INITIATED:
+			if redemption.Status == types.RedemptionStatus_INITIATED {
 				redemptions = append(redemptions, redemption)
 			}
-		case types.CompletionFilter_PENDING:
-			if !redemption.Completed {
+		case types.RedemptionStatus_UNSTAKED:
+			if redemption.Status == types.RedemptionStatus_UNSTAKED {
+				redemptions = append(redemptions, redemption)
+			}
+		case types.RedemptionStatus_BURNED:
+			if redemption.Status == types.RedemptionStatus_BURNED {
+				redemptions = append(redemptions, redemption)
+			}
+		case types.RedemptionStatus_COMPLETED:
+			if redemption.Status == types.RedemptionStatus_COMPLETED {
 				redemptions = append(redemptions, redemption)
 			}
 		default: // don't filter

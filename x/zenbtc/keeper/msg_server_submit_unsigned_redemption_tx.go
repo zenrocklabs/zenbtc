@@ -59,9 +59,5 @@ func (k msgServer) SubmitUnsignedRedemptionTx(goCtx context.Context, msg *types.
 		return nil, err
 	}
 
-	if err := k.validationKeeper.EthereumNonceRequested.Set(ctx, k.validationKeeper.GetZenBTCUnstakerKeyID(ctx), true); err != nil {
-		return nil, err
-	}
-
 	return &types.MsgSubmitUnsignedRedemptionTxResponse{}, nil
 }

@@ -80,7 +80,7 @@ func (k msgServer) updateCompletedRedemptions(ctx sdk.Context, redemptionIndexes
 		supply.CustodiedBTC -= redemption.Data.Amount
 
 		// Mark the redemption as completed
-		redemption.Completed = true
+		redemption.Status = types.RedemptionStatus_COMPLETED
 
 		// Save the updated redemption entry
 		if err := k.validationKeeper.ZenBTCRedemptions.Set(ctx, redemptionIndex, redemption); err != nil {
@@ -159,8 +159,8 @@ func (k msgServer) checkRedemptionTXCreator(ctx context.Context, msg *types.MsgS
 func (k msgServer) verifyOutputsAgainstRedemptions(ctx context.Context, msg *types.MsgSubmitUnsignedRedemptionTx, msgTX *wire.MsgTx) error {
 	chaincfg := utils.ChainFromString(msg.ChainName)
 	req := &types.QueryRedemptionsRequest{
-		StartIndex:       0,
-		CompletionFilter: types.CompletionFilter_PENDING,
+		StartIndex: 0,
+		Status:     types.RedemptionStatus_BURNED,
 	}
 
 	redemptions, err := k.Keeper.Redemptions(ctx, req)
