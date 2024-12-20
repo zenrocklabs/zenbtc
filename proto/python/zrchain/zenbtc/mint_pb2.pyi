@@ -6,12 +6,14 @@ from typing import ClassVar as _ClassVar, Iterable as _Iterable, Optional as _Op
 DESCRIPTOR: _descriptor.FileDescriptor
 
 class NonceData(_message.Message):
-    __slots__ = ("nonce", "counter")
+    __slots__ = ("nonce", "counter", "skip")
     NONCE_FIELD_NUMBER: _ClassVar[int]
     COUNTER_FIELD_NUMBER: _ClassVar[int]
+    SKIP_FIELD_NUMBER: _ClassVar[int]
     nonce: int
     counter: int
-    def __init__(self, nonce: _Optional[int] = ..., counter: _Optional[int] = ...) -> None: ...
+    skip: bool
+    def __init__(self, nonce: _Optional[int] = ..., counter: _Optional[int] = ..., skip: bool = ...) -> None: ...
 
 class RequestedBitcoinHeaders(_message.Message):
     __slots__ = ("heights",)
