@@ -1,3 +1,10 @@
+# [1.7.0](https://github.com/zenrocklabs/zenbtc/compare/v1.6.2...v1.7.0) (2024-12-23)
+
+
+### Features
+
+* unwrap flow + fixes ([#12](https://github.com/zenrocklabs/zenbtc/issues/12)) ([d0d44b7](https://github.com/zenrocklabs/zenbtc/commit/d0d44b731ca9f55fc6e41651109f6ae5356d5179))
+
 ## [1.6.2](https://github.com/zenrocklabs/zenbtc/compare/v1.6.1...v1.6.2) (2024-12-18)
 
 
