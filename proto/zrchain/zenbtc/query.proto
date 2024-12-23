@@ -47,15 +47,9 @@ message QueryLockTransactionsResponse {
   repeated string lock_transactions = 1;
 }
 
-enum CompletionFilter {
-  ALL = 0;
-  PENDING = 1;
-  COMPLETED = 2;
-}
-
 message QueryRedemptionsRequest {
   uint64 start_index = 1;
-  CompletionFilter completion_filter = 2;
+  RedemptionStatus status = 2;
 }
 
 message QueryRedemptionsResponse {

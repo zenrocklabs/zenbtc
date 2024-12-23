@@ -9,11 +9,19 @@ option go_package = "github.com/zenrocklabs/zenbtc/x/zenbtc/types";
 // Redemption contains the data for a redemption transaction.
 message Redemption {
   RedemptionData data = 1 [(gogoproto.nullable) = false];
-  bool completed = 2;
+  RedemptionStatus status = 2;
 }
 
 message RedemptionData {
   uint64 id = 1;
   bytes destination_address = 2;
   uint64 amount = 3;
+}
+
+enum RedemptionStatus {
+  UNSPECIFIED = 0;
+  INITIATED = 1;
+  UNSTAKED = 2;
+  BURNED = 3;
+  COMPLETED = 4;
 }
