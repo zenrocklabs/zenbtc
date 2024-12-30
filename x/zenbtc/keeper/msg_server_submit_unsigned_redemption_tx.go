@@ -15,7 +15,7 @@ func (k msgServer) SubmitUnsignedRedemptionTx(goCtx context.Context, msg *types.
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
 	//For Debugging Only
-	//CSM - Strip this before release.
+	
 	//if err := k.validationKeeper.ZenBTCRedemptions.Set(ctx, 1, types.Redemption{
 	//	Data: types.RedemptionData{ // populate data below
 	//		Id:                 1,
