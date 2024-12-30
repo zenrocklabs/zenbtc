@@ -1,3 +1,10 @@
+## [1.7.1](https://github.com/zenrocklabs/zenbtc/compare/v1.7.0...v1.7.1) (2024-12-30)
+
+
+### Bug Fixes
+
+* remove BTC Proxy debugging code for block generated before zrchain start ([#13](https://github.com/zenrocklabs/zenbtc/issues/13)) ([53ad7f0](https://github.com/zenrocklabs/zenbtc/commit/53ad7f02c81ba910b7eeb6bdff7d3a24af66621e))
+
 # [1.7.0](https://github.com/zenrocklabs/zenbtc/compare/v1.6.2...v1.7.0) (2024-12-23)
 
 
