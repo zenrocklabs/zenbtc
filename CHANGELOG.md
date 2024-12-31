@@ -1,3 +1,10 @@
+## [1.7.2](https://github.com/zenrocklabs/zenbtc/compare/v1.7.1...v1.7.2) (2024-12-31)
+
+
+### Bug Fixes
+
+* KeyByAddress, wallet type to specify the correct type based on the BTC Chain in use. ([#14](https://github.com/zenrocklabs/zenbtc/issues/14)) ([9d829a1](https://github.com/zenrocklabs/zenbtc/commit/9d829a1d8b0fc1487984c0120ec06592893ae614))
+
 ## [1.7.1](https://github.com/zenrocklabs/zenbtc/compare/v1.7.0...v1.7.1) (2024-12-30)
 
 
