@@ -23,13 +23,9 @@ func (k msgServer) VerifyDepositBlockInclusion(goCtx context.Context, msg *types
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
 	blockHeader, err := k.validationKeeper.BtcBlockHeaders.Get(ctx, msg.BlockHeight)
-	if err != nil {
-		return nil, err
-	}
 
 	//CSM For Debugging Only
 	//try and get missing Blockheader over RPC - WARNING for debugging only!!!!
-
 	//if err != nil {
 	//	bh, _ := debugRetrieveBlockHeaderViaRPC(msg.ChainName, msg.BlockHeight)
 	//	if bh != nil {
@@ -37,8 +33,11 @@ func (k msgServer) VerifyDepositBlockInclusion(goCtx context.Context, msg *types
 	//		blockHeader = *bh
 	//	}
 	//}
-
 	// END of debug code
+
+	if err != nil {
+		return nil, err
+	}
 
 	found := false
 
@@ -69,7 +68,7 @@ func (k msgServer) VerifyDepositBlockInclusion(goCtx context.Context, msg *types
 		Address:     msg.DepositAddr,
 		KeyringAddr: k.validationKeeper.GetZenBTCDepositKeyringAddr(ctx),
 		KeyType:     treasurytypes.KeyType_KEY_TYPE_BITCOIN_SECP256K1,
-		WalletType:  treasurytypes.WalletType_WALLET_TYPE_BTC_TESTNET,
+		WalletType:  WalletTypeFromChainName(msg),
 	})
 	if err != nil {
 		return nil, err
@@ -209,4 +208,17 @@ func (k msgServer) ZenBTCChangeAddresses(ctx context.Context, chainName string) 
 		result = append(result, address)
 	}
 	return result, nil
+}
+
+func WalletTypeFromChainName(msg *types.MsgVerifyDepositBlockInclusion) treasurytypes.WalletType {
+	switch msg.ChainName {
+	case "mainnet":
+		return treasurytypes.WalletType_WALLET_TYPE_BTC_MAINNET
+	case "regtest":
+		return treasurytypes.WalletType_WALLET_TYPE_BTC_REGNET
+	case "testnet", "testnet3", "testnet4":
+		return treasurytypes.WalletType_WALLET_TYPE_BTC_TESTNET
+	default:
+		return treasurytypes.WalletType_WALLET_TYPE_UNSPECIFIED
+	}
 }
