@@ -160,7 +160,7 @@ func (k msgServer) verifyOutputsAgainstRedemptions(ctx context.Context, msg *typ
 	chaincfg := utils.ChainFromString(msg.ChainName)
 	req := &types.QueryRedemptionsRequest{
 		StartIndex: 0,
-		Status:     types.RedemptionStatus_BURNED,
+		Status:     types.RedemptionStatus_UNSTAKED,
 	}
 
 	redemptions, err := k.Keeper.Redemptions(ctx, req)
@@ -190,8 +190,7 @@ func (k msgServer) verifyOutputsAgainstRedemptions(ctx context.Context, msg *typ
 		}
 
 		// Verify the output against redemptions
-		err = k.verifyOutputInRedemptions(redemptions, addrs[0].String(), output.Value, msg.RedemptionIndexes[outputIndex])
-		if err != nil {
+		if err = k.verifyOutputInRedemptions(redemptions, addrs[0].String(), output.Value, msg.RedemptionIndexes[outputIndex]); err != nil {
 			return fmt.Errorf("invalid output %d in tx: %s, error: %w", outputIndex, hex.EncodeToString(msg.Txbytes), err)
 		}
 	}
