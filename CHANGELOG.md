@@ -1,3 +1,10 @@
+## [1.7.3](https://github.com/zenrocklabs/zenbtc/compare/v1.7.2...v1.7.3) (2025-01-07)
+
+
+### Bug Fixes
+
+* query unstaked redemptions ([#15](https://github.com/zenrocklabs/zenbtc/issues/15)) ([a2ce053](https://github.com/zenrocklabs/zenbtc/commit/a2ce053798e6e68ac3b1854802c6e032e2db53e4))
+
 ## [1.7.2](https://github.com/zenrocklabs/zenbtc/compare/v1.7.1...v1.7.2) (2024-12-31)
 
 
