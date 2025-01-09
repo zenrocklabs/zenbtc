@@ -3,6 +3,7 @@ package keeper
 import (
 	"context"
 	"errors"
+	"fmt"
 	"net/rpc"
 
 	"github.com/zenrocklabs/zenbtc/utils"
@@ -138,17 +139,19 @@ func (k msgServer) VerifyDepositBlockInclusion(goCtx context.Context, msg *types
 	// Amount of zenBTC to mint is the BTC amount divided by BTC/zenBTC exchange rate
 	amount := float64(msg.Amount) / exchangeRate
 
-	pendingTxs.Txs = append(pendingTxs.Txs, &treasurytypes.PendingMintTransaction{
+	tx := &treasurytypes.PendingMintTransaction{
 		ChainId:          q.Response.Key.ZenbtcMetadata.ChainId,
 		ChainType:        q.Response.Key.ZenbtcMetadata.ChainType,
 		RecipientAddress: q.Response.Key.ZenbtcMetadata.RecipientAddr,
 		Amount:           uint64(amount),
 		Creator:          msg.Creator,
 		KeyId:            k.validationKeeper.GetZenBTCMinterKeyID(ctx),
-	})
+	}
+	pendingTxs.Txs = append(pendingTxs.Txs, tx)
 	if err := k.validationKeeper.PendingMintTransactions.Set(ctx, pendingTxs); err != nil {
 		return nil, err
 	}
+	k.validationKeeper.Logger(ctx).Warn("added pending mint transaction", "tx", fmt.Sprintf("%+v", tx))
 
 	if err := k.validationKeeper.EthereumNonceRequested.Set(ctx, k.validationKeeper.GetZenBTCMinterKeyID(ctx), true); err != nil {
 		return nil, err
