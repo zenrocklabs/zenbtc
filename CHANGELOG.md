@@ -1,3 +1,10 @@
+## [1.7.4](https://github.com/zenrocklabs/zenbtc/compare/v1.7.3...v1.7.4) (2025-01-09)
+
+
+### Bug Fixes
+
+* add logging to debug mint issue ([#16](https://github.com/zenrocklabs/zenbtc/issues/16)) ([68fbb2a](https://github.com/zenrocklabs/zenbtc/commit/68fbb2aa5996d9729c6e504f6c985007ca3639dd))
+
 ## [1.7.3](https://github.com/zenrocklabs/zenbtc/compare/v1.7.2...v1.7.3) (2025-01-07)
 
 
