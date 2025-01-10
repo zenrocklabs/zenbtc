@@ -28,6 +28,7 @@ type (
 		treasuryKeeper   *treasury.Keeper
 
 		Schema               collections.Schema
+		Params               collections.Item[types.Params]
 		LockTransactionStore collections.KeySet[string]
 	}
 )

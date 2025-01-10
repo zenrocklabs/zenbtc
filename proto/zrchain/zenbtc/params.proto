@@ -10,4 +10,14 @@ option go_package = "github.com/zenrocklabs/zenbtc/x/zenbtc/types";
 message Params {
   option (amino.name) = "zrchain/x/zenbtc/Params";
   option (gogoproto.equal) = true;
+
+  string ethBatcherAddr = 1;
+  string depositKeyringAddr = 2;
+  uint64 minterKeyID = 3;
+  uint64 withdrawerKeyID = 4;
+  uint64 unstakerKeyID = 5;
+  uint64 rewardsDepositKeyID = 6;
+  repeated uint64 changeAddressKeyIDs = 7;
+  string bitcoinProxyCreatorID = 8;
+  string authority = 9;
 }
