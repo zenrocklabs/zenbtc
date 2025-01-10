@@ -1,4 +1,4 @@
-package v6_test
+package v2_test
 
 import (
 	"testing"
@@ -7,7 +7,7 @@ import (
 	validation "github.com/Zenrock-Foundation/zrchain/v5/x/validation/module"
 	"github.com/cosmos/cosmos-sdk/codec"
 	"github.com/stretchr/testify/require"
-	v1 "github.com/zenrocklabs/zenbtc/x/zenbtc/migrations/v1"
+	v2 "github.com/zenrocklabs/zenbtc/x/zenbtc/migrations/v2"
 
 	storetypes "cosmossdk.io/store/types"
 
@@ -44,7 +44,7 @@ func TestMigrate(t *testing.T) {
 	params := collections.NewItem(sb, types.ParamsKey, types.ParamsIndex, codec.CollValue[types.Params](cdc))
 	err := params.Set(ctx, types.Params{})
 	require.NoError(t, err)
-	require.NoError(t, v1.UpdateParams(ctx, params))
+	require.NoError(t, v2.UpdateParams(ctx, params))
 
 	var res types.Params
 	bz, err := store.Get(types.ParamsKey)
@@ -66,7 +66,7 @@ func TestMigrateFail(t *testing.T) {
 	sb := collections.NewSchemaBuilder(kvStoreService)
 	params := collections.NewItem(sb, types.ParamsKey, types.ParamsIndex, codec.CollValue[types.Params](cdc))
 
-	require.Error(t, v1.UpdateParams(ctx, params))
+	require.Error(t, v2.UpdateParams(ctx, params))
 }
 
 // type mockSubspace struct {
