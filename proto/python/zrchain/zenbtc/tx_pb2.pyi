@@ -23,7 +23,7 @@ class MsgUpdateParamsResponse(_message.Message):
     def __init__(self) -> None: ...
 
 class MsgVerifyDepositBlockInclusion(_message.Message):
-    __slots__ = ("creator", "chain_name", "block_height", "raw_tx", "index", "proof", "deposit_addr", "amount")
+    __slots__ = ("creator", "chain_name", "block_height", "raw_tx", "index", "proof", "deposit_addr", "amount", "vout")
     CREATOR_FIELD_NUMBER: _ClassVar[int]
     CHAIN_NAME_FIELD_NUMBER: _ClassVar[int]
     BLOCK_HEIGHT_FIELD_NUMBER: _ClassVar[int]
@@ -32,6 +32,7 @@ class MsgVerifyDepositBlockInclusion(_message.Message):
     PROOF_FIELD_NUMBER: _ClassVar[int]
     DEPOSIT_ADDR_FIELD_NUMBER: _ClassVar[int]
     AMOUNT_FIELD_NUMBER: _ClassVar[int]
+    VOUT_FIELD_NUMBER: _ClassVar[int]
     creator: str
     chain_name: str
     block_height: int
@@ -40,7 +41,8 @@ class MsgVerifyDepositBlockInclusion(_message.Message):
     proof: _containers.RepeatedScalarFieldContainer[str]
     deposit_addr: str
     amount: int
-    def __init__(self, creator: _Optional[str] = ..., chain_name: _Optional[str] = ..., block_height: _Optional[int] = ..., raw_tx: _Optional[str] = ..., index: _Optional[int] = ..., proof: _Optional[_Iterable[str]] = ..., deposit_addr: _Optional[str] = ..., amount: _Optional[int] = ...) -> None: ...
+    vout: int
+    def __init__(self, creator: _Optional[str] = ..., chain_name: _Optional[str] = ..., block_height: _Optional[int] = ..., raw_tx: _Optional[str] = ..., index: _Optional[int] = ..., proof: _Optional[_Iterable[str]] = ..., deposit_addr: _Optional[str] = ..., amount: _Optional[int] = ..., vout: _Optional[int] = ...) -> None: ...
 
 class MsgVerifyDepositBlockInclusionResponse(_message.Message):
     __slots__ = ()
