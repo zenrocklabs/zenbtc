@@ -139,7 +139,7 @@ func (k msgServer) VerifyDepositBlockInclusion(goCtx context.Context, msg *types
 	}
 
 	// Calculate amount of zenBTC to mint based on current exchange rate
-	exchangeRate, err := k.validationKeeper.GetZenBTCExchangeRate(ctx)
+	exchangeRate, err := k.GetExchangeRate(ctx)
 	if err != nil {
 		return nil, err
 	}

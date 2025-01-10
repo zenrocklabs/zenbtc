@@ -28,6 +28,16 @@ service Query {
   rpc GetRedemptions(QueryRedemptionsRequest) returns (QueryRedemptionsResponse) {
     option (google.api.http).get = "/zenbtc/redemptions";
   }
+
+  // Queries a list of PendingMintTransactions items.
+  rpc QueryPendingMintTransactions(QueryPendingMintTransactionsRequest) returns (QueryPendingMintTransactionsResponse) {
+    option (google.api.http).get = "/zenbtc/pending_mint_transactions";
+  }
+
+  // Queries the current supply of zenBTC.
+  rpc QuerySupply(QuerySupplyRequest) returns (QuerySupplyResponse) {
+    option (google.api.http).get = "/zenbtc/supply";
+  }
 }
 
 // QueryParamsRequest is request type for the Query/Params RPC method.
@@ -55,4 +65,18 @@ message QueryRedemptionsRequest {
 
 message QueryRedemptionsResponse {
   repeated Redemption redemptions = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryPendingMintTransactionsRequest {}
+
+message QueryPendingMintTransactionsResponse {
+  repeated PendingMintTransaction pending_mint_transactions = 1;
+}
+
+message QuerySupplyRequest {}
+
+message QuerySupplyResponse {
+  uint64 custodiedBTC = 1;
+  uint64 mintedZenBTC = 2;
+  double exchangeRate = 3;
 }

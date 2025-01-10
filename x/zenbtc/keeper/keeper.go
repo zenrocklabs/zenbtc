@@ -2,6 +2,7 @@ package keeper
 
 import (
 	"context"
+	"errors"
 	"fmt"
 
 	"cosmossdk.io/collections"
@@ -78,4 +79,22 @@ func (k Keeper) Logger() log.Logger {
 
 func (k Keeper) GetPendingMintTransactions(ctx context.Context) (treasurytypes.PendingMintTransactions, error) {
 	return k.PendingMintTransactions.Get(ctx)
+}
+
+// GetZenBTCExchangeRate returns the current exchange rate between BTC and zenBTC
+// Returns the number of BTC represented by 1 zenBTC
+func (k Keeper) GetExchangeRate(ctx context.Context) (float64, error) {
+	supply, err := k.Supply.Get(ctx)
+	if err != nil {
+		if !errors.Is(err, collections.ErrNotFound) {
+			return 0, err
+		}
+		return 1.0, nil // Initial exchange rate of 1:1
+	}
+
+	if supply.MintedZenBTC == 0 {
+		return 1.0, nil // If no zenBTC minted yet, use 1:1 rate
+	}
+
+	return float64(supply.CustodiedBTC) / float64(supply.MintedZenBTC), nil
 }
