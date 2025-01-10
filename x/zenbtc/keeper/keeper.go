@@ -30,9 +30,9 @@ type (
 		LockTransactionStore collections.Map[collections.Pair[string, uint64], types.LockTransaction]
 		// PendingMintTransactions - key: pending zenBTC mint transaction
 		PendingMintTransactions collections.Item[types.PendingMintTransactions]
-		// ZenBTCRedemptions - key: redemption index | value: redemption data
+		// Redemptions - key: redemption index | value: redemption data
 		Redemptions collections.Map[uint64, types.Redemption]
-		// ZenBTCSupply - value: zenBTC supply data
+		// Supply - value: zenBTC supply data
 		Supply collections.Item[types.Supply]
 	}
 )
