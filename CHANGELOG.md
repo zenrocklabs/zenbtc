@@ -1,3 +1,10 @@
+## [1.7.6](https://github.com/zenrocklabs/zenbtc/compare/v1.7.5...v1.7.6) (2025-01-10)
+
+
+### Bug Fixes
+
+* migration files ([#18](https://github.com/zenrocklabs/zenbtc/issues/18)) ([07ff35f](https://github.com/zenrocklabs/zenbtc/commit/07ff35f09f2c0c7270d17b66230ba331a799a6a4))
+
 ## [1.7.5](https://github.com/zenrocklabs/zenbtc/compare/v1.7.4...v1.7.5) (2025-01-10)
 
 
