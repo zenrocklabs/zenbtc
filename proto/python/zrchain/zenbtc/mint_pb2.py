@@ -24,7 +24,7 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x19zrchain/zenbtc/mint.proto\x12\x0ezrchain.zenbtc\"O\n\tNonceData\x12\x14\n\x05nonce\x18\x01 \x01(\x04R\x05nonce\x12\x18\n\x07\x63ounter\x18\x02 \x01(\x04R\x07\x63ounter\x12\x12\n\x04skip\x18\x03 \x01(\x08R\x04skip\"3\n\x17RequestedBitcoinHeaders\x12\x18\n\x07heights\x18\x01 \x03(\x03R\x07heightsB.Z,github.com/zenrocklabs/zenbtc/x/zenbtc/typesb\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x19zrchain/zenbtc/mint.proto\x12\x0ezrchain.zenbtc\"O\n\tNonceData\x12\x14\n\x05nonce\x18\x01 \x01(\x04R\x05nonce\x12\x18\n\x07\x63ounter\x18\x02 \x01(\x04R\x07\x63ounter\x12\x12\n\x04skip\x18\x03 \x01(\x08R\x04skip\"3\n\x17RequestedBitcoinHeaders\x12\x18\n\x07heights\x18\x01 \x03(\x03R\x07heights\"\xb6\x01\n\x0fLockTransaction\x12\x15\n\x06raw_tx\x18\x01 \x01(\tR\x05rawTx\x12\x12\n\x04vout\x18\x02 \x01(\x04R\x04vout\x12\x16\n\x06sender\x18\x03 \x01(\tR\x06sender\x12%\n\x0emint_recipient\x18\x04 \x01(\tR\rmintRecipient\x12\x16\n\x06\x61mount\x18\x05 \x01(\x04R\x06\x61mount\x12!\n\x0c\x62lock_height\x18\x06 \x01(\x04R\x0b\x62lockHeightB.Z,github.com/zenrocklabs/zenbtc/x/zenbtc/typesb\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
@@ -36,4 +36,6 @@ if not _descriptor._USE_C_DESCRIPTORS:
   _globals['_NONCEDATA']._serialized_end=124
   _globals['_REQUESTEDBITCOINHEADERS']._serialized_start=126
   _globals['_REQUESTEDBITCOINHEADERS']._serialized_end=177
+  _globals['_LOCKTRANSACTION']._serialized_start=180
+  _globals['_LOCKTRANSACTION']._serialized_end=362
 # @@protoc_insertion_point(module_scope)

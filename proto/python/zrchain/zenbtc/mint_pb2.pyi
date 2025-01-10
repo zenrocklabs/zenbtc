@@ -20,3 +20,19 @@ class RequestedBitcoinHeaders(_message.Message):
     HEIGHTS_FIELD_NUMBER: _ClassVar[int]
     heights: _containers.RepeatedScalarFieldContainer[int]
     def __init__(self, heights: _Optional[_Iterable[int]] = ...) -> None: ...
+
+class LockTransaction(_message.Message):
+    __slots__ = ("raw_tx", "vout", "sender", "mint_recipient", "amount", "block_height")
+    RAW_TX_FIELD_NUMBER: _ClassVar[int]
+    VOUT_FIELD_NUMBER: _ClassVar[int]
+    SENDER_FIELD_NUMBER: _ClassVar[int]
+    MINT_RECIPIENT_FIELD_NUMBER: _ClassVar[int]
+    AMOUNT_FIELD_NUMBER: _ClassVar[int]
+    BLOCK_HEIGHT_FIELD_NUMBER: _ClassVar[int]
+    raw_tx: str
+    vout: int
+    sender: str
+    mint_recipient: str
+    amount: int
+    block_height: int
+    def __init__(self, raw_tx: _Optional[str] = ..., vout: _Optional[int] = ..., sender: _Optional[str] = ..., mint_recipient: _Optional[str] = ..., amount: _Optional[int] = ..., block_height: _Optional[int] = ...) -> None: ...
