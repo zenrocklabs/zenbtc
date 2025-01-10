@@ -25,8 +25,8 @@ class QueryStub(object):
                 request_serializer=zrchain_dot_zenbtc_dot_query__pb2.QueryLockTransactionsRequest.SerializeToString,
                 response_deserializer=zrchain_dot_zenbtc_dot_query__pb2.QueryLockTransactionsResponse.FromString,
                 )
-        self.Redemptions = channel.unary_unary(
-                '/zrchain.zenbtc.Query/Redemptions',
+        self.GetRedemptions = channel.unary_unary(
+                '/zrchain.zenbtc.Query/GetRedemptions',
                 request_serializer=zrchain_dot_zenbtc_dot_query__pb2.QueryRedemptionsRequest.SerializeToString,
                 response_deserializer=zrchain_dot_zenbtc_dot_query__pb2.QueryRedemptionsResponse.FromString,
                 )
@@ -50,7 +50,7 @@ class QueryServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def Redemptions(self, request, context):
+    def GetRedemptions(self, request, context):
         """Queries a list of Redemptions items.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
@@ -70,8 +70,8 @@ def add_QueryServicer_to_server(servicer, server):
                     request_deserializer=zrchain_dot_zenbtc_dot_query__pb2.QueryLockTransactionsRequest.FromString,
                     response_serializer=zrchain_dot_zenbtc_dot_query__pb2.QueryLockTransactionsResponse.SerializeToString,
             ),
-            'Redemptions': grpc.unary_unary_rpc_method_handler(
-                    servicer.Redemptions,
+            'GetRedemptions': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetRedemptions,
                     request_deserializer=zrchain_dot_zenbtc_dot_query__pb2.QueryRedemptionsRequest.FromString,
                     response_serializer=zrchain_dot_zenbtc_dot_query__pb2.QueryRedemptionsResponse.SerializeToString,
             ),
@@ -121,7 +121,7 @@ class Query(object):
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
-    def Redemptions(request,
+    def GetRedemptions(request,
             target,
             options=(),
             channel_credentials=None,
@@ -131,7 +131,7 @@ class Query(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/zrchain.zenbtc.Query/Redemptions',
+        return grpc.experimental.unary_unary(request, target, '/zrchain.zenbtc.Query/GetRedemptions',
             zrchain_dot_zenbtc_dot_query__pb2.QueryRedemptionsRequest.SerializeToString,
             zrchain_dot_zenbtc_dot_query__pb2.QueryRedemptionsResponse.FromString,
             options, channel_credentials,

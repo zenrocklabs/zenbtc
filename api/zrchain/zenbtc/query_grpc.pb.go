@@ -23,7 +23,7 @@ type QueryClient interface {
 	// Queries a list of LockTransactions items.
 	LockTransactions(ctx context.Context, in *QueryLockTransactionsRequest, opts ...grpc.CallOption) (*QueryLockTransactionsResponse, error)
 	// Queries a list of Redemptions items.
-	Redemptions(ctx context.Context, in *QueryRedemptionsRequest, opts ...grpc.CallOption) (*QueryRedemptionsResponse, error)
+	GetRedemptions(ctx context.Context, in *QueryRedemptionsRequest, opts ...grpc.CallOption) (*QueryRedemptionsResponse, error)
 }
 
 type queryClient struct {
@@ -52,9 +52,9 @@ func (c *queryClient) LockTransactions(ctx context.Context, in *QueryLockTransac
 	return out, nil
 }
 
-func (c *queryClient) Redemptions(ctx context.Context, in *QueryRedemptionsRequest, opts ...grpc.CallOption) (*QueryRedemptionsResponse, error) {
+func (c *queryClient) GetRedemptions(ctx context.Context, in *QueryRedemptionsRequest, opts ...grpc.CallOption) (*QueryRedemptionsResponse, error) {
 	out := new(QueryRedemptionsResponse)
-	err := c.cc.Invoke(ctx, "/zrchain.zenbtc.Query/Redemptions", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/zrchain.zenbtc.Query/GetRedemptions", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -70,7 +70,7 @@ type QueryServer interface {
 	// Queries a list of LockTransactions items.
 	LockTransactions(context.Context, *QueryLockTransactionsRequest) (*QueryLockTransactionsResponse, error)
 	// Queries a list of Redemptions items.
-	Redemptions(context.Context, *QueryRedemptionsRequest) (*QueryRedemptionsResponse, error)
+	GetRedemptions(context.Context, *QueryRedemptionsRequest) (*QueryRedemptionsResponse, error)
 	mustEmbedUnimplementedQueryServer()
 }
 
@@ -84,8 +84,8 @@ func (UnimplementedQueryServer) GetParams(context.Context, *QueryParamsRequest) 
 func (UnimplementedQueryServer) LockTransactions(context.Context, *QueryLockTransactionsRequest) (*QueryLockTransactionsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method LockTransactions not implemented")
 }
-func (UnimplementedQueryServer) Redemptions(context.Context, *QueryRedemptionsRequest) (*QueryRedemptionsResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Redemptions not implemented")
+func (UnimplementedQueryServer) GetRedemptions(context.Context, *QueryRedemptionsRequest) (*QueryRedemptionsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetRedemptions not implemented")
 }
 func (UnimplementedQueryServer) mustEmbedUnimplementedQueryServer() {}
 
@@ -136,20 +136,20 @@ func _Query_LockTransactions_Handler(srv interface{}, ctx context.Context, dec f
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Query_Redemptions_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Query_GetRedemptions_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(QueryRedemptionsRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(QueryServer).Redemptions(ctx, in)
+		return srv.(QueryServer).GetRedemptions(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/zrchain.zenbtc.Query/Redemptions",
+		FullMethod: "/zrchain.zenbtc.Query/GetRedemptions",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(QueryServer).Redemptions(ctx, req.(*QueryRedemptionsRequest))
+		return srv.(QueryServer).GetRedemptions(ctx, req.(*QueryRedemptionsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -170,8 +170,8 @@ var Query_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Query_LockTransactions_Handler,
 		},
 		{
-			MethodName: "Redemptions",
-			Handler:    _Query_Redemptions_Handler,
+			MethodName: "GetRedemptions",
+			Handler:    _Query_GetRedemptions_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

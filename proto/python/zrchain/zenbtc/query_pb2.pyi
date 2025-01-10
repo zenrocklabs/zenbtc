@@ -2,9 +2,9 @@ from amino import amino_pb2 as _amino_pb2
 from cosmos.base.query.v1beta1 import pagination_pb2 as _pagination_pb2
 from gogoproto import gogo_pb2 as _gogo_pb2
 from google.api import annotations_pb2 as _annotations_pb2
+from zrchain.zenbtc import mint_pb2 as _mint_pb2
 from zrchain.zenbtc import params_pb2 as _params_pb2
 from zrchain.zenbtc import redemptions_pb2 as _redemptions_pb2
-from zrchain.zenbtc import mint_pb2 as _mint_pb2
 from google.protobuf.internal import containers as _containers
 from google.protobuf import descriptor as _descriptor
 from google.protobuf import message as _message
