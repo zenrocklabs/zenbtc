@@ -56,7 +56,7 @@ func (k msgServer) VerifyDepositBlockInclusion(goCtx context.Context, msg *types
 
 	//Check the address & amount specified is actually in the supplied (proven) BTC Transaction
 	for _, output := range outputs {
-		if output.Address == msg.DepositAddr && output.Amount == msg.Amount {
+		if output.Address == msg.DepositAddr && output.Amount == msg.Amount && uint64(output.OutputIndex) == msg.Vout {
 			found = true
 			break
 		}
@@ -91,7 +91,8 @@ func (k msgServer) VerifyDepositBlockInclusion(goCtx context.Context, msg *types
 	}
 
 	// Deposit/lock txs are stored in zenBTC module so they can't be used to mint zenBTC tokens more than once
-	txExists, err := k.LockTransactionStore.Has(ctx, msg.RawTx)
+
+	txExists, err := k.LockTransactionStore.Has(ctx, fmt.Sprintf("%s:%d", msg.RawTx, msg.Vout))
 	if err != nil {
 		return nil, err
 	}
@@ -113,7 +114,7 @@ func (k msgServer) VerifyDepositBlockInclusion(goCtx context.Context, msg *types
 		return nil, err
 	}
 
-	if err := k.LockTransactionStore.Set(ctx, msg.RawTx); err != nil {
+	if err := k.LockTransactionStore.Set(ctx, fmt.Sprintf("%s:%d", msg.RawTx, msg.Vout)); err != nil {
 		return nil, err
 	}
 
