@@ -1,11 +1,30 @@
 from amino import amino_pb2 as _amino_pb2
 from gogoproto import gogo_pb2 as _gogo_pb2
+from google.protobuf.internal import containers as _containers
 from google.protobuf import descriptor as _descriptor
 from google.protobuf import message as _message
-from typing import ClassVar as _ClassVar
+from typing import ClassVar as _ClassVar, Iterable as _Iterable, Optional as _Optional
 
 DESCRIPTOR: _descriptor.FileDescriptor
 
 class Params(_message.Message):
-    __slots__ = ()
-    def __init__(self) -> None: ...
+    __slots__ = ("ethBatcherAddr", "depositKeyringAddr", "minterKeyID", "withdrawerKeyID", "unstakerKeyID", "rewardsDepositKeyID", "changeAddressKeyIDs", "bitcoinProxyCreatorID", "authority")
+    ETHBATCHERADDR_FIELD_NUMBER: _ClassVar[int]
+    DEPOSITKEYRINGADDR_FIELD_NUMBER: _ClassVar[int]
+    MINTERKEYID_FIELD_NUMBER: _ClassVar[int]
+    WITHDRAWERKEYID_FIELD_NUMBER: _ClassVar[int]
+    UNSTAKERKEYID_FIELD_NUMBER: _ClassVar[int]
+    REWARDSDEPOSITKEYID_FIELD_NUMBER: _ClassVar[int]
+    CHANGEADDRESSKEYIDS_FIELD_NUMBER: _ClassVar[int]
+    BITCOINPROXYCREATORID_FIELD_NUMBER: _ClassVar[int]
+    AUTHORITY_FIELD_NUMBER: _ClassVar[int]
+    ethBatcherAddr: str
+    depositKeyringAddr: str
+    minterKeyID: int
+    withdrawerKeyID: int
+    unstakerKeyID: int
+    rewardsDepositKeyID: int
+    changeAddressKeyIDs: _containers.RepeatedScalarFieldContainer[int]
+    bitcoinProxyCreatorID: str
+    authority: str
+    def __init__(self, ethBatcherAddr: _Optional[str] = ..., depositKeyringAddr: _Optional[str] = ..., minterKeyID: _Optional[int] = ..., withdrawerKeyID: _Optional[int] = ..., unstakerKeyID: _Optional[int] = ..., rewardsDepositKeyID: _Optional[int] = ..., changeAddressKeyIDs: _Optional[_Iterable[int]] = ..., bitcoinProxyCreatorID: _Optional[str] = ..., authority: _Optional[str] = ...) -> None: ...
