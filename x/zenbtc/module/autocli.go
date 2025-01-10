@@ -25,7 +25,7 @@ func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 				},
 
 				{
-					RpcMethod:      "Redemptions",
+					RpcMethod:      "GetRedemptions",
 					Use:            "redemptions",
 					Short:          "Query Redemptions",
 					PositionalArgs: []*autocliv1.PositionalArgDescriptor{},

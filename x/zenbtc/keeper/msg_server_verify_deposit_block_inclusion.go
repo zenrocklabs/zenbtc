@@ -100,7 +100,7 @@ func (k msgServer) VerifyDepositBlockInclusion(goCtx context.Context, msg *types
 		return nil, errors.New("lock tx was already previously used to mint zenBTC tokens")
 	}
 
-	supply, err := k.validationKeeper.ZenBTCSupply.Get(ctx)
+	supply, err := k.Supply.Get(ctx)
 	if err != nil {
 		if !errors.Is(err, collections.ErrNotFound) {
 			return nil, err
@@ -110,7 +110,7 @@ func (k msgServer) VerifyDepositBlockInclusion(goCtx context.Context, msg *types
 
 	supply.CustodiedBTC += msg.Amount
 
-	if err := k.validationKeeper.ZenBTCSupply.Set(ctx, supply); err != nil {
+	if err := k.Supply.Set(ctx, supply); err != nil {
 		return nil, err
 	}
 
@@ -130,7 +130,7 @@ func (k msgServer) VerifyDepositBlockInclusion(goCtx context.Context, msg *types
 		return &types.MsgVerifyDepositBlockInclusionResponse{}, nil
 	}
 
-	pendingTxs, err := k.validationKeeper.PendingMintTransactions.Get(ctx)
+	pendingTxs, err := k.PendingMintTransactions.Get(ctx)
 	if err != nil {
 		if !errors.Is(err, collections.ErrNotFound) {
 			return nil, err
@@ -156,7 +156,7 @@ func (k msgServer) VerifyDepositBlockInclusion(goCtx context.Context, msg *types
 		KeyId:            k.GetMinterKeyID(ctx),
 	}
 	pendingTxs.Txs = append(pendingTxs.Txs, tx)
-	if err := k.validationKeeper.PendingMintTransactions.Set(ctx, pendingTxs); err != nil {
+	if err := k.PendingMintTransactions.Set(ctx, pendingTxs); err != nil {
 		return nil, err
 	}
 	k.validationKeeper.Logger(ctx).Warn("added pending mint transaction", "tx", fmt.Sprintf("%+v", tx))

@@ -12,7 +12,7 @@ import (
 	"github.com/zenrocklabs/zenbtc/x/zenbtc/types"
 )
 
-func (k Keeper) Redemptions(goCtx context.Context, req *types.QueryRedemptionsRequest) (*types.QueryRedemptionsResponse, error) {
+func (k Keeper) GetRedemptions(goCtx context.Context, req *types.QueryRedemptionsRequest) (*types.QueryRedemptionsResponse, error) {
 	if req == nil {
 		return nil, status.Error(codes.InvalidArgument, "invalid request")
 	}
@@ -21,7 +21,7 @@ func (k Keeper) Redemptions(goCtx context.Context, req *types.QueryRedemptionsRe
 	redemptions := make([]types.Redemption, 0)
 	var queryRange collections.Range[uint64]
 
-	if err := k.validationKeeper.ZenBTCRedemptions.Walk(ctx, queryRange.StartInclusive(req.StartIndex), func(key uint64, redemption types.Redemption) (bool, error) {
+	if err := k.Redemptions.Walk(ctx, queryRange.StartInclusive(req.StartIndex), func(key uint64, redemption types.Redemption) (bool, error) {
 		switch req.Status {
 		case types.RedemptionStatus_INITIATED:
 			if redemption.Status == types.RedemptionStatus_INITIATED {
