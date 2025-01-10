@@ -10,7 +10,7 @@ var (
 	DefaultChangeAddressKeyIDs        = []uint64{3}
 	DefaultUnstakerKeyID       uint64 = 4
 	DefaultRewardsDepositKeyID uint64 = 5
-	DefaultProxyCreatorID             = "zen13y3tm68gmu9kntcxwvmue82p6akacnpt2v7nty"
+	DefaultProxyAddress               = "zen13y3tm68gmu9kntcxwvmue82p6akacnpt2v7nty"
 	DefaultParamsAuthority            = "zen1sd3fwcpw2mdw3pxexmlg34gsd78r0sxrk5weh3"
 	// DefaultStrategyAddr               = "0x0000000000000000000000000000000000000000"
 	// DefaultStakerKeyID = 0
@@ -22,7 +22,7 @@ func (k Keeper) GetZenBTCEthBatcherAddr(ctx context.Context) string {
 	if err != nil {
 		return DefaultEthBatcherAddr
 	}
-	return params.ZenBTCParams.ZenBTCEthBatcherAddr
+	return params.EthBatcherAddr
 }
 
 func (k Keeper) GetZenBTCDepositKeyringAddr(ctx context.Context) string {
@@ -30,7 +30,7 @@ func (k Keeper) GetZenBTCDepositKeyringAddr(ctx context.Context) string {
 	if err != nil {
 		return DefaultDepositKeyringAddr
 	}
-	return params.ZenBTCParams.ZenBTCDepositKeyringAddr
+	return params.DepositKeyringAddr
 }
 
 func (k Keeper) GetZenBTCMinterKeyID(ctx context.Context) uint64 {
@@ -38,7 +38,7 @@ func (k Keeper) GetZenBTCMinterKeyID(ctx context.Context) uint64 {
 	if err != nil {
 		return DefaultMinterKeyID
 	}
-	return params.ZenBTCParams.ZenBTCMinterKeyID
+	return params.MinterKeyID
 }
 
 func (k Keeper) GetZenBTCUnstakerKeyID(ctx context.Context) uint64 {
@@ -46,7 +46,7 @@ func (k Keeper) GetZenBTCUnstakerKeyID(ctx context.Context) uint64 {
 	if err != nil {
 		return DefaultUnstakerKeyID
 	}
-	return params.ZenBTCParams.ZenBTCUnstakerKeyID
+	return params.UnstakerKeyID
 }
 
 func (k Keeper) GetZenBTCWithdrawerKeyID(ctx context.Context) uint64 {
@@ -54,15 +54,15 @@ func (k Keeper) GetZenBTCWithdrawerKeyID(ctx context.Context) uint64 {
 	if err != nil {
 		return DefaultWithdrawerKeyID
 	}
-	return params.ZenBTCParams.ZenBTCWithdrawerKeyID
+	return params.WithdrawerKeyID
 }
 
-func (k Keeper) GetBitcoinProxyCreatorID(ctx context.Context) string {
+func (k Keeper) GetBitcoinProxyAddress(ctx context.Context) string {
 	params, err := k.Params.Get(ctx)
 	if err != nil {
-		return DefaultProxyCreatorID
+		return DefaultProxyAddress
 	}
-	return params.ZenBTCParams.BitcoinProxyCreatorID
+	return params.BitcoinProxyAddress
 }
 
 func (k Keeper) GetZenBTCChangeAddressKeyIDs(ctx context.Context) []uint64 {
@@ -70,7 +70,7 @@ func (k Keeper) GetZenBTCChangeAddressKeyIDs(ctx context.Context) []uint64 {
 	if err != nil {
 		return DefaultChangeAddressKeyIDs
 	}
-	return params.ZenBTCParams.ZenBTCChangeAddressKeyIDs
+	return params.ChangeAddressKeyIDs
 }
 
 func (k Keeper) GetZenBTCRewardsDepositKeyID(ctx context.Context) uint64 {
@@ -78,5 +78,5 @@ func (k Keeper) GetZenBTCRewardsDepositKeyID(ctx context.Context) uint64 {
 	if err != nil {
 		return DefaultRewardsDepositKeyID
 	}
-	return params.ZenBTCParams.ZenBTCRewardsDepositKeyID
+	return params.RewardsDepositKeyID
 }

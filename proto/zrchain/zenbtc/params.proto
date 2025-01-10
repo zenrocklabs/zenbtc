@@ -18,6 +18,6 @@ message Params {
   uint64 unstakerKeyID = 5;
   uint64 rewardsDepositKeyID = 6;
   repeated uint64 changeAddressKeyIDs = 7;
-  string bitcoinProxyCreatorID = 8;
+  string bitcoinProxyAddress = 8;
   string authority = 9;
 }
