@@ -67,7 +67,7 @@ func (k msgServer) VerifyDepositBlockInclusion(goCtx context.Context, msg *types
 
 	q, err := k.treasuryKeeper.KeyByAddress(ctx, &treasurytypes.QueryKeyByAddressRequest{
 		Address:     msg.DepositAddr,
-		KeyringAddr: k.validationKeeper.GetZenBTCDepositKeyringAddr(ctx),
+		KeyringAddr: k.GetDepositKeyringAddr(ctx),
 		KeyType:     treasurytypes.KeyType_KEY_TYPE_BITCOIN_SECP256K1,
 		WalletType:  WalletTypeFromChainName(msg),
 	})
@@ -119,7 +119,7 @@ func (k msgServer) VerifyDepositBlockInclusion(goCtx context.Context, msg *types
 	}
 
 	// Don't mint zenBTC tokens for rewards deposits; return early
-	if q.Response.Key.Id == k.validationKeeper.GetZenBTCRewardsDepositKeyID(ctx) {
+	if q.Response.Key.Id == k.GetRewardsDepositKeyID(ctx) {
 		return &types.MsgVerifyDepositBlockInclusionResponse{}, nil
 	}
 
@@ -146,7 +146,7 @@ func (k msgServer) VerifyDepositBlockInclusion(goCtx context.Context, msg *types
 		RecipientAddress: q.Response.Key.ZenbtcMetadata.RecipientAddr,
 		Amount:           uint64(amount),
 		Creator:          msg.Creator,
-		KeyId:            k.validationKeeper.GetZenBTCMinterKeyID(ctx),
+		KeyId:            k.GetMinterKeyID(ctx),
 	}
 	pendingTxs.Txs = append(pendingTxs.Txs, tx)
 	if err := k.validationKeeper.PendingMintTransactions.Set(ctx, pendingTxs); err != nil {
@@ -154,7 +154,7 @@ func (k msgServer) VerifyDepositBlockInclusion(goCtx context.Context, msg *types
 	}
 	k.validationKeeper.Logger(ctx).Warn("added pending mint transaction", "tx", fmt.Sprintf("%+v", tx))
 
-	if err := k.validationKeeper.EthereumNonceRequested.Set(ctx, k.validationKeeper.GetZenBTCMinterKeyID(ctx), true); err != nil {
+	if err := k.validationKeeper.EthereumNonceRequested.Set(ctx, k.GetMinterKeyID(ctx), true); err != nil {
 		return nil, err
 	}
 
@@ -197,7 +197,7 @@ func debugRetrieveBlockHeaderViaRPC(chainName string, blockHeight int64) (*api.B
 Get the list of Change KeyID and derive the addresses for the correct Chain
 */
 func (k msgServer) ZenBTCChangeAddresses(ctx context.Context, chainName string) ([]string, error) {
-	keyIDs := k.validationKeeper.GetZenBTCChangeAddressKeyIDs(ctx)
+	keyIDs := k.GetChangeAddressKeyIDs(ctx)
 	chaincfg := utils.ChainFromString(chainName)
 	result := make([]string, 0)
 	for _, keyID := range keyIDs {

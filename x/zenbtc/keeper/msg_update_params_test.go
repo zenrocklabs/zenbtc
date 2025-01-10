@@ -7,13 +7,14 @@ import (
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
+	"github.com/zenrocklabs/zenbtc/x/zenbtc/keeper"
 	"github.com/zenrocklabs/zenbtc/x/zenbtc/types"
 )
 
 func TestMsgUpdateParams(t *testing.T) {
 	k, ms, ctx := setupMsgServer(t)
-	params := types.DefaultParams()
-	require.NoError(t, k.SetParams(ctx, params))
+	params := keeper.DefaultParams()
+	require.NoError(t, k.Params.Set(ctx, *params))
 	wctx := sdk.UnwrapSDKContext(ctx)
 
 	// default params
@@ -27,7 +28,7 @@ func TestMsgUpdateParams(t *testing.T) {
 			name: "invalid authority",
 			input: &types.MsgUpdateParams{
 				Authority: "invalid",
-				Params:    params,
+				Params:    *params,
 			},
 			expErr:    true,
 			expErrMsg: "invalid authority",
@@ -35,7 +36,7 @@ func TestMsgUpdateParams(t *testing.T) {
 		{
 			name: "send enabled param",
 			input: &types.MsgUpdateParams{
-				Authority: k.GetAuthority(),
+				Authority: k.GetParamsAuthority(ctx),
 				Params:    types.Params{},
 			},
 			expErr: false,
@@ -43,8 +44,8 @@ func TestMsgUpdateParams(t *testing.T) {
 		{
 			name: "all good",
 			input: &types.MsgUpdateParams{
-				Authority: k.GetAuthority(),
-				Params:    params,
+				Authority: k.GetParamsAuthority(ctx),
+				Params:    *params,
 			},
 			expErr: false,
 		},

@@ -8,13 +8,14 @@ import (
 	keepertest "github.com/Zenrock-Foundation/zrchain/v5/testutil/keeper"
 	"github.com/Zenrock-Foundation/zrchain/v5/testutil/nullify"
 
+	"github.com/zenrocklabs/zenbtc/x/zenbtc/keeper"
 	zenbtc "github.com/zenrocklabs/zenbtc/x/zenbtc/module"
 	"github.com/zenrocklabs/zenbtc/x/zenbtc/types"
 )
 
 func TestGenesis(t *testing.T) {
 	genesisState := types.GenesisState{
-		Params: types.DefaultParams(),
+		Params: *keeper.DefaultParams(),
 
 		// this line is used by starport scaffolding # genesis/test/state
 	}

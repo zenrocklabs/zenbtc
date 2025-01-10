@@ -1,6 +1,10 @@
 package keeper
 
-import "context"
+import (
+	"context"
+
+	"github.com/zenrocklabs/zenbtc/x/zenbtc/types"
+)
 
 var (
 	DefaultEthBatcherAddr             = "0x912D79F8d489d0d007aBE0E26fD5d2f06BA4A2AA"
@@ -17,7 +21,37 @@ var (
 	// DefaultBurnerKeyID = 0
 )
 
-func (k Keeper) GetZenBTCEthBatcherAddr(ctx context.Context) string {
+// NewParams creates a new Params instance
+func NewParams(ethBatcherAddr, depositKeyringAddr string, minterKeyID, unstakerKeyID, withdrawerKeyID uint64, changeAddressKeyIDs []uint64, rewardsDepositKeyID uint64, bitcoinProxyAddress, authority string) *types.Params {
+	return &types.Params{
+		EthBatcherAddr:      ethBatcherAddr,
+		DepositKeyringAddr:  depositKeyringAddr,
+		MinterKeyID:         minterKeyID,
+		UnstakerKeyID:       unstakerKeyID,
+		WithdrawerKeyID:     withdrawerKeyID,
+		ChangeAddressKeyIDs: changeAddressKeyIDs,
+		RewardsDepositKeyID: rewardsDepositKeyID,
+		BitcoinProxyAddress: bitcoinProxyAddress,
+		Authority:           authority,
+	}
+}
+
+// DefaultParams returns a default set of parameters.
+func DefaultParams() *types.Params {
+	return NewParams(
+		DefaultEthBatcherAddr,
+		DefaultDepositKeyringAddr,
+		DefaultMinterKeyID,
+		DefaultUnstakerKeyID,
+		DefaultWithdrawerKeyID,
+		DefaultChangeAddressKeyIDs,
+		DefaultRewardsDepositKeyID,
+		DefaultProxyAddress,
+		DefaultParamsAuthority,
+	)
+}
+
+func (k Keeper) GetEthBatcherAddr(ctx context.Context) string {
 	params, err := k.Params.Get(ctx)
 	if err != nil {
 		return DefaultEthBatcherAddr
@@ -25,7 +59,7 @@ func (k Keeper) GetZenBTCEthBatcherAddr(ctx context.Context) string {
 	return params.EthBatcherAddr
 }
 
-func (k Keeper) GetZenBTCDepositKeyringAddr(ctx context.Context) string {
+func (k Keeper) GetDepositKeyringAddr(ctx context.Context) string {
 	params, err := k.Params.Get(ctx)
 	if err != nil {
 		return DefaultDepositKeyringAddr
@@ -33,7 +67,7 @@ func (k Keeper) GetZenBTCDepositKeyringAddr(ctx context.Context) string {
 	return params.DepositKeyringAddr
 }
 
-func (k Keeper) GetZenBTCMinterKeyID(ctx context.Context) uint64 {
+func (k Keeper) GetMinterKeyID(ctx context.Context) uint64 {
 	params, err := k.Params.Get(ctx)
 	if err != nil {
 		return DefaultMinterKeyID
@@ -41,7 +75,7 @@ func (k Keeper) GetZenBTCMinterKeyID(ctx context.Context) uint64 {
 	return params.MinterKeyID
 }
 
-func (k Keeper) GetZenBTCUnstakerKeyID(ctx context.Context) uint64 {
+func (k Keeper) GetUnstakerKeyID(ctx context.Context) uint64 {
 	params, err := k.Params.Get(ctx)
 	if err != nil {
 		return DefaultUnstakerKeyID
@@ -49,7 +83,7 @@ func (k Keeper) GetZenBTCUnstakerKeyID(ctx context.Context) uint64 {
 	return params.UnstakerKeyID
 }
 
-func (k Keeper) GetZenBTCWithdrawerKeyID(ctx context.Context) uint64 {
+func (k Keeper) GetWithdrawerKeyID(ctx context.Context) uint64 {
 	params, err := k.Params.Get(ctx)
 	if err != nil {
 		return DefaultWithdrawerKeyID
@@ -65,7 +99,7 @@ func (k Keeper) GetBitcoinProxyAddress(ctx context.Context) string {
 	return params.BitcoinProxyAddress
 }
 
-func (k Keeper) GetZenBTCChangeAddressKeyIDs(ctx context.Context) []uint64 {
+func (k Keeper) GetChangeAddressKeyIDs(ctx context.Context) []uint64 {
 	params, err := k.Params.Get(ctx)
 	if err != nil {
 		return DefaultChangeAddressKeyIDs
@@ -73,10 +107,18 @@ func (k Keeper) GetZenBTCChangeAddressKeyIDs(ctx context.Context) []uint64 {
 	return params.ChangeAddressKeyIDs
 }
 
-func (k Keeper) GetZenBTCRewardsDepositKeyID(ctx context.Context) uint64 {
+func (k Keeper) GetRewardsDepositKeyID(ctx context.Context) uint64 {
 	params, err := k.Params.Get(ctx)
 	if err != nil {
 		return DefaultRewardsDepositKeyID
 	}
 	return params.RewardsDepositKeyID
+}
+
+func (k Keeper) GetParamsAuthority(ctx context.Context) string {
+	params, err := k.Params.Get(ctx)
+	if err != nil {
+		return DefaultParamsAuthority
+	}
+	return params.Authority
 }

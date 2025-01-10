@@ -97,7 +97,7 @@ func (k msgServer) updateCompletedRedemptions(ctx sdk.Context, redemptionIndexes
 }
 
 func (k msgServer) checkChangeAddress(ctx context.Context, msg *types.MsgSubmitUnsignedRedemptionTx) (*wire.MsgTx, error) {
-	zenBTCChangeAddressKeyIDs := k.validationKeeper.GetZenBTCChangeAddressKeyIDs(ctx)
+	zenBTCChangeAddressKeyIDs := k.GetChangeAddressKeyIDs(ctx)
 	if zenBTCChangeAddressKeyIDs == nil || len(zenBTCChangeAddressKeyIDs) == 0 {
 		return nil, fmt.Errorf("failed to retrieve ZenBTCChangeAddressKeyIDs")
 	}
@@ -145,13 +145,13 @@ func (k msgServer) checkChangeAddress(ctx context.Context, msg *types.MsgSubmitU
 }
 
 func (k msgServer) checkRedemptionTXCreator(ctx context.Context, msg *types.MsgSubmitUnsignedRedemptionTx) error {
-	bitcoinProxyCreatorID := k.validationKeeper.GetBitcoinProxyCreatorID(ctx)
-	if bitcoinProxyCreatorID == "" {
-		return fmt.Errorf("failed to retrieve BitcoinProxyCreatorID")
+	bitcoinProxyAddress := k.GetBitcoinProxyAddress(ctx)
+	if bitcoinProxyAddress == "" {
+		return fmt.Errorf("failed to retrieve BitcoinProxyAddress")
 	}
 
-	if msg.Creator != bitcoinProxyCreatorID {
-		return fmt.Errorf("msg.Creator (%s) must be the BitcoinProxyCreatorID (%s)", msg.Creator, bitcoinProxyCreatorID)
+	if msg.Creator != bitcoinProxyAddress {
+		return fmt.Errorf("msg.Creator (%s) must be the BitcoinProxyAddress (%s)", msg.Creator, bitcoinProxyAddress)
 	}
 	return nil
 }

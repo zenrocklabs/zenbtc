@@ -20,10 +20,6 @@ type (
 		storeService store.KVStoreService
 		logger       log.Logger
 
-		// the address capable of executing a MsgUpdateParams message. Typically, this
-		// should be the x/gov module account.
-		authority string
-
 		validationKeeper *validation.Keeper
 		treasuryKeeper   *treasury.Keeper
 
@@ -50,7 +46,6 @@ func NewKeeper(
 	k := Keeper{
 		cdc:                  cdc,
 		storeService:         storeService,
-		authority:            authority,
 		logger:               logger,
 		validationKeeper:     validationKeeper,
 		treasuryKeeper:       treasuryKeeper,
@@ -65,11 +60,6 @@ func NewKeeper(
 	k.Schema = schema
 
 	return k
-}
-
-// GetAuthority returns the module's authority.
-func (k Keeper) GetAuthority() string {
-	return k.authority
 }
 
 // Logger returns a module-specific logger.

@@ -14,7 +14,7 @@ option go_package = "github.com/zenrocklabs/zenbtc/x/zenbtc/types";
 // Query defines the gRPC querier service.
 service Query {
   // Parameters queries the parameters of the module.
-  rpc Params(QueryParamsRequest) returns (QueryParamsResponse) {
+  rpc GetParams(QueryParamsRequest) returns (QueryParamsResponse) {
     option (google.api.http).get = "/zenbtc/params";
   }
 
