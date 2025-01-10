@@ -1,3 +1,10 @@
+## [1.7.5](https://github.com/zenrocklabs/zenbtc/compare/v1.7.4...v1.7.5) (2025-01-10)
+
+
+### Bug Fixes
+
+* move most zenBTC logic to `x/zenbtc` module + add vout key field `LockTransactions` ([#17](https://github.com/zenrocklabs/zenbtc/issues/17)) ([bb9b8e8](https://github.com/zenrocklabs/zenbtc/commit/bb9b8e82ad8b476dae094f6356ceb9084287cf5b))
+
 ## [1.7.4](https://github.com/zenrocklabs/zenbtc/compare/v1.7.3...v1.7.4) (2025-01-09)
 
 
