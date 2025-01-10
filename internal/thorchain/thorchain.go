@@ -223,7 +223,7 @@ func (c *thorChainClient) Swap(destination string, amount *big.Int, toleranceBPS
 
 	// Send ETH transaction and wait for receipt
 	if broadcast {
-		_, err := txMgr.Send(context.Background(), tx, true)
+		_, err := txMgr.Send(context.Background(), tx)
 		if err != nil {
 			return nil, fmt.Errorf("failed to send ETH: %w", err)
 		}
@@ -246,7 +246,7 @@ func (c *thorChainClient) Swap(destination string, amount *big.Int, toleranceBPS
 		}
 
 		// Send router transaction and wait for receipt
-		receipt, err := txMgr.Send(context.Background(), routerTx, true)
+		receipt, err := txMgr.Send(context.Background(), routerTx)
 		return receipt, err
 	}
 

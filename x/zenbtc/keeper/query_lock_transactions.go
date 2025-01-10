@@ -19,9 +19,9 @@ func (k Keeper) LockTransactions(goCtx context.Context, req *types.QueryLockTran
 
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
-	lockTransactions := []types.LockTransaction{}
+	lockTransactions := []*types.LockTransaction{}
 	if err := k.LockTransactionStore.Walk(ctx, nil, func(key collections.Pair[string, uint64], value types.LockTransaction) (bool, error) {
-		lockTransactions = append(lockTransactions, value)
+		lockTransactions = append(lockTransactions, &value)
 		return false, nil
 	}); err != nil {
 		return nil, err
