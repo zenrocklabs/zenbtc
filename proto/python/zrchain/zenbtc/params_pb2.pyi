@@ -8,7 +8,7 @@ from typing import ClassVar as _ClassVar, Iterable as _Iterable, Optional as _Op
 DESCRIPTOR: _descriptor.FileDescriptor
 
 class Params(_message.Message):
-    __slots__ = ("ethBatcherAddr", "depositKeyringAddr", "minterKeyID", "withdrawerKeyID", "unstakerKeyID", "rewardsDepositKeyID", "changeAddressKeyIDs", "bitcoinProxyCreatorID", "authority")
+    __slots__ = ("ethBatcherAddr", "depositKeyringAddr", "minterKeyID", "withdrawerKeyID", "unstakerKeyID", "rewardsDepositKeyID", "changeAddressKeyIDs", "bitcoinProxyAddress", "authority")
     ETHBATCHERADDR_FIELD_NUMBER: _ClassVar[int]
     DEPOSITKEYRINGADDR_FIELD_NUMBER: _ClassVar[int]
     MINTERKEYID_FIELD_NUMBER: _ClassVar[int]
@@ -16,7 +16,7 @@ class Params(_message.Message):
     UNSTAKERKEYID_FIELD_NUMBER: _ClassVar[int]
     REWARDSDEPOSITKEYID_FIELD_NUMBER: _ClassVar[int]
     CHANGEADDRESSKEYIDS_FIELD_NUMBER: _ClassVar[int]
-    BITCOINPROXYCREATORID_FIELD_NUMBER: _ClassVar[int]
+    BITCOINPROXYADDRESS_FIELD_NUMBER: _ClassVar[int]
     AUTHORITY_FIELD_NUMBER: _ClassVar[int]
     ethBatcherAddr: str
     depositKeyringAddr: str
@@ -25,6 +25,6 @@ class Params(_message.Message):
     unstakerKeyID: int
     rewardsDepositKeyID: int
     changeAddressKeyIDs: _containers.RepeatedScalarFieldContainer[int]
-    bitcoinProxyCreatorID: str
+    bitcoinProxyAddress: str
     authority: str
-    def __init__(self, ethBatcherAddr: _Optional[str] = ..., depositKeyringAddr: _Optional[str] = ..., minterKeyID: _Optional[int] = ..., withdrawerKeyID: _Optional[int] = ..., unstakerKeyID: _Optional[int] = ..., rewardsDepositKeyID: _Optional[int] = ..., changeAddressKeyIDs: _Optional[_Iterable[int]] = ..., bitcoinProxyCreatorID: _Optional[str] = ..., authority: _Optional[str] = ...) -> None: ...
+    def __init__(self, ethBatcherAddr: _Optional[str] = ..., depositKeyringAddr: _Optional[str] = ..., minterKeyID: _Optional[int] = ..., withdrawerKeyID: _Optional[int] = ..., unstakerKeyID: _Optional[int] = ..., rewardsDepositKeyID: _Optional[int] = ..., changeAddressKeyIDs: _Optional[_Iterable[int]] = ..., bitcoinProxyAddress: _Optional[str] = ..., authority: _Optional[str] = ...) -> None: ...
