@@ -52,7 +52,7 @@ func (k msgServer) updateCompletedRedemptions(ctx sdk.Context, redemptionIndexes
 	}
 
 	// Get exchange rate for converting BTC amount to zenBTC
-	exchangeRate, err := k.validationKeeper.GetZenBTCExchangeRate(ctx)
+	exchangeRate, err := k.GetExchangeRate(ctx)
 	if err != nil {
 		return fmt.Errorf("failed to get exchange rate: %w", err)
 	}

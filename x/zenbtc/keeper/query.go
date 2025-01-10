@@ -15,38 +15,31 @@ func (k Keeper) QueryPendingMintTransactions(ctx context.Context, req *types.Que
 	pendingMints, err := k.PendingMintTransactions.Get(ctx)
 	if err != nil {
 		if errors.Is(err, collections.ErrNotFound) {
-			return &types.QueryPendingMintTransactionsResponse{PendingMintTransactions: []*types.PendingMintTransactionResponse{}}, nil
+			return &types.QueryPendingMintTransactionsResponse{PendingMintTransactions: []*types.PendingMintTransaction{}}, nil
 		}
 		return nil, err
 	}
-	pendingMintResponses := make([]*types.PendingMintTransactionResponse, 0, len(pendingMints.Txs))
+	pendingMintResponses := make([]*types.PendingMintTransaction, 0, len(pendingMints.Txs))
 	for _, mint := range pendingMints.Txs {
-		pendingMintResponses = append(pendingMintResponses, &types.PendingMintTransactionResponse{
-			ChainId:          mint.ChainId,
-			ChainType:        mint.ChainType.String(),
-			RecipientAddress: mint.RecipientAddress,
-			Amount:           mint.Amount,
-			Creator:          mint.Creator,
-			KeyId:            mint.KeyId,
-		})
+		pendingMintResponses = append(pendingMintResponses, mint)
 	}
 	return &types.QueryPendingMintTransactionsResponse{PendingMintTransactions: pendingMintResponses}, nil
 }
 
-func (k Keeper) QuerySupply(ctx context.Context, req *types.QueryZenBTCSupplyRequest) (*types.QueryZenBTCSupplyResponse, error) {
+func (k Keeper) QuerySupply(ctx context.Context, req *types.QuerySupplyRequest) (*types.QuerySupplyResponse, error) {
 	supply, err := k.Supply.Get(ctx)
 	if err != nil {
 		if errors.Is(err, collections.ErrNotFound) {
-			return &types.QueryZenBTCSupplyResponse{CustodiedBTC: 0, MintedZenBTC: 0}, nil
+			return &types.QuerySupplyResponse{CustodiedBTC: 0, MintedZenBTC: 0}, nil
 		}
 		return nil, err
 	}
-	exchangeRate, err := k.GetZenBTCExchangeRate(sdk.UnwrapSDKContext(ctx))
+	exchangeRate, err := k.GetExchangeRate(sdk.UnwrapSDKContext(ctx))
 	if err != nil {
 		if errors.Is(err, collections.ErrNotFound) {
-			return &types.QueryZenBTCSupplyResponse{CustodiedBTC: 0, MintedZenBTC: 0}, nil
+			return &types.QuerySupplyResponse{CustodiedBTC: 0, MintedZenBTC: 0}, nil
 		}
 		return nil, err
 	}
-	return &types.QueryZenBTCSupplyResponse{CustodiedBTC: supply.CustodiedBTC, MintedZenBTC: supply.MintedZenBTC, ExchangeRate: exchangeRate}, nil
+	return &types.QuerySupplyResponse{CustodiedBTC: supply.CustodiedBTC, MintedZenBTC: supply.MintedZenBTC, ExchangeRate: exchangeRate}, nil
 }

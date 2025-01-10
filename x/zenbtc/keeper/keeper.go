@@ -12,7 +12,6 @@ import (
 	"github.com/zenrocklabs/zenbtc/x/zenbtc/types"
 
 	treasury "github.com/Zenrock-Foundation/zrchain/v5/x/treasury/keeper"
-	treasurytypes "github.com/Zenrock-Foundation/zrchain/v5/x/treasury/types"
 	validation "github.com/Zenrock-Foundation/zrchain/v5/x/validation/keeper"
 )
 
@@ -30,7 +29,7 @@ type (
 		// LockTransactionStore - key: lock transaction rawTx + vout | value: lock transaction data
 		LockTransactionStore collections.Map[collections.Pair[string, uint64], types.LockTransaction]
 		// PendingMintTransactions - key: pending zenBTC mint transaction
-		PendingMintTransactions collections.Item[treasurytypes.PendingMintTransactions]
+		PendingMintTransactions collections.Item[types.PendingMintTransactions]
 		// ZenBTCRedemptions - key: redemption index | value: redemption data
 		Redemptions collections.Map[uint64, types.Redemption]
 		// ZenBTCSupply - value: zenBTC supply data
@@ -57,7 +56,7 @@ func NewKeeper(
 
 		Params:                  collections.NewItem(sb, types.ParamsKey, types.ParamsIndex, codec.CollValue[types.Params](cdc)),
 		LockTransactionStore:    collections.NewMap(sb, types.LockTransactionsKey, types.LockTransactionsIndex, collections.PairKeyCodec(collections.StringKey, collections.Uint64Key), codec.CollValue[types.LockTransaction](cdc)),
-		PendingMintTransactions: collections.NewItem(sb, types.PendingMintTransactionsKey, types.PendingMintTransactionsIndex, codec.CollValue[treasurytypes.PendingMintTransactions](cdc)),
+		PendingMintTransactions: collections.NewItem(sb, types.PendingMintTransactionsKey, types.PendingMintTransactionsIndex, codec.CollValue[types.PendingMintTransactions](cdc)),
 		Redemptions:             collections.NewMap(sb, types.RedemptionsKey, types.RedemptionsIndex, collections.Uint64Key, codec.CollValue[types.Redemption](cdc)),
 		Supply:                  collections.NewItem(sb, types.SupplyKey, types.SupplyIndex, codec.CollValue[types.Supply](cdc)),
 	}
@@ -77,10 +76,6 @@ func (k Keeper) Logger() log.Logger {
 	return k.logger.With("module", fmt.Sprintf("x/%s", types.ModuleName))
 }
 
-func (k Keeper) GetPendingMintTransactions(ctx context.Context) (treasurytypes.PendingMintTransactions, error) {
-	return k.PendingMintTransactions.Get(ctx)
-}
-
 // GetZenBTCExchangeRate returns the current exchange rate between BTC and zenBTC
 // Returns the number of BTC represented by 1 zenBTC
 func (k Keeper) GetExchangeRate(ctx context.Context) (float64, error) {
@@ -97,4 +92,32 @@ func (k Keeper) GetExchangeRate(ctx context.Context) (float64, error) {
 	}
 
 	return float64(supply.CustodiedBTC) / float64(supply.MintedZenBTC), nil
+}
+
+func (k Keeper) GetPendingMintTransactions(ctx context.Context) (types.PendingMintTransactions, error) {
+	return k.PendingMintTransactions.Get(ctx)
+}
+
+func (k Keeper) SetPendingMintTransactions(ctx context.Context, pendingMintTransactions types.PendingMintTransactions) error {
+	return k.PendingMintTransactions.Set(ctx, pendingMintTransactions)
+}
+
+func (k Keeper) HasRedemption(ctx context.Context, id uint64) (bool, error) {
+	return k.Redemptions.Has(ctx, id)
+}
+
+func (k Keeper) SetRedemption(ctx context.Context, id uint64, redemption types.Redemption) error {
+	return k.Redemptions.Set(ctx, id, redemption)
+}
+
+func (k Keeper) WalkRedemptions(ctx context.Context, fn func(id uint64, redemption types.Redemption) (stop bool, err error)) error {
+	return k.Redemptions.Walk(ctx, nil, fn)
+}
+
+func (k Keeper) GetSupply(ctx context.Context) (types.Supply, error) {
+	return k.Supply.Get(ctx)
+}
+
+func (k Keeper) SetSupply(ctx context.Context, supply types.Supply) error {
+	return k.Supply.Set(ctx, supply)
 }
