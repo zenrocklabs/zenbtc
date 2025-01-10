@@ -30,6 +30,16 @@ class QueryStub(object):
                 request_serializer=zrchain_dot_zenbtc_dot_query__pb2.QueryRedemptionsRequest.SerializeToString,
                 response_deserializer=zrchain_dot_zenbtc_dot_query__pb2.QueryRedemptionsResponse.FromString,
                 )
+        self.QueryPendingMintTransactions = channel.unary_unary(
+                '/zrchain.zenbtc.Query/QueryPendingMintTransactions',
+                request_serializer=zrchain_dot_zenbtc_dot_query__pb2.QueryPendingMintTransactionsRequest.SerializeToString,
+                response_deserializer=zrchain_dot_zenbtc_dot_query__pb2.QueryPendingMintTransactionsResponse.FromString,
+                )
+        self.QuerySupply = channel.unary_unary(
+                '/zrchain.zenbtc.Query/QuerySupply',
+                request_serializer=zrchain_dot_zenbtc_dot_query__pb2.QuerySupplyRequest.SerializeToString,
+                response_deserializer=zrchain_dot_zenbtc_dot_query__pb2.QuerySupplyResponse.FromString,
+                )
 
 
 class QueryServicer(object):
@@ -57,6 +67,20 @@ class QueryServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def QueryPendingMintTransactions(self, request, context):
+        """Queries a list of PendingMintTransactions items.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def QuerySupply(self, request, context):
+        """Queries the current supply of zenBTC.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_QueryServicer_to_server(servicer, server):
     rpc_method_handlers = {
@@ -74,6 +98,16 @@ def add_QueryServicer_to_server(servicer, server):
                     servicer.GetRedemptions,
                     request_deserializer=zrchain_dot_zenbtc_dot_query__pb2.QueryRedemptionsRequest.FromString,
                     response_serializer=zrchain_dot_zenbtc_dot_query__pb2.QueryRedemptionsResponse.SerializeToString,
+            ),
+            'QueryPendingMintTransactions': grpc.unary_unary_rpc_method_handler(
+                    servicer.QueryPendingMintTransactions,
+                    request_deserializer=zrchain_dot_zenbtc_dot_query__pb2.QueryPendingMintTransactionsRequest.FromString,
+                    response_serializer=zrchain_dot_zenbtc_dot_query__pb2.QueryPendingMintTransactionsResponse.SerializeToString,
+            ),
+            'QuerySupply': grpc.unary_unary_rpc_method_handler(
+                    servicer.QuerySupply,
+                    request_deserializer=zrchain_dot_zenbtc_dot_query__pb2.QuerySupplyRequest.FromString,
+                    response_serializer=zrchain_dot_zenbtc_dot_query__pb2.QuerySupplyResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -134,5 +168,39 @@ class Query(object):
         return grpc.experimental.unary_unary(request, target, '/zrchain.zenbtc.Query/GetRedemptions',
             zrchain_dot_zenbtc_dot_query__pb2.QueryRedemptionsRequest.SerializeToString,
             zrchain_dot_zenbtc_dot_query__pb2.QueryRedemptionsResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def QueryPendingMintTransactions(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/zrchain.zenbtc.Query/QueryPendingMintTransactions',
+            zrchain_dot_zenbtc_dot_query__pb2.QueryPendingMintTransactionsRequest.SerializeToString,
+            zrchain_dot_zenbtc_dot_query__pb2.QueryPendingMintTransactionsResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def QuerySupply(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/zrchain.zenbtc.Query/QuerySupply',
+            zrchain_dot_zenbtc_dot_query__pb2.QuerySupplyRequest.SerializeToString,
+            zrchain_dot_zenbtc_dot_query__pb2.QuerySupplyResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

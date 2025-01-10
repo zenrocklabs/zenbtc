@@ -45,3 +45,27 @@ class QueryRedemptionsResponse(_message.Message):
     REDEMPTIONS_FIELD_NUMBER: _ClassVar[int]
     redemptions: _containers.RepeatedCompositeFieldContainer[_redemptions_pb2.Redemption]
     def __init__(self, redemptions: _Optional[_Iterable[_Union[_redemptions_pb2.Redemption, _Mapping]]] = ...) -> None: ...
+
+class QueryPendingMintTransactionsRequest(_message.Message):
+    __slots__ = ()
+    def __init__(self) -> None: ...
+
+class QueryPendingMintTransactionsResponse(_message.Message):
+    __slots__ = ("pending_mint_transactions",)
+    PENDING_MINT_TRANSACTIONS_FIELD_NUMBER: _ClassVar[int]
+    pending_mint_transactions: _containers.RepeatedCompositeFieldContainer[_mint_pb2.PendingMintTransaction]
+    def __init__(self, pending_mint_transactions: _Optional[_Iterable[_Union[_mint_pb2.PendingMintTransaction, _Mapping]]] = ...) -> None: ...
+
+class QuerySupplyRequest(_message.Message):
+    __slots__ = ()
+    def __init__(self) -> None: ...
+
+class QuerySupplyResponse(_message.Message):
+    __slots__ = ("custodiedBTC", "mintedZenBTC", "exchangeRate")
+    CUSTODIEDBTC_FIELD_NUMBER: _ClassVar[int]
+    MINTEDZENBTC_FIELD_NUMBER: _ClassVar[int]
+    EXCHANGERATE_FIELD_NUMBER: _ClassVar[int]
+    custodiedBTC: int
+    mintedZenBTC: int
+    exchangeRate: float
+    def __init__(self, custodiedBTC: _Optional[int] = ..., mintedZenBTC: _Optional[int] = ..., exchangeRate: _Optional[float] = ...) -> None: ...
