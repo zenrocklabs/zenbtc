@@ -1,6 +1,7 @@
 package keeper
 
 import (
+	"context"
 	"fmt"
 
 	"cosmossdk.io/collections"
@@ -73,4 +74,8 @@ func NewKeeper(
 // Logger returns a module-specific logger.
 func (k Keeper) Logger() log.Logger {
 	return k.logger.With("module", fmt.Sprintf("x/%s", types.ModuleName))
+}
+
+func (k Keeper) GetPendingMintTransactions(ctx context.Context) (treasurytypes.PendingMintTransactions, error) {
+	return k.PendingMintTransactions.Get(ctx)
 }

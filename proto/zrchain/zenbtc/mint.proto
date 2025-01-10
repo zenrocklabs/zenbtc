@@ -22,3 +22,37 @@ message LockTransaction {
   uint64 amount = 5;
   int64 block_height = 6;
 }
+
+// PendingMintTransaction is the metadata for a pending zenBTC mint transaction.
+message PendingMintTransaction {
+  uint64 chain_id = 1;
+  WalletType chain_type = 2;
+  string recipient_address = 3;
+  uint64 amount = 4;
+  string creator = 5;
+  uint64 key_id = 6;
+}
+
+// PendingMintTransactions is a collection of pending mint transactions.
+message PendingMintTransactions {
+  repeated PendingMintTransaction txs = 1;
+}
+
+// WalletType specifies the Layer 1 blockchain that this wallet will be used
+// for.
+enum WalletType {
+  // The wallet type is missing (all wallets will be derived)
+  WALLET_TYPE_UNSPECIFIED = 0;
+  // The wallet type for native cosmos accounts
+  WALLET_TYPE_NATIVE = 1;
+  // The wallet type for mainnet ETH and its ERC-20 tokens
+  WALLET_TYPE_EVM = 2;
+  // The Wallet type for Testnet BTC
+  WALLET_TYPE_BTC_TESTNET = 3;
+  // The Wallet type for Mainnet BTC
+  WALLET_TYPE_BTC_MAINNET = 4;
+  // The Wallet type for RegNet - Local Test Network
+  WALLET_TYPE_BTC_REGNET = 5;
+  // Wallet type for Solana
+  WALLET_TYPE_SOLANA = 6;
+}
