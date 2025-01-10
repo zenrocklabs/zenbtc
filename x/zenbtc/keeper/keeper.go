@@ -7,7 +7,6 @@ import (
 	"cosmossdk.io/core/store"
 	"cosmossdk.io/log"
 	"github.com/cosmos/cosmos-sdk/codec"
-	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/zenrocklabs/zenbtc/x/zenbtc/types"
 
 	treasury "github.com/Zenrock-Foundation/zrchain/v5/x/treasury/keeper"
@@ -25,7 +24,7 @@ type (
 
 		Schema               collections.Schema
 		Params               collections.Item[types.Params]
-		LockTransactionStore collections.KeySet[string]
+		LockTransactionStore collections.Map[collections.Pair[string, uint64], types.LockTransaction]
 	}
 )
 
@@ -33,23 +32,21 @@ func NewKeeper(
 	cdc codec.BinaryCodec,
 	storeService store.KVStoreService,
 	logger log.Logger,
-	authority string,
 	validationKeeper *validation.Keeper,
 	treasuryKeeper *treasury.Keeper,
 ) *Keeper {
-	if _, err := sdk.AccAddressFromBech32(authority); err != nil {
-		panic(fmt.Sprintf("invalid authority address: %s", authority))
-	}
 
 	sb := collections.NewSchemaBuilder(storeService)
 
 	k := Keeper{
-		cdc:                  cdc,
-		storeService:         storeService,
-		logger:               logger,
-		validationKeeper:     validationKeeper,
-		treasuryKeeper:       treasuryKeeper,
-		LockTransactionStore: collections.NewKeySet(sb, types.LockTransactionsKey, types.LockTransactionsIndex, collections.StringKey),
+		cdc:              cdc,
+		storeService:     storeService,
+		logger:           logger,
+		validationKeeper: validationKeeper,
+		treasuryKeeper:   treasuryKeeper,
+
+		Params:               collections.NewItem(sb, types.ParamsKey, types.ParamsIndex, codec.CollValue[types.Params](cdc)),
+		LockTransactionStore: collections.NewMap(sb, types.LockTransactionsKey, types.LockTransactionsIndex, collections.PairKeyCodec(collections.StringKey, collections.Uint64Key), codec.CollValue[types.LockTransaction](cdc)),
 	}
 
 	schema, err := sb.Build()

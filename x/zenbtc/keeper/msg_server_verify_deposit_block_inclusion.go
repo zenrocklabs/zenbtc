@@ -92,7 +92,7 @@ func (k msgServer) VerifyDepositBlockInclusion(goCtx context.Context, msg *types
 
 	// Deposit/lock txs are stored in zenBTC module so they can't be used to mint zenBTC tokens more than once
 
-	txExists, err := k.LockTransactionStore.Has(ctx, fmt.Sprintf("%s:%d", msg.RawTx, msg.Vout))
+	txExists, err := k.LockTransactionStore.Has(ctx, collections.Join(msg.RawTx, msg.Vout))
 	if err != nil {
 		return nil, err
 	}
@@ -114,7 +114,14 @@ func (k msgServer) VerifyDepositBlockInclusion(goCtx context.Context, msg *types
 		return nil, err
 	}
 
-	if err := k.LockTransactionStore.Set(ctx, fmt.Sprintf("%s:%d", msg.RawTx, msg.Vout)); err != nil {
+	if err := k.LockTransactionStore.Set(ctx, collections.Join(msg.RawTx, msg.Vout), types.LockTransaction{
+		RawTx:         msg.RawTx,
+		Vout:          msg.Vout,
+		Sender:        msg.DepositAddr,
+		MintRecipient: q.Response.Key.ZenbtcMetadata.RecipientAddr,
+		Amount:        msg.Amount,
+		BlockHeight:   msg.BlockHeight,
+	}); err != nil {
 		return nil, err
 	}
 

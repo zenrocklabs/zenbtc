@@ -44,7 +44,7 @@ message QueryParamsResponse {
 message QueryLockTransactionsRequest {}
 
 message QueryLockTransactionsResponse {
-  repeated string lock_transactions = 1;
+  repeated LockTransaction lock_transactions = 1;
 }
 
 message QueryRedemptionsRequest {
