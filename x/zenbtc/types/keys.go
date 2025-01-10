@@ -14,13 +14,9 @@ const (
 )
 
 var (
-	AssetPricesKey = collections.NewPrefix(0)
+	ParamsKey           = collections.NewPrefix(0)
+	LockTransactionsKey = collections.NewPrefix(1)
 
-	AssetPricesIndex = "asset_prices"
-
-	ParamsKey = []byte("p_zenbtc")
+	ParamsIndex           = "params"
+	LockTransactionsIndex = "lock_transactions"
 )
-
-func KeyPrefix(p string) []byte {
-	return []byte(p)
-}

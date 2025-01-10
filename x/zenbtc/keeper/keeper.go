@@ -36,7 +36,7 @@ func NewKeeper(
 	authority string,
 	validationKeeper *validation.Keeper,
 	treasuryKeeper *treasury.Keeper,
-) Keeper {
+) *Keeper {
 	if _, err := sdk.AccAddressFromBech32(authority); err != nil {
 		panic(fmt.Sprintf("invalid authority address: %s", authority))
 	}
@@ -49,7 +49,7 @@ func NewKeeper(
 		logger:               logger,
 		validationKeeper:     validationKeeper,
 		treasuryKeeper:       treasuryKeeper,
-		LockTransactionStore: collections.NewKeySet(sb, types.AssetPricesKey, types.AssetPricesIndex, collections.StringKey),
+		LockTransactionStore: collections.NewKeySet(sb, types.LockTransactionsKey, types.LockTransactionsIndex, collections.StringKey),
 	}
 
 	schema, err := sb.Build()
@@ -59,7 +59,7 @@ func NewKeeper(
 
 	k.Schema = schema
 
-	return k
+	return &k
 }
 
 // Logger returns a module-specific logger.
