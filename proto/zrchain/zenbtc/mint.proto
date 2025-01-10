@@ -13,3 +13,12 @@ message NonceData {
 message RequestedBitcoinHeaders {
   repeated int64 heights = 1;
 }
+
+message LockTransaction {
+  string raw_tx = 1;
+  uint64 vout = 2;
+  string sender = 3;
+  string mint_recipient = 4;
+  uint64 amount = 5;
+  uint64 block_height = 6;
+}
