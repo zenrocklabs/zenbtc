@@ -1171,8 +1171,8 @@ func (x *fastReflection_LockTransaction) Range(f func(protoreflect.FieldDescript
 			return
 		}
 	}
-	if x.BlockHeight != uint64(0) {
-		value := protoreflect.ValueOfUint64(x.BlockHeight)
+	if x.BlockHeight != int64(0) {
+		value := protoreflect.ValueOfInt64(x.BlockHeight)
 		if !f(fd_LockTransaction_block_height, value) {
 			return
 		}
@@ -1203,7 +1203,7 @@ func (x *fastReflection_LockTransaction) Has(fd protoreflect.FieldDescriptor) bo
 	case "zrchain.zenbtc.LockTransaction.amount":
 		return x.Amount != uint64(0)
 	case "zrchain.zenbtc.LockTransaction.block_height":
-		return x.BlockHeight != uint64(0)
+		return x.BlockHeight != int64(0)
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: zrchain.zenbtc.LockTransaction"))
@@ -1231,7 +1231,7 @@ func (x *fastReflection_LockTransaction) Clear(fd protoreflect.FieldDescriptor) 
 	case "zrchain.zenbtc.LockTransaction.amount":
 		x.Amount = uint64(0)
 	case "zrchain.zenbtc.LockTransaction.block_height":
-		x.BlockHeight = uint64(0)
+		x.BlockHeight = int64(0)
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: zrchain.zenbtc.LockTransaction"))
@@ -1265,7 +1265,7 @@ func (x *fastReflection_LockTransaction) Get(descriptor protoreflect.FieldDescri
 		return protoreflect.ValueOfUint64(value)
 	case "zrchain.zenbtc.LockTransaction.block_height":
 		value := x.BlockHeight
-		return protoreflect.ValueOfUint64(value)
+		return protoreflect.ValueOfInt64(value)
 	default:
 		if descriptor.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: zrchain.zenbtc.LockTransaction"))
@@ -1297,7 +1297,7 @@ func (x *fastReflection_LockTransaction) Set(fd protoreflect.FieldDescriptor, va
 	case "zrchain.zenbtc.LockTransaction.amount":
 		x.Amount = value.Uint()
 	case "zrchain.zenbtc.LockTransaction.block_height":
-		x.BlockHeight = value.Uint()
+		x.BlockHeight = value.Int()
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: zrchain.zenbtc.LockTransaction"))
@@ -1354,7 +1354,7 @@ func (x *fastReflection_LockTransaction) NewField(fd protoreflect.FieldDescripto
 	case "zrchain.zenbtc.LockTransaction.amount":
 		return protoreflect.ValueOfUint64(uint64(0))
 	case "zrchain.zenbtc.LockTransaction.block_height":
-		return protoreflect.ValueOfUint64(uint64(0))
+		return protoreflect.ValueOfInt64(int64(0))
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: zrchain.zenbtc.LockTransaction"))
@@ -1707,7 +1707,7 @@ func (x *fastReflection_LockTransaction) ProtoMethods() *protoiface.Methods {
 					}
 					b := dAtA[iNdEx]
 					iNdEx++
-					x.BlockHeight |= uint64(b&0x7F) << shift
+					x.BlockHeight |= int64(b&0x7F) << shift
 					if b < 0x80 {
 						break
 					}
@@ -1856,7 +1856,7 @@ type LockTransaction struct {
 	Sender        string `protobuf:"bytes,3,opt,name=sender,proto3" json:"sender,omitempty"`
 	MintRecipient string `protobuf:"bytes,4,opt,name=mint_recipient,json=mintRecipient,proto3" json:"mint_recipient,omitempty"`
 	Amount        uint64 `protobuf:"varint,5,opt,name=amount,proto3" json:"amount,omitempty"`
-	BlockHeight   uint64 `protobuf:"varint,6,opt,name=block_height,json=blockHeight,proto3" json:"block_height,omitempty"`
+	BlockHeight   int64  `protobuf:"varint,6,opt,name=block_height,json=blockHeight,proto3" json:"block_height,omitempty"`
 }
 
 func (x *LockTransaction) Reset() {
@@ -1914,7 +1914,7 @@ func (x *LockTransaction) GetAmount() uint64 {
 	return 0
 }
 
-func (x *LockTransaction) GetBlockHeight() uint64 {
+func (x *LockTransaction) GetBlockHeight() int64 {
 	if x != nil {
 		return x.BlockHeight
 	}
@@ -1945,7 +1945,7 @@ var file_zrchain_zenbtc_mint_proto_rawDesc = []byte{
 	0x52, 0x0d, 0x6d, 0x69, 0x6e, 0x74, 0x52, 0x65, 0x63, 0x69, 0x70, 0x69, 0x65, 0x6e, 0x74, 0x12,
 	0x16, 0x0a, 0x06, 0x61, 0x6d, 0x6f, 0x75, 0x6e, 0x74, 0x18, 0x05, 0x20, 0x01, 0x28, 0x04, 0x52,
 	0x06, 0x61, 0x6d, 0x6f, 0x75, 0x6e, 0x74, 0x12, 0x21, 0x0a, 0x0c, 0x62, 0x6c, 0x6f, 0x63, 0x6b,
-	0x5f, 0x68, 0x65, 0x69, 0x67, 0x68, 0x74, 0x18, 0x06, 0x20, 0x01, 0x28, 0x04, 0x52, 0x0b, 0x62,
+	0x5f, 0x68, 0x65, 0x69, 0x67, 0x68, 0x74, 0x18, 0x06, 0x20, 0x01, 0x28, 0x03, 0x52, 0x0b, 0x62,
 	0x6c, 0x6f, 0x63, 0x6b, 0x48, 0x65, 0x69, 0x67, 0x68, 0x74, 0x42, 0x99, 0x01, 0x0a, 0x12, 0x63,
 	0x6f, 0x6d, 0x2e, 0x7a, 0x72, 0x63, 0x68, 0x61, 0x69, 0x6e, 0x2e, 0x7a, 0x65, 0x6e, 0x62, 0x74,
 	0x63, 0x42, 0x09, 0x4d, 0x69, 0x6e, 0x74, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x50, 0x01, 0x5a, 0x1f,

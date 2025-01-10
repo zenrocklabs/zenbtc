@@ -8,6 +8,7 @@ import "gogoproto/gogo.proto";
 import "google/api/annotations.proto";
 import "zrchain/zenbtc/params.proto";
 import "zrchain/zenbtc/redemptions.proto";
+import "zrchain/zenbtc/mint.proto";
 
 option go_package = "github.com/zenrocklabs/zenbtc/x/zenbtc/types";
 

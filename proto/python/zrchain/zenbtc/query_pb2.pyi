@@ -4,6 +4,7 @@ from gogoproto import gogo_pb2 as _gogo_pb2
 from google.api import annotations_pb2 as _annotations_pb2
 from zrchain.zenbtc import params_pb2 as _params_pb2
 from zrchain.zenbtc import redemptions_pb2 as _redemptions_pb2
+from zrchain.zenbtc import mint_pb2 as _mint_pb2
 from google.protobuf.internal import containers as _containers
 from google.protobuf import descriptor as _descriptor
 from google.protobuf import message as _message
@@ -28,8 +29,8 @@ class QueryLockTransactionsRequest(_message.Message):
 class QueryLockTransactionsResponse(_message.Message):
     __slots__ = ("lock_transactions",)
     LOCK_TRANSACTIONS_FIELD_NUMBER: _ClassVar[int]
-    lock_transactions: _containers.RepeatedScalarFieldContainer[str]
-    def __init__(self, lock_transactions: _Optional[_Iterable[str]] = ...) -> None: ...
+    lock_transactions: _containers.RepeatedCompositeFieldContainer[_mint_pb2.LockTransaction]
+    def __init__(self, lock_transactions: _Optional[_Iterable[_Union[_mint_pb2.LockTransaction, _Mapping]]] = ...) -> None: ...
 
 class QueryRedemptionsRequest(_message.Message):
     __slots__ = ("start_index", "status")
