@@ -5,6 +5,7 @@ package types
 
 import (
 	context "context"
+	encoding_binary "encoding/binary"
 	fmt "fmt"
 	_ "github.com/cosmos/cosmos-sdk/types/query"
 	_ "github.com/cosmos/cosmos-sdk/types/tx/amino"
@@ -151,7 +152,7 @@ func (m *QueryLockTransactionsRequest) XXX_DiscardUnknown() {
 var xxx_messageInfo_QueryLockTransactionsRequest proto.InternalMessageInfo
 
 type QueryLockTransactionsResponse struct {
-	LockTransactions []string `protobuf:"bytes,1,rep,name=lock_transactions,json=lockTransactions,proto3" json:"lock_transactions,omitempty"`
+	LockTransactions []*LockTransaction `protobuf:"bytes,1,rep,name=lock_transactions,json=lockTransactions,proto3" json:"lock_transactions,omitempty"`
 }
 
 func (m *QueryLockTransactionsResponse) Reset()         { *m = QueryLockTransactionsResponse{} }
@@ -187,7 +188,7 @@ func (m *QueryLockTransactionsResponse) XXX_DiscardUnknown() {
 
 var xxx_messageInfo_QueryLockTransactionsResponse proto.InternalMessageInfo
 
-func (m *QueryLockTransactionsResponse) GetLockTransactions() []string {
+func (m *QueryLockTransactionsResponse) GetLockTransactions() []*LockTransaction {
 	if m != nil {
 		return m.LockTransactions
 	}
@@ -290,6 +291,182 @@ func (m *QueryRedemptionsResponse) GetRedemptions() []Redemption {
 	return nil
 }
 
+type QueryPendingMintTransactionsRequest struct {
+}
+
+func (m *QueryPendingMintTransactionsRequest) Reset()         { *m = QueryPendingMintTransactionsRequest{} }
+func (m *QueryPendingMintTransactionsRequest) String() string { return proto.CompactTextString(m) }
+func (*QueryPendingMintTransactionsRequest) ProtoMessage()    {}
+func (*QueryPendingMintTransactionsRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_d8cea4d05ef3f869, []int{6}
+}
+func (m *QueryPendingMintTransactionsRequest) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *QueryPendingMintTransactionsRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_QueryPendingMintTransactionsRequest.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *QueryPendingMintTransactionsRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_QueryPendingMintTransactionsRequest.Merge(m, src)
+}
+func (m *QueryPendingMintTransactionsRequest) XXX_Size() int {
+	return m.Size()
+}
+func (m *QueryPendingMintTransactionsRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_QueryPendingMintTransactionsRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_QueryPendingMintTransactionsRequest proto.InternalMessageInfo
+
+type QueryPendingMintTransactionsResponse struct {
+	PendingMintTransactions []*PendingMintTransaction `protobuf:"bytes,1,rep,name=pending_mint_transactions,json=pendingMintTransactions,proto3" json:"pending_mint_transactions,omitempty"`
+}
+
+func (m *QueryPendingMintTransactionsResponse) Reset()         { *m = QueryPendingMintTransactionsResponse{} }
+func (m *QueryPendingMintTransactionsResponse) String() string { return proto.CompactTextString(m) }
+func (*QueryPendingMintTransactionsResponse) ProtoMessage()    {}
+func (*QueryPendingMintTransactionsResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_d8cea4d05ef3f869, []int{7}
+}
+func (m *QueryPendingMintTransactionsResponse) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *QueryPendingMintTransactionsResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_QueryPendingMintTransactionsResponse.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *QueryPendingMintTransactionsResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_QueryPendingMintTransactionsResponse.Merge(m, src)
+}
+func (m *QueryPendingMintTransactionsResponse) XXX_Size() int {
+	return m.Size()
+}
+func (m *QueryPendingMintTransactionsResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_QueryPendingMintTransactionsResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_QueryPendingMintTransactionsResponse proto.InternalMessageInfo
+
+func (m *QueryPendingMintTransactionsResponse) GetPendingMintTransactions() []*PendingMintTransaction {
+	if m != nil {
+		return m.PendingMintTransactions
+	}
+	return nil
+}
+
+type QuerySupplyRequest struct {
+}
+
+func (m *QuerySupplyRequest) Reset()         { *m = QuerySupplyRequest{} }
+func (m *QuerySupplyRequest) String() string { return proto.CompactTextString(m) }
+func (*QuerySupplyRequest) ProtoMessage()    {}
+func (*QuerySupplyRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_d8cea4d05ef3f869, []int{8}
+}
+func (m *QuerySupplyRequest) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *QuerySupplyRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_QuerySupplyRequest.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *QuerySupplyRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_QuerySupplyRequest.Merge(m, src)
+}
+func (m *QuerySupplyRequest) XXX_Size() int {
+	return m.Size()
+}
+func (m *QuerySupplyRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_QuerySupplyRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_QuerySupplyRequest proto.InternalMessageInfo
+
+type QuerySupplyResponse struct {
+	CustodiedBTC uint64  `protobuf:"varint,1,opt,name=custodiedBTC,proto3" json:"custodiedBTC,omitempty"`
+	MintedZenBTC uint64  `protobuf:"varint,2,opt,name=mintedZenBTC,proto3" json:"mintedZenBTC,omitempty"`
+	ExchangeRate float64 `protobuf:"fixed64,3,opt,name=exchangeRate,proto3" json:"exchangeRate,omitempty"`
+}
+
+func (m *QuerySupplyResponse) Reset()         { *m = QuerySupplyResponse{} }
+func (m *QuerySupplyResponse) String() string { return proto.CompactTextString(m) }
+func (*QuerySupplyResponse) ProtoMessage()    {}
+func (*QuerySupplyResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_d8cea4d05ef3f869, []int{9}
+}
+func (m *QuerySupplyResponse) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *QuerySupplyResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_QuerySupplyResponse.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *QuerySupplyResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_QuerySupplyResponse.Merge(m, src)
+}
+func (m *QuerySupplyResponse) XXX_Size() int {
+	return m.Size()
+}
+func (m *QuerySupplyResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_QuerySupplyResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_QuerySupplyResponse proto.InternalMessageInfo
+
+func (m *QuerySupplyResponse) GetCustodiedBTC() uint64 {
+	if m != nil {
+		return m.CustodiedBTC
+	}
+	return 0
+}
+
+func (m *QuerySupplyResponse) GetMintedZenBTC() uint64 {
+	if m != nil {
+		return m.MintedZenBTC
+	}
+	return 0
+}
+
+func (m *QuerySupplyResponse) GetExchangeRate() float64 {
+	if m != nil {
+		return m.ExchangeRate
+	}
+	return 0
+}
+
 func init() {
 	proto.RegisterType((*QueryParamsRequest)(nil), "zrchain.zenbtc.QueryParamsRequest")
 	proto.RegisterType((*QueryParamsResponse)(nil), "zrchain.zenbtc.QueryParamsResponse")
@@ -297,45 +474,60 @@ func init() {
 	proto.RegisterType((*QueryLockTransactionsResponse)(nil), "zrchain.zenbtc.QueryLockTransactionsResponse")
 	proto.RegisterType((*QueryRedemptionsRequest)(nil), "zrchain.zenbtc.QueryRedemptionsRequest")
 	proto.RegisterType((*QueryRedemptionsResponse)(nil), "zrchain.zenbtc.QueryRedemptionsResponse")
+	proto.RegisterType((*QueryPendingMintTransactionsRequest)(nil), "zrchain.zenbtc.QueryPendingMintTransactionsRequest")
+	proto.RegisterType((*QueryPendingMintTransactionsResponse)(nil), "zrchain.zenbtc.QueryPendingMintTransactionsResponse")
+	proto.RegisterType((*QuerySupplyRequest)(nil), "zrchain.zenbtc.QuerySupplyRequest")
+	proto.RegisterType((*QuerySupplyResponse)(nil), "zrchain.zenbtc.QuerySupplyResponse")
 }
 
 func init() { proto.RegisterFile("zrchain/zenbtc/query.proto", fileDescriptor_d8cea4d05ef3f869) }
 
 var fileDescriptor_d8cea4d05ef3f869 = []byte{
-	// 519 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x8c, 0x53, 0x3f, 0x6f, 0xd3, 0x40,
-	0x14, 0xcf, 0xb5, 0x25, 0x52, 0xcf, 0x52, 0x94, 0x5e, 0x4b, 0x09, 0x4e, 0x71, 0x8d, 0x19, 0x88,
-	0x4a, 0xf1, 0xa9, 0x61, 0x81, 0x35, 0x03, 0x12, 0x52, 0x87, 0x62, 0x98, 0x18, 0xa8, 0xce, 0xee,
-	0xc9, 0xb5, 0x12, 0xdf, 0xb9, 0xbe, 0x0b, 0x6a, 0x2b, 0xb1, 0x30, 0x30, 0x23, 0xf8, 0x12, 0x8c,
-	0x7c, 0x8c, 0x8e, 0x95, 0x58, 0x98, 0x10, 0x4a, 0x90, 0xf8, 0x1a, 0xc8, 0xe7, 0xb3, 0xe2, 0xd8,
-	0x09, 0x74, 0x89, 0x4e, 0xef, 0xf7, 0xe7, 0xfd, 0xde, 0x7b, 0x31, 0x34, 0x2f, 0xd3, 0xe0, 0x94,
-	0x44, 0x0c, 0x5f, 0x52, 0xe6, 0xcb, 0x00, 0x9f, 0x8d, 0x69, 0x7a, 0xe1, 0x26, 0x29, 0x97, 0x1c,
-	0xb5, 0x34, 0xe6, 0xe6, 0x98, 0xb9, 0x41, 0xe2, 0x88, 0x71, 0xac, 0x7e, 0x73, 0x8a, 0xb9, 0x17,
-	0x70, 0x11, 0x73, 0x81, 0x7d, 0x22, 0x68, 0xae, 0xc5, 0xef, 0x0e, 0x7c, 0x2a, 0xc9, 0x01, 0x4e,
-	0x48, 0x18, 0x31, 0x22, 0x23, 0xce, 0x34, 0x77, 0x2b, 0xe4, 0x21, 0x57, 0x4f, 0x9c, 0xbd, 0x74,
-	0x75, 0x27, 0xe4, 0x3c, 0x1c, 0x51, 0x4c, 0x92, 0x08, 0x13, 0xc6, 0xb8, 0x54, 0x12, 0xa1, 0xd1,
-	0x6e, 0x25, 0x5e, 0x42, 0x52, 0x12, 0x17, 0xa0, 0x5d, 0x01, 0x53, 0x7a, 0x42, 0xe3, 0xa4, 0x24,
-	0x77, 0xb6, 0x20, 0x7a, 0x99, 0x85, 0x3a, 0x52, 0x32, 0x8f, 0x9e, 0x8d, 0xa9, 0x90, 0xce, 0x11,
-	0xdc, 0x9c, 0xab, 0x8a, 0x84, 0x33, 0x41, 0xd1, 0x33, 0xd8, 0xcc, 0xed, 0x3b, 0xc0, 0x06, 0x3d,
-	0xa3, 0xbf, 0xed, 0xce, 0xcf, 0xef, 0xe6, 0xfc, 0xc1, 0xfa, 0xd5, 0xcf, 0xdd, 0xc6, 0xd7, 0x3f,
-	0xdf, 0xf6, 0x80, 0xa7, 0x05, 0x8e, 0x05, 0x77, 0x94, 0xe3, 0x21, 0x0f, 0x86, 0xaf, 0x53, 0xc2,
-	0x04, 0x09, 0x54, 0x8c, 0xa2, 0xe3, 0x21, 0xbc, 0xb7, 0x04, 0xd7, 0xbd, 0x1f, 0xc1, 0x8d, 0x11,
-	0x0f, 0x86, 0xc7, 0xb2, 0x04, 0x76, 0x80, 0xbd, 0xda, 0x5b, 0xf7, 0xda, 0xa3, 0x8a, 0xc8, 0x91,
-	0xf0, 0x8e, 0x72, 0xf3, 0x66, 0xf3, 0xea, 0x46, 0x68, 0x17, 0x1a, 0x42, 0x92, 0x54, 0x1e, 0x47,
-	0xec, 0x84, 0x9e, 0xab, 0x41, 0xd6, 0x3c, 0xa8, 0x4a, 0x2f, 0xb2, 0x0a, 0x7a, 0x0a, 0x9b, 0x42,
-	0x12, 0x39, 0x16, 0x9d, 0x15, 0x1b, 0xf4, 0x5a, 0x7d, 0xbb, 0x3a, 0xe4, 0xcc, 0xf4, 0x95, 0xe2,
-	0x79, 0x9a, 0xef, 0xbc, 0x85, 0x9d, 0x7a, 0x57, 0x1d, 0x7f, 0x00, 0x8d, 0xd2, 0xf2, 0x55, 0x70,
-	0xa3, 0x6f, 0x2e, 0xb7, 0x1e, 0xac, 0x65, 0x3b, 0xf4, 0xca, 0xa2, 0xfe, 0xc7, 0x55, 0x78, 0x4b,
-	0x35, 0x40, 0x11, 0x6c, 0xe6, 0xab, 0x46, 0x4e, 0xd5, 0xa2, 0x7e, 0x4d, 0xf3, 0xc1, 0x3f, 0x39,
-	0x79, 0x40, 0x67, 0xfb, 0xc3, 0xf7, 0xdf, 0x5f, 0x56, 0xda, 0xa8, 0x35, 0xff, 0x47, 0x42, 0x9f,
-	0x01, 0x6c, 0x57, 0x8f, 0x82, 0xf6, 0x17, 0x3a, 0x2e, 0xb9, 0xad, 0xf9, 0xf8, 0x86, 0x6c, 0x9d,
-	0xe4, 0xbe, 0x4a, 0xd2, 0x45, 0x77, 0x8b, 0x24, 0xb5, 0xbb, 0xa3, 0xf7, 0xd0, 0x28, 0x2d, 0x19,
-	0x3d, 0x5c, 0xd8, 0xa0, 0x7e, 0x7c, 0xb3, 0xf7, 0x7f, 0xa2, 0x0e, 0xd1, 0x55, 0x21, 0x6e, 0xa3,
-	0xcd, 0x05, 0x9f, 0xce, 0xe0, 0xf9, 0xd5, 0xc4, 0x02, 0xd7, 0x13, 0x0b, 0xfc, 0x9a, 0x58, 0xe0,
-	0xd3, 0xd4, 0x6a, 0x5c, 0x4f, 0xad, 0xc6, 0x8f, 0xa9, 0xd5, 0x78, 0xb3, 0x1f, 0x46, 0xf2, 0x74,
-	0xec, 0xbb, 0x01, 0x8f, 0x33, 0x61, 0xca, 0x83, 0xe1, 0x88, 0xf8, 0xa2, 0x30, 0x39, 0x2f, 0x1e,
-	0xf2, 0x22, 0xa1, 0xc2, 0x6f, 0xaa, 0x6f, 0xf0, 0xc9, 0xdf, 0x00, 0x00, 0x00, 0xff, 0xff, 0x93,
-	0x89, 0xfa, 0x57, 0x63, 0x04, 0x00, 0x00,
+	// 702 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x94, 0x55, 0xcf, 0x4f, 0xd4, 0x40,
+	0x14, 0xde, 0xe1, 0x57, 0xc2, 0xac, 0xd9, 0xc0, 0x80, 0xb0, 0x14, 0x2c, 0x4b, 0xf1, 0xc7, 0x4a,
+	0x70, 0x1b, 0x16, 0x0f, 0x7a, 0x5d, 0x13, 0x89, 0x09, 0x26, 0x58, 0x38, 0x71, 0x90, 0x4c, 0xbb,
+	0x93, 0xd2, 0xb0, 0x9d, 0x29, 0x9d, 0x59, 0x03, 0x9c, 0xd4, 0xa3, 0x27, 0xa3, 0xff, 0x84, 0x47,
+	0x0f, 0xfc, 0x11, 0x1c, 0x49, 0xbc, 0x78, 0x32, 0x06, 0x4c, 0xfc, 0x37, 0x4c, 0xa7, 0x53, 0x68,
+	0xbb, 0x2d, 0xea, 0x65, 0x33, 0x79, 0xef, 0x7b, 0xef, 0x7d, 0xf3, 0xe6, 0xfb, 0xba, 0x50, 0x3b,
+	0x09, 0x9d, 0x7d, 0xec, 0x51, 0xf3, 0x84, 0x50, 0x5b, 0x38, 0xe6, 0x61, 0x9f, 0x84, 0xc7, 0xad,
+	0x20, 0x64, 0x82, 0xa1, 0x9a, 0xca, 0xb5, 0xe2, 0x9c, 0x36, 0x89, 0x7d, 0x8f, 0x32, 0x53, 0xfe,
+	0xc6, 0x10, 0x6d, 0xc5, 0x61, 0xdc, 0x67, 0xdc, 0xb4, 0x31, 0x27, 0x71, 0xad, 0xf9, 0x66, 0xcd,
+	0x26, 0x02, 0xaf, 0x99, 0x01, 0x76, 0x3d, 0x8a, 0x85, 0xc7, 0xa8, 0xc2, 0x4e, 0xbb, 0xcc, 0x65,
+	0xf2, 0x68, 0x46, 0x27, 0x15, 0x5d, 0x70, 0x19, 0x73, 0x7b, 0xc4, 0xc4, 0x81, 0x67, 0x62, 0x4a,
+	0x99, 0x90, 0x25, 0x5c, 0x65, 0xe7, 0x72, 0xf4, 0x7c, 0x8f, 0x0a, 0x95, 0x9a, 0xcf, 0xa5, 0x02,
+	0x1c, 0x62, 0x3f, 0xa9, 0x6b, 0xe4, 0x92, 0x21, 0xe9, 0x12, 0x3f, 0x48, 0x75, 0x36, 0xa6, 0x21,
+	0x7a, 0x15, 0xf1, 0xdd, 0x92, 0x65, 0x16, 0x39, 0xec, 0x13, 0x2e, 0x8c, 0x2d, 0x38, 0x95, 0x89,
+	0xf2, 0x80, 0x51, 0x4e, 0xd0, 0x53, 0x38, 0x16, 0xb7, 0xaf, 0x83, 0x06, 0x68, 0x56, 0xdb, 0x33,
+	0xad, 0xec, 0x6a, 0x5a, 0x31, 0xbe, 0x33, 0x7e, 0xf6, 0x63, 0xb1, 0xf2, 0xe5, 0xf7, 0xd7, 0x15,
+	0x60, 0xa9, 0x02, 0x43, 0x87, 0x0b, 0xb2, 0xe3, 0x26, 0x73, 0x0e, 0x76, 0x42, 0x4c, 0x39, 0x76,
+	0x24, 0x8d, 0x64, 0xa2, 0x0f, 0xef, 0x94, 0xe4, 0xd5, 0xec, 0x4d, 0x38, 0xd9, 0x63, 0xce, 0xc1,
+	0x9e, 0x48, 0x25, 0xeb, 0xa0, 0x31, 0xdc, 0xac, 0xb6, 0x17, 0xf3, 0x34, 0x72, 0x4d, 0xac, 0x89,
+	0x5e, 0xae, 0xab, 0x21, 0xe0, 0xac, 0x1c, 0x67, 0x5d, 0x2f, 0x44, 0x31, 0x41, 0x8b, 0xb0, 0xca,
+	0x05, 0x0e, 0xc5, 0x9e, 0x47, 0xbb, 0xe4, 0x48, 0xde, 0x74, 0xc4, 0x82, 0x32, 0xf4, 0x22, 0x8a,
+	0xa0, 0x27, 0x70, 0x8c, 0x0b, 0x2c, 0xfa, 0xbc, 0x3e, 0xd4, 0x00, 0xcd, 0x5a, 0xbb, 0x91, 0x1f,
+	0x7f, 0xdd, 0x74, 0x5b, 0xe2, 0x2c, 0x85, 0x37, 0x5e, 0xc3, 0xfa, 0xe0, 0x54, 0x75, 0xbf, 0x0e,
+	0xac, 0xa6, 0x5e, 0x47, 0xdd, 0x4c, 0x2b, 0x6f, 0xdd, 0x19, 0x89, 0x96, 0x6c, 0xa5, 0x8b, 0x8c,
+	0x7b, 0x70, 0x39, 0x7e, 0x36, 0x42, 0xbb, 0x1e, 0x75, 0x5f, 0x7a, 0x54, 0x14, 0xed, 0xfa, 0x03,
+	0x80, 0x77, 0x6f, 0xc6, 0x29, 0x4e, 0x36, 0x9c, 0x0b, 0x62, 0xc8, 0x5e, 0xa4, 0xb8, 0xa2, 0xdd,
+	0xdf, 0x1f, 0x90, 0x40, 0x61, 0x4f, 0x6b, 0x36, 0x28, 0x9e, 0x75, 0x25, 0xc0, 0xed, 0x7e, 0x10,
+	0xf4, 0x8e, 0x13, 0x8a, 0xef, 0x80, 0x52, 0x60, 0x12, 0x56, 0x8c, 0x0c, 0x78, 0xcb, 0xe9, 0x73,
+	0xc1, 0xba, 0x1e, 0xe9, 0x76, 0x76, 0x9e, 0xa9, 0xd7, 0xc9, 0xc4, 0x22, 0x4c, 0xc4, 0x96, 0x74,
+	0x77, 0x09, 0x8d, 0x30, 0x43, 0x31, 0x26, 0x1d, 0x8b, 0x30, 0xe4, 0xc8, 0xd9, 0xc7, 0xd4, 0x25,
+	0x16, 0x16, 0xa4, 0x3e, 0xdc, 0x00, 0x4d, 0x60, 0x65, 0x62, 0xed, 0xd3, 0x51, 0x38, 0x2a, 0x39,
+	0xa0, 0x1e, 0x1c, 0xdf, 0x20, 0x22, 0x16, 0x37, 0x32, 0xf2, 0x37, 0x1e, 0xf4, 0x8f, 0xb6, 0x7c,
+	0x23, 0x26, 0xbe, 0x8b, 0x31, 0xf3, 0xfe, 0xdb, 0xaf, 0xcf, 0x43, 0x13, 0xa8, 0x96, 0xb5, 0x2e,
+	0xfa, 0x04, 0xe0, 0x44, 0xde, 0x06, 0x68, 0xb5, 0xb0, 0x63, 0x89, 0x9b, 0xb4, 0x47, 0xff, 0x88,
+	0x56, 0x4c, 0x96, 0x24, 0x93, 0x79, 0x34, 0x97, 0x30, 0x19, 0x70, 0x1a, 0x7a, 0x0b, 0x60, 0x6d,
+	0x83, 0x88, 0x94, 0x72, 0xd1, 0x83, 0xc2, 0x21, 0x83, 0x8e, 0xd2, 0x9a, 0x7f, 0x07, 0x2a, 0x22,
+	0xf3, 0x92, 0xc8, 0x6d, 0x34, 0x55, 0xf0, 0xc1, 0x42, 0xa7, 0x40, 0x7d, 0x43, 0x4a, 0x64, 0x8b,
+	0xd6, 0x8b, 0xb7, 0x7e, 0xa3, 0x19, 0xb4, 0xc7, 0xff, 0x57, 0xa4, 0x88, 0x3e, 0x94, 0x44, 0x97,
+	0xd1, 0xd2, 0xd5, 0xdb, 0x95, 0xf9, 0x04, 0x51, 0x58, 0x4d, 0x29, 0xb9, 0x44, 0x3e, 0x19, 0xf5,
+	0x97, 0xc8, 0x27, 0x6b, 0x85, 0x41, 0xf9, 0x70, 0x99, 0xef, 0x3c, 0x3f, 0xbb, 0xd0, 0xc1, 0xf9,
+	0x85, 0x0e, 0x7e, 0x5e, 0xe8, 0xe0, 0xe3, 0xa5, 0x5e, 0x39, 0xbf, 0xd4, 0x2b, 0xdf, 0x2f, 0xf5,
+	0xca, 0xee, 0xaa, 0xeb, 0x89, 0xfd, 0xbe, 0xdd, 0x72, 0x98, 0x1f, 0xd5, 0x84, 0xcc, 0x39, 0xe8,
+	0x61, 0x9b, 0x27, 0xf5, 0x47, 0xc9, 0x41, 0x1c, 0x07, 0x84, 0xdb, 0x63, 0xf2, 0x0f, 0x62, 0xfd,
+	0x4f, 0x00, 0x00, 0x00, 0xff, 0xff, 0xcf, 0xc9, 0xfb, 0x7d, 0x1b, 0x07, 0x00, 0x00,
 }
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -351,11 +543,15 @@ const _ = grpc.SupportPackageIsVersion4
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
 type QueryClient interface {
 	// Parameters queries the parameters of the module.
-	Params(ctx context.Context, in *QueryParamsRequest, opts ...grpc.CallOption) (*QueryParamsResponse, error)
+	GetParams(ctx context.Context, in *QueryParamsRequest, opts ...grpc.CallOption) (*QueryParamsResponse, error)
 	// Queries a list of LockTransactions items.
 	LockTransactions(ctx context.Context, in *QueryLockTransactionsRequest, opts ...grpc.CallOption) (*QueryLockTransactionsResponse, error)
 	// Queries a list of Redemptions items.
-	Redemptions(ctx context.Context, in *QueryRedemptionsRequest, opts ...grpc.CallOption) (*QueryRedemptionsResponse, error)
+	GetRedemptions(ctx context.Context, in *QueryRedemptionsRequest, opts ...grpc.CallOption) (*QueryRedemptionsResponse, error)
+	// Queries a list of PendingMintTransactions items.
+	QueryPendingMintTransactions(ctx context.Context, in *QueryPendingMintTransactionsRequest, opts ...grpc.CallOption) (*QueryPendingMintTransactionsResponse, error)
+	// Queries the current supply of zenBTC.
+	QuerySupply(ctx context.Context, in *QuerySupplyRequest, opts ...grpc.CallOption) (*QuerySupplyResponse, error)
 }
 
 type queryClient struct {
@@ -366,9 +562,9 @@ func NewQueryClient(cc grpc1.ClientConn) QueryClient {
 	return &queryClient{cc}
 }
 
-func (c *queryClient) Params(ctx context.Context, in *QueryParamsRequest, opts ...grpc.CallOption) (*QueryParamsResponse, error) {
+func (c *queryClient) GetParams(ctx context.Context, in *QueryParamsRequest, opts ...grpc.CallOption) (*QueryParamsResponse, error) {
 	out := new(QueryParamsResponse)
-	err := c.cc.Invoke(ctx, "/zrchain.zenbtc.Query/Params", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/zrchain.zenbtc.Query/GetParams", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -384,9 +580,27 @@ func (c *queryClient) LockTransactions(ctx context.Context, in *QueryLockTransac
 	return out, nil
 }
 
-func (c *queryClient) Redemptions(ctx context.Context, in *QueryRedemptionsRequest, opts ...grpc.CallOption) (*QueryRedemptionsResponse, error) {
+func (c *queryClient) GetRedemptions(ctx context.Context, in *QueryRedemptionsRequest, opts ...grpc.CallOption) (*QueryRedemptionsResponse, error) {
 	out := new(QueryRedemptionsResponse)
-	err := c.cc.Invoke(ctx, "/zrchain.zenbtc.Query/Redemptions", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/zrchain.zenbtc.Query/GetRedemptions", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *queryClient) QueryPendingMintTransactions(ctx context.Context, in *QueryPendingMintTransactionsRequest, opts ...grpc.CallOption) (*QueryPendingMintTransactionsResponse, error) {
+	out := new(QueryPendingMintTransactionsResponse)
+	err := c.cc.Invoke(ctx, "/zrchain.zenbtc.Query/QueryPendingMintTransactions", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *queryClient) QuerySupply(ctx context.Context, in *QuerySupplyRequest, opts ...grpc.CallOption) (*QuerySupplyResponse, error) {
+	out := new(QuerySupplyResponse)
+	err := c.cc.Invoke(ctx, "/zrchain.zenbtc.Query/QuerySupply", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -396,45 +610,55 @@ func (c *queryClient) Redemptions(ctx context.Context, in *QueryRedemptionsReque
 // QueryServer is the server API for Query service.
 type QueryServer interface {
 	// Parameters queries the parameters of the module.
-	Params(context.Context, *QueryParamsRequest) (*QueryParamsResponse, error)
+	GetParams(context.Context, *QueryParamsRequest) (*QueryParamsResponse, error)
 	// Queries a list of LockTransactions items.
 	LockTransactions(context.Context, *QueryLockTransactionsRequest) (*QueryLockTransactionsResponse, error)
 	// Queries a list of Redemptions items.
-	Redemptions(context.Context, *QueryRedemptionsRequest) (*QueryRedemptionsResponse, error)
+	GetRedemptions(context.Context, *QueryRedemptionsRequest) (*QueryRedemptionsResponse, error)
+	// Queries a list of PendingMintTransactions items.
+	QueryPendingMintTransactions(context.Context, *QueryPendingMintTransactionsRequest) (*QueryPendingMintTransactionsResponse, error)
+	// Queries the current supply of zenBTC.
+	QuerySupply(context.Context, *QuerySupplyRequest) (*QuerySupplyResponse, error)
 }
 
 // UnimplementedQueryServer can be embedded to have forward compatible implementations.
 type UnimplementedQueryServer struct {
 }
 
-func (*UnimplementedQueryServer) Params(ctx context.Context, req *QueryParamsRequest) (*QueryParamsResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Params not implemented")
+func (*UnimplementedQueryServer) GetParams(ctx context.Context, req *QueryParamsRequest) (*QueryParamsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetParams not implemented")
 }
 func (*UnimplementedQueryServer) LockTransactions(ctx context.Context, req *QueryLockTransactionsRequest) (*QueryLockTransactionsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method LockTransactions not implemented")
 }
-func (*UnimplementedQueryServer) Redemptions(ctx context.Context, req *QueryRedemptionsRequest) (*QueryRedemptionsResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Redemptions not implemented")
+func (*UnimplementedQueryServer) GetRedemptions(ctx context.Context, req *QueryRedemptionsRequest) (*QueryRedemptionsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetRedemptions not implemented")
+}
+func (*UnimplementedQueryServer) QueryPendingMintTransactions(ctx context.Context, req *QueryPendingMintTransactionsRequest) (*QueryPendingMintTransactionsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method QueryPendingMintTransactions not implemented")
+}
+func (*UnimplementedQueryServer) QuerySupply(ctx context.Context, req *QuerySupplyRequest) (*QuerySupplyResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method QuerySupply not implemented")
 }
 
 func RegisterQueryServer(s grpc1.Server, srv QueryServer) {
 	s.RegisterService(&_Query_serviceDesc, srv)
 }
 
-func _Query_Params_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Query_GetParams_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(QueryParamsRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(QueryServer).Params(ctx, in)
+		return srv.(QueryServer).GetParams(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/zrchain.zenbtc.Query/Params",
+		FullMethod: "/zrchain.zenbtc.Query/GetParams",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(QueryServer).Params(ctx, req.(*QueryParamsRequest))
+		return srv.(QueryServer).GetParams(ctx, req.(*QueryParamsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -457,20 +681,56 @@ func _Query_LockTransactions_Handler(srv interface{}, ctx context.Context, dec f
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Query_Redemptions_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Query_GetRedemptions_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(QueryRedemptionsRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(QueryServer).Redemptions(ctx, in)
+		return srv.(QueryServer).GetRedemptions(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/zrchain.zenbtc.Query/Redemptions",
+		FullMethod: "/zrchain.zenbtc.Query/GetRedemptions",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(QueryServer).Redemptions(ctx, req.(*QueryRedemptionsRequest))
+		return srv.(QueryServer).GetRedemptions(ctx, req.(*QueryRedemptionsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Query_QueryPendingMintTransactions_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryPendingMintTransactionsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(QueryServer).QueryPendingMintTransactions(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/zrchain.zenbtc.Query/QueryPendingMintTransactions",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(QueryServer).QueryPendingMintTransactions(ctx, req.(*QueryPendingMintTransactionsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Query_QuerySupply_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QuerySupplyRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(QueryServer).QuerySupply(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/zrchain.zenbtc.Query/QuerySupply",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(QueryServer).QuerySupply(ctx, req.(*QuerySupplyRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -481,16 +741,24 @@ var _Query_serviceDesc = grpc.ServiceDesc{
 	HandlerType: (*QueryServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "Params",
-			Handler:    _Query_Params_Handler,
+			MethodName: "GetParams",
+			Handler:    _Query_GetParams_Handler,
 		},
 		{
 			MethodName: "LockTransactions",
 			Handler:    _Query_LockTransactions_Handler,
 		},
 		{
-			MethodName: "Redemptions",
-			Handler:    _Query_Redemptions_Handler,
+			MethodName: "GetRedemptions",
+			Handler:    _Query_GetRedemptions_Handler,
+		},
+		{
+			MethodName: "QueryPendingMintTransactions",
+			Handler:    _Query_QueryPendingMintTransactions_Handler,
+		},
+		{
+			MethodName: "QuerySupply",
+			Handler:    _Query_QuerySupply_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
@@ -598,9 +866,14 @@ func (m *QueryLockTransactionsResponse) MarshalToSizedBuffer(dAtA []byte) (int, 
 	_ = l
 	if len(m.LockTransactions) > 0 {
 		for iNdEx := len(m.LockTransactions) - 1; iNdEx >= 0; iNdEx-- {
-			i -= len(m.LockTransactions[iNdEx])
-			copy(dAtA[i:], m.LockTransactions[iNdEx])
-			i = encodeVarintQuery(dAtA, i, uint64(len(m.LockTransactions[iNdEx])))
+			{
+				size, err := m.LockTransactions[iNdEx].MarshalToSizedBuffer(dAtA[:i])
+				if err != nil {
+					return 0, err
+				}
+				i -= size
+				i = encodeVarintQuery(dAtA, i, uint64(size))
+			}
 			i--
 			dAtA[i] = 0xa
 		}
@@ -678,6 +951,128 @@ func (m *QueryRedemptionsResponse) MarshalToSizedBuffer(dAtA []byte) (int, error
 	return len(dAtA) - i, nil
 }
 
+func (m *QueryPendingMintTransactionsRequest) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *QueryPendingMintTransactionsRequest) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *QueryPendingMintTransactionsRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	return len(dAtA) - i, nil
+}
+
+func (m *QueryPendingMintTransactionsResponse) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *QueryPendingMintTransactionsResponse) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *QueryPendingMintTransactionsResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if len(m.PendingMintTransactions) > 0 {
+		for iNdEx := len(m.PendingMintTransactions) - 1; iNdEx >= 0; iNdEx-- {
+			{
+				size, err := m.PendingMintTransactions[iNdEx].MarshalToSizedBuffer(dAtA[:i])
+				if err != nil {
+					return 0, err
+				}
+				i -= size
+				i = encodeVarintQuery(dAtA, i, uint64(size))
+			}
+			i--
+			dAtA[i] = 0xa
+		}
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *QuerySupplyRequest) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *QuerySupplyRequest) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *QuerySupplyRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	return len(dAtA) - i, nil
+}
+
+func (m *QuerySupplyResponse) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *QuerySupplyResponse) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *QuerySupplyResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if m.ExchangeRate != 0 {
+		i -= 8
+		encoding_binary.LittleEndian.PutUint64(dAtA[i:], uint64(math.Float64bits(float64(m.ExchangeRate))))
+		i--
+		dAtA[i] = 0x19
+	}
+	if m.MintedZenBTC != 0 {
+		i = encodeVarintQuery(dAtA, i, uint64(m.MintedZenBTC))
+		i--
+		dAtA[i] = 0x10
+	}
+	if m.CustodiedBTC != 0 {
+		i = encodeVarintQuery(dAtA, i, uint64(m.CustodiedBTC))
+		i--
+		dAtA[i] = 0x8
+	}
+	return len(dAtA) - i, nil
+}
+
 func encodeVarintQuery(dAtA []byte, offset int, v uint64) int {
 	offset -= sovQuery(v)
 	base := offset
@@ -725,8 +1120,8 @@ func (m *QueryLockTransactionsResponse) Size() (n int) {
 	var l int
 	_ = l
 	if len(m.LockTransactions) > 0 {
-		for _, s := range m.LockTransactions {
-			l = len(s)
+		for _, e := range m.LockTransactions {
+			l = e.Size()
 			n += 1 + l + sovQuery(uint64(l))
 		}
 	}
@@ -759,6 +1154,57 @@ func (m *QueryRedemptionsResponse) Size() (n int) {
 			l = e.Size()
 			n += 1 + l + sovQuery(uint64(l))
 		}
+	}
+	return n
+}
+
+func (m *QueryPendingMintTransactionsRequest) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	return n
+}
+
+func (m *QueryPendingMintTransactionsResponse) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	if len(m.PendingMintTransactions) > 0 {
+		for _, e := range m.PendingMintTransactions {
+			l = e.Size()
+			n += 1 + l + sovQuery(uint64(l))
+		}
+	}
+	return n
+}
+
+func (m *QuerySupplyRequest) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	return n
+}
+
+func (m *QuerySupplyResponse) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	if m.CustodiedBTC != 0 {
+		n += 1 + sovQuery(uint64(m.CustodiedBTC))
+	}
+	if m.MintedZenBTC != 0 {
+		n += 1 + sovQuery(uint64(m.MintedZenBTC))
+	}
+	if m.ExchangeRate != 0 {
+		n += 9
 	}
 	return n
 }
@@ -985,7 +1431,7 @@ func (m *QueryLockTransactionsResponse) Unmarshal(dAtA []byte) error {
 			if wireType != 2 {
 				return fmt.Errorf("proto: wrong wireType = %d for field LockTransactions", wireType)
 			}
-			var stringLen uint64
+			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
 					return ErrIntOverflowQuery
@@ -995,23 +1441,25 @@ func (m *QueryLockTransactionsResponse) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
+				msglen |= int(b&0x7F) << shift
 				if b < 0x80 {
 					break
 				}
 			}
-			intStringLen := int(stringLen)
-			if intStringLen < 0 {
+			if msglen < 0 {
 				return ErrInvalidLengthQuery
 			}
-			postIndex := iNdEx + intStringLen
+			postIndex := iNdEx + msglen
 			if postIndex < 0 {
 				return ErrInvalidLengthQuery
 			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.LockTransactions = append(m.LockTransactions, string(dAtA[iNdEx:postIndex]))
+			m.LockTransactions = append(m.LockTransactions, &LockTransaction{})
+			if err := m.LockTransactions[len(m.LockTransactions)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
@@ -1185,6 +1633,289 @@ func (m *QueryRedemptionsResponse) Unmarshal(dAtA []byte) error {
 				return err
 			}
 			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipQuery(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *QueryPendingMintTransactionsRequest) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowQuery
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: QueryPendingMintTransactionsRequest: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: QueryPendingMintTransactionsRequest: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		default:
+			iNdEx = preIndex
+			skippy, err := skipQuery(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *QueryPendingMintTransactionsResponse) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowQuery
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: QueryPendingMintTransactionsResponse: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: QueryPendingMintTransactionsResponse: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field PendingMintTransactions", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowQuery
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthQuery
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.PendingMintTransactions = append(m.PendingMintTransactions, &PendingMintTransaction{})
+			if err := m.PendingMintTransactions[len(m.PendingMintTransactions)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipQuery(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *QuerySupplyRequest) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowQuery
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: QuerySupplyRequest: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: QuerySupplyRequest: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		default:
+			iNdEx = preIndex
+			skippy, err := skipQuery(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *QuerySupplyResponse) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowQuery
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: QuerySupplyResponse: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: QuerySupplyResponse: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field CustodiedBTC", wireType)
+			}
+			m.CustodiedBTC = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowQuery
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.CustodiedBTC |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		case 2:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field MintedZenBTC", wireType)
+			}
+			m.MintedZenBTC = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowQuery
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.MintedZenBTC |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		case 3:
+			if wireType != 1 {
+				return fmt.Errorf("proto: wrong wireType = %d for field ExchangeRate", wireType)
+			}
+			var v uint64
+			if (iNdEx + 8) > l {
+				return io.ErrUnexpectedEOF
+			}
+			v = uint64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
+			iNdEx += 8
+			m.ExchangeRate = float64(math.Float64frombits(v))
 		default:
 			iNdEx = preIndex
 			skippy, err := skipQuery(dAtA[iNdEx:])

@@ -46,13 +46,13 @@ func (k msgServer) updateCompletedRedemptions(ctx sdk.Context, redemptionIndexes
 	}
 
 	// Get current supply
-	supply, err := k.validationKeeper.ZenBTCSupply.Get(ctx)
+	supply, err := k.Keeper.Supply.Get(ctx)
 	if err != nil {
 		return fmt.Errorf("failed to get zenBTC supply: %w", err)
 	}
 
 	// Get exchange rate for converting BTC amount to zenBTC
-	exchangeRate, err := k.validationKeeper.GetZenBTCExchangeRate(ctx)
+	exchangeRate, err := k.GetExchangeRate(ctx)
 	if err != nil {
 		return fmt.Errorf("failed to get exchange rate: %w", err)
 	}
@@ -60,7 +60,7 @@ func (k msgServer) updateCompletedRedemptions(ctx sdk.Context, redemptionIndexes
 	// Iterate over the redemption indexes, starting from the second element
 	for _, redemptionIndex := range redemptionIndexes[1:] {
 		// Retrieve the redemption entry
-		redemption, err := k.validationKeeper.ZenBTCRedemptions.Get(ctx, redemptionIndex)
+		redemption, err := k.Keeper.Redemptions.Get(ctx, redemptionIndex)
 		if err != nil {
 			return fmt.Errorf("failed to retrieve redemption at index %d: %w", redemptionIndex, err)
 		}
@@ -83,13 +83,13 @@ func (k msgServer) updateCompletedRedemptions(ctx sdk.Context, redemptionIndexes
 		redemption.Status = types.RedemptionStatus_COMPLETED
 
 		// Save the updated redemption entry
-		if err := k.validationKeeper.ZenBTCRedemptions.Set(ctx, redemptionIndex, redemption); err != nil {
+		if err := k.Keeper.Redemptions.Set(ctx, redemptionIndex, redemption); err != nil {
 			return fmt.Errorf("failed to update redemption at index %d: %w", redemptionIndex, err)
 		}
 	}
 
 	// Save updated supply
-	if err := k.validationKeeper.ZenBTCSupply.Set(ctx, supply); err != nil {
+	if err := k.Keeper.Supply.Set(ctx, supply); err != nil {
 		return fmt.Errorf("failed to update zenBTC supply: %w", err)
 	}
 
@@ -97,7 +97,7 @@ func (k msgServer) updateCompletedRedemptions(ctx sdk.Context, redemptionIndexes
 }
 
 func (k msgServer) checkChangeAddress(ctx context.Context, msg *types.MsgSubmitUnsignedRedemptionTx) (*wire.MsgTx, error) {
-	zenBTCChangeAddressKeyIDs := k.validationKeeper.GetZenBTCChangeAddressKeyIDs(ctx)
+	zenBTCChangeAddressKeyIDs := k.GetChangeAddressKeyIDs(ctx)
 	if zenBTCChangeAddressKeyIDs == nil || len(zenBTCChangeAddressKeyIDs) == 0 {
 		return nil, fmt.Errorf("failed to retrieve ZenBTCChangeAddressKeyIDs")
 	}
@@ -145,13 +145,13 @@ func (k msgServer) checkChangeAddress(ctx context.Context, msg *types.MsgSubmitU
 }
 
 func (k msgServer) checkRedemptionTXCreator(ctx context.Context, msg *types.MsgSubmitUnsignedRedemptionTx) error {
-	bitcoinProxyCreatorID := k.validationKeeper.GetBitcoinProxyCreatorID(ctx)
-	if bitcoinProxyCreatorID == "" {
-		return fmt.Errorf("failed to retrieve BitcoinProxyCreatorID")
+	bitcoinProxyAddress := k.GetBitcoinProxyAddress(ctx)
+	if bitcoinProxyAddress == "" {
+		return fmt.Errorf("failed to retrieve BitcoinProxyAddress")
 	}
 
-	if msg.Creator != bitcoinProxyCreatorID {
-		return fmt.Errorf("msg.Creator (%s) must be the BitcoinProxyCreatorID (%s)", msg.Creator, bitcoinProxyCreatorID)
+	if msg.Creator != bitcoinProxyAddress {
+		return fmt.Errorf("msg.Creator (%s) must be the BitcoinProxyAddress (%s)", msg.Creator, bitcoinProxyAddress)
 	}
 	return nil
 }
@@ -163,7 +163,7 @@ func (k msgServer) verifyOutputsAgainstRedemptions(ctx context.Context, msg *typ
 		Status:     types.RedemptionStatus_UNSTAKED,
 	}
 
-	redemptions, err := k.Keeper.Redemptions(ctx, req)
+	redemptions, err := k.Keeper.GetRedemptions(ctx, req)
 	if err != nil {
 		return fmt.Errorf("error retrieving redemptions: %w", err)
 	}

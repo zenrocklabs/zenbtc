@@ -10,6 +10,7 @@ import (
 
 	"github.com/Zenrock-Foundation/zrchain/v5/testutil/sample"
 
+	"github.com/zenrocklabs/zenbtc/x/zenbtc/keeper"
 	zenbtcsimulation "github.com/zenrocklabs/zenbtc/x/zenbtc/simulation"
 
 	"github.com/zenrocklabs/zenbtc/x/zenbtc/types"
@@ -43,7 +44,7 @@ func (AppModule) GenerateGenesisState(simState *module.SimulationState) {
 		accs[i] = acc.Address.String()
 	}
 	zenbtcGenesis := types.GenesisState{
-		Params: types.DefaultParams(),
+		Params: *keeper.DefaultParams(),
 		// this line is used by starport scaffolding # simapp/module/genesisState
 	}
 	simState.GenState[types.ModuleName] = simState.Cdc.MustMarshalJSON(&zenbtcGenesis)

@@ -7,15 +7,17 @@ import (
 
 	keepertest "github.com/Zenrock-Foundation/zrchain/v5/testutil/keeper"
 
+	"github.com/zenrocklabs/zenbtc/x/zenbtc/keeper"
+
 	"github.com/zenrocklabs/zenbtc/x/zenbtc/types"
 )
 
 func TestParamsQuery(t *testing.T) {
-	keeper, ctx := keepertest.ZenbtcKeeper(t)
-	params := types.DefaultParams()
-	require.NoError(t, keeper.SetParams(ctx, params))
+	zenBTCKeeper, ctx := keepertest.ZenbtcKeeper(t)
+	params := keeper.DefaultParams()
+	require.NoError(t, zenBTCKeeper.Params.Set(ctx, *params))
 
-	response, err := keeper.Params(ctx, &types.QueryParamsRequest{})
+	response, err := zenBTCKeeper.GetParams(ctx, &types.QueryParamsRequest{})
 	require.NoError(t, err)
-	require.Equal(t, &types.QueryParamsResponse{Params: params}, response)
+	require.Equal(t, &types.QueryParamsResponse{Params: *params}, response)
 }

@@ -13,7 +13,7 @@ func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 			Service: modulev1.Query_ServiceDesc.ServiceName,
 			RpcCommandOptions: []*autocliv1.RpcCommandOptions{
 				{
-					RpcMethod: "Params",
+					RpcMethod: "GetParams",
 					Use:       "params",
 					Short:     "Shows the parameters of the module",
 				},
@@ -25,9 +25,21 @@ func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 				},
 
 				{
-					RpcMethod:      "Redemptions",
+					RpcMethod:      "GetRedemptions",
 					Use:            "redemptions",
 					Short:          "Query Redemptions",
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{},
+				},
+				{
+					RpcMethod:      "QueryPendingMintTransactions",
+					Use:            "pending-mint-transactions",
+					Short:          "Query PendingMintTransactions",
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{},
+				},
+				{
+					RpcMethod:      "QuerySupply",
+					Use:            "supply",
+					Short:          "Query Supply",
 					PositionalArgs: []*autocliv1.PositionalArgDescriptor{},
 				},
 

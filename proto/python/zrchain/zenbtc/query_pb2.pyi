@@ -2,6 +2,7 @@ from amino import amino_pb2 as _amino_pb2
 from cosmos.base.query.v1beta1 import pagination_pb2 as _pagination_pb2
 from gogoproto import gogo_pb2 as _gogo_pb2
 from google.api import annotations_pb2 as _annotations_pb2
+from zrchain.zenbtc import mint_pb2 as _mint_pb2
 from zrchain.zenbtc import params_pb2 as _params_pb2
 from zrchain.zenbtc import redemptions_pb2 as _redemptions_pb2
 from google.protobuf.internal import containers as _containers
@@ -28,8 +29,8 @@ class QueryLockTransactionsRequest(_message.Message):
 class QueryLockTransactionsResponse(_message.Message):
     __slots__ = ("lock_transactions",)
     LOCK_TRANSACTIONS_FIELD_NUMBER: _ClassVar[int]
-    lock_transactions: _containers.RepeatedScalarFieldContainer[str]
-    def __init__(self, lock_transactions: _Optional[_Iterable[str]] = ...) -> None: ...
+    lock_transactions: _containers.RepeatedCompositeFieldContainer[_mint_pb2.LockTransaction]
+    def __init__(self, lock_transactions: _Optional[_Iterable[_Union[_mint_pb2.LockTransaction, _Mapping]]] = ...) -> None: ...
 
 class QueryRedemptionsRequest(_message.Message):
     __slots__ = ("start_index", "status")
@@ -44,3 +45,27 @@ class QueryRedemptionsResponse(_message.Message):
     REDEMPTIONS_FIELD_NUMBER: _ClassVar[int]
     redemptions: _containers.RepeatedCompositeFieldContainer[_redemptions_pb2.Redemption]
     def __init__(self, redemptions: _Optional[_Iterable[_Union[_redemptions_pb2.Redemption, _Mapping]]] = ...) -> None: ...
+
+class QueryPendingMintTransactionsRequest(_message.Message):
+    __slots__ = ()
+    def __init__(self) -> None: ...
+
+class QueryPendingMintTransactionsResponse(_message.Message):
+    __slots__ = ("pending_mint_transactions",)
+    PENDING_MINT_TRANSACTIONS_FIELD_NUMBER: _ClassVar[int]
+    pending_mint_transactions: _containers.RepeatedCompositeFieldContainer[_mint_pb2.PendingMintTransaction]
+    def __init__(self, pending_mint_transactions: _Optional[_Iterable[_Union[_mint_pb2.PendingMintTransaction, _Mapping]]] = ...) -> None: ...
+
+class QuerySupplyRequest(_message.Message):
+    __slots__ = ()
+    def __init__(self) -> None: ...
+
+class QuerySupplyResponse(_message.Message):
+    __slots__ = ("custodiedBTC", "mintedZenBTC", "exchangeRate")
+    CUSTODIEDBTC_FIELD_NUMBER: _ClassVar[int]
+    MINTEDZENBTC_FIELD_NUMBER: _ClassVar[int]
+    EXCHANGERATE_FIELD_NUMBER: _ClassVar[int]
+    custodiedBTC: int
+    mintedZenBTC: int
+    exchangeRate: float
+    def __init__(self, custodiedBTC: _Optional[int] = ..., mintedZenBTC: _Optional[int] = ..., exchangeRate: _Optional[float] = ...) -> None: ...

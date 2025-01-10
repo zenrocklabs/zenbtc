@@ -1055,6 +1055,1868 @@ func (x *fastReflection_RequestedBitcoinHeaders) ProtoMethods() *protoiface.Meth
 	}
 }
 
+var (
+	md_LockTransaction                protoreflect.MessageDescriptor
+	fd_LockTransaction_raw_tx         protoreflect.FieldDescriptor
+	fd_LockTransaction_vout           protoreflect.FieldDescriptor
+	fd_LockTransaction_sender         protoreflect.FieldDescriptor
+	fd_LockTransaction_mint_recipient protoreflect.FieldDescriptor
+	fd_LockTransaction_amount         protoreflect.FieldDescriptor
+	fd_LockTransaction_block_height   protoreflect.FieldDescriptor
+)
+
+func init() {
+	file_zrchain_zenbtc_mint_proto_init()
+	md_LockTransaction = File_zrchain_zenbtc_mint_proto.Messages().ByName("LockTransaction")
+	fd_LockTransaction_raw_tx = md_LockTransaction.Fields().ByName("raw_tx")
+	fd_LockTransaction_vout = md_LockTransaction.Fields().ByName("vout")
+	fd_LockTransaction_sender = md_LockTransaction.Fields().ByName("sender")
+	fd_LockTransaction_mint_recipient = md_LockTransaction.Fields().ByName("mint_recipient")
+	fd_LockTransaction_amount = md_LockTransaction.Fields().ByName("amount")
+	fd_LockTransaction_block_height = md_LockTransaction.Fields().ByName("block_height")
+}
+
+var _ protoreflect.Message = (*fastReflection_LockTransaction)(nil)
+
+type fastReflection_LockTransaction LockTransaction
+
+func (x *LockTransaction) ProtoReflect() protoreflect.Message {
+	return (*fastReflection_LockTransaction)(x)
+}
+
+func (x *LockTransaction) slowProtoReflect() protoreflect.Message {
+	mi := &file_zrchain_zenbtc_mint_proto_msgTypes[2]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+var _fastReflection_LockTransaction_messageType fastReflection_LockTransaction_messageType
+var _ protoreflect.MessageType = fastReflection_LockTransaction_messageType{}
+
+type fastReflection_LockTransaction_messageType struct{}
+
+func (x fastReflection_LockTransaction_messageType) Zero() protoreflect.Message {
+	return (*fastReflection_LockTransaction)(nil)
+}
+func (x fastReflection_LockTransaction_messageType) New() protoreflect.Message {
+	return new(fastReflection_LockTransaction)
+}
+func (x fastReflection_LockTransaction_messageType) Descriptor() protoreflect.MessageDescriptor {
+	return md_LockTransaction
+}
+
+// Descriptor returns message descriptor, which contains only the protobuf
+// type information for the message.
+func (x *fastReflection_LockTransaction) Descriptor() protoreflect.MessageDescriptor {
+	return md_LockTransaction
+}
+
+// Type returns the message type, which encapsulates both Go and protobuf
+// type information. If the Go type information is not needed,
+// it is recommended that the message descriptor be used instead.
+func (x *fastReflection_LockTransaction) Type() protoreflect.MessageType {
+	return _fastReflection_LockTransaction_messageType
+}
+
+// New returns a newly allocated and mutable empty message.
+func (x *fastReflection_LockTransaction) New() protoreflect.Message {
+	return new(fastReflection_LockTransaction)
+}
+
+// Interface unwraps the message reflection interface and
+// returns the underlying ProtoMessage interface.
+func (x *fastReflection_LockTransaction) Interface() protoreflect.ProtoMessage {
+	return (*LockTransaction)(x)
+}
+
+// Range iterates over every populated field in an undefined order,
+// calling f for each field descriptor and value encountered.
+// Range returns immediately if f returns false.
+// While iterating, mutating operations may only be performed
+// on the current field descriptor.
+func (x *fastReflection_LockTransaction) Range(f func(protoreflect.FieldDescriptor, protoreflect.Value) bool) {
+	if x.RawTx != "" {
+		value := protoreflect.ValueOfString(x.RawTx)
+		if !f(fd_LockTransaction_raw_tx, value) {
+			return
+		}
+	}
+	if x.Vout != uint64(0) {
+		value := protoreflect.ValueOfUint64(x.Vout)
+		if !f(fd_LockTransaction_vout, value) {
+			return
+		}
+	}
+	if x.Sender != "" {
+		value := protoreflect.ValueOfString(x.Sender)
+		if !f(fd_LockTransaction_sender, value) {
+			return
+		}
+	}
+	if x.MintRecipient != "" {
+		value := protoreflect.ValueOfString(x.MintRecipient)
+		if !f(fd_LockTransaction_mint_recipient, value) {
+			return
+		}
+	}
+	if x.Amount != uint64(0) {
+		value := protoreflect.ValueOfUint64(x.Amount)
+		if !f(fd_LockTransaction_amount, value) {
+			return
+		}
+	}
+	if x.BlockHeight != int64(0) {
+		value := protoreflect.ValueOfInt64(x.BlockHeight)
+		if !f(fd_LockTransaction_block_height, value) {
+			return
+		}
+	}
+}
+
+// Has reports whether a field is populated.
+//
+// Some fields have the property of nullability where it is possible to
+// distinguish between the default value of a field and whether the field
+// was explicitly populated with the default value. Singular message fields,
+// member fields of a oneof, and proto2 scalar fields are nullable. Such
+// fields are populated only if explicitly set.
+//
+// In other cases (aside from the nullable cases above),
+// a proto3 scalar field is populated if it contains a non-zero value, and
+// a repeated field is populated if it is non-empty.
+func (x *fastReflection_LockTransaction) Has(fd protoreflect.FieldDescriptor) bool {
+	switch fd.FullName() {
+	case "zrchain.zenbtc.LockTransaction.raw_tx":
+		return x.RawTx != ""
+	case "zrchain.zenbtc.LockTransaction.vout":
+		return x.Vout != uint64(0)
+	case "zrchain.zenbtc.LockTransaction.sender":
+		return x.Sender != ""
+	case "zrchain.zenbtc.LockTransaction.mint_recipient":
+		return x.MintRecipient != ""
+	case "zrchain.zenbtc.LockTransaction.amount":
+		return x.Amount != uint64(0)
+	case "zrchain.zenbtc.LockTransaction.block_height":
+		return x.BlockHeight != int64(0)
+	default:
+		if fd.IsExtension() {
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: zrchain.zenbtc.LockTransaction"))
+		}
+		panic(fmt.Errorf("message zrchain.zenbtc.LockTransaction does not contain field %s", fd.FullName()))
+	}
+}
+
+// Clear clears the field such that a subsequent Has call reports false.
+//
+// Clearing an extension field clears both the extension type and value
+// associated with the given field number.
+//
+// Clear is a mutating operation and unsafe for concurrent use.
+func (x *fastReflection_LockTransaction) Clear(fd protoreflect.FieldDescriptor) {
+	switch fd.FullName() {
+	case "zrchain.zenbtc.LockTransaction.raw_tx":
+		x.RawTx = ""
+	case "zrchain.zenbtc.LockTransaction.vout":
+		x.Vout = uint64(0)
+	case "zrchain.zenbtc.LockTransaction.sender":
+		x.Sender = ""
+	case "zrchain.zenbtc.LockTransaction.mint_recipient":
+		x.MintRecipient = ""
+	case "zrchain.zenbtc.LockTransaction.amount":
+		x.Amount = uint64(0)
+	case "zrchain.zenbtc.LockTransaction.block_height":
+		x.BlockHeight = int64(0)
+	default:
+		if fd.IsExtension() {
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: zrchain.zenbtc.LockTransaction"))
+		}
+		panic(fmt.Errorf("message zrchain.zenbtc.LockTransaction does not contain field %s", fd.FullName()))
+	}
+}
+
+// Get retrieves the value for a field.
+//
+// For unpopulated scalars, it returns the default value, where
+// the default value of a bytes scalar is guaranteed to be a copy.
+// For unpopulated composite types, it returns an empty, read-only view
+// of the value; to obtain a mutable reference, use Mutable.
+func (x *fastReflection_LockTransaction) Get(descriptor protoreflect.FieldDescriptor) protoreflect.Value {
+	switch descriptor.FullName() {
+	case "zrchain.zenbtc.LockTransaction.raw_tx":
+		value := x.RawTx
+		return protoreflect.ValueOfString(value)
+	case "zrchain.zenbtc.LockTransaction.vout":
+		value := x.Vout
+		return protoreflect.ValueOfUint64(value)
+	case "zrchain.zenbtc.LockTransaction.sender":
+		value := x.Sender
+		return protoreflect.ValueOfString(value)
+	case "zrchain.zenbtc.LockTransaction.mint_recipient":
+		value := x.MintRecipient
+		return protoreflect.ValueOfString(value)
+	case "zrchain.zenbtc.LockTransaction.amount":
+		value := x.Amount
+		return protoreflect.ValueOfUint64(value)
+	case "zrchain.zenbtc.LockTransaction.block_height":
+		value := x.BlockHeight
+		return protoreflect.ValueOfInt64(value)
+	default:
+		if descriptor.IsExtension() {
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: zrchain.zenbtc.LockTransaction"))
+		}
+		panic(fmt.Errorf("message zrchain.zenbtc.LockTransaction does not contain field %s", descriptor.FullName()))
+	}
+}
+
+// Set stores the value for a field.
+//
+// For a field belonging to a oneof, it implicitly clears any other field
+// that may be currently set within the same oneof.
+// For extension fields, it implicitly stores the provided ExtensionType.
+// When setting a composite type, it is unspecified whether the stored value
+// aliases the source's memory in any way. If the composite value is an
+// empty, read-only value, then it panics.
+//
+// Set is a mutating operation and unsafe for concurrent use.
+func (x *fastReflection_LockTransaction) Set(fd protoreflect.FieldDescriptor, value protoreflect.Value) {
+	switch fd.FullName() {
+	case "zrchain.zenbtc.LockTransaction.raw_tx":
+		x.RawTx = value.Interface().(string)
+	case "zrchain.zenbtc.LockTransaction.vout":
+		x.Vout = value.Uint()
+	case "zrchain.zenbtc.LockTransaction.sender":
+		x.Sender = value.Interface().(string)
+	case "zrchain.zenbtc.LockTransaction.mint_recipient":
+		x.MintRecipient = value.Interface().(string)
+	case "zrchain.zenbtc.LockTransaction.amount":
+		x.Amount = value.Uint()
+	case "zrchain.zenbtc.LockTransaction.block_height":
+		x.BlockHeight = value.Int()
+	default:
+		if fd.IsExtension() {
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: zrchain.zenbtc.LockTransaction"))
+		}
+		panic(fmt.Errorf("message zrchain.zenbtc.LockTransaction does not contain field %s", fd.FullName()))
+	}
+}
+
+// Mutable returns a mutable reference to a composite type.
+//
+// If the field is unpopulated, it may allocate a composite value.
+// For a field belonging to a oneof, it implicitly clears any other field
+// that may be currently set within the same oneof.
+// For extension fields, it implicitly stores the provided ExtensionType
+// if not already stored.
+// It panics if the field does not contain a composite type.
+//
+// Mutable is a mutating operation and unsafe for concurrent use.
+func (x *fastReflection_LockTransaction) Mutable(fd protoreflect.FieldDescriptor) protoreflect.Value {
+	switch fd.FullName() {
+	case "zrchain.zenbtc.LockTransaction.raw_tx":
+		panic(fmt.Errorf("field raw_tx of message zrchain.zenbtc.LockTransaction is not mutable"))
+	case "zrchain.zenbtc.LockTransaction.vout":
+		panic(fmt.Errorf("field vout of message zrchain.zenbtc.LockTransaction is not mutable"))
+	case "zrchain.zenbtc.LockTransaction.sender":
+		panic(fmt.Errorf("field sender of message zrchain.zenbtc.LockTransaction is not mutable"))
+	case "zrchain.zenbtc.LockTransaction.mint_recipient":
+		panic(fmt.Errorf("field mint_recipient of message zrchain.zenbtc.LockTransaction is not mutable"))
+	case "zrchain.zenbtc.LockTransaction.amount":
+		panic(fmt.Errorf("field amount of message zrchain.zenbtc.LockTransaction is not mutable"))
+	case "zrchain.zenbtc.LockTransaction.block_height":
+		panic(fmt.Errorf("field block_height of message zrchain.zenbtc.LockTransaction is not mutable"))
+	default:
+		if fd.IsExtension() {
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: zrchain.zenbtc.LockTransaction"))
+		}
+		panic(fmt.Errorf("message zrchain.zenbtc.LockTransaction does not contain field %s", fd.FullName()))
+	}
+}
+
+// NewField returns a new value that is assignable to the field
+// for the given descriptor. For scalars, this returns the default value.
+// For lists, maps, and messages, this returns a new, empty, mutable value.
+func (x *fastReflection_LockTransaction) NewField(fd protoreflect.FieldDescriptor) protoreflect.Value {
+	switch fd.FullName() {
+	case "zrchain.zenbtc.LockTransaction.raw_tx":
+		return protoreflect.ValueOfString("")
+	case "zrchain.zenbtc.LockTransaction.vout":
+		return protoreflect.ValueOfUint64(uint64(0))
+	case "zrchain.zenbtc.LockTransaction.sender":
+		return protoreflect.ValueOfString("")
+	case "zrchain.zenbtc.LockTransaction.mint_recipient":
+		return protoreflect.ValueOfString("")
+	case "zrchain.zenbtc.LockTransaction.amount":
+		return protoreflect.ValueOfUint64(uint64(0))
+	case "zrchain.zenbtc.LockTransaction.block_height":
+		return protoreflect.ValueOfInt64(int64(0))
+	default:
+		if fd.IsExtension() {
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: zrchain.zenbtc.LockTransaction"))
+		}
+		panic(fmt.Errorf("message zrchain.zenbtc.LockTransaction does not contain field %s", fd.FullName()))
+	}
+}
+
+// WhichOneof reports which field within the oneof is populated,
+// returning nil if none are populated.
+// It panics if the oneof descriptor does not belong to this message.
+func (x *fastReflection_LockTransaction) WhichOneof(d protoreflect.OneofDescriptor) protoreflect.FieldDescriptor {
+	switch d.FullName() {
+	default:
+		panic(fmt.Errorf("%s is not a oneof field in zrchain.zenbtc.LockTransaction", d.FullName()))
+	}
+	panic("unreachable")
+}
+
+// GetUnknown retrieves the entire list of unknown fields.
+// The caller may only mutate the contents of the RawFields
+// if the mutated bytes are stored back into the message with SetUnknown.
+func (x *fastReflection_LockTransaction) GetUnknown() protoreflect.RawFields {
+	return x.unknownFields
+}
+
+// SetUnknown stores an entire list of unknown fields.
+// The raw fields must be syntactically valid according to the wire format.
+// An implementation may panic if this is not the case.
+// Once stored, the caller must not mutate the content of the RawFields.
+// An empty RawFields may be passed to clear the fields.
+//
+// SetUnknown is a mutating operation and unsafe for concurrent use.
+func (x *fastReflection_LockTransaction) SetUnknown(fields protoreflect.RawFields) {
+	x.unknownFields = fields
+}
+
+// IsValid reports whether the message is valid.
+//
+// An invalid message is an empty, read-only value.
+//
+// An invalid message often corresponds to a nil pointer of the concrete
+// message type, but the details are implementation dependent.
+// Validity is not part of the protobuf data model, and may not
+// be preserved in marshaling or other operations.
+func (x *fastReflection_LockTransaction) IsValid() bool {
+	return x != nil
+}
+
+// ProtoMethods returns optional fastReflectionFeature-path implementations of various operations.
+// This method may return nil.
+//
+// The returned methods type is identical to
+// "google.golang.org/protobuf/runtime/protoiface".Methods.
+// Consult the protoiface package documentation for details.
+func (x *fastReflection_LockTransaction) ProtoMethods() *protoiface.Methods {
+	size := func(input protoiface.SizeInput) protoiface.SizeOutput {
+		x := input.Message.Interface().(*LockTransaction)
+		if x == nil {
+			return protoiface.SizeOutput{
+				NoUnkeyedLiterals: input.NoUnkeyedLiterals,
+				Size:              0,
+			}
+		}
+		options := runtime.SizeInputToOptions(input)
+		_ = options
+		var n int
+		var l int
+		_ = l
+		l = len(x.RawTx)
+		if l > 0 {
+			n += 1 + l + runtime.Sov(uint64(l))
+		}
+		if x.Vout != 0 {
+			n += 1 + runtime.Sov(uint64(x.Vout))
+		}
+		l = len(x.Sender)
+		if l > 0 {
+			n += 1 + l + runtime.Sov(uint64(l))
+		}
+		l = len(x.MintRecipient)
+		if l > 0 {
+			n += 1 + l + runtime.Sov(uint64(l))
+		}
+		if x.Amount != 0 {
+			n += 1 + runtime.Sov(uint64(x.Amount))
+		}
+		if x.BlockHeight != 0 {
+			n += 1 + runtime.Sov(uint64(x.BlockHeight))
+		}
+		if x.unknownFields != nil {
+			n += len(x.unknownFields)
+		}
+		return protoiface.SizeOutput{
+			NoUnkeyedLiterals: input.NoUnkeyedLiterals,
+			Size:              n,
+		}
+	}
+
+	marshal := func(input protoiface.MarshalInput) (protoiface.MarshalOutput, error) {
+		x := input.Message.Interface().(*LockTransaction)
+		if x == nil {
+			return protoiface.MarshalOutput{
+				NoUnkeyedLiterals: input.NoUnkeyedLiterals,
+				Buf:               input.Buf,
+			}, nil
+		}
+		options := runtime.MarshalInputToOptions(input)
+		_ = options
+		size := options.Size(x)
+		dAtA := make([]byte, size)
+		i := len(dAtA)
+		_ = i
+		var l int
+		_ = l
+		if x.unknownFields != nil {
+			i -= len(x.unknownFields)
+			copy(dAtA[i:], x.unknownFields)
+		}
+		if x.BlockHeight != 0 {
+			i = runtime.EncodeVarint(dAtA, i, uint64(x.BlockHeight))
+			i--
+			dAtA[i] = 0x30
+		}
+		if x.Amount != 0 {
+			i = runtime.EncodeVarint(dAtA, i, uint64(x.Amount))
+			i--
+			dAtA[i] = 0x28
+		}
+		if len(x.MintRecipient) > 0 {
+			i -= len(x.MintRecipient)
+			copy(dAtA[i:], x.MintRecipient)
+			i = runtime.EncodeVarint(dAtA, i, uint64(len(x.MintRecipient)))
+			i--
+			dAtA[i] = 0x22
+		}
+		if len(x.Sender) > 0 {
+			i -= len(x.Sender)
+			copy(dAtA[i:], x.Sender)
+			i = runtime.EncodeVarint(dAtA, i, uint64(len(x.Sender)))
+			i--
+			dAtA[i] = 0x1a
+		}
+		if x.Vout != 0 {
+			i = runtime.EncodeVarint(dAtA, i, uint64(x.Vout))
+			i--
+			dAtA[i] = 0x10
+		}
+		if len(x.RawTx) > 0 {
+			i -= len(x.RawTx)
+			copy(dAtA[i:], x.RawTx)
+			i = runtime.EncodeVarint(dAtA, i, uint64(len(x.RawTx)))
+			i--
+			dAtA[i] = 0xa
+		}
+		if input.Buf != nil {
+			input.Buf = append(input.Buf, dAtA...)
+		} else {
+			input.Buf = dAtA
+		}
+		return protoiface.MarshalOutput{
+			NoUnkeyedLiterals: input.NoUnkeyedLiterals,
+			Buf:               input.Buf,
+		}, nil
+	}
+	unmarshal := func(input protoiface.UnmarshalInput) (protoiface.UnmarshalOutput, error) {
+		x := input.Message.Interface().(*LockTransaction)
+		if x == nil {
+			return protoiface.UnmarshalOutput{
+				NoUnkeyedLiterals: input.NoUnkeyedLiterals,
+				Flags:             input.Flags,
+			}, nil
+		}
+		options := runtime.UnmarshalInputToOptions(input)
+		_ = options
+		dAtA := input.Buf
+		l := len(dAtA)
+		iNdEx := 0
+		for iNdEx < l {
+			preIndex := iNdEx
+			var wire uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				wire |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			fieldNum := int32(wire >> 3)
+			wireType := int(wire & 0x7)
+			if wireType == 4 {
+				return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: LockTransaction: wiretype end group for non-group")
+			}
+			if fieldNum <= 0 {
+				return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: LockTransaction: illegal tag %d (wire type %d)", fieldNum, wire)
+			}
+			switch fieldNum {
+			case 1:
+				if wireType != 2 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field RawTx", wireType)
+				}
+				var stringLen uint64
+				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
+					}
+					if iNdEx >= l {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+					}
+					b := dAtA[iNdEx]
+					iNdEx++
+					stringLen |= uint64(b&0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+				intStringLen := int(stringLen)
+				if intStringLen < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				postIndex := iNdEx + intStringLen
+				if postIndex < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				if postIndex > l {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+				}
+				x.RawTx = string(dAtA[iNdEx:postIndex])
+				iNdEx = postIndex
+			case 2:
+				if wireType != 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field Vout", wireType)
+				}
+				x.Vout = 0
+				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
+					}
+					if iNdEx >= l {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+					}
+					b := dAtA[iNdEx]
+					iNdEx++
+					x.Vout |= uint64(b&0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+			case 3:
+				if wireType != 2 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field Sender", wireType)
+				}
+				var stringLen uint64
+				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
+					}
+					if iNdEx >= l {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+					}
+					b := dAtA[iNdEx]
+					iNdEx++
+					stringLen |= uint64(b&0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+				intStringLen := int(stringLen)
+				if intStringLen < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				postIndex := iNdEx + intStringLen
+				if postIndex < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				if postIndex > l {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+				}
+				x.Sender = string(dAtA[iNdEx:postIndex])
+				iNdEx = postIndex
+			case 4:
+				if wireType != 2 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field MintRecipient", wireType)
+				}
+				var stringLen uint64
+				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
+					}
+					if iNdEx >= l {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+					}
+					b := dAtA[iNdEx]
+					iNdEx++
+					stringLen |= uint64(b&0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+				intStringLen := int(stringLen)
+				if intStringLen < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				postIndex := iNdEx + intStringLen
+				if postIndex < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				if postIndex > l {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+				}
+				x.MintRecipient = string(dAtA[iNdEx:postIndex])
+				iNdEx = postIndex
+			case 5:
+				if wireType != 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field Amount", wireType)
+				}
+				x.Amount = 0
+				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
+					}
+					if iNdEx >= l {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+					}
+					b := dAtA[iNdEx]
+					iNdEx++
+					x.Amount |= uint64(b&0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+			case 6:
+				if wireType != 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field BlockHeight", wireType)
+				}
+				x.BlockHeight = 0
+				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
+					}
+					if iNdEx >= l {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+					}
+					b := dAtA[iNdEx]
+					iNdEx++
+					x.BlockHeight |= int64(b&0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+			default:
+				iNdEx = preIndex
+				skippy, err := runtime.Skip(dAtA[iNdEx:])
+				if err != nil {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, err
+				}
+				if (skippy < 0) || (iNdEx+skippy) < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				if (iNdEx + skippy) > l {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+				}
+				if !options.DiscardUnknown {
+					x.unknownFields = append(x.unknownFields, dAtA[iNdEx:iNdEx+skippy]...)
+				}
+				iNdEx += skippy
+			}
+		}
+
+		if iNdEx > l {
+			return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+		}
+		return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, nil
+	}
+	return &protoiface.Methods{
+		NoUnkeyedLiterals: struct{}{},
+		Flags:             protoiface.SupportMarshalDeterministic | protoiface.SupportUnmarshalDiscardUnknown,
+		Size:              size,
+		Marshal:           marshal,
+		Unmarshal:         unmarshal,
+		Merge:             nil,
+		CheckInitialized:  nil,
+	}
+}
+
+var (
+	md_PendingMintTransaction                   protoreflect.MessageDescriptor
+	fd_PendingMintTransaction_chain_id          protoreflect.FieldDescriptor
+	fd_PendingMintTransaction_chain_type        protoreflect.FieldDescriptor
+	fd_PendingMintTransaction_recipient_address protoreflect.FieldDescriptor
+	fd_PendingMintTransaction_amount            protoreflect.FieldDescriptor
+	fd_PendingMintTransaction_creator           protoreflect.FieldDescriptor
+	fd_PendingMintTransaction_key_id            protoreflect.FieldDescriptor
+)
+
+func init() {
+	file_zrchain_zenbtc_mint_proto_init()
+	md_PendingMintTransaction = File_zrchain_zenbtc_mint_proto.Messages().ByName("PendingMintTransaction")
+	fd_PendingMintTransaction_chain_id = md_PendingMintTransaction.Fields().ByName("chain_id")
+	fd_PendingMintTransaction_chain_type = md_PendingMintTransaction.Fields().ByName("chain_type")
+	fd_PendingMintTransaction_recipient_address = md_PendingMintTransaction.Fields().ByName("recipient_address")
+	fd_PendingMintTransaction_amount = md_PendingMintTransaction.Fields().ByName("amount")
+	fd_PendingMintTransaction_creator = md_PendingMintTransaction.Fields().ByName("creator")
+	fd_PendingMintTransaction_key_id = md_PendingMintTransaction.Fields().ByName("key_id")
+}
+
+var _ protoreflect.Message = (*fastReflection_PendingMintTransaction)(nil)
+
+type fastReflection_PendingMintTransaction PendingMintTransaction
+
+func (x *PendingMintTransaction) ProtoReflect() protoreflect.Message {
+	return (*fastReflection_PendingMintTransaction)(x)
+}
+
+func (x *PendingMintTransaction) slowProtoReflect() protoreflect.Message {
+	mi := &file_zrchain_zenbtc_mint_proto_msgTypes[3]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+var _fastReflection_PendingMintTransaction_messageType fastReflection_PendingMintTransaction_messageType
+var _ protoreflect.MessageType = fastReflection_PendingMintTransaction_messageType{}
+
+type fastReflection_PendingMintTransaction_messageType struct{}
+
+func (x fastReflection_PendingMintTransaction_messageType) Zero() protoreflect.Message {
+	return (*fastReflection_PendingMintTransaction)(nil)
+}
+func (x fastReflection_PendingMintTransaction_messageType) New() protoreflect.Message {
+	return new(fastReflection_PendingMintTransaction)
+}
+func (x fastReflection_PendingMintTransaction_messageType) Descriptor() protoreflect.MessageDescriptor {
+	return md_PendingMintTransaction
+}
+
+// Descriptor returns message descriptor, which contains only the protobuf
+// type information for the message.
+func (x *fastReflection_PendingMintTransaction) Descriptor() protoreflect.MessageDescriptor {
+	return md_PendingMintTransaction
+}
+
+// Type returns the message type, which encapsulates both Go and protobuf
+// type information. If the Go type information is not needed,
+// it is recommended that the message descriptor be used instead.
+func (x *fastReflection_PendingMintTransaction) Type() protoreflect.MessageType {
+	return _fastReflection_PendingMintTransaction_messageType
+}
+
+// New returns a newly allocated and mutable empty message.
+func (x *fastReflection_PendingMintTransaction) New() protoreflect.Message {
+	return new(fastReflection_PendingMintTransaction)
+}
+
+// Interface unwraps the message reflection interface and
+// returns the underlying ProtoMessage interface.
+func (x *fastReflection_PendingMintTransaction) Interface() protoreflect.ProtoMessage {
+	return (*PendingMintTransaction)(x)
+}
+
+// Range iterates over every populated field in an undefined order,
+// calling f for each field descriptor and value encountered.
+// Range returns immediately if f returns false.
+// While iterating, mutating operations may only be performed
+// on the current field descriptor.
+func (x *fastReflection_PendingMintTransaction) Range(f func(protoreflect.FieldDescriptor, protoreflect.Value) bool) {
+	if x.ChainId != uint64(0) {
+		value := protoreflect.ValueOfUint64(x.ChainId)
+		if !f(fd_PendingMintTransaction_chain_id, value) {
+			return
+		}
+	}
+	if x.ChainType != 0 {
+		value := protoreflect.ValueOfEnum((protoreflect.EnumNumber)(x.ChainType))
+		if !f(fd_PendingMintTransaction_chain_type, value) {
+			return
+		}
+	}
+	if x.RecipientAddress != "" {
+		value := protoreflect.ValueOfString(x.RecipientAddress)
+		if !f(fd_PendingMintTransaction_recipient_address, value) {
+			return
+		}
+	}
+	if x.Amount != uint64(0) {
+		value := protoreflect.ValueOfUint64(x.Amount)
+		if !f(fd_PendingMintTransaction_amount, value) {
+			return
+		}
+	}
+	if x.Creator != "" {
+		value := protoreflect.ValueOfString(x.Creator)
+		if !f(fd_PendingMintTransaction_creator, value) {
+			return
+		}
+	}
+	if x.KeyId != uint64(0) {
+		value := protoreflect.ValueOfUint64(x.KeyId)
+		if !f(fd_PendingMintTransaction_key_id, value) {
+			return
+		}
+	}
+}
+
+// Has reports whether a field is populated.
+//
+// Some fields have the property of nullability where it is possible to
+// distinguish between the default value of a field and whether the field
+// was explicitly populated with the default value. Singular message fields,
+// member fields of a oneof, and proto2 scalar fields are nullable. Such
+// fields are populated only if explicitly set.
+//
+// In other cases (aside from the nullable cases above),
+// a proto3 scalar field is populated if it contains a non-zero value, and
+// a repeated field is populated if it is non-empty.
+func (x *fastReflection_PendingMintTransaction) Has(fd protoreflect.FieldDescriptor) bool {
+	switch fd.FullName() {
+	case "zrchain.zenbtc.PendingMintTransaction.chain_id":
+		return x.ChainId != uint64(0)
+	case "zrchain.zenbtc.PendingMintTransaction.chain_type":
+		return x.ChainType != 0
+	case "zrchain.zenbtc.PendingMintTransaction.recipient_address":
+		return x.RecipientAddress != ""
+	case "zrchain.zenbtc.PendingMintTransaction.amount":
+		return x.Amount != uint64(0)
+	case "zrchain.zenbtc.PendingMintTransaction.creator":
+		return x.Creator != ""
+	case "zrchain.zenbtc.PendingMintTransaction.key_id":
+		return x.KeyId != uint64(0)
+	default:
+		if fd.IsExtension() {
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: zrchain.zenbtc.PendingMintTransaction"))
+		}
+		panic(fmt.Errorf("message zrchain.zenbtc.PendingMintTransaction does not contain field %s", fd.FullName()))
+	}
+}
+
+// Clear clears the field such that a subsequent Has call reports false.
+//
+// Clearing an extension field clears both the extension type and value
+// associated with the given field number.
+//
+// Clear is a mutating operation and unsafe for concurrent use.
+func (x *fastReflection_PendingMintTransaction) Clear(fd protoreflect.FieldDescriptor) {
+	switch fd.FullName() {
+	case "zrchain.zenbtc.PendingMintTransaction.chain_id":
+		x.ChainId = uint64(0)
+	case "zrchain.zenbtc.PendingMintTransaction.chain_type":
+		x.ChainType = 0
+	case "zrchain.zenbtc.PendingMintTransaction.recipient_address":
+		x.RecipientAddress = ""
+	case "zrchain.zenbtc.PendingMintTransaction.amount":
+		x.Amount = uint64(0)
+	case "zrchain.zenbtc.PendingMintTransaction.creator":
+		x.Creator = ""
+	case "zrchain.zenbtc.PendingMintTransaction.key_id":
+		x.KeyId = uint64(0)
+	default:
+		if fd.IsExtension() {
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: zrchain.zenbtc.PendingMintTransaction"))
+		}
+		panic(fmt.Errorf("message zrchain.zenbtc.PendingMintTransaction does not contain field %s", fd.FullName()))
+	}
+}
+
+// Get retrieves the value for a field.
+//
+// For unpopulated scalars, it returns the default value, where
+// the default value of a bytes scalar is guaranteed to be a copy.
+// For unpopulated composite types, it returns an empty, read-only view
+// of the value; to obtain a mutable reference, use Mutable.
+func (x *fastReflection_PendingMintTransaction) Get(descriptor protoreflect.FieldDescriptor) protoreflect.Value {
+	switch descriptor.FullName() {
+	case "zrchain.zenbtc.PendingMintTransaction.chain_id":
+		value := x.ChainId
+		return protoreflect.ValueOfUint64(value)
+	case "zrchain.zenbtc.PendingMintTransaction.chain_type":
+		value := x.ChainType
+		return protoreflect.ValueOfEnum((protoreflect.EnumNumber)(value))
+	case "zrchain.zenbtc.PendingMintTransaction.recipient_address":
+		value := x.RecipientAddress
+		return protoreflect.ValueOfString(value)
+	case "zrchain.zenbtc.PendingMintTransaction.amount":
+		value := x.Amount
+		return protoreflect.ValueOfUint64(value)
+	case "zrchain.zenbtc.PendingMintTransaction.creator":
+		value := x.Creator
+		return protoreflect.ValueOfString(value)
+	case "zrchain.zenbtc.PendingMintTransaction.key_id":
+		value := x.KeyId
+		return protoreflect.ValueOfUint64(value)
+	default:
+		if descriptor.IsExtension() {
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: zrchain.zenbtc.PendingMintTransaction"))
+		}
+		panic(fmt.Errorf("message zrchain.zenbtc.PendingMintTransaction does not contain field %s", descriptor.FullName()))
+	}
+}
+
+// Set stores the value for a field.
+//
+// For a field belonging to a oneof, it implicitly clears any other field
+// that may be currently set within the same oneof.
+// For extension fields, it implicitly stores the provided ExtensionType.
+// When setting a composite type, it is unspecified whether the stored value
+// aliases the source's memory in any way. If the composite value is an
+// empty, read-only value, then it panics.
+//
+// Set is a mutating operation and unsafe for concurrent use.
+func (x *fastReflection_PendingMintTransaction) Set(fd protoreflect.FieldDescriptor, value protoreflect.Value) {
+	switch fd.FullName() {
+	case "zrchain.zenbtc.PendingMintTransaction.chain_id":
+		x.ChainId = value.Uint()
+	case "zrchain.zenbtc.PendingMintTransaction.chain_type":
+		x.ChainType = (WalletType)(value.Enum())
+	case "zrchain.zenbtc.PendingMintTransaction.recipient_address":
+		x.RecipientAddress = value.Interface().(string)
+	case "zrchain.zenbtc.PendingMintTransaction.amount":
+		x.Amount = value.Uint()
+	case "zrchain.zenbtc.PendingMintTransaction.creator":
+		x.Creator = value.Interface().(string)
+	case "zrchain.zenbtc.PendingMintTransaction.key_id":
+		x.KeyId = value.Uint()
+	default:
+		if fd.IsExtension() {
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: zrchain.zenbtc.PendingMintTransaction"))
+		}
+		panic(fmt.Errorf("message zrchain.zenbtc.PendingMintTransaction does not contain field %s", fd.FullName()))
+	}
+}
+
+// Mutable returns a mutable reference to a composite type.
+//
+// If the field is unpopulated, it may allocate a composite value.
+// For a field belonging to a oneof, it implicitly clears any other field
+// that may be currently set within the same oneof.
+// For extension fields, it implicitly stores the provided ExtensionType
+// if not already stored.
+// It panics if the field does not contain a composite type.
+//
+// Mutable is a mutating operation and unsafe for concurrent use.
+func (x *fastReflection_PendingMintTransaction) Mutable(fd protoreflect.FieldDescriptor) protoreflect.Value {
+	switch fd.FullName() {
+	case "zrchain.zenbtc.PendingMintTransaction.chain_id":
+		panic(fmt.Errorf("field chain_id of message zrchain.zenbtc.PendingMintTransaction is not mutable"))
+	case "zrchain.zenbtc.PendingMintTransaction.chain_type":
+		panic(fmt.Errorf("field chain_type of message zrchain.zenbtc.PendingMintTransaction is not mutable"))
+	case "zrchain.zenbtc.PendingMintTransaction.recipient_address":
+		panic(fmt.Errorf("field recipient_address of message zrchain.zenbtc.PendingMintTransaction is not mutable"))
+	case "zrchain.zenbtc.PendingMintTransaction.amount":
+		panic(fmt.Errorf("field amount of message zrchain.zenbtc.PendingMintTransaction is not mutable"))
+	case "zrchain.zenbtc.PendingMintTransaction.creator":
+		panic(fmt.Errorf("field creator of message zrchain.zenbtc.PendingMintTransaction is not mutable"))
+	case "zrchain.zenbtc.PendingMintTransaction.key_id":
+		panic(fmt.Errorf("field key_id of message zrchain.zenbtc.PendingMintTransaction is not mutable"))
+	default:
+		if fd.IsExtension() {
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: zrchain.zenbtc.PendingMintTransaction"))
+		}
+		panic(fmt.Errorf("message zrchain.zenbtc.PendingMintTransaction does not contain field %s", fd.FullName()))
+	}
+}
+
+// NewField returns a new value that is assignable to the field
+// for the given descriptor. For scalars, this returns the default value.
+// For lists, maps, and messages, this returns a new, empty, mutable value.
+func (x *fastReflection_PendingMintTransaction) NewField(fd protoreflect.FieldDescriptor) protoreflect.Value {
+	switch fd.FullName() {
+	case "zrchain.zenbtc.PendingMintTransaction.chain_id":
+		return protoreflect.ValueOfUint64(uint64(0))
+	case "zrchain.zenbtc.PendingMintTransaction.chain_type":
+		return protoreflect.ValueOfEnum(0)
+	case "zrchain.zenbtc.PendingMintTransaction.recipient_address":
+		return protoreflect.ValueOfString("")
+	case "zrchain.zenbtc.PendingMintTransaction.amount":
+		return protoreflect.ValueOfUint64(uint64(0))
+	case "zrchain.zenbtc.PendingMintTransaction.creator":
+		return protoreflect.ValueOfString("")
+	case "zrchain.zenbtc.PendingMintTransaction.key_id":
+		return protoreflect.ValueOfUint64(uint64(0))
+	default:
+		if fd.IsExtension() {
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: zrchain.zenbtc.PendingMintTransaction"))
+		}
+		panic(fmt.Errorf("message zrchain.zenbtc.PendingMintTransaction does not contain field %s", fd.FullName()))
+	}
+}
+
+// WhichOneof reports which field within the oneof is populated,
+// returning nil if none are populated.
+// It panics if the oneof descriptor does not belong to this message.
+func (x *fastReflection_PendingMintTransaction) WhichOneof(d protoreflect.OneofDescriptor) protoreflect.FieldDescriptor {
+	switch d.FullName() {
+	default:
+		panic(fmt.Errorf("%s is not a oneof field in zrchain.zenbtc.PendingMintTransaction", d.FullName()))
+	}
+	panic("unreachable")
+}
+
+// GetUnknown retrieves the entire list of unknown fields.
+// The caller may only mutate the contents of the RawFields
+// if the mutated bytes are stored back into the message with SetUnknown.
+func (x *fastReflection_PendingMintTransaction) GetUnknown() protoreflect.RawFields {
+	return x.unknownFields
+}
+
+// SetUnknown stores an entire list of unknown fields.
+// The raw fields must be syntactically valid according to the wire format.
+// An implementation may panic if this is not the case.
+// Once stored, the caller must not mutate the content of the RawFields.
+// An empty RawFields may be passed to clear the fields.
+//
+// SetUnknown is a mutating operation and unsafe for concurrent use.
+func (x *fastReflection_PendingMintTransaction) SetUnknown(fields protoreflect.RawFields) {
+	x.unknownFields = fields
+}
+
+// IsValid reports whether the message is valid.
+//
+// An invalid message is an empty, read-only value.
+//
+// An invalid message often corresponds to a nil pointer of the concrete
+// message type, but the details are implementation dependent.
+// Validity is not part of the protobuf data model, and may not
+// be preserved in marshaling or other operations.
+func (x *fastReflection_PendingMintTransaction) IsValid() bool {
+	return x != nil
+}
+
+// ProtoMethods returns optional fastReflectionFeature-path implementations of various operations.
+// This method may return nil.
+//
+// The returned methods type is identical to
+// "google.golang.org/protobuf/runtime/protoiface".Methods.
+// Consult the protoiface package documentation for details.
+func (x *fastReflection_PendingMintTransaction) ProtoMethods() *protoiface.Methods {
+	size := func(input protoiface.SizeInput) protoiface.SizeOutput {
+		x := input.Message.Interface().(*PendingMintTransaction)
+		if x == nil {
+			return protoiface.SizeOutput{
+				NoUnkeyedLiterals: input.NoUnkeyedLiterals,
+				Size:              0,
+			}
+		}
+		options := runtime.SizeInputToOptions(input)
+		_ = options
+		var n int
+		var l int
+		_ = l
+		if x.ChainId != 0 {
+			n += 1 + runtime.Sov(uint64(x.ChainId))
+		}
+		if x.ChainType != 0 {
+			n += 1 + runtime.Sov(uint64(x.ChainType))
+		}
+		l = len(x.RecipientAddress)
+		if l > 0 {
+			n += 1 + l + runtime.Sov(uint64(l))
+		}
+		if x.Amount != 0 {
+			n += 1 + runtime.Sov(uint64(x.Amount))
+		}
+		l = len(x.Creator)
+		if l > 0 {
+			n += 1 + l + runtime.Sov(uint64(l))
+		}
+		if x.KeyId != 0 {
+			n += 1 + runtime.Sov(uint64(x.KeyId))
+		}
+		if x.unknownFields != nil {
+			n += len(x.unknownFields)
+		}
+		return protoiface.SizeOutput{
+			NoUnkeyedLiterals: input.NoUnkeyedLiterals,
+			Size:              n,
+		}
+	}
+
+	marshal := func(input protoiface.MarshalInput) (protoiface.MarshalOutput, error) {
+		x := input.Message.Interface().(*PendingMintTransaction)
+		if x == nil {
+			return protoiface.MarshalOutput{
+				NoUnkeyedLiterals: input.NoUnkeyedLiterals,
+				Buf:               input.Buf,
+			}, nil
+		}
+		options := runtime.MarshalInputToOptions(input)
+		_ = options
+		size := options.Size(x)
+		dAtA := make([]byte, size)
+		i := len(dAtA)
+		_ = i
+		var l int
+		_ = l
+		if x.unknownFields != nil {
+			i -= len(x.unknownFields)
+			copy(dAtA[i:], x.unknownFields)
+		}
+		if x.KeyId != 0 {
+			i = runtime.EncodeVarint(dAtA, i, uint64(x.KeyId))
+			i--
+			dAtA[i] = 0x30
+		}
+		if len(x.Creator) > 0 {
+			i -= len(x.Creator)
+			copy(dAtA[i:], x.Creator)
+			i = runtime.EncodeVarint(dAtA, i, uint64(len(x.Creator)))
+			i--
+			dAtA[i] = 0x2a
+		}
+		if x.Amount != 0 {
+			i = runtime.EncodeVarint(dAtA, i, uint64(x.Amount))
+			i--
+			dAtA[i] = 0x20
+		}
+		if len(x.RecipientAddress) > 0 {
+			i -= len(x.RecipientAddress)
+			copy(dAtA[i:], x.RecipientAddress)
+			i = runtime.EncodeVarint(dAtA, i, uint64(len(x.RecipientAddress)))
+			i--
+			dAtA[i] = 0x1a
+		}
+		if x.ChainType != 0 {
+			i = runtime.EncodeVarint(dAtA, i, uint64(x.ChainType))
+			i--
+			dAtA[i] = 0x10
+		}
+		if x.ChainId != 0 {
+			i = runtime.EncodeVarint(dAtA, i, uint64(x.ChainId))
+			i--
+			dAtA[i] = 0x8
+		}
+		if input.Buf != nil {
+			input.Buf = append(input.Buf, dAtA...)
+		} else {
+			input.Buf = dAtA
+		}
+		return protoiface.MarshalOutput{
+			NoUnkeyedLiterals: input.NoUnkeyedLiterals,
+			Buf:               input.Buf,
+		}, nil
+	}
+	unmarshal := func(input protoiface.UnmarshalInput) (protoiface.UnmarshalOutput, error) {
+		x := input.Message.Interface().(*PendingMintTransaction)
+		if x == nil {
+			return protoiface.UnmarshalOutput{
+				NoUnkeyedLiterals: input.NoUnkeyedLiterals,
+				Flags:             input.Flags,
+			}, nil
+		}
+		options := runtime.UnmarshalInputToOptions(input)
+		_ = options
+		dAtA := input.Buf
+		l := len(dAtA)
+		iNdEx := 0
+		for iNdEx < l {
+			preIndex := iNdEx
+			var wire uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				wire |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			fieldNum := int32(wire >> 3)
+			wireType := int(wire & 0x7)
+			if wireType == 4 {
+				return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: PendingMintTransaction: wiretype end group for non-group")
+			}
+			if fieldNum <= 0 {
+				return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: PendingMintTransaction: illegal tag %d (wire type %d)", fieldNum, wire)
+			}
+			switch fieldNum {
+			case 1:
+				if wireType != 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field ChainId", wireType)
+				}
+				x.ChainId = 0
+				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
+					}
+					if iNdEx >= l {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+					}
+					b := dAtA[iNdEx]
+					iNdEx++
+					x.ChainId |= uint64(b&0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+			case 2:
+				if wireType != 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field ChainType", wireType)
+				}
+				x.ChainType = 0
+				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
+					}
+					if iNdEx >= l {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+					}
+					b := dAtA[iNdEx]
+					iNdEx++
+					x.ChainType |= WalletType(b&0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+			case 3:
+				if wireType != 2 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field RecipientAddress", wireType)
+				}
+				var stringLen uint64
+				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
+					}
+					if iNdEx >= l {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+					}
+					b := dAtA[iNdEx]
+					iNdEx++
+					stringLen |= uint64(b&0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+				intStringLen := int(stringLen)
+				if intStringLen < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				postIndex := iNdEx + intStringLen
+				if postIndex < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				if postIndex > l {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+				}
+				x.RecipientAddress = string(dAtA[iNdEx:postIndex])
+				iNdEx = postIndex
+			case 4:
+				if wireType != 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field Amount", wireType)
+				}
+				x.Amount = 0
+				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
+					}
+					if iNdEx >= l {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+					}
+					b := dAtA[iNdEx]
+					iNdEx++
+					x.Amount |= uint64(b&0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+			case 5:
+				if wireType != 2 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field Creator", wireType)
+				}
+				var stringLen uint64
+				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
+					}
+					if iNdEx >= l {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+					}
+					b := dAtA[iNdEx]
+					iNdEx++
+					stringLen |= uint64(b&0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+				intStringLen := int(stringLen)
+				if intStringLen < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				postIndex := iNdEx + intStringLen
+				if postIndex < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				if postIndex > l {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+				}
+				x.Creator = string(dAtA[iNdEx:postIndex])
+				iNdEx = postIndex
+			case 6:
+				if wireType != 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field KeyId", wireType)
+				}
+				x.KeyId = 0
+				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
+					}
+					if iNdEx >= l {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+					}
+					b := dAtA[iNdEx]
+					iNdEx++
+					x.KeyId |= uint64(b&0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+			default:
+				iNdEx = preIndex
+				skippy, err := runtime.Skip(dAtA[iNdEx:])
+				if err != nil {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, err
+				}
+				if (skippy < 0) || (iNdEx+skippy) < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				if (iNdEx + skippy) > l {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+				}
+				if !options.DiscardUnknown {
+					x.unknownFields = append(x.unknownFields, dAtA[iNdEx:iNdEx+skippy]...)
+				}
+				iNdEx += skippy
+			}
+		}
+
+		if iNdEx > l {
+			return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+		}
+		return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, nil
+	}
+	return &protoiface.Methods{
+		NoUnkeyedLiterals: struct{}{},
+		Flags:             protoiface.SupportMarshalDeterministic | protoiface.SupportUnmarshalDiscardUnknown,
+		Size:              size,
+		Marshal:           marshal,
+		Unmarshal:         unmarshal,
+		Merge:             nil,
+		CheckInitialized:  nil,
+	}
+}
+
+var _ protoreflect.List = (*_PendingMintTransactions_1_list)(nil)
+
+type _PendingMintTransactions_1_list struct {
+	list *[]*PendingMintTransaction
+}
+
+func (x *_PendingMintTransactions_1_list) Len() int {
+	if x.list == nil {
+		return 0
+	}
+	return len(*x.list)
+}
+
+func (x *_PendingMintTransactions_1_list) Get(i int) protoreflect.Value {
+	return protoreflect.ValueOfMessage((*x.list)[i].ProtoReflect())
+}
+
+func (x *_PendingMintTransactions_1_list) Set(i int, value protoreflect.Value) {
+	valueUnwrapped := value.Message()
+	concreteValue := valueUnwrapped.Interface().(*PendingMintTransaction)
+	(*x.list)[i] = concreteValue
+}
+
+func (x *_PendingMintTransactions_1_list) Append(value protoreflect.Value) {
+	valueUnwrapped := value.Message()
+	concreteValue := valueUnwrapped.Interface().(*PendingMintTransaction)
+	*x.list = append(*x.list, concreteValue)
+}
+
+func (x *_PendingMintTransactions_1_list) AppendMutable() protoreflect.Value {
+	v := new(PendingMintTransaction)
+	*x.list = append(*x.list, v)
+	return protoreflect.ValueOfMessage(v.ProtoReflect())
+}
+
+func (x *_PendingMintTransactions_1_list) Truncate(n int) {
+	for i := n; i < len(*x.list); i++ {
+		(*x.list)[i] = nil
+	}
+	*x.list = (*x.list)[:n]
+}
+
+func (x *_PendingMintTransactions_1_list) NewElement() protoreflect.Value {
+	v := new(PendingMintTransaction)
+	return protoreflect.ValueOfMessage(v.ProtoReflect())
+}
+
+func (x *_PendingMintTransactions_1_list) IsValid() bool {
+	return x.list != nil
+}
+
+var (
+	md_PendingMintTransactions     protoreflect.MessageDescriptor
+	fd_PendingMintTransactions_txs protoreflect.FieldDescriptor
+)
+
+func init() {
+	file_zrchain_zenbtc_mint_proto_init()
+	md_PendingMintTransactions = File_zrchain_zenbtc_mint_proto.Messages().ByName("PendingMintTransactions")
+	fd_PendingMintTransactions_txs = md_PendingMintTransactions.Fields().ByName("txs")
+}
+
+var _ protoreflect.Message = (*fastReflection_PendingMintTransactions)(nil)
+
+type fastReflection_PendingMintTransactions PendingMintTransactions
+
+func (x *PendingMintTransactions) ProtoReflect() protoreflect.Message {
+	return (*fastReflection_PendingMintTransactions)(x)
+}
+
+func (x *PendingMintTransactions) slowProtoReflect() protoreflect.Message {
+	mi := &file_zrchain_zenbtc_mint_proto_msgTypes[4]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+var _fastReflection_PendingMintTransactions_messageType fastReflection_PendingMintTransactions_messageType
+var _ protoreflect.MessageType = fastReflection_PendingMintTransactions_messageType{}
+
+type fastReflection_PendingMintTransactions_messageType struct{}
+
+func (x fastReflection_PendingMintTransactions_messageType) Zero() protoreflect.Message {
+	return (*fastReflection_PendingMintTransactions)(nil)
+}
+func (x fastReflection_PendingMintTransactions_messageType) New() protoreflect.Message {
+	return new(fastReflection_PendingMintTransactions)
+}
+func (x fastReflection_PendingMintTransactions_messageType) Descriptor() protoreflect.MessageDescriptor {
+	return md_PendingMintTransactions
+}
+
+// Descriptor returns message descriptor, which contains only the protobuf
+// type information for the message.
+func (x *fastReflection_PendingMintTransactions) Descriptor() protoreflect.MessageDescriptor {
+	return md_PendingMintTransactions
+}
+
+// Type returns the message type, which encapsulates both Go and protobuf
+// type information. If the Go type information is not needed,
+// it is recommended that the message descriptor be used instead.
+func (x *fastReflection_PendingMintTransactions) Type() protoreflect.MessageType {
+	return _fastReflection_PendingMintTransactions_messageType
+}
+
+// New returns a newly allocated and mutable empty message.
+func (x *fastReflection_PendingMintTransactions) New() protoreflect.Message {
+	return new(fastReflection_PendingMintTransactions)
+}
+
+// Interface unwraps the message reflection interface and
+// returns the underlying ProtoMessage interface.
+func (x *fastReflection_PendingMintTransactions) Interface() protoreflect.ProtoMessage {
+	return (*PendingMintTransactions)(x)
+}
+
+// Range iterates over every populated field in an undefined order,
+// calling f for each field descriptor and value encountered.
+// Range returns immediately if f returns false.
+// While iterating, mutating operations may only be performed
+// on the current field descriptor.
+func (x *fastReflection_PendingMintTransactions) Range(f func(protoreflect.FieldDescriptor, protoreflect.Value) bool) {
+	if len(x.Txs) != 0 {
+		value := protoreflect.ValueOfList(&_PendingMintTransactions_1_list{list: &x.Txs})
+		if !f(fd_PendingMintTransactions_txs, value) {
+			return
+		}
+	}
+}
+
+// Has reports whether a field is populated.
+//
+// Some fields have the property of nullability where it is possible to
+// distinguish between the default value of a field and whether the field
+// was explicitly populated with the default value. Singular message fields,
+// member fields of a oneof, and proto2 scalar fields are nullable. Such
+// fields are populated only if explicitly set.
+//
+// In other cases (aside from the nullable cases above),
+// a proto3 scalar field is populated if it contains a non-zero value, and
+// a repeated field is populated if it is non-empty.
+func (x *fastReflection_PendingMintTransactions) Has(fd protoreflect.FieldDescriptor) bool {
+	switch fd.FullName() {
+	case "zrchain.zenbtc.PendingMintTransactions.txs":
+		return len(x.Txs) != 0
+	default:
+		if fd.IsExtension() {
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: zrchain.zenbtc.PendingMintTransactions"))
+		}
+		panic(fmt.Errorf("message zrchain.zenbtc.PendingMintTransactions does not contain field %s", fd.FullName()))
+	}
+}
+
+// Clear clears the field such that a subsequent Has call reports false.
+//
+// Clearing an extension field clears both the extension type and value
+// associated with the given field number.
+//
+// Clear is a mutating operation and unsafe for concurrent use.
+func (x *fastReflection_PendingMintTransactions) Clear(fd protoreflect.FieldDescriptor) {
+	switch fd.FullName() {
+	case "zrchain.zenbtc.PendingMintTransactions.txs":
+		x.Txs = nil
+	default:
+		if fd.IsExtension() {
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: zrchain.zenbtc.PendingMintTransactions"))
+		}
+		panic(fmt.Errorf("message zrchain.zenbtc.PendingMintTransactions does not contain field %s", fd.FullName()))
+	}
+}
+
+// Get retrieves the value for a field.
+//
+// For unpopulated scalars, it returns the default value, where
+// the default value of a bytes scalar is guaranteed to be a copy.
+// For unpopulated composite types, it returns an empty, read-only view
+// of the value; to obtain a mutable reference, use Mutable.
+func (x *fastReflection_PendingMintTransactions) Get(descriptor protoreflect.FieldDescriptor) protoreflect.Value {
+	switch descriptor.FullName() {
+	case "zrchain.zenbtc.PendingMintTransactions.txs":
+		if len(x.Txs) == 0 {
+			return protoreflect.ValueOfList(&_PendingMintTransactions_1_list{})
+		}
+		listValue := &_PendingMintTransactions_1_list{list: &x.Txs}
+		return protoreflect.ValueOfList(listValue)
+	default:
+		if descriptor.IsExtension() {
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: zrchain.zenbtc.PendingMintTransactions"))
+		}
+		panic(fmt.Errorf("message zrchain.zenbtc.PendingMintTransactions does not contain field %s", descriptor.FullName()))
+	}
+}
+
+// Set stores the value for a field.
+//
+// For a field belonging to a oneof, it implicitly clears any other field
+// that may be currently set within the same oneof.
+// For extension fields, it implicitly stores the provided ExtensionType.
+// When setting a composite type, it is unspecified whether the stored value
+// aliases the source's memory in any way. If the composite value is an
+// empty, read-only value, then it panics.
+//
+// Set is a mutating operation and unsafe for concurrent use.
+func (x *fastReflection_PendingMintTransactions) Set(fd protoreflect.FieldDescriptor, value protoreflect.Value) {
+	switch fd.FullName() {
+	case "zrchain.zenbtc.PendingMintTransactions.txs":
+		lv := value.List()
+		clv := lv.(*_PendingMintTransactions_1_list)
+		x.Txs = *clv.list
+	default:
+		if fd.IsExtension() {
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: zrchain.zenbtc.PendingMintTransactions"))
+		}
+		panic(fmt.Errorf("message zrchain.zenbtc.PendingMintTransactions does not contain field %s", fd.FullName()))
+	}
+}
+
+// Mutable returns a mutable reference to a composite type.
+//
+// If the field is unpopulated, it may allocate a composite value.
+// For a field belonging to a oneof, it implicitly clears any other field
+// that may be currently set within the same oneof.
+// For extension fields, it implicitly stores the provided ExtensionType
+// if not already stored.
+// It panics if the field does not contain a composite type.
+//
+// Mutable is a mutating operation and unsafe for concurrent use.
+func (x *fastReflection_PendingMintTransactions) Mutable(fd protoreflect.FieldDescriptor) protoreflect.Value {
+	switch fd.FullName() {
+	case "zrchain.zenbtc.PendingMintTransactions.txs":
+		if x.Txs == nil {
+			x.Txs = []*PendingMintTransaction{}
+		}
+		value := &_PendingMintTransactions_1_list{list: &x.Txs}
+		return protoreflect.ValueOfList(value)
+	default:
+		if fd.IsExtension() {
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: zrchain.zenbtc.PendingMintTransactions"))
+		}
+		panic(fmt.Errorf("message zrchain.zenbtc.PendingMintTransactions does not contain field %s", fd.FullName()))
+	}
+}
+
+// NewField returns a new value that is assignable to the field
+// for the given descriptor. For scalars, this returns the default value.
+// For lists, maps, and messages, this returns a new, empty, mutable value.
+func (x *fastReflection_PendingMintTransactions) NewField(fd protoreflect.FieldDescriptor) protoreflect.Value {
+	switch fd.FullName() {
+	case "zrchain.zenbtc.PendingMintTransactions.txs":
+		list := []*PendingMintTransaction{}
+		return protoreflect.ValueOfList(&_PendingMintTransactions_1_list{list: &list})
+	default:
+		if fd.IsExtension() {
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: zrchain.zenbtc.PendingMintTransactions"))
+		}
+		panic(fmt.Errorf("message zrchain.zenbtc.PendingMintTransactions does not contain field %s", fd.FullName()))
+	}
+}
+
+// WhichOneof reports which field within the oneof is populated,
+// returning nil if none are populated.
+// It panics if the oneof descriptor does not belong to this message.
+func (x *fastReflection_PendingMintTransactions) WhichOneof(d protoreflect.OneofDescriptor) protoreflect.FieldDescriptor {
+	switch d.FullName() {
+	default:
+		panic(fmt.Errorf("%s is not a oneof field in zrchain.zenbtc.PendingMintTransactions", d.FullName()))
+	}
+	panic("unreachable")
+}
+
+// GetUnknown retrieves the entire list of unknown fields.
+// The caller may only mutate the contents of the RawFields
+// if the mutated bytes are stored back into the message with SetUnknown.
+func (x *fastReflection_PendingMintTransactions) GetUnknown() protoreflect.RawFields {
+	return x.unknownFields
+}
+
+// SetUnknown stores an entire list of unknown fields.
+// The raw fields must be syntactically valid according to the wire format.
+// An implementation may panic if this is not the case.
+// Once stored, the caller must not mutate the content of the RawFields.
+// An empty RawFields may be passed to clear the fields.
+//
+// SetUnknown is a mutating operation and unsafe for concurrent use.
+func (x *fastReflection_PendingMintTransactions) SetUnknown(fields protoreflect.RawFields) {
+	x.unknownFields = fields
+}
+
+// IsValid reports whether the message is valid.
+//
+// An invalid message is an empty, read-only value.
+//
+// An invalid message often corresponds to a nil pointer of the concrete
+// message type, but the details are implementation dependent.
+// Validity is not part of the protobuf data model, and may not
+// be preserved in marshaling or other operations.
+func (x *fastReflection_PendingMintTransactions) IsValid() bool {
+	return x != nil
+}
+
+// ProtoMethods returns optional fastReflectionFeature-path implementations of various operations.
+// This method may return nil.
+//
+// The returned methods type is identical to
+// "google.golang.org/protobuf/runtime/protoiface".Methods.
+// Consult the protoiface package documentation for details.
+func (x *fastReflection_PendingMintTransactions) ProtoMethods() *protoiface.Methods {
+	size := func(input protoiface.SizeInput) protoiface.SizeOutput {
+		x := input.Message.Interface().(*PendingMintTransactions)
+		if x == nil {
+			return protoiface.SizeOutput{
+				NoUnkeyedLiterals: input.NoUnkeyedLiterals,
+				Size:              0,
+			}
+		}
+		options := runtime.SizeInputToOptions(input)
+		_ = options
+		var n int
+		var l int
+		_ = l
+		if len(x.Txs) > 0 {
+			for _, e := range x.Txs {
+				l = options.Size(e)
+				n += 1 + l + runtime.Sov(uint64(l))
+			}
+		}
+		if x.unknownFields != nil {
+			n += len(x.unknownFields)
+		}
+		return protoiface.SizeOutput{
+			NoUnkeyedLiterals: input.NoUnkeyedLiterals,
+			Size:              n,
+		}
+	}
+
+	marshal := func(input protoiface.MarshalInput) (protoiface.MarshalOutput, error) {
+		x := input.Message.Interface().(*PendingMintTransactions)
+		if x == nil {
+			return protoiface.MarshalOutput{
+				NoUnkeyedLiterals: input.NoUnkeyedLiterals,
+				Buf:               input.Buf,
+			}, nil
+		}
+		options := runtime.MarshalInputToOptions(input)
+		_ = options
+		size := options.Size(x)
+		dAtA := make([]byte, size)
+		i := len(dAtA)
+		_ = i
+		var l int
+		_ = l
+		if x.unknownFields != nil {
+			i -= len(x.unknownFields)
+			copy(dAtA[i:], x.unknownFields)
+		}
+		if len(x.Txs) > 0 {
+			for iNdEx := len(x.Txs) - 1; iNdEx >= 0; iNdEx-- {
+				encoded, err := options.Marshal(x.Txs[iNdEx])
+				if err != nil {
+					return protoiface.MarshalOutput{
+						NoUnkeyedLiterals: input.NoUnkeyedLiterals,
+						Buf:               input.Buf,
+					}, err
+				}
+				i -= len(encoded)
+				copy(dAtA[i:], encoded)
+				i = runtime.EncodeVarint(dAtA, i, uint64(len(encoded)))
+				i--
+				dAtA[i] = 0xa
+			}
+		}
+		if input.Buf != nil {
+			input.Buf = append(input.Buf, dAtA...)
+		} else {
+			input.Buf = dAtA
+		}
+		return protoiface.MarshalOutput{
+			NoUnkeyedLiterals: input.NoUnkeyedLiterals,
+			Buf:               input.Buf,
+		}, nil
+	}
+	unmarshal := func(input protoiface.UnmarshalInput) (protoiface.UnmarshalOutput, error) {
+		x := input.Message.Interface().(*PendingMintTransactions)
+		if x == nil {
+			return protoiface.UnmarshalOutput{
+				NoUnkeyedLiterals: input.NoUnkeyedLiterals,
+				Flags:             input.Flags,
+			}, nil
+		}
+		options := runtime.UnmarshalInputToOptions(input)
+		_ = options
+		dAtA := input.Buf
+		l := len(dAtA)
+		iNdEx := 0
+		for iNdEx < l {
+			preIndex := iNdEx
+			var wire uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				wire |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			fieldNum := int32(wire >> 3)
+			wireType := int(wire & 0x7)
+			if wireType == 4 {
+				return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: PendingMintTransactions: wiretype end group for non-group")
+			}
+			if fieldNum <= 0 {
+				return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: PendingMintTransactions: illegal tag %d (wire type %d)", fieldNum, wire)
+			}
+			switch fieldNum {
+			case 1:
+				if wireType != 2 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field Txs", wireType)
+				}
+				var msglen int
+				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
+					}
+					if iNdEx >= l {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+					}
+					b := dAtA[iNdEx]
+					iNdEx++
+					msglen |= int(b&0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+				if msglen < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				postIndex := iNdEx + msglen
+				if postIndex < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				if postIndex > l {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+				}
+				x.Txs = append(x.Txs, &PendingMintTransaction{})
+				if err := options.Unmarshal(dAtA[iNdEx:postIndex], x.Txs[len(x.Txs)-1]); err != nil {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, err
+				}
+				iNdEx = postIndex
+			default:
+				iNdEx = preIndex
+				skippy, err := runtime.Skip(dAtA[iNdEx:])
+				if err != nil {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, err
+				}
+				if (skippy < 0) || (iNdEx+skippy) < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				if (iNdEx + skippy) > l {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+				}
+				if !options.DiscardUnknown {
+					x.unknownFields = append(x.unknownFields, dAtA[iNdEx:iNdEx+skippy]...)
+				}
+				iNdEx += skippy
+			}
+		}
+
+		if iNdEx > l {
+			return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+		}
+		return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, nil
+	}
+	return &protoiface.Methods{
+		NoUnkeyedLiterals: struct{}{},
+		Flags:             protoiface.SupportMarshalDeterministic | protoiface.SupportUnmarshalDiscardUnknown,
+		Size:              size,
+		Marshal:           marshal,
+		Unmarshal:         unmarshal,
+		Merge:             nil,
+		CheckInitialized:  nil,
+	}
+}
+
 // Code generated by protoc-gen-go. DO NOT EDIT.
 // versions:
 // 	protoc-gen-go v1.27.0
@@ -1067,6 +2929,76 @@ const (
 	// Verify that runtime/protoimpl is sufficiently up-to-date.
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
+
+// WalletType specifies the Layer 1 blockchain that this wallet will be used
+// for.
+type WalletType int32
+
+const (
+	// The wallet type is missing (all wallets will be derived)
+	WalletType_WALLET_TYPE_UNSPECIFIED WalletType = 0
+	// The wallet type for native cosmos accounts
+	WalletType_WALLET_TYPE_NATIVE WalletType = 1
+	// The wallet type for mainnet ETH and its ERC-20 tokens
+	WalletType_WALLET_TYPE_EVM WalletType = 2
+	// The Wallet type for Testnet BTC
+	WalletType_WALLET_TYPE_BTC_TESTNET WalletType = 3
+	// The Wallet type for Mainnet BTC
+	WalletType_WALLET_TYPE_BTC_MAINNET WalletType = 4
+	// The Wallet type for RegNet - Local Test Network
+	WalletType_WALLET_TYPE_BTC_REGNET WalletType = 5
+	// Wallet type for Solana
+	WalletType_WALLET_TYPE_SOLANA WalletType = 6
+)
+
+// Enum value maps for WalletType.
+var (
+	WalletType_name = map[int32]string{
+		0: "WALLET_TYPE_UNSPECIFIED",
+		1: "WALLET_TYPE_NATIVE",
+		2: "WALLET_TYPE_EVM",
+		3: "WALLET_TYPE_BTC_TESTNET",
+		4: "WALLET_TYPE_BTC_MAINNET",
+		5: "WALLET_TYPE_BTC_REGNET",
+		6: "WALLET_TYPE_SOLANA",
+	}
+	WalletType_value = map[string]int32{
+		"WALLET_TYPE_UNSPECIFIED": 0,
+		"WALLET_TYPE_NATIVE":      1,
+		"WALLET_TYPE_EVM":         2,
+		"WALLET_TYPE_BTC_TESTNET": 3,
+		"WALLET_TYPE_BTC_MAINNET": 4,
+		"WALLET_TYPE_BTC_REGNET":  5,
+		"WALLET_TYPE_SOLANA":      6,
+	}
+)
+
+func (x WalletType) Enum() *WalletType {
+	p := new(WalletType)
+	*p = x
+	return p
+}
+
+func (x WalletType) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (WalletType) Descriptor() protoreflect.EnumDescriptor {
+	return file_zrchain_zenbtc_mint_proto_enumTypes[0].Descriptor()
+}
+
+func (WalletType) Type() protoreflect.EnumType {
+	return &file_zrchain_zenbtc_mint_proto_enumTypes[0]
+}
+
+func (x WalletType) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use WalletType.Descriptor instead.
+func (WalletType) EnumDescriptor() ([]byte, []int) {
+	return file_zrchain_zenbtc_mint_proto_rawDescGZIP(), []int{0}
+}
 
 type NonceData struct {
 	state         protoimpl.MessageState
@@ -1154,6 +3086,193 @@ func (x *RequestedBitcoinHeaders) GetHeights() []int64 {
 	return nil
 }
 
+type LockTransaction struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	RawTx         string `protobuf:"bytes,1,opt,name=raw_tx,json=rawTx,proto3" json:"raw_tx,omitempty"`
+	Vout          uint64 `protobuf:"varint,2,opt,name=vout,proto3" json:"vout,omitempty"`
+	Sender        string `protobuf:"bytes,3,opt,name=sender,proto3" json:"sender,omitempty"`
+	MintRecipient string `protobuf:"bytes,4,opt,name=mint_recipient,json=mintRecipient,proto3" json:"mint_recipient,omitempty"`
+	Amount        uint64 `protobuf:"varint,5,opt,name=amount,proto3" json:"amount,omitempty"`
+	BlockHeight   int64  `protobuf:"varint,6,opt,name=block_height,json=blockHeight,proto3" json:"block_height,omitempty"`
+}
+
+func (x *LockTransaction) Reset() {
+	*x = LockTransaction{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_zrchain_zenbtc_mint_proto_msgTypes[2]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *LockTransaction) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*LockTransaction) ProtoMessage() {}
+
+// Deprecated: Use LockTransaction.ProtoReflect.Descriptor instead.
+func (*LockTransaction) Descriptor() ([]byte, []int) {
+	return file_zrchain_zenbtc_mint_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *LockTransaction) GetRawTx() string {
+	if x != nil {
+		return x.RawTx
+	}
+	return ""
+}
+
+func (x *LockTransaction) GetVout() uint64 {
+	if x != nil {
+		return x.Vout
+	}
+	return 0
+}
+
+func (x *LockTransaction) GetSender() string {
+	if x != nil {
+		return x.Sender
+	}
+	return ""
+}
+
+func (x *LockTransaction) GetMintRecipient() string {
+	if x != nil {
+		return x.MintRecipient
+	}
+	return ""
+}
+
+func (x *LockTransaction) GetAmount() uint64 {
+	if x != nil {
+		return x.Amount
+	}
+	return 0
+}
+
+func (x *LockTransaction) GetBlockHeight() int64 {
+	if x != nil {
+		return x.BlockHeight
+	}
+	return 0
+}
+
+// PendingMintTransaction is the metadata for a pending zenBTC mint transaction.
+type PendingMintTransaction struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	ChainId          uint64     `protobuf:"varint,1,opt,name=chain_id,json=chainId,proto3" json:"chain_id,omitempty"`
+	ChainType        WalletType `protobuf:"varint,2,opt,name=chain_type,json=chainType,proto3,enum=zrchain.zenbtc.WalletType" json:"chain_type,omitempty"`
+	RecipientAddress string     `protobuf:"bytes,3,opt,name=recipient_address,json=recipientAddress,proto3" json:"recipient_address,omitempty"`
+	Amount           uint64     `protobuf:"varint,4,opt,name=amount,proto3" json:"amount,omitempty"`
+	Creator          string     `protobuf:"bytes,5,opt,name=creator,proto3" json:"creator,omitempty"`
+	KeyId            uint64     `protobuf:"varint,6,opt,name=key_id,json=keyId,proto3" json:"key_id,omitempty"`
+}
+
+func (x *PendingMintTransaction) Reset() {
+	*x = PendingMintTransaction{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_zrchain_zenbtc_mint_proto_msgTypes[3]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *PendingMintTransaction) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*PendingMintTransaction) ProtoMessage() {}
+
+// Deprecated: Use PendingMintTransaction.ProtoReflect.Descriptor instead.
+func (*PendingMintTransaction) Descriptor() ([]byte, []int) {
+	return file_zrchain_zenbtc_mint_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *PendingMintTransaction) GetChainId() uint64 {
+	if x != nil {
+		return x.ChainId
+	}
+	return 0
+}
+
+func (x *PendingMintTransaction) GetChainType() WalletType {
+	if x != nil {
+		return x.ChainType
+	}
+	return WalletType_WALLET_TYPE_UNSPECIFIED
+}
+
+func (x *PendingMintTransaction) GetRecipientAddress() string {
+	if x != nil {
+		return x.RecipientAddress
+	}
+	return ""
+}
+
+func (x *PendingMintTransaction) GetAmount() uint64 {
+	if x != nil {
+		return x.Amount
+	}
+	return 0
+}
+
+func (x *PendingMintTransaction) GetCreator() string {
+	if x != nil {
+		return x.Creator
+	}
+	return ""
+}
+
+func (x *PendingMintTransaction) GetKeyId() uint64 {
+	if x != nil {
+		return x.KeyId
+	}
+	return 0
+}
+
+// PendingMintTransactions is a collection of pending mint transactions.
+type PendingMintTransactions struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Txs []*PendingMintTransaction `protobuf:"bytes,1,rep,name=txs,proto3" json:"txs,omitempty"`
+}
+
+func (x *PendingMintTransactions) Reset() {
+	*x = PendingMintTransactions{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_zrchain_zenbtc_mint_proto_msgTypes[4]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *PendingMintTransactions) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*PendingMintTransactions) ProtoMessage() {}
+
+// Deprecated: Use PendingMintTransactions.ProtoReflect.Descriptor instead.
+func (*PendingMintTransactions) Descriptor() ([]byte, []int) {
+	return file_zrchain_zenbtc_mint_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *PendingMintTransactions) GetTxs() []*PendingMintTransaction {
+	if x != nil {
+		return x.Txs
+	}
+	return nil
+}
+
 var File_zrchain_zenbtc_mint_proto protoreflect.FileDescriptor
 
 var file_zrchain_zenbtc_mint_proto_rawDesc = []byte{
@@ -1168,17 +3287,61 @@ var file_zrchain_zenbtc_mint_proto_rawDesc = []byte{
 	0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x65, 0x64, 0x42, 0x69, 0x74, 0x63, 0x6f, 0x69, 0x6e,
 	0x48, 0x65, 0x61, 0x64, 0x65, 0x72, 0x73, 0x12, 0x18, 0x0a, 0x07, 0x68, 0x65, 0x69, 0x67, 0x68,
 	0x74, 0x73, 0x18, 0x01, 0x20, 0x03, 0x28, 0x03, 0x52, 0x07, 0x68, 0x65, 0x69, 0x67, 0x68, 0x74,
-	0x73, 0x42, 0x99, 0x01, 0x0a, 0x12, 0x63, 0x6f, 0x6d, 0x2e, 0x7a, 0x72, 0x63, 0x68, 0x61, 0x69,
-	0x6e, 0x2e, 0x7a, 0x65, 0x6e, 0x62, 0x74, 0x63, 0x42, 0x09, 0x4d, 0x69, 0x6e, 0x74, 0x50, 0x72,
-	0x6f, 0x74, 0x6f, 0x50, 0x01, 0x5a, 0x1f, 0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x73, 0x64, 0x6b,
-	0x2e, 0x69, 0x6f, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x7a, 0x72, 0x63, 0x68, 0x61, 0x69, 0x6e, 0x2f,
-	0x7a, 0x65, 0x6e, 0x62, 0x74, 0x63, 0xa2, 0x02, 0x03, 0x5a, 0x5a, 0x58, 0xaa, 0x02, 0x0e, 0x5a,
-	0x72, 0x63, 0x68, 0x61, 0x69, 0x6e, 0x2e, 0x5a, 0x65, 0x6e, 0x62, 0x74, 0x63, 0xca, 0x02, 0x0e,
-	0x5a, 0x72, 0x63, 0x68, 0x61, 0x69, 0x6e, 0x5c, 0x5a, 0x65, 0x6e, 0x62, 0x74, 0x63, 0xe2, 0x02,
-	0x1a, 0x5a, 0x72, 0x63, 0x68, 0x61, 0x69, 0x6e, 0x5c, 0x5a, 0x65, 0x6e, 0x62, 0x74, 0x63, 0x5c,
-	0x47, 0x50, 0x42, 0x4d, 0x65, 0x74, 0x61, 0x64, 0x61, 0x74, 0x61, 0xea, 0x02, 0x0f, 0x5a, 0x72,
-	0x63, 0x68, 0x61, 0x69, 0x6e, 0x3a, 0x3a, 0x5a, 0x65, 0x6e, 0x62, 0x74, 0x63, 0x62, 0x06, 0x70,
-	0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x73, 0x22, 0xb6, 0x01, 0x0a, 0x0f, 0x4c, 0x6f, 0x63, 0x6b, 0x54, 0x72, 0x61, 0x6e, 0x73, 0x61,
+	0x63, 0x74, 0x69, 0x6f, 0x6e, 0x12, 0x15, 0x0a, 0x06, 0x72, 0x61, 0x77, 0x5f, 0x74, 0x78, 0x18,
+	0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x05, 0x72, 0x61, 0x77, 0x54, 0x78, 0x12, 0x12, 0x0a, 0x04,
+	0x76, 0x6f, 0x75, 0x74, 0x18, 0x02, 0x20, 0x01, 0x28, 0x04, 0x52, 0x04, 0x76, 0x6f, 0x75, 0x74,
+	0x12, 0x16, 0x0a, 0x06, 0x73, 0x65, 0x6e, 0x64, 0x65, 0x72, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09,
+	0x52, 0x06, 0x73, 0x65, 0x6e, 0x64, 0x65, 0x72, 0x12, 0x25, 0x0a, 0x0e, 0x6d, 0x69, 0x6e, 0x74,
+	0x5f, 0x72, 0x65, 0x63, 0x69, 0x70, 0x69, 0x65, 0x6e, 0x74, 0x18, 0x04, 0x20, 0x01, 0x28, 0x09,
+	0x52, 0x0d, 0x6d, 0x69, 0x6e, 0x74, 0x52, 0x65, 0x63, 0x69, 0x70, 0x69, 0x65, 0x6e, 0x74, 0x12,
+	0x16, 0x0a, 0x06, 0x61, 0x6d, 0x6f, 0x75, 0x6e, 0x74, 0x18, 0x05, 0x20, 0x01, 0x28, 0x04, 0x52,
+	0x06, 0x61, 0x6d, 0x6f, 0x75, 0x6e, 0x74, 0x12, 0x21, 0x0a, 0x0c, 0x62, 0x6c, 0x6f, 0x63, 0x6b,
+	0x5f, 0x68, 0x65, 0x69, 0x67, 0x68, 0x74, 0x18, 0x06, 0x20, 0x01, 0x28, 0x03, 0x52, 0x0b, 0x62,
+	0x6c, 0x6f, 0x63, 0x6b, 0x48, 0x65, 0x69, 0x67, 0x68, 0x74, 0x22, 0xe4, 0x01, 0x0a, 0x16, 0x50,
+	0x65, 0x6e, 0x64, 0x69, 0x6e, 0x67, 0x4d, 0x69, 0x6e, 0x74, 0x54, 0x72, 0x61, 0x6e, 0x73, 0x61,
+	0x63, 0x74, 0x69, 0x6f, 0x6e, 0x12, 0x19, 0x0a, 0x08, 0x63, 0x68, 0x61, 0x69, 0x6e, 0x5f, 0x69,
+	0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x04, 0x52, 0x07, 0x63, 0x68, 0x61, 0x69, 0x6e, 0x49, 0x64,
+	0x12, 0x39, 0x0a, 0x0a, 0x63, 0x68, 0x61, 0x69, 0x6e, 0x5f, 0x74, 0x79, 0x70, 0x65, 0x18, 0x02,
+	0x20, 0x01, 0x28, 0x0e, 0x32, 0x1a, 0x2e, 0x7a, 0x72, 0x63, 0x68, 0x61, 0x69, 0x6e, 0x2e, 0x7a,
+	0x65, 0x6e, 0x62, 0x74, 0x63, 0x2e, 0x57, 0x61, 0x6c, 0x6c, 0x65, 0x74, 0x54, 0x79, 0x70, 0x65,
+	0x52, 0x09, 0x63, 0x68, 0x61, 0x69, 0x6e, 0x54, 0x79, 0x70, 0x65, 0x12, 0x2b, 0x0a, 0x11, 0x72,
+	0x65, 0x63, 0x69, 0x70, 0x69, 0x65, 0x6e, 0x74, 0x5f, 0x61, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73,
+	0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x10, 0x72, 0x65, 0x63, 0x69, 0x70, 0x69, 0x65, 0x6e,
+	0x74, 0x41, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x12, 0x16, 0x0a, 0x06, 0x61, 0x6d, 0x6f, 0x75,
+	0x6e, 0x74, 0x18, 0x04, 0x20, 0x01, 0x28, 0x04, 0x52, 0x06, 0x61, 0x6d, 0x6f, 0x75, 0x6e, 0x74,
+	0x12, 0x18, 0x0a, 0x07, 0x63, 0x72, 0x65, 0x61, 0x74, 0x6f, 0x72, 0x18, 0x05, 0x20, 0x01, 0x28,
+	0x09, 0x52, 0x07, 0x63, 0x72, 0x65, 0x61, 0x74, 0x6f, 0x72, 0x12, 0x15, 0x0a, 0x06, 0x6b, 0x65,
+	0x79, 0x5f, 0x69, 0x64, 0x18, 0x06, 0x20, 0x01, 0x28, 0x04, 0x52, 0x05, 0x6b, 0x65, 0x79, 0x49,
+	0x64, 0x22, 0x53, 0x0a, 0x17, 0x50, 0x65, 0x6e, 0x64, 0x69, 0x6e, 0x67, 0x4d, 0x69, 0x6e, 0x74,
+	0x54, 0x72, 0x61, 0x6e, 0x73, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x12, 0x38, 0x0a, 0x03,
+	0x74, 0x78, 0x73, 0x18, 0x01, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x26, 0x2e, 0x7a, 0x72, 0x63, 0x68,
+	0x61, 0x69, 0x6e, 0x2e, 0x7a, 0x65, 0x6e, 0x62, 0x74, 0x63, 0x2e, 0x50, 0x65, 0x6e, 0x64, 0x69,
+	0x6e, 0x67, 0x4d, 0x69, 0x6e, 0x74, 0x54, 0x72, 0x61, 0x6e, 0x73, 0x61, 0x63, 0x74, 0x69, 0x6f,
+	0x6e, 0x52, 0x03, 0x74, 0x78, 0x73, 0x2a, 0xc4, 0x01, 0x0a, 0x0a, 0x57, 0x61, 0x6c, 0x6c, 0x65,
+	0x74, 0x54, 0x79, 0x70, 0x65, 0x12, 0x1b, 0x0a, 0x17, 0x57, 0x41, 0x4c, 0x4c, 0x45, 0x54, 0x5f,
+	0x54, 0x59, 0x50, 0x45, 0x5f, 0x55, 0x4e, 0x53, 0x50, 0x45, 0x43, 0x49, 0x46, 0x49, 0x45, 0x44,
+	0x10, 0x00, 0x12, 0x16, 0x0a, 0x12, 0x57, 0x41, 0x4c, 0x4c, 0x45, 0x54, 0x5f, 0x54, 0x59, 0x50,
+	0x45, 0x5f, 0x4e, 0x41, 0x54, 0x49, 0x56, 0x45, 0x10, 0x01, 0x12, 0x13, 0x0a, 0x0f, 0x57, 0x41,
+	0x4c, 0x4c, 0x45, 0x54, 0x5f, 0x54, 0x59, 0x50, 0x45, 0x5f, 0x45, 0x56, 0x4d, 0x10, 0x02, 0x12,
+	0x1b, 0x0a, 0x17, 0x57, 0x41, 0x4c, 0x4c, 0x45, 0x54, 0x5f, 0x54, 0x59, 0x50, 0x45, 0x5f, 0x42,
+	0x54, 0x43, 0x5f, 0x54, 0x45, 0x53, 0x54, 0x4e, 0x45, 0x54, 0x10, 0x03, 0x12, 0x1b, 0x0a, 0x17,
+	0x57, 0x41, 0x4c, 0x4c, 0x45, 0x54, 0x5f, 0x54, 0x59, 0x50, 0x45, 0x5f, 0x42, 0x54, 0x43, 0x5f,
+	0x4d, 0x41, 0x49, 0x4e, 0x4e, 0x45, 0x54, 0x10, 0x04, 0x12, 0x1a, 0x0a, 0x16, 0x57, 0x41, 0x4c,
+	0x4c, 0x45, 0x54, 0x5f, 0x54, 0x59, 0x50, 0x45, 0x5f, 0x42, 0x54, 0x43, 0x5f, 0x52, 0x45, 0x47,
+	0x4e, 0x45, 0x54, 0x10, 0x05, 0x12, 0x16, 0x0a, 0x12, 0x57, 0x41, 0x4c, 0x4c, 0x45, 0x54, 0x5f,
+	0x54, 0x59, 0x50, 0x45, 0x5f, 0x53, 0x4f, 0x4c, 0x41, 0x4e, 0x41, 0x10, 0x06, 0x42, 0x99, 0x01,
+	0x0a, 0x12, 0x63, 0x6f, 0x6d, 0x2e, 0x7a, 0x72, 0x63, 0x68, 0x61, 0x69, 0x6e, 0x2e, 0x7a, 0x65,
+	0x6e, 0x62, 0x74, 0x63, 0x42, 0x09, 0x4d, 0x69, 0x6e, 0x74, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x50,
+	0x01, 0x5a, 0x1f, 0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x73, 0x64, 0x6b, 0x2e, 0x69, 0x6f, 0x2f,
+	0x61, 0x70, 0x69, 0x2f, 0x7a, 0x72, 0x63, 0x68, 0x61, 0x69, 0x6e, 0x2f, 0x7a, 0x65, 0x6e, 0x62,
+	0x74, 0x63, 0xa2, 0x02, 0x03, 0x5a, 0x5a, 0x58, 0xaa, 0x02, 0x0e, 0x5a, 0x72, 0x63, 0x68, 0x61,
+	0x69, 0x6e, 0x2e, 0x5a, 0x65, 0x6e, 0x62, 0x74, 0x63, 0xca, 0x02, 0x0e, 0x5a, 0x72, 0x63, 0x68,
+	0x61, 0x69, 0x6e, 0x5c, 0x5a, 0x65, 0x6e, 0x62, 0x74, 0x63, 0xe2, 0x02, 0x1a, 0x5a, 0x72, 0x63,
+	0x68, 0x61, 0x69, 0x6e, 0x5c, 0x5a, 0x65, 0x6e, 0x62, 0x74, 0x63, 0x5c, 0x47, 0x50, 0x42, 0x4d,
+	0x65, 0x74, 0x61, 0x64, 0x61, 0x74, 0x61, 0xea, 0x02, 0x0f, 0x5a, 0x72, 0x63, 0x68, 0x61, 0x69,
+	0x6e, 0x3a, 0x3a, 0x5a, 0x65, 0x6e, 0x62, 0x74, 0x63, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f,
+	0x33,
 }
 
 var (
@@ -1193,17 +3356,24 @@ func file_zrchain_zenbtc_mint_proto_rawDescGZIP() []byte {
 	return file_zrchain_zenbtc_mint_proto_rawDescData
 }
 
-var file_zrchain_zenbtc_mint_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
+var file_zrchain_zenbtc_mint_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
+var file_zrchain_zenbtc_mint_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
 var file_zrchain_zenbtc_mint_proto_goTypes = []interface{}{
-	(*NonceData)(nil),               // 0: zrchain.zenbtc.NonceData
-	(*RequestedBitcoinHeaders)(nil), // 1: zrchain.zenbtc.RequestedBitcoinHeaders
+	(WalletType)(0),                 // 0: zrchain.zenbtc.WalletType
+	(*NonceData)(nil),               // 1: zrchain.zenbtc.NonceData
+	(*RequestedBitcoinHeaders)(nil), // 2: zrchain.zenbtc.RequestedBitcoinHeaders
+	(*LockTransaction)(nil),         // 3: zrchain.zenbtc.LockTransaction
+	(*PendingMintTransaction)(nil),  // 4: zrchain.zenbtc.PendingMintTransaction
+	(*PendingMintTransactions)(nil), // 5: zrchain.zenbtc.PendingMintTransactions
 }
 var file_zrchain_zenbtc_mint_proto_depIdxs = []int32{
-	0, // [0:0] is the sub-list for method output_type
-	0, // [0:0] is the sub-list for method input_type
-	0, // [0:0] is the sub-list for extension type_name
-	0, // [0:0] is the sub-list for extension extendee
-	0, // [0:0] is the sub-list for field type_name
+	0, // 0: zrchain.zenbtc.PendingMintTransaction.chain_type:type_name -> zrchain.zenbtc.WalletType
+	4, // 1: zrchain.zenbtc.PendingMintTransactions.txs:type_name -> zrchain.zenbtc.PendingMintTransaction
+	2, // [2:2] is the sub-list for method output_type
+	2, // [2:2] is the sub-list for method input_type
+	2, // [2:2] is the sub-list for extension type_name
+	2, // [2:2] is the sub-list for extension extendee
+	0, // [0:2] is the sub-list for field type_name
 }
 
 func init() { file_zrchain_zenbtc_mint_proto_init() }
@@ -1236,19 +3406,56 @@ func file_zrchain_zenbtc_mint_proto_init() {
 				return nil
 			}
 		}
+		file_zrchain_zenbtc_mint_proto_msgTypes[2].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*LockTransaction); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_zrchain_zenbtc_mint_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*PendingMintTransaction); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_zrchain_zenbtc_mint_proto_msgTypes[4].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*PendingMintTransactions); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_zrchain_zenbtc_mint_proto_rawDesc,
-			NumEnums:      0,
-			NumMessages:   2,
+			NumEnums:      1,
+			NumMessages:   5,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
 		GoTypes:           file_zrchain_zenbtc_mint_proto_goTypes,
 		DependencyIndexes: file_zrchain_zenbtc_mint_proto_depIdxs,
+		EnumInfos:         file_zrchain_zenbtc_mint_proto_enumTypes,
 		MessageInfos:      file_zrchain_zenbtc_mint_proto_msgTypes,
 	}.Build()
 	File_zrchain_zenbtc_mint_proto = out.File

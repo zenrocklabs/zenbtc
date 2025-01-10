@@ -15,12 +15,13 @@ import (
 	"github.com/ethereum/go-ethereum/ethclient"
 
 	contractrewardscoordinator "github.com/Layr-Labs/eigenlayer-contracts/pkg/bindings/IRewardsCoordinator"
+	rewardscoordinator "github.com/Layr-Labs/eigenlayer-contracts/pkg/bindings/IRewardsCoordinator"
 	"github.com/Layr-Labs/eigenlayer-rewards-proofs/pkg/claimgen"
 	"github.com/Layr-Labs/eigenlayer-rewards-proofs/pkg/proofDataFetcher/httpProofDataFetcher"
-	"github.com/Layr-Labs/eigensdk-go/chainio/clients/elcontracts"
+
+	// "github.com/Layr-Labs/eigensdk-go/chainio/clients/elcontracts"
 	"github.com/Layr-Labs/eigensdk-go/chainio/clients/wallet"
 	"github.com/Layr-Labs/eigensdk-go/chainio/txmgr"
-	rewardscoordinator "github.com/Layr-Labs/eigensdk-go/contracts/bindings/IRewardsCoordinator"
 	eigensdkLogger "github.com/Layr-Labs/eigensdk-go/logging"
 	"github.com/Layr-Labs/eigensdk-go/signerv2"
 	"github.com/ethereum/go-ethereum/accounts/abi/bind"
@@ -69,6 +70,8 @@ func NewEigenlayerClient(logger eigensdkLogger.Logger, ethClient *ethclient.Clie
 
 type ChainMetadata struct {
 	ELRewardsCoordinatorAddress string
+	DelegationManagerAddress    string
+	AVSDirectoryAddress         string
 	ProofStoreBaseURL           string
 }
 
@@ -78,10 +81,14 @@ var (
 
 	ChainMetadataMap = map[int64]ChainMetadata{
 		MainnetChainId: {
+			DelegationManagerAddress:    "0x39053D51B77DC0d36036Fc1fCc8Cb819df8Ef37A",
+			AVSDirectoryAddress:         "0x135DDa560e946695d6f155dACaFC6f1F25C1F5AF",
 			ELRewardsCoordinatorAddress: "0x7750d328b314EfFa365A0402CcfD489B80B0adda",
 			ProofStoreBaseURL:           "https://eigenlabs-rewards-mainnet-ethereum.s3.amazonaws.com",
 		},
 		HoleskyChainId: {
+			DelegationManagerAddress:    "0xA44151489861Fe9e3055d95adC98FbD462B948e7",
+			AVSDirectoryAddress:         "0x055733000064333CaDDbC92763c58BF0192fFeBf",
 			ELRewardsCoordinatorAddress: "0xAcc1fb458a1317E886dB376Fc8141540537E68fE",
 			ProofStoreBaseURL:           "https://eigenlabs-rewards-testnet-holesky.s3.amazonaws.com",
 		},
@@ -92,10 +99,12 @@ func (c *eigenlayerClient) ClaimRewards(earnerAddress string, broadcast bool) (*
 	ctx := context.Background()
 
 	rewardCoordinatorAddress := common.HexToAddress(ChainMetadataMap[c.chainId.Int64()].ELRewardsCoordinatorAddress)
+	// delegationManagerAddress := common.HexToAddress(ChainMetadataMap[c.chainId.Int64()].DelegationManagerAddress)
+	// avsDirectoryAddress := common.HexToAddress(ChainMetadataMap[c.chainId.Int64()].AVSDirectoryAddress)
 	earner := common.HexToAddress(earnerAddress)
 	recvAddr := c.ethAccount.GetAddress()
 
-	rc, err := rewardscoordinator.NewContractIRewardsCoordinator(rewardCoordinatorAddress, c.ethClient)
+	rc, err := rewardscoordinator.NewIRewardsCoordinator(rewardCoordinatorAddress, c.ethClient)
 	if err != nil {
 		return nil, errors.Wrap(err, "could not create reward coordinator client")
 	}
@@ -108,16 +117,17 @@ func (c *eigenlayerClient) ClaimRewards(earnerAddress string, broadcast bool) (*
 		return nil, fmt.Errorf("claimer for earner %s doesnt match signer %s", claimerFor, recvAddr)
 	}
 
-	elReader, err := elcontracts.NewReaderFromConfig(
-		elcontracts.Config{
-			RewardsCoordinatorAddress: rewardCoordinatorAddress,
-		},
-		c.ethClient,
-		c.logger,
-	)
-	if err != nil {
-		return nil, errors.Wrap(err, "could not create elreader")
-	}
+	// elReader, err := elcontracts.BuildELChainReader(
+	// 	delegationManagerAddress,
+	// 	avsDirectoryAddress,
+	// 	c.ethClient,
+	// 	c.logger,
+	// )
+	// if err != nil {
+	// 	return nil, errors.Wrap(err, "could not create elreader")
+	// }
+
+	// TODO: uncomment above block
 
 	df := httpProofDataFetcher.NewHttpProofDataFetcher(
 		ChainMetadataMap[c.chainId.Int64()].ProofStoreBaseURL,
@@ -126,7 +136,7 @@ func (c *eigenlayerClient) ClaimRewards(earnerAddress string, broadcast bool) (*
 		http.DefaultClient,
 	)
 
-	claimDate, rootIndex, err := getClaimDistributionRoot(ctx, elReader, c.logger)
+	claimDate, rootIndex, err := getClaimDistributionRoot(ctx, nil, c.logger) // TODO: pass elReader
 	if err != nil {
 		return nil, errors.Wrap(err, "failed to get claim distribution root")
 	}
@@ -170,15 +180,17 @@ func (c *eigenlayerClient) ClaimRewards(earnerAddress string, broadcast bool) (*
 		TokenLeaves:     convertClaimTokenLeaves(claim.TokenLeaves),
 	}
 
-	c.logger.Info("Validating claim proof...")
-	ok, err := elReader.CheckClaim(&bind.CallOpts{Context: ctx}, elClaim)
-	if err != nil {
-		return nil, errors.Wrap(err, "failed to check claim")
-	}
-	if !ok {
-		return nil, errors.New("failed to validate claim")
-	}
-	c.logger.Info("Claim proof validated successfully")
+	// c.logger.Info("Validating claim proof...")
+	// ok, err := elReader.CheckClaim(&bind.CallOpts{Context: ctx}, elClaim)
+	// if err != nil {
+	// 	return nil, errors.Wrap(err, "failed to check claim")
+	// }
+	// if !ok {
+	// 	return nil, errors.New("failed to validate claim")
+	// }
+	// c.logger.Info("Claim proof validated successfully")
+
+	// TODO: uncomment above block
 
 	txMgr, err := c.getTxMgr()
 	if err != nil {
@@ -198,7 +210,7 @@ func (c *eigenlayerClient) ClaimRewards(earnerAddress string, broadcast bool) (*
 
 	if broadcast {
 		c.logger.Info("Broadcasting tx")
-		receipt, err := txMgr.Send(ctx, tx, true)
+		receipt, err := txMgr.Send(ctx, tx)
 		if err != nil {
 			return nil, errors.Wrap(err, "failed broadcast ProcessClaim")
 		}

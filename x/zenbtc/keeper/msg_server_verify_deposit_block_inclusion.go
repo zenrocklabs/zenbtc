@@ -56,7 +56,7 @@ func (k msgServer) VerifyDepositBlockInclusion(goCtx context.Context, msg *types
 
 	//Check the address & amount specified is actually in the supplied (proven) BTC Transaction
 	for _, output := range outputs {
-		if output.Address == msg.DepositAddr && output.Amount == msg.Amount {
+		if output.Address == msg.DepositAddr && output.Amount == msg.Amount && uint64(output.OutputIndex) == msg.Vout {
 			found = true
 			break
 		}
@@ -67,7 +67,7 @@ func (k msgServer) VerifyDepositBlockInclusion(goCtx context.Context, msg *types
 
 	q, err := k.treasuryKeeper.KeyByAddress(ctx, &treasurytypes.QueryKeyByAddressRequest{
 		Address:     msg.DepositAddr,
-		KeyringAddr: k.validationKeeper.GetZenBTCDepositKeyringAddr(ctx),
+		KeyringAddr: k.GetDepositKeyringAddr(ctx),
 		KeyType:     treasurytypes.KeyType_KEY_TYPE_BITCOIN_SECP256K1,
 		WalletType:  WalletTypeFromChainName(msg),
 	})
@@ -91,7 +91,8 @@ func (k msgServer) VerifyDepositBlockInclusion(goCtx context.Context, msg *types
 	}
 
 	// Deposit/lock txs are stored in zenBTC module so they can't be used to mint zenBTC tokens more than once
-	txExists, err := k.LockTransactionStore.Has(ctx, msg.RawTx)
+
+	txExists, err := k.LockTransactionStore.Has(ctx, collections.Join(msg.RawTx, msg.Vout))
 	if err != nil {
 		return nil, err
 	}
@@ -99,7 +100,7 @@ func (k msgServer) VerifyDepositBlockInclusion(goCtx context.Context, msg *types
 		return nil, errors.New("lock tx was already previously used to mint zenBTC tokens")
 	}
 
-	supply, err := k.validationKeeper.ZenBTCSupply.Get(ctx)
+	supply, err := k.Supply.Get(ctx)
 	if err != nil {
 		if !errors.Is(err, collections.ErrNotFound) {
 			return nil, err
@@ -109,29 +110,36 @@ func (k msgServer) VerifyDepositBlockInclusion(goCtx context.Context, msg *types
 
 	supply.CustodiedBTC += msg.Amount
 
-	if err := k.validationKeeper.ZenBTCSupply.Set(ctx, supply); err != nil {
+	if err := k.Supply.Set(ctx, supply); err != nil {
 		return nil, err
 	}
 
-	if err := k.LockTransactionStore.Set(ctx, msg.RawTx); err != nil {
+	if err := k.LockTransactionStore.Set(ctx, collections.Join(msg.RawTx, msg.Vout), types.LockTransaction{
+		RawTx:         msg.RawTx,
+		Vout:          msg.Vout,
+		Sender:        msg.DepositAddr,
+		MintRecipient: q.Response.Key.ZenbtcMetadata.RecipientAddr,
+		Amount:        msg.Amount,
+		BlockHeight:   msg.BlockHeight,
+	}); err != nil {
 		return nil, err
 	}
 
 	// Don't mint zenBTC tokens for rewards deposits; return early
-	if q.Response.Key.Id == k.validationKeeper.GetZenBTCRewardsDepositKeyID(ctx) {
+	if q.Response.Key.Id == k.GetRewardsDepositKeyID(ctx) {
 		return &types.MsgVerifyDepositBlockInclusionResponse{}, nil
 	}
 
-	pendingTxs, err := k.validationKeeper.PendingMintTransactions.Get(ctx)
+	pendingTxs, err := k.PendingMintTransactions.Get(ctx)
 	if err != nil {
 		if !errors.Is(err, collections.ErrNotFound) {
 			return nil, err
 		}
-		pendingTxs = treasurytypes.PendingMintTransactions{Txs: []*treasurytypes.PendingMintTransaction{}}
+		pendingTxs = types.PendingMintTransactions{Txs: []*types.PendingMintTransaction{}}
 	}
 
 	// Calculate amount of zenBTC to mint based on current exchange rate
-	exchangeRate, err := k.validationKeeper.GetZenBTCExchangeRate(ctx)
+	exchangeRate, err := k.GetExchangeRate(ctx)
 	if err != nil {
 		return nil, err
 	}
@@ -139,21 +147,21 @@ func (k msgServer) VerifyDepositBlockInclusion(goCtx context.Context, msg *types
 	// Amount of zenBTC to mint is the BTC amount divided by BTC/zenBTC exchange rate
 	amount := float64(msg.Amount) / exchangeRate
 
-	tx := &treasurytypes.PendingMintTransaction{
+	tx := &types.PendingMintTransaction{
 		ChainId:          q.Response.Key.ZenbtcMetadata.ChainId,
-		ChainType:        q.Response.Key.ZenbtcMetadata.ChainType,
+		ChainType:        types.WalletType(q.Response.Key.ZenbtcMetadata.ChainType),
 		RecipientAddress: q.Response.Key.ZenbtcMetadata.RecipientAddr,
 		Amount:           uint64(amount),
 		Creator:          msg.Creator,
-		KeyId:            k.validationKeeper.GetZenBTCMinterKeyID(ctx),
+		KeyId:            k.GetMinterKeyID(ctx),
 	}
 	pendingTxs.Txs = append(pendingTxs.Txs, tx)
-	if err := k.validationKeeper.PendingMintTransactions.Set(ctx, pendingTxs); err != nil {
+	if err := k.PendingMintTransactions.Set(ctx, pendingTxs); err != nil {
 		return nil, err
 	}
 	k.validationKeeper.Logger(ctx).Warn("added pending mint transaction", "tx", fmt.Sprintf("%+v", tx))
 
-	if err := k.validationKeeper.EthereumNonceRequested.Set(ctx, k.validationKeeper.GetZenBTCMinterKeyID(ctx), true); err != nil {
+	if err := k.validationKeeper.EthereumNonceRequested.Set(ctx, k.GetMinterKeyID(ctx), true); err != nil {
 		return nil, err
 	}
 
@@ -196,7 +204,7 @@ func debugRetrieveBlockHeaderViaRPC(chainName string, blockHeight int64) (*api.B
 Get the list of Change KeyID and derive the addresses for the correct Chain
 */
 func (k msgServer) ZenBTCChangeAddresses(ctx context.Context, chainName string) ([]string, error) {
-	keyIDs := k.validationKeeper.GetZenBTCChangeAddressKeyIDs(ctx)
+	keyIDs := k.GetChangeAddressKeyIDs(ctx)
 	chaincfg := utils.ChainFromString(chainName)
 	result := make([]string, 0)
 	for _, keyID := range keyIDs {

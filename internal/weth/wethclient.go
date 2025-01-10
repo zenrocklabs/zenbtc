@@ -79,7 +79,7 @@ func (c *wethClient) Unwrap(amount *big.Int, broadcast bool) (*types.Receipt, er
 
 	if broadcast {
 		c.logger.Info("Broadcasting tx")
-		receipt, err := txMgr.Send(ctx, tx, true)
+		receipt, err := txMgr.Send(ctx, tx)
 		if err != nil {
 			return nil, errors.Wrap(err, "failed broadcast withdraw")
 		}
@@ -111,7 +111,7 @@ func (c *wethClient) Wrap(amount *big.Int, broadcast bool) (*types.Receipt, erro
 
 	if broadcast {
 		c.logger.Info("Broadcasting tx")
-		receipt, err := txMgr.Send(ctx, tx, true)
+		receipt, err := txMgr.Send(ctx, tx)
 		if err != nil {
 			return nil, errors.Wrap(err, "failed broadcast withdraw")
 		}
