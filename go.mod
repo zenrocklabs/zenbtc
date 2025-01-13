@@ -4,10 +4,10 @@ go 1.23.2
 
 replace (
 	cosmossdk.io/core => cosmossdk.io/core v0.11.0
-	github.com/Zenrock-Foundation/zrchain/v5 => github.com/zenrocklabs/zrchain/v5 v5.7.2
+	github.com/Zenrock-Foundation/zrchain/v5 => github.com/zenrocklabs/zrchain/v5 v5.9.6
 	github.com/btcsuite/btcd/btcec => github.com/btcsuite/btcd/btcec/v2 v2.3.3
 	github.com/btcsuite/btcutil => github.com/btcsuite/btcd/btcutil v1.1.5
-	github.com/cosmos/cosmos-sdk => github.com/zenrocklabs/cosmos-sdk v0.50.10-zenrock
+	github.com/cosmos/cosmos-sdk => github.com/zenrocklabs/cosmos-sdk v0.50.10-zenrock2
 	github.com/gogo/protobuf => github.com/gogo/protobuf v1.3.2
 )
 
@@ -17,6 +17,7 @@ require (
 	cosmossdk.io/core v1.0.0-alpha.5
 	cosmossdk.io/errors v1.0.1
 	cosmossdk.io/log v1.4.1
+	cosmossdk.io/store v1.1.1
 	github.com/Layr-Labs/eigenlayer-contracts v0.4.1-holesky-pepe.0.20240813143901-00fc4b95e9c1
 	github.com/Layr-Labs/eigenlayer-rewards-proofs v0.2.13
 	github.com/Layr-Labs/eigensdk-go v0.1.12
@@ -44,7 +45,6 @@ require (
 require (
 	cosmossdk.io/depinject v1.0.0 // indirect
 	cosmossdk.io/math v1.4.0 // indirect
-	cosmossdk.io/store v1.1.1 // indirect
 	cosmossdk.io/x/tx v0.13.5 // indirect
 	cosmossdk.io/x/upgrade v0.1.4 // indirect
 	filippo.io/edwards25519 v1.1.0 // indirect
