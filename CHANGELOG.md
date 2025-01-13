@@ -1,3 +1,10 @@
+## [1.7.9](https://github.com/zenrocklabs/zenbtc/compare/v1.7.8...v1.7.9) (2025-01-13)
+
+
+### Bug Fixes
+
+* enable `UpdateParams` CLI cmd + bump cosmos fork ver ([#21](https://github.com/zenrocklabs/zenbtc/issues/21)) ([daa7ac6](https://github.com/zenrocklabs/zenbtc/commit/daa7ac6353ed3e7e8ef8afe8644402d17e9e5384))
+
 ## [1.7.8](https://github.com/zenrocklabs/zenbtc/compare/v1.7.7...v1.7.8) (2025-01-13)
 
 
