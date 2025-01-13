@@ -9,13 +9,6 @@ import (
 )
 
 func UpdateParams(ctx sdk.Context, params collections.Item[types.Params]) error {
-	oldParams, err := params.Get(ctx)
-	if err != nil {
-		return err
-	}
-
-	currParams := oldParams
-
 	paramsMap := map[string]types.Params{
 		"zenrock": { // local
 			EthBatcherAddr:      "0x912D79F8d489d0d007aBE0E26fD5d2f06BA4A2AA",
@@ -68,14 +61,16 @@ func UpdateParams(ctx sdk.Context, params collections.Item[types.Params]) error 
 		chainID = "zenrock"
 	}
 
-	for prefix, params := range paramsMap {
+	newParams := types.Params{}
+
+	for prefix, paramSet := range paramsMap {
 		if strings.HasPrefix(chainID, prefix) {
-			currParams = params
+			newParams = paramSet
 			break
 		}
 	}
 
-	if err := params.Set(ctx, currParams); err != nil {
+	if err := params.Set(ctx, newParams); err != nil {
 		return err
 	}
 
