@@ -2,6 +2,7 @@ package keeper
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/zenrocklabs/zenbtc/x/zenbtc/types"
 )
@@ -92,6 +93,8 @@ func (k Keeper) GetWithdrawerKeyID(ctx context.Context) uint64 {
 }
 
 func (k Keeper) GetBitcoinProxyAddress(ctx context.Context) string {
+	k.Logger().Warn("zenbtc", "params", fmt.Sprintf("%+v", k.Params))
+	k.Logger().Warn("zenbtc", "ctx", fmt.Sprintf("%+v", ctx))
 	params, err := k.Params.Get(ctx)
 	if err != nil {
 		return DefaultProxyAddress
