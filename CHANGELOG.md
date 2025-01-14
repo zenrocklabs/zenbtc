@@ -1,3 +1,10 @@
+## [1.7.13](https://github.com/zenrocklabs/zenbtc/compare/v1.7.12...v1.7.13) (2025-01-14)
+
+
+### Bug Fixes
+
+* temporarily hardcode bitcoin proxy address ([66c681d](https://github.com/zenrocklabs/zenbtc/commit/66c681d549de1685384e0b37d9ff818839db67ec))
+
 ## [1.7.12](https://github.com/zenrocklabs/zenbtc/compare/v1.7.11...v1.7.12) (2025-01-14)
 
 
