@@ -40,9 +40,9 @@ func (k msgServer) VerifyUnsignedRedemptionTX(ctx sdk.Context, msg *types.MsgSub
 	return nil
 }
 
-func (k msgServer) updateCompletedRedemptions(ctx sdk.Context, redemptionIndexes []uint64) error {
-	if len(redemptionIndexes) == 0 {
-		return fmt.Errorf("no redemption indexes provided")
+func (k msgServer) updateCompletedRedemptions(ctx sdk.Context, redemptionIndices []uint64) error {
+	if len(redemptionIndices) == 0 {
+		return fmt.Errorf("no redemption indices provided")
 	}
 
 	// Get current supply
@@ -51,33 +51,38 @@ func (k msgServer) updateCompletedRedemptions(ctx sdk.Context, redemptionIndexes
 		return fmt.Errorf("failed to get zenBTC supply: %w", err)
 	}
 
-	// Get exchange rate for converting BTC amount to zenBTC
-	exchangeRate, err := k.GetExchangeRate(ctx)
-	if err != nil {
-		return fmt.Errorf("failed to get exchange rate: %w", err)
-	}
-
-	// Iterate over the redemption indexes, starting from the second element
-	for _, redemptionIndex := range redemptionIndexes[1:] {
+	// Iterate over the redemption indices, starting from the second element
+	for _, redemptionIndex := range redemptionIndices[1:] {
 		// Retrieve the redemption entry
 		redemption, err := k.Keeper.Redemptions.Get(ctx, redemptionIndex)
 		if err != nil {
 			return fmt.Errorf("failed to retrieve redemption at index %d: %w", redemptionIndex, err)
 		}
 
-		// Calculate zenBTC amount from BTC amount
-		// redemption.Data.Amount is in BTC, divide by BTC/zenBTC rate to get zenBTC
-		zenBTCAmount := uint64(float64(redemption.Data.Amount) / exchangeRate)
+		// Get current exchange rate
+		exchangeRate, err := k.GetExchangeRate(ctx)
+		if err != nil {
+			return fmt.Errorf("failed to get exchange rate: %w", err)
+		}
 
-		// Decrease both supplies
-		if supply.MintedZenBTC < zenBTCAmount {
-			return fmt.Errorf("insufficient minted zenBTC supply for redemption at index %d", redemptionIndex)
+		// redemption.Data.Amount is in zenBTC (what user wants to redeem)
+		// Calculate how much BTC they should receive based on current exchange rate
+		btcToRelease := uint64(float64(redemption.Data.Amount) * exchangeRate)
+
+		// Invariant checks
+		if supply.MintedZenBTC < redemption.Data.Amount {
+			return fmt.Errorf("insufficient minted zenBTC for redemption at index %d", redemptionIndex)
 		}
-		if supply.CustodiedBTC < redemption.Data.Amount {
-			return fmt.Errorf("insufficient custodied BTC supply for redemption at index %d", redemptionIndex)
+		if supply.CustodiedBTC < btcToRelease {
+			return fmt.Errorf("insufficient custodied BTC for redemption at index %d", redemptionIndex)
 		}
-		supply.MintedZenBTC -= zenBTCAmount
-		supply.CustodiedBTC -= redemption.Data.Amount
+
+		// Update supplies (zenBTC burned, BTC released)
+		supply.MintedZenBTC -= redemption.Data.Amount
+		supply.CustodiedBTC -= btcToRelease
+
+		k.Logger().Warn("minted supply updated", "minted_old", supply.MintedZenBTC+redemption.Data.Amount, "minted_new", supply.MintedZenBTC)
+		k.Logger().Warn("custodied supply updated", "custodied_old", supply.CustodiedBTC+btcToRelease, "custodied_new", supply.CustodiedBTC)
 
 		// Mark the redemption as completed
 		redemption.Status = types.RedemptionStatus_COMPLETED
@@ -127,11 +132,11 @@ func (k msgServer) checkChangeAddress(ctx context.Context, msg *types.MsgSubmitU
 	for _, keyID := range zenBTCChangeAddressKeyIDs {
 		key, err := k.Keeper.treasuryKeeper.KeyStore.Get(ctx, keyID)
 		if err != nil {
-			return nil, fmt.Errorf("error retrieving change addresses for keyID %s: %w", keyID, err)
+			return nil, fmt.Errorf("error retrieving change addresses for keyID %d: %w", keyID, err)
 		}
 		address, err := treasurytypes.BitcoinP2WPKH(&key, chaincfg)
 		if err != nil {
-			return nil, fmt.Errorf("error generating change address from keyID %s: %w", keyID, err)
+			return nil, fmt.Errorf("error generating change address from keyID %d: %w", keyID, err)
 		}
 		if address == changeAddress {
 			validChangeAddress = true

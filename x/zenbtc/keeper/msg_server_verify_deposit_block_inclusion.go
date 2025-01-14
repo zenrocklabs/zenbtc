@@ -138,20 +138,11 @@ func (k msgServer) VerifyDepositBlockInclusion(goCtx context.Context, msg *types
 		pendingTxs = types.PendingMintTransactions{Txs: []*types.PendingMintTransaction{}}
 	}
 
-	// Calculate amount of zenBTC to mint based on current exchange rate
-	exchangeRate, err := k.GetExchangeRate(ctx)
-	if err != nil {
-		return nil, err
-	}
-
-	// Amount of zenBTC to mint is the BTC amount divided by BTC/zenBTC exchange rate
-	amount := float64(msg.Amount) / exchangeRate
-
 	tx := &types.PendingMintTransaction{
 		ChainId:          q.Response.Key.ZenbtcMetadata.ChainId,
 		ChainType:        types.WalletType(q.Response.Key.ZenbtcMetadata.ChainType),
 		RecipientAddress: q.Response.Key.ZenbtcMetadata.RecipientAddr,
-		Amount:           uint64(amount),
+		Amount:           msg.Amount,
 		Creator:          msg.Creator,
 		KeyId:            k.GetMinterKeyID(ctx),
 	}
