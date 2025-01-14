@@ -1,3 +1,10 @@
+## [1.7.10](https://github.com/zenrocklabs/zenbtc/compare/v1.7.9...v1.7.10) (2025-01-14)
+
+
+### Bug Fixes
+
+* exchange rate calculation ([d701de4](https://github.com/zenrocklabs/zenbtc/commit/d701de46a90f0345b100e28c6f990b3fcb22e840))
+
 ## [1.7.9](https://github.com/zenrocklabs/zenbtc/compare/v1.7.8...v1.7.9) (2025-01-13)
 
 
