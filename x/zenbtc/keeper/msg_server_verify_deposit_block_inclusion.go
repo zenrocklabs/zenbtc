@@ -42,19 +42,19 @@ func (k msgServer) VerifyDepositBlockInclusion(goCtx context.Context, msg *types
 
 	found := false
 
-	//List of addresses to ignore - we don't want to cause a mint for change
+	// List of addresses to ignore - we don't want to cause a mint for change
 	ignoreAddresses, err := k.ZenBTCChangeAddresses(ctx, msg.ChainName)
 	if err != nil {
 		return nil, errors.New("Error Retrieving the Change Addresses")
 	}
 
-	//Verify the blockheader is valid and the proof, return a list of outputs in the transaction
+	// Verify the blockheader is valid and the proof, return a list of outputs in the transaction
 	outputs, _, err := bitcoin.VerifyBTCLockTransaction(msg.RawTx, msg.ChainName, int(msg.Index), msg.Proof, &blockHeader, ignoreAddresses)
 	if err != nil {
 		return nil, err
 	}
 
-	//Check the address & amount specified is actually in the supplied (proven) BTC Transaction
+	// Check the address & amount specified is actually in the supplied (proven) BTC Transaction
 	for _, output := range outputs {
 		if output.Address == msg.DepositAddr && output.Amount == msg.Amount && uint64(output.OutputIndex) == msg.Vout {
 			found = true
@@ -91,7 +91,6 @@ func (k msgServer) VerifyDepositBlockInclusion(goCtx context.Context, msg *types
 	}
 
 	// Deposit/lock txs are stored in zenBTC module so they can't be used to mint zenBTC tokens more than once
-
 	txExists, err := k.LockTransactionStore.Has(ctx, collections.Join(msg.RawTx, msg.Vout))
 	if err != nil {
 		return nil, err
@@ -99,6 +98,15 @@ func (k msgServer) VerifyDepositBlockInclusion(goCtx context.Context, msg *types
 	if txExists {
 		return nil, errors.New("lock tx was already previously used to mint zenBTC tokens")
 	}
+
+	// Get exchange rate before updating supply
+	exchangeRate, err := k.GetExchangeRate(ctx)
+	if err != nil {
+		return nil, err
+	}
+
+	// Calculate zenBTC amount using current exchange rate
+	zenBTCAmount := uint64(float64(msg.Amount) / exchangeRate)
 
 	supply, err := k.Supply.Get(ctx)
 	if err != nil {
@@ -142,7 +150,7 @@ func (k msgServer) VerifyDepositBlockInclusion(goCtx context.Context, msg *types
 		ChainId:          q.Response.Key.ZenbtcMetadata.ChainId,
 		ChainType:        types.WalletType(q.Response.Key.ZenbtcMetadata.ChainType),
 		RecipientAddress: q.Response.Key.ZenbtcMetadata.RecipientAddr,
-		Amount:           msg.Amount,
+		Amount:           zenBTCAmount,
 		Creator:          msg.Creator,
 		KeyId:            k.GetMinterKeyID(ctx),
 	}
