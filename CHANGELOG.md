@@ -1,3 +1,10 @@
+## [1.7.12](https://github.com/zenrocklabs/zenbtc/compare/v1.7.11...v1.7.12) (2025-01-14)
+
+
+### Bug Fixes
+
+* add logging (params issue) ([d9f8dc3](https://github.com/zenrocklabs/zenbtc/commit/d9f8dc3be4117ec5c228128b7ea4a61fdc5fa512))
+
 ## [1.7.11](https://github.com/zenrocklabs/zenbtc/compare/v1.7.10...v1.7.11) (2025-01-14)
 
 
