@@ -1,3 +1,10 @@
+## [1.7.14](https://github.com/zenrocklabs/zenbtc/compare/v1.7.13...v1.7.14) (2025-01-15)
+
+
+### Bug Fixes
+
+* add `PrevNonce` field ([761a396](https://github.com/zenrocklabs/zenbtc/commit/761a396237acb17608fcd92830add309600bf52b))
+
 ## [1.7.13](https://github.com/zenrocklabs/zenbtc/compare/v1.7.12...v1.7.13) (2025-01-14)
 
 
