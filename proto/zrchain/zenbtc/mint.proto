@@ -8,6 +8,7 @@ message NonceData {
   uint64 nonce = 1;
   uint64 counter = 2;
   bool skip = 3;
+  uint64 prev_nonce = 4;
 }
 
 message RequestedBitcoinHeaders {

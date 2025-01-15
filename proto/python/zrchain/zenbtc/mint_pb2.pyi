@@ -24,14 +24,16 @@ WALLET_TYPE_BTC_REGNET: WalletType
 WALLET_TYPE_SOLANA: WalletType
 
 class NonceData(_message.Message):
-    __slots__ = ("nonce", "counter", "skip")
+    __slots__ = ("nonce", "counter", "skip", "prev_nonce")
     NONCE_FIELD_NUMBER: _ClassVar[int]
     COUNTER_FIELD_NUMBER: _ClassVar[int]
     SKIP_FIELD_NUMBER: _ClassVar[int]
+    PREV_NONCE_FIELD_NUMBER: _ClassVar[int]
     nonce: int
     counter: int
     skip: bool
-    def __init__(self, nonce: _Optional[int] = ..., counter: _Optional[int] = ..., skip: bool = ...) -> None: ...
+    prev_nonce: int
+    def __init__(self, nonce: _Optional[int] = ..., counter: _Optional[int] = ..., skip: bool = ..., prev_nonce: _Optional[int] = ...) -> None: ...
 
 class RequestedBitcoinHeaders(_message.Message):
     __slots__ = ("heights",)
