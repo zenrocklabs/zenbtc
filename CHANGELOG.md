@@ -1,3 +1,10 @@
+## [1.7.15](https://github.com/zenrocklabs/zenbtc/compare/v1.7.14...v1.7.15) (2025-01-16)
+
+
+### Bug Fixes
+
+* track `PendingZenBTC` supply to use in exchange rate calc ([c66d066](https://github.com/zenrocklabs/zenbtc/commit/c66d066f53aa25049e325ce6c48e242d9092f275))
+
 ## [1.7.14](https://github.com/zenrocklabs/zenbtc/compare/v1.7.13...v1.7.14) (2025-01-15)
 
 
