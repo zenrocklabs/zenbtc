@@ -24,7 +24,7 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x1bzrchain/zenbtc/supply.proto\x12\x0ezrchain.zenbtc\"P\n\x06Supply\x12\"\n\x0c\x63ustodiedBTC\x18\x01 \x01(\x04R\x0c\x63ustodiedBTC\x12\"\n\x0cmintedZenBTC\x18\x02 \x01(\x04R\x0cmintedZenBTCB.Z,github.com/zenrocklabs/zenbtc/x/zenbtc/typesb\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x1bzrchain/zenbtc/supply.proto\x12\x0ezrchain.zenbtc\"v\n\x06Supply\x12\"\n\x0c\x63ustodiedBTC\x18\x01 \x01(\x04R\x0c\x63ustodiedBTC\x12\"\n\x0cmintedZenBTC\x18\x02 \x01(\x04R\x0cmintedZenBTC\x12$\n\rpendingZenBTC\x18\x03 \x01(\x04R\rpendingZenBTCB.Z,github.com/zenrocklabs/zenbtc/x/zenbtc/typesb\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
@@ -33,5 +33,5 @@ if not _descriptor._USE_C_DESCRIPTORS:
   _globals['DESCRIPTOR']._loaded_options = None
   _globals['DESCRIPTOR']._serialized_options = b'Z,github.com/zenrocklabs/zenbtc/x/zenbtc/types'
   _globals['_SUPPLY']._serialized_start=47
-  _globals['_SUPPLY']._serialized_end=127
+  _globals['_SUPPLY']._serialized_end=165
 # @@protoc_insertion_point(module_scope)

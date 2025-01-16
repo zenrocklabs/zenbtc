@@ -7,4 +7,5 @@ option go_package = "github.com/zenrocklabs/zenbtc/x/zenbtc/types";
 message Supply {
     uint64 custodiedBTC = 1;
     uint64 mintedZenBTC = 2;
+    uint64 pendingZenBTC = 3;
 }

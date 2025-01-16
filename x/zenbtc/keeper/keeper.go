@@ -87,11 +87,12 @@ func (k Keeper) GetExchangeRate(ctx context.Context) (float64, error) {
 		return 1.0, nil // Initial exchange rate of 1:1
 	}
 
-	if supply.MintedZenBTC == 0 {
-		return 1.0, nil // If no zenBTC minted yet, use 1:1 rate
+	totalZenBTC := supply.MintedZenBTC + supply.PendingZenBTC
+	if totalZenBTC == 0 {
+		return 1.0, nil // If no mints/deposits yet, use 1:1 rate
 	}
 
-	return float64(supply.CustodiedBTC) / float64(supply.MintedZenBTC), nil
+	return float64(supply.CustodiedBTC) / float64(totalZenBTC), nil
 }
 
 func (k Keeper) GetPendingMintTransactions(ctx context.Context) (types.PendingMintTransactions, error) {
