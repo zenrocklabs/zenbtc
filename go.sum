@@ -994,10 +994,10 @@ github.com/yuin/goldmark v1.2.1/go.mod h1:3hX8gzYuyVAZsxl0MRgGTJEmQBFcNTphYh9dec
 github.com/yuin/goldmark v1.3.5/go.mod h1:mwnBkeHKe2W/ZEtQ+71ViKU8L12m81fl3OWwC1Zlc8k=
 github.com/yusufpapurcu/wmi v1.2.4 h1:zFUKzehAFReQwLys1b/iSMl+JQGSCSjtVqQn9bBrPo0=
 github.com/yusufpapurcu/wmi v1.2.4/go.mod h1:SBZ9tNy3G9/m5Oi98Zks0QjeHVDvuK0qfxQmPyzfmi0=
-github.com/zenrocklabs/cosmos-sdk v0.50.10-zenrock2 h1:AdQSOWitA063FzWTXboTKYjytvfLyuPlBMYCR+/L7TQ=
-github.com/zenrocklabs/cosmos-sdk v0.50.10-zenrock2/go.mod h1:6Eesrx3ZE7vxBZWpK++30H+Uc7Q4ahQWCL7JKU/LEdU=
-github.com/zenrocklabs/zrchain/v5 v5.9.6 h1:tqMcPs+/lzLCGgMT1DEIrzLOYeul0VcJs68E0icx9mE=
-github.com/zenrocklabs/zrchain/v5 v5.9.6/go.mod h1:K/6HXMI1cFxdvLzp+MBc16njtZggpZ9ptx1sXyShLjY=
+github.com/zenrocklabs/cosmos-sdk v0.50.10-zenrock h1:QKr8fWJ85qM/mcnKRQfsem6cNZ1hBmrnrv4FWt4cSmc=
+github.com/zenrocklabs/cosmos-sdk v0.50.10-zenrock/go.mod h1:6Eesrx3ZE7vxBZWpK++30H+Uc7Q4ahQWCL7JKU/LEdU=
+github.com/zenrocklabs/zrchain/v5 v5.10.2 h1:vPQypDtdF1GhqmT/Sj+BEgoikG6+BPofwQa+jFVpt5c=
+github.com/zenrocklabs/zrchain/v5 v5.10.2/go.mod h1:wg/l2whB3XsAYkC+yt6e5cT1wOMKuIjUp/xwh5EXhnE=
 github.com/zondax/hid v0.9.2 h1:WCJFnEDMiqGF64nlZz28E9qLVZ0KSJ7xpc5DLEyma2U=
 github.com/zondax/hid v0.9.2/go.mod h1:l5wttcP0jwtdLjqjMMWFVEE7d1zO0jvSPA9OPZxWpEM=
 github.com/zondax/ledger-go v1.0.0 h1:BvNoksIyRqyQTW78rIZP9A44WwAminKiomQa7jXp9EI=
