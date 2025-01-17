@@ -26,12 +26,13 @@ message LockTransaction {
 
 // PendingMintTransaction is the metadata for a pending zenBTC mint transaction.
 message PendingMintTransaction {
-  uint64 chain_id = 1;
+  uint64 chain_id = 1 [deprecated=true];
   WalletType chain_type = 2;
   string recipient_address = 3;
   uint64 amount = 4;
   string creator = 5;
   uint64 key_id = 6;
+  string caip2_chain_id=7;
 }
 
 // PendingMintTransactions is a collection of pending mint transactions.
