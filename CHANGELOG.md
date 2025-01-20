@@ -1,3 +1,10 @@
+## [1.7.17](https://github.com/zenrocklabs/zenbtc/compare/v1.7.16...v1.7.17) (2025-01-20)
+
+
+### Bug Fixes
+
+* store migration keyIDs ([f011e3b](https://github.com/zenrocklabs/zenbtc/commit/f011e3b4bb80a85d9e566ff8230c45818195df18))
+
 ## [1.7.16](https://github.com/zenrocklabs/zenbtc/compare/v1.7.15...v1.7.16) (2025-01-17)
 
 
