@@ -1,6 +1,7 @@
 package v3
 
 import (
+	"errors"
 	"fmt"
 
 	"cosmossdk.io/collections"
@@ -13,6 +14,9 @@ import (
 func ChangePendingMintTxChainIdtoCaip2Id(ctx sdk.Context, pendingMintTxCol collections.Item[types.PendingMintTransactions], codec codec.BinaryCodec) error {
 	p, err := pendingMintTxCol.Get(ctx)
 	if err != nil {
+		if errors.Is(err, collections.ErrNotFound) {
+			return nil
+		}
 		return err
 	}
 
