@@ -4,6 +4,7 @@ import (
 	"context"
 	"encoding/hex"
 	"fmt"
+	"slices"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
@@ -25,6 +26,10 @@ func (k msgServer) VerifyUnsignedRedemptionTX(ctx sdk.Context, msg *types.MsgSub
 	msgTX, err := k.checkChangeAddress(ctx, msg)
 	if err != nil {
 		return fmt.Errorf("failed to check change address: %w", err)
+	}
+
+	if err := k.verifyInputsInRedemption(ctx, msg.Inputs); err != nil {
+		return fmt.Errorf("failed to verify input keys: %w", err)
 	}
 
 	// Verify that the outputs in the supplied BTC TX all match redemptions
@@ -199,6 +204,34 @@ func (k msgServer) verifyOutputsAgainstRedemptions(ctx context.Context, msg *typ
 			return fmt.Errorf("invalid output %d in tx: %s, error: %w", outputIndex, hex.EncodeToString(msg.Txbytes), err)
 		}
 	}
+	return nil
+}
+
+func (k msgServer) verifyInputsInRedemption(ctx context.Context, inputs []*types.InputHashes) error {
+	changeAddressKeyIDs := k.Keeper.GetChangeAddressKeyIDs(ctx)
+
+	for _, input := range inputs {
+		// skip validation for change inputs.
+		if ok := slices.Contains(changeAddressKeyIDs, input.Keyid); ok {
+			continue
+		}
+
+		inputKey, err := k.treasuryKeeper.KeyStore.Get(ctx, input.Keyid)
+		if err != nil {
+			return err
+		}
+
+		// verify that input key is a zenBTC key
+		if inputKey.ZenbtcMetadata == nil {
+			return fmt.Errorf("input key is missing zenbtc_metadata: %d", input.Keyid)
+		}
+
+		// ensure that key does not contain empty "ZenbtcMetadata" structure
+		if inputKey.ZenbtcMetadata.RecipientAddr == "" {
+			return fmt.Errorf("input key is missing zenbtc_metadata recipient: %d", input.Keyid)
+		}
+	}
+
 	return nil
 }
 
