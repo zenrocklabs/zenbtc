@@ -1,7 +1,6 @@
 package v3_test
 
 import (
-	"fmt"
 	"testing"
 
 	"cosmossdk.io/collections"
@@ -28,7 +27,7 @@ func TestMigrate(t *testing.T) {
 	store := kvStoreService.OpenKVStore(ctx)
 	sb := collections.NewSchemaBuilder(kvStoreService)
 
-	pendingTxs := collections.NewItem(sb, types.ParamsKey, types.ParamsIndex, codec.CollValue[types.PendingMintTransactions](cdc))
+	pendingTxs := collections.NewItem(sb, types.PendingMintTransactionsKey, types.ParamsIndex, codec.CollValue[types.PendingMintTransactions](cdc))
 
 	ptxs := types.PendingMintTransactions{Txs: []*types.PendingMintTransaction{}}
 
@@ -57,11 +56,10 @@ func TestMigrate(t *testing.T) {
 	require.NoError(t, v3.ChangePendingMintTxChainIdtoCaip2Id(ctx, pendingTxs, cdc))
 
 	var res types.PendingMintTransactions
-	bz, err := store.Get(types.ParamsKey)
+	bz, err := store.Get(types.PendingMintTransactionsKey)
 	require.NoError(t, err)
 	require.NoError(t, cdc.Unmarshal(bz, &res))
 
-	fmt.Printf("txs: %+v\n", res)
 	resTxs, _ := pendingTxs.Get(ctx)
 
 	require.Equal(t, resTxs, res)
@@ -79,16 +77,15 @@ func TestMigrate_Fail(t *testing.T) {
 	store := kvStoreService.OpenKVStore(ctx)
 	sb := collections.NewSchemaBuilder(kvStoreService)
 
-	pendingTxs := collections.NewItem(sb, types.ParamsKey, types.ParamsIndex, codec.CollValue[types.PendingMintTransactions](cdc))
+	pendingTxs := collections.NewItem(sb, types.PendingMintTransactionsKey, types.ParamsIndex, codec.CollValue[types.PendingMintTransactions](cdc))
 
 	require.NoError(t, v3.ChangePendingMintTxChainIdtoCaip2Id(ctx, pendingTxs, cdc))
 
 	var res types.PendingMintTransactions
-	bz, err := store.Get(types.ParamsKey)
+	bz, err := store.Get(types.PendingMintTransactionsKey)
 	require.NoError(t, err)
 	require.NoError(t, cdc.Unmarshal(bz, &res))
 
-	fmt.Printf("txs: %+v\n", res)
 	resTxs, _ := pendingTxs.Get(ctx)
 
 	require.Equal(t, resTxs, res)
