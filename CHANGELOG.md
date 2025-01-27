@@ -1,3 +1,10 @@
+# [1.8.0](https://github.com/zenrocklabs/zenbtc/compare/v1.7.17...v1.8.0) (2025-01-27)
+
+
+### Features
+
+* create README.md ([#24](https://github.com/zenrocklabs/zenbtc/issues/24)) ([a56c783](https://github.com/zenrocklabs/zenbtc/commit/a56c783c16c37dbeaeba13dc8046e07eb5ffe3cd))
+
 ## [1.7.17](https://github.com/zenrocklabs/zenbtc/compare/v1.7.16...v1.7.17) (2025-01-20)
 
 
