@@ -51,7 +51,8 @@ func TestMigrate(t *testing.T) {
 
 	ptxs.Txs = append(ptxs.Txs, tx)
 	ptxs.Txs = append(ptxs.Txs, tx2)
-	pendingTxs.Set(ctx, ptxs)
+	err := pendingTxs.Set(ctx, ptxs)
+	require.NoError(t, err)
 
 	require.NoError(t, v3.ChangePendingMintTxChainIdtoCaip2Id(ctx, pendingTxs, cdc))
 
@@ -86,7 +87,5 @@ func TestMigrate_Fail(t *testing.T) {
 	require.NoError(t, err)
 	require.NoError(t, cdc.Unmarshal(bz, &res))
 
-	resTxs, _ := pendingTxs.Get(ctx)
-
-	require.Equal(t, resTxs, res)
+	require.Equal(t, types.PendingMintTransactions{}, res)
 }

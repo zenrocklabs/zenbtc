@@ -31,7 +31,9 @@ func ChangePendingMintTxChainIdtoCaip2Id(ctx sdk.Context, pendingMintTxCol colle
 		pTxs.Txs = append(pTxs.Txs, pendingMintTx)
 	}
 
-	pendingMintTxCol.Set(ctx, pTxs)
+	if err := pendingMintTxCol.Set(ctx, pTxs); err != nil {
+		return err
+	}
 
 	return nil
 }
