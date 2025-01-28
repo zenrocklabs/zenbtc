@@ -61,7 +61,8 @@ func TestMigrate(t *testing.T) {
 	require.NoError(t, err)
 	require.NoError(t, cdc.Unmarshal(bz, &res))
 
-	resTxs, _ := pendingTxs.Get(ctx)
+	resTxs, err := pendingTxs.Get(ctx)
+	require.NoError(t, err)
 
 	require.Equal(t, resTxs, res)
 }
