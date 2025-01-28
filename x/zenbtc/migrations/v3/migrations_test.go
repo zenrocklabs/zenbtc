@@ -27,7 +27,7 @@ func TestMigrate(t *testing.T) {
 	store := kvStoreService.OpenKVStore(ctx)
 	sb := collections.NewSchemaBuilder(kvStoreService)
 
-	pendingTxs := collections.NewItem(sb, types.PendingMintTransactionsKey, types.ParamsIndex, codec.CollValue[types.PendingMintTransactions](cdc))
+	pendingTxs := collections.NewItem(sb, types.PendingMintTransactionsKey, types.PendingMintTransactionsIndex, codec.CollValue[types.PendingMintTransactions](cdc))
 
 	ptxs := types.PendingMintTransactions{Txs: []*types.PendingMintTransaction{}}
 
@@ -77,7 +77,7 @@ func TestMigrate_Fail(t *testing.T) {
 	store := kvStoreService.OpenKVStore(ctx)
 	sb := collections.NewSchemaBuilder(kvStoreService)
 
-	pendingTxs := collections.NewItem(sb, types.PendingMintTransactionsKey, types.ParamsIndex, codec.CollValue[types.PendingMintTransactions](cdc))
+	pendingTxs := collections.NewItem(sb, types.PendingMintTransactionsKey, types.PendingMintTransactionsIndex, codec.CollValue[types.PendingMintTransactions](cdc))
 
 	require.NoError(t, v3.ChangePendingMintTxChainIdtoCaip2Id(ctx, pendingTxs, cdc))
 
