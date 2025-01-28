@@ -180,9 +180,6 @@ func (k msgServer) verifyOutputsAgainstRedemptions(ctx context.Context, msg *typ
 	if redemptions == nil {
 		return fmt.Errorf("redemptions is nil")
 	}
-	if len(redemptions.Redemptions) == 0 {
-		return fmt.Errorf("redemptions is empty")
-	}
 
 	// Verify that the length of RedemptionIndexes matches the number of TxOut
 	if len(msg.RedemptionIndexes) != len(msgTX.TxOut) {
