@@ -1,3 +1,10 @@
+# [1.9.0](https://github.com/zenrocklabs/zenbtc/compare/v1.8.0...v1.9.0) (2025-01-28)
+
+
+### Features
+
+* Add caip2 id field ([#22](https://github.com/zenrocklabs/zenbtc/issues/22)) ([319c7dc](https://github.com/zenrocklabs/zenbtc/commit/319c7dc07e89629da339cb1cbc6458a8cfd88fad))
+
 # [1.8.0](https://github.com/zenrocklabs/zenbtc/compare/v1.7.17...v1.8.0) (2025-01-27)
 
 
