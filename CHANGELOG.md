@@ -1,3 +1,10 @@
+## [1.9.1](https://github.com/zenrocklabs/zenbtc/compare/v1.9.0...v1.9.1) (2025-01-28)
+
+
+### Bug Fixes
+
+* permit redemptions with no outputs to enable consolidation reansactions ([6a52f3b](https://github.com/zenrocklabs/zenbtc/commit/6a52f3b649ac36f77a7db81f24b3fec445fee8ff))
+
 # [1.9.0](https://github.com/zenrocklabs/zenbtc/compare/v1.8.0...v1.9.0) (2025-01-28)
 
 
