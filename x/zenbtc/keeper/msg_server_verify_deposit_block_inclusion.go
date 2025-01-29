@@ -24,20 +24,17 @@ func (k msgServer) VerifyDepositBlockInclusion(goCtx context.Context, msg *types
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
 	blockHeader, err := k.validationKeeper.BtcBlockHeaders.Get(ctx, msg.BlockHeight)
-
-	//CSM For Debugging Only
-	//try and get missing Blockheader over RPC - WARNING for debugging only!!!!
-	//if err != nil {
-	//	bh, _ := debugRetrieveBlockHeaderViaRPC(msg.ChainName, msg.BlockHeight)
-	//	if bh != nil {
-	//		err = nil
-	//		blockHeader = *bh
-	//	}
-	//}
-	// END of debug code
-
 	if err != nil {
 		return nil, err
+	}
+
+	// Deposit/lock txs are stored in zenBTC module so they can't be used to mint zenBTC tokens more than once
+	txExists, err := k.LockTransactionStore.Has(ctx, collections.Join(msg.RawTx, msg.Vout))
+	if err != nil {
+		return nil, err
+	}
+	if txExists {
+		return nil, errors.New("lock tx was already previously used to mint zenBTC tokens")
 	}
 
 	found := false
@@ -88,15 +85,6 @@ func (k msgServer) VerifyDepositBlockInclusion(goCtx context.Context, msg *types
 	}
 	if !found {
 		return nil, errors.New("zenBTC deposit address does not correspond to correct key (no matching wallet)")
-	}
-
-	// Deposit/lock txs are stored in zenBTC module so they can't be used to mint zenBTC tokens more than once
-	txExists, err := k.LockTransactionStore.Has(ctx, collections.Join(msg.RawTx, msg.Vout))
-	if err != nil {
-		return nil, err
-	}
-	if txExists {
-		return nil, errors.New("lock tx was already previously used to mint zenBTC tokens")
 	}
 
 	// Get exchange rate before updating supply
