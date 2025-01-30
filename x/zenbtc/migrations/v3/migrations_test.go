@@ -5,18 +5,18 @@ import (
 
 	"cosmossdk.io/collections"
 	storetypes "cosmossdk.io/store/types"
-	validation "github.com/Zenrock-Foundation/zrchain/v5/x/validation/module"
 	"github.com/cosmos/cosmos-sdk/codec"
 	"github.com/cosmos/cosmos-sdk/runtime"
 	"github.com/cosmos/cosmos-sdk/testutil"
 	moduletestutil "github.com/cosmos/cosmos-sdk/types/module/testutil"
 	"github.com/test-go/testify/require"
 	v3 "github.com/zenrocklabs/zenbtc/x/zenbtc/migrations/v3"
+	zenbtc "github.com/zenrocklabs/zenbtc/x/zenbtc/module"
 	"github.com/zenrocklabs/zenbtc/x/zenbtc/types"
 )
 
 func TestMigrate(t *testing.T) {
-	encCfg := moduletestutil.MakeTestEncodingConfig(validation.AppModuleBasic{})
+	encCfg := moduletestutil.MakeTestEncodingConfig(zenbtc.AppModuleBasic{})
 	cdc := encCfg.Codec
 
 	storeKey := storetypes.NewKVStoreKey(types.ModuleName)
@@ -78,7 +78,7 @@ func TestMigrate(t *testing.T) {
 }
 
 func TestMigrate_Fail(t *testing.T) {
-	encCfg := moduletestutil.MakeTestEncodingConfig(validation.AppModuleBasic{})
+	encCfg := moduletestutil.MakeTestEncodingConfig(zenbtc.AppModuleBasic{})
 	cdc := encCfg.Codec
 
 	storeKey := storetypes.NewKVStoreKey(types.ModuleName)
