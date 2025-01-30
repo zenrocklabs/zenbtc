@@ -1,3 +1,10 @@
+## [1.9.3](https://github.com/zenrocklabs/zenbtc/compare/v1.9.2...v1.9.3) (2025-01-30)
+
+
+### Bug Fixes
+
+* migration test import ([9b0f326](https://github.com/zenrocklabs/zenbtc/commit/9b0f3266b94b7ec4b70ee1f13237382ef3f43489))
+
 ## [1.9.2](https://github.com/zenrocklabs/zenbtc/compare/v1.9.1...v1.9.2) (2025-01-30)
 
 
