@@ -1,3 +1,10 @@
+## [1.9.2](https://github.com/zenrocklabs/zenbtc/compare/v1.9.1...v1.9.2) (2025-01-30)
+
+
+### Bug Fixes
+
+* revert caip2 changes + add migration to fix state ([70024c3](https://github.com/zenrocklabs/zenbtc/commit/70024c34c58a4fad353d4afb1fe60b6556e84b14))
+
 ## [1.9.1](https://github.com/zenrocklabs/zenbtc/compare/v1.9.0...v1.9.1) (2025-01-28)
 
 
