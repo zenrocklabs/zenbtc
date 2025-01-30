@@ -49,12 +49,22 @@ func TestMigrate(t *testing.T) {
 		KeyId:            123,
 	}
 
+	tx3 := &types.PendingMintTransaction{ // this tx should be removed
+		ChainId:          1,
+		ChainType:        types.WalletType_WALLET_TYPE_EVM,
+		RecipientAddress: "0x123",
+		Amount:           0,
+		Creator:          "zen13y3tm68gmu9kntcxwvmue82p6akacnpt2v7nty",
+		KeyId:            123,
+	}
+
 	ptxs.Txs = append(ptxs.Txs, tx)
 	ptxs.Txs = append(ptxs.Txs, tx2)
+	ptxs.Txs = append(ptxs.Txs, tx3)
 	err := pendingTxs.Set(ctx, ptxs)
 	require.NoError(t, err)
 
-	require.NoError(t, v3.ChangePendingMintTxChainIdtoCaip2Id(ctx, pendingTxs, cdc))
+	require.NoError(t, v3.RemoveBadTestnetState(ctx, pendingTxs, cdc))
 
 	var res types.PendingMintTransactions
 	bz, err := store.Get(types.PendingMintTransactionsKey)
@@ -64,7 +74,7 @@ func TestMigrate(t *testing.T) {
 	resTxs, err := pendingTxs.Get(ctx)
 	require.NoError(t, err)
 
-	require.Equal(t, resTxs, res)
+	require.Equal(t, len(ptxs.Txs)-1, len(resTxs.Txs))
 }
 
 func TestMigrate_Fail(t *testing.T) {
@@ -81,7 +91,7 @@ func TestMigrate_Fail(t *testing.T) {
 
 	pendingTxs := collections.NewItem(sb, types.PendingMintTransactionsKey, types.PendingMintTransactionsIndex, codec.CollValue[types.PendingMintTransactions](cdc))
 
-	require.NoError(t, v3.ChangePendingMintTxChainIdtoCaip2Id(ctx, pendingTxs, cdc))
+	require.NoError(t, v3.RemoveBadTestnetState(ctx, pendingTxs, cdc))
 
 	var res types.PendingMintTransactions
 	bz, err := store.Get(types.PendingMintTransactionsKey)

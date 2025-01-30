@@ -24,5 +24,5 @@ func (m Migrator) Migrate1to2(ctx sdk.Context) error {
 }
 
 func (m Migrator) Migrate2to3(ctx sdk.Context) error {
-	return v3.ChangePendingMintTxChainIdtoCaip2Id(ctx, m.keeper.PendingMintTransactions, m.keeper.cdc)
+	return v3.RemoveBadTestnetState(ctx, m.keeper.PendingMintTransactions, m.keeper.cdc)
 }

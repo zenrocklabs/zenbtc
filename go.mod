@@ -9,6 +9,7 @@ replace (
 	github.com/btcsuite/btcd/btcec => github.com/btcsuite/btcd/btcec/v2 v2.3.3
 	github.com/btcsuite/btcutil => github.com/btcsuite/btcd/btcutil v1.1.5
 	github.com/cosmos/cosmos-sdk => github.com/zenrocklabs/cosmos-sdk v0.50.10-zenrock
+	github.com/cosmos/iavl => github.com/cosmos/iavl v1.2.0
 	github.com/gogo/protobuf => github.com/gogo/protobuf v1.3.2
 )
 
@@ -35,6 +36,7 @@ require (
 	github.com/miguelmota/go-ethereum-hdwallet v0.1.2
 	github.com/pkg/errors v0.9.1
 	github.com/stretchr/testify v1.9.0
+	github.com/test-go/testify v1.1.4
 	github.com/urfave/cli/v2 v2.27.4
 	google.golang.org/genproto/googleapis/api v0.0.0-20241118233622-e639e219e697
 	google.golang.org/grpc v1.68.0

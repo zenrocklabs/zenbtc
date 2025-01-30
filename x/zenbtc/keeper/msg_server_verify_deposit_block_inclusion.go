@@ -151,8 +151,7 @@ func (k msgServer) VerifyDepositBlockInclusion(goCtx context.Context, msg *types
 	}
 
 	tx := &types.PendingMintTransaction{
-		// ChainId:          q.Response.Key.ZenbtcMetadata.ChainId,
-		Caip2ChainId:     q.Response.Key.ZenbtcMetadata.Caip2ChainId,
+		ChainId:          q.Response.Key.ZenbtcMetadata.ChainId,
 		ChainType:        types.WalletType(q.Response.Key.ZenbtcMetadata.ChainType),
 		RecipientAddress: q.Response.Key.ZenbtcMetadata.RecipientAddr,
 		Amount:           zenBTCAmount,
