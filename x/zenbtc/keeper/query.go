@@ -30,16 +30,22 @@ func (k Keeper) QuerySupply(ctx context.Context, req *types.QuerySupplyRequest) 
 	supply, err := k.Supply.Get(ctx)
 	if err != nil {
 		if errors.Is(err, collections.ErrNotFound) {
-			return &types.QuerySupplyResponse{CustodiedBTC: 0, MintedZenBTC: 0}, nil
+			return &types.QuerySupplyResponse{CustodiedBTC: 0, MintedZenBTC: 0, ExchangeRate: 0}, nil
 		}
 		return nil, err
 	}
+
 	exchangeRate, err := k.GetExchangeRate(sdk.UnwrapSDKContext(ctx))
 	if err != nil {
 		if errors.Is(err, collections.ErrNotFound) {
-			return &types.QuerySupplyResponse{CustodiedBTC: 0, MintedZenBTC: 0}, nil
+			return &types.QuerySupplyResponse{CustodiedBTC: 0, MintedZenBTC: 0, ExchangeRate: 0}, nil
 		}
 		return nil, err
 	}
-	return &types.QuerySupplyResponse{CustodiedBTC: supply.CustodiedBTC, MintedZenBTC: supply.MintedZenBTC, ExchangeRate: exchangeRate}, nil
+
+	return &types.QuerySupplyResponse{
+		CustodiedBTC: supply.CustodiedBTC,
+		MintedZenBTC: supply.MintedZenBTC + supply.PendingZenBTC,
+		ExchangeRate: exchangeRate,
+	}, nil
 }
