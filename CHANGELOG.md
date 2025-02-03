@@ -1,3 +1,10 @@
+## [1.9.5](https://github.com/zenrocklabs/zenbtc/compare/v1.9.4...v1.9.5) (2025-02-03)
+
+
+### Bug Fixes
+
+* improve supply query ([de371dc](https://github.com/zenrocklabs/zenbtc/commit/de371dc19e81b972524e85d16d77624ff347cd84))
+
 ## [1.9.4](https://github.com/zenrocklabs/zenbtc/compare/v1.9.3...v1.9.4) (2025-02-03)
 
 
