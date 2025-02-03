@@ -14,15 +14,17 @@ const (
 )
 
 var (
-	ParamsKey                  = collections.NewPrefix(0)
-	LockTransactionsKey        = collections.NewPrefix(1)
-	PendingMintTransactionsKey = collections.NewPrefix(2)
-	RedemptionsKey             = collections.NewPrefix(3)
-	SupplyKey                  = collections.NewPrefix(4)
+	ParamsKey                      = collections.NewPrefix(0)
+	LockTransactionsKey            = collections.NewPrefix(1)
+	PendingMintTransactionsKey     = collections.NewPrefix(2)
+	RedemptionsKey                 = collections.NewPrefix(3)
+	SupplyKey                      = collections.NewPrefix(4)
+	PendingMintTransactionCountKey = collections.NewPrefix(5)
 
-	ParamsIndex                  = "params"
-	LockTransactionsIndex        = "lock_transactions"
-	PendingMintTransactionsIndex = "pending_mint_transactions"
-	RedemptionsIndex             = "redemptions"
-	SupplyIndex                  = "supply"
+	ParamsIndex                      = "params"
+	LockTransactionsIndex            = "lock_transactions"
+	PendingMintTransactionsIndex     = "pending_mint_transactions"
+	RedemptionsIndex                 = "redemptions"
+	SupplyIndex                      = "supply"
+	PendingMintTransactionCountIndex = "pending_mint_transaction_count"
 )

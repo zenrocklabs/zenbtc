@@ -12,18 +12,16 @@ import (
 var _ types.QueryServer = Keeper{}
 
 func (k Keeper) QueryPendingMintTransactions(ctx context.Context, req *types.QueryPendingMintTransactionsRequest) (*types.QueryPendingMintTransactionsResponse, error) {
-	pendingMints, err := k.PendingMintTransactions.Get(ctx)
-	if err != nil {
-		if errors.Is(err, collections.ErrNotFound) {
-			return &types.QueryPendingMintTransactionsResponse{PendingMintTransactions: []*types.PendingMintTransaction{}}, nil
-		}
+	var pendingMintResponses []*types.PendingMintTransaction
+	if err := k.PendingMintTransactions.Walk(ctx, nil, func(_ uint64, mint types.PendingMintTransaction) (stop bool, err error) {
+		pendingMintResponses = append(pendingMintResponses, &mint)
+		return false, nil
+	}); err != nil {
 		return nil, err
 	}
-	pendingMintResponses := make([]*types.PendingMintTransaction, 0, len(pendingMints.Txs))
-	for _, mint := range pendingMints.Txs {
-		pendingMintResponses = append(pendingMintResponses, mint)
-	}
-	return &types.QueryPendingMintTransactionsResponse{PendingMintTransactions: pendingMintResponses}, nil
+	return &types.QueryPendingMintTransactionsResponse{
+		PendingMintTransactions: pendingMintResponses,
+	}, nil
 }
 
 func (k Keeper) QuerySupply(ctx context.Context, req *types.QuerySupplyRequest) (*types.QuerySupplyResponse, error) {
