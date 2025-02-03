@@ -77,6 +77,8 @@ message QuerySupplyRequest {}
 
 message QuerySupplyResponse {
   uint64 custodiedBTC = 1;
-  uint64 mintedZenBTC = 2;
-  double exchangeRate = 3;
+  uint64 totalZenBTC = 2;
+  uint64 mintedZenBTC = 3;
+  uint64 pendingZenBTC = 4;
+  string exchangeRate = 5;
 }
