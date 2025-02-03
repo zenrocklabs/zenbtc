@@ -44,6 +44,8 @@ func (k Keeper) QuerySupply(ctx context.Context, req *types.QuerySupplyRequest) 
 		return nil, err
 	}
 
+	k.Logger().Warn("pending zenbtc (to be minted)", "amount", supply.PendingZenBTC)
+
 	return &types.QuerySupplyResponse{
 		CustodiedBTC:  supply.CustodiedBTC,
 		TotalZenBTC:   supply.MintedZenBTC + supply.PendingZenBTC,
