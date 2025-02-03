@@ -1,3 +1,10 @@
+## [1.9.6](https://github.com/zenrocklabs/zenbtc/compare/v1.9.5...v1.9.6) (2025-02-03)
+
+
+### Bug Fixes
+
+* add temp debug log ([3df533d](https://github.com/zenrocklabs/zenbtc/commit/3df533d0c166dc3313b8021dde764849c5e06fd3))
+
 ## [1.9.5](https://github.com/zenrocklabs/zenbtc/compare/v1.9.4...v1.9.5) (2025-02-03)
 
 
