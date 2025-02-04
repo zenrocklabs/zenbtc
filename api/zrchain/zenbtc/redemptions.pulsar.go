@@ -1116,8 +1116,8 @@ func (x *fastReflection_BurnEvent) Range(f func(protoreflect.FieldDescriptor, pr
 			return
 		}
 	}
-	if x.DestinationAddr != "" {
-		value := protoreflect.ValueOfString(x.DestinationAddr)
+	if len(x.DestinationAddr) != 0 {
+		value := protoreflect.ValueOfBytes(x.DestinationAddr)
 		if !f(fd_BurnEvent_destinationAddr, value) {
 			return
 		}
@@ -1150,7 +1150,7 @@ func (x *fastReflection_BurnEvent) Has(fd protoreflect.FieldDescriptor) bool {
 	case "zrchain.zenbtc.BurnEvent.chainID":
 		return x.ChainID != ""
 	case "zrchain.zenbtc.BurnEvent.destinationAddr":
-		return x.DestinationAddr != ""
+		return len(x.DestinationAddr) != 0
 	case "zrchain.zenbtc.BurnEvent.amount":
 		return x.Amount != uint64(0)
 	default:
@@ -1176,7 +1176,7 @@ func (x *fastReflection_BurnEvent) Clear(fd protoreflect.FieldDescriptor) {
 	case "zrchain.zenbtc.BurnEvent.chainID":
 		x.ChainID = ""
 	case "zrchain.zenbtc.BurnEvent.destinationAddr":
-		x.DestinationAddr = ""
+		x.DestinationAddr = nil
 	case "zrchain.zenbtc.BurnEvent.amount":
 		x.Amount = uint64(0)
 	default:
@@ -1206,7 +1206,7 @@ func (x *fastReflection_BurnEvent) Get(descriptor protoreflect.FieldDescriptor) 
 		return protoreflect.ValueOfString(value)
 	case "zrchain.zenbtc.BurnEvent.destinationAddr":
 		value := x.DestinationAddr
-		return protoreflect.ValueOfString(value)
+		return protoreflect.ValueOfBytes(value)
 	case "zrchain.zenbtc.BurnEvent.amount":
 		value := x.Amount
 		return protoreflect.ValueOfUint64(value)
@@ -1237,7 +1237,7 @@ func (x *fastReflection_BurnEvent) Set(fd protoreflect.FieldDescriptor, value pr
 	case "zrchain.zenbtc.BurnEvent.chainID":
 		x.ChainID = value.Interface().(string)
 	case "zrchain.zenbtc.BurnEvent.destinationAddr":
-		x.DestinationAddr = value.Interface().(string)
+		x.DestinationAddr = value.Bytes()
 	case "zrchain.zenbtc.BurnEvent.amount":
 		x.Amount = value.Uint()
 	default:
@@ -1290,7 +1290,7 @@ func (x *fastReflection_BurnEvent) NewField(fd protoreflect.FieldDescriptor) pro
 	case "zrchain.zenbtc.BurnEvent.chainID":
 		return protoreflect.ValueOfString("")
 	case "zrchain.zenbtc.BurnEvent.destinationAddr":
-		return protoreflect.ValueOfString("")
+		return protoreflect.ValueOfBytes(nil)
 	case "zrchain.zenbtc.BurnEvent.amount":
 		return protoreflect.ValueOfUint64(uint64(0))
 	default:
@@ -1576,7 +1576,7 @@ func (x *fastReflection_BurnEvent) ProtoMethods() *protoiface.Methods {
 				if wireType != 2 {
 					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field DestinationAddr", wireType)
 				}
-				var stringLen uint64
+				var byteLen int
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
 						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
@@ -1586,23 +1586,25 @@ func (x *fastReflection_BurnEvent) ProtoMethods() *protoiface.Methods {
 					}
 					b := dAtA[iNdEx]
 					iNdEx++
-					stringLen |= uint64(b&0x7F) << shift
+					byteLen |= int(b&0x7F) << shift
 					if b < 0x80 {
 						break
 					}
 				}
-				intStringLen := int(stringLen)
-				if intStringLen < 0 {
+				if byteLen < 0 {
 					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
 				}
-				postIndex := iNdEx + intStringLen
+				postIndex := iNdEx + byteLen
 				if postIndex < 0 {
 					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
 				}
 				if postIndex > l {
 					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
 				}
-				x.DestinationAddr = string(dAtA[iNdEx:postIndex])
+				x.DestinationAddr = append(x.DestinationAddr[:0], dAtA[iNdEx:postIndex]...)
+				if x.DestinationAddr == nil {
+					x.DestinationAddr = []byte{}
+				}
 				iNdEx = postIndex
 			case 5:
 				if wireType != 0 {
@@ -2323,7 +2325,7 @@ type BurnEvent struct {
 	TxID            string `protobuf:"bytes,1,opt,name=txID,proto3" json:"txID,omitempty"`
 	LogIndex        uint64 `protobuf:"varint,2,opt,name=logIndex,proto3" json:"logIndex,omitempty"`
 	ChainID         string `protobuf:"bytes,3,opt,name=chainID,proto3" json:"chainID,omitempty"`
-	DestinationAddr string `protobuf:"bytes,4,opt,name=destinationAddr,proto3" json:"destinationAddr,omitempty"`
+	DestinationAddr []byte `protobuf:"bytes,4,opt,name=destinationAddr,proto3" json:"destinationAddr,omitempty"`
 	Amount          uint64 `protobuf:"varint,5,opt,name=amount,proto3" json:"amount,omitempty"`
 }
 
@@ -2368,11 +2370,11 @@ func (x *BurnEvent) GetChainID() string {
 	return ""
 }
 
-func (x *BurnEvent) GetDestinationAddr() string {
+func (x *BurnEvent) GetDestinationAddr() []byte {
 	if x != nil {
 		return x.DestinationAddr
 	}
-	return ""
+	return nil
 }
 
 func (x *BurnEvent) GetAmount() uint64 {
@@ -2446,7 +2448,7 @@ var file_zrchain_zenbtc_redemptions_proto_rawDesc = []byte{
 	0x6e, 0x64, 0x65, 0x78, 0x12, 0x18, 0x0a, 0x07, 0x63, 0x68, 0x61, 0x69, 0x6e, 0x49, 0x44, 0x18,
 	0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x63, 0x68, 0x61, 0x69, 0x6e, 0x49, 0x44, 0x12, 0x28,
 	0x0a, 0x0f, 0x64, 0x65, 0x73, 0x74, 0x69, 0x6e, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x41, 0x64, 0x64,
-	0x72, 0x18, 0x04, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0f, 0x64, 0x65, 0x73, 0x74, 0x69, 0x6e, 0x61,
+	0x72, 0x18, 0x04, 0x20, 0x01, 0x28, 0x0c, 0x52, 0x0f, 0x64, 0x65, 0x73, 0x74, 0x69, 0x6e, 0x61,
 	0x74, 0x69, 0x6f, 0x6e, 0x41, 0x64, 0x64, 0x72, 0x12, 0x16, 0x0a, 0x06, 0x61, 0x6d, 0x6f, 0x75,
 	0x6e, 0x74, 0x18, 0x05, 0x20, 0x01, 0x28, 0x04, 0x52, 0x06, 0x61, 0x6d, 0x6f, 0x75, 0x6e, 0x74,
 	0x22, 0x3f, 0x0a, 0x0a, 0x42, 0x75, 0x72, 0x6e, 0x45, 0x76, 0x65, 0x6e, 0x74, 0x73, 0x12, 0x31,

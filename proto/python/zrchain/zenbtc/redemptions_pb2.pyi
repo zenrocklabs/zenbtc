@@ -48,9 +48,9 @@ class BurnEvent(_message.Message):
     txID: str
     logIndex: int
     chainID: str
-    destinationAddr: str
+    destinationAddr: bytes
     amount: int
-    def __init__(self, txID: _Optional[str] = ..., logIndex: _Optional[int] = ..., chainID: _Optional[str] = ..., destinationAddr: _Optional[str] = ..., amount: _Optional[int] = ...) -> None: ...
+    def __init__(self, txID: _Optional[str] = ..., logIndex: _Optional[int] = ..., chainID: _Optional[str] = ..., destinationAddr: _Optional[bytes] = ..., amount: _Optional[int] = ...) -> None: ...
 
 class BurnEvents(_message.Message):
     __slots__ = ("events",)
