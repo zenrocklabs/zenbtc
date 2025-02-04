@@ -128,3 +128,11 @@ func (k Keeper) GetSupply(ctx context.Context) (types.Supply, error) {
 func (k Keeper) SetSupply(ctx context.Context, supply types.Supply) error {
 	return k.Supply.Set(ctx, supply)
 }
+
+func (k Keeper) GetBurnEvents(ctx context.Context) (types.BurnEvents, error) {
+	return k.BurnEvents.Get(ctx)
+}
+
+func (k Keeper) SetBurnEvents(ctx context.Context, burnEvents types.BurnEvents) error {
+	return k.BurnEvents.Set(ctx, burnEvents)
+}
