@@ -20,6 +20,7 @@ var (
 	RedemptionsKey                 = collections.NewPrefix(3)
 	SupplyKey                      = collections.NewPrefix(4)
 	PendingMintTransactionCountKey = collections.NewPrefix(5)
+	BurnEventsKey                  = collections.NewPrefix(6)
 
 	ParamsIndex                      = "params"
 	LockTransactionsIndex            = "lock_transactions"
@@ -27,4 +28,5 @@ var (
 	RedemptionsIndex                 = "redemptions"
 	SupplyIndex                      = "supply"
 	PendingMintTransactionCountIndex = "pending_mint_transaction_count"
+	BurnEventsIndex                  = "burn_events"
 )

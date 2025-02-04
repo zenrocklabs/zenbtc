@@ -64,6 +64,7 @@ func NewKeeper(
 		PendingMintTransactionCount: collections.NewItem(sb, types.PendingMintTransactionCountKey, types.PendingMintTransactionCountIndex, collections.Uint64Value),
 		Redemptions:                 collections.NewMap(sb, types.RedemptionsKey, types.RedemptionsIndex, collections.Uint64Key, codec.CollValue[types.Redemption](cdc)),
 		Supply:                      collections.NewItem(sb, types.SupplyKey, types.SupplyIndex, codec.CollValue[types.Supply](cdc)),
+		BurnEvents:                  collections.NewItem(sb, types.BurnEventsKey, types.BurnEventsIndex, codec.CollValue[types.BurnEvents](cdc)),
 	}
 
 	schema, err := sb.Build()
