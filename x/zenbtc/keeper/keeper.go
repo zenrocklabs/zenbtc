@@ -98,12 +98,16 @@ func (k Keeper) GetExchangeRate(ctx context.Context) (float64, error) {
 	return float64(supply.CustodiedBTC) / float64(totalZenBTC), nil
 }
 
-func (k Keeper) GetPendingMintTransactions(ctx context.Context, id uint64) (types.PendingMintTransaction, error) {
-	return k.PendingMintTransactions.Get(ctx, id)
+// func (k Keeper) GetPendingMintTransaction(ctx context.Context, id uint64) (types.PendingMintTransaction, error) {
+// 	return k.PendingMintTransactions.Get(ctx, id)
+// }
+
+func (k Keeper) SetPendingMintTransaction(ctx context.Context, pendingMintTransaction types.PendingMintTransaction) error {
+	return k.PendingMintTransactions.Set(ctx, pendingMintTransaction.Id, pendingMintTransaction)
 }
 
-func (k Keeper) SetPendingMintTransactions(ctx context.Context, id uint64, pendingMintTransactions types.PendingMintTransaction) error {
-	return k.PendingMintTransactions.Set(ctx, id, pendingMintTransactions)
+func (k Keeper) WalkPendingMintTransactions(ctx context.Context, fn func(id uint64, pendingMintTransaction types.PendingMintTransaction) (stop bool, err error)) error {
+	return k.PendingMintTransactions.Walk(ctx, nil, fn)
 }
 
 func (k Keeper) HasRedemption(ctx context.Context, id uint64) (bool, error) {
