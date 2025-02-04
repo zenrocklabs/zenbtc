@@ -32,6 +32,8 @@ type (
 		PendingMintTransactions collections.Map[uint64, types.PendingMintTransaction]
 		// PendingMintTransactionCount - value: count of pending zenBTC mint transactions
 		PendingMintTransactionCount collections.Item[uint64]
+		// BurnEvents - key: burn event index | value: burn event data
+		BurnEvents collections.Item[types.BurnEvents]
 		// Redemptions - key: redemption index | value: redemption data
 		Redemptions collections.Map[uint64, types.Redemption]
 		// Supply - value: zenBTC supply data
@@ -97,10 +99,6 @@ func (k Keeper) GetExchangeRate(ctx context.Context) (float64, error) {
 
 	return float64(supply.CustodiedBTC) / float64(totalZenBTC), nil
 }
-
-// func (k Keeper) GetPendingMintTransaction(ctx context.Context, id uint64) (types.PendingMintTransaction, error) {
-// 	return k.PendingMintTransactions.Get(ctx, id)
-// }
 
 func (k Keeper) SetPendingMintTransaction(ctx context.Context, pendingMintTransaction types.PendingMintTransaction) error {
 	return k.PendingMintTransactions.Set(ctx, pendingMintTransaction.Id, pendingMintTransaction)
