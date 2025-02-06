@@ -149,14 +149,14 @@ func (k msgServer) VerifyDepositBlockInclusion(goCtx context.Context, msg *types
 		RecipientAddress: q.Response.Key.ZenbtcMetadata.RecipientAddr,
 		Amount:           zenBTCAmount,
 		Creator:          msg.Creator,
-		KeyId:            k.GetMinterKeyID(ctx),
+		KeyId:            k.GetEthMinterKeyID(ctx),
 	}
 	if _, err := k.CreatePendingMintTransaction(ctx, tx); err != nil {
 		return nil, err
 	}
 	k.validationKeeper.Logger(ctx).Warn("added pending mint transaction", "tx", fmt.Sprintf("%+v", tx))
 
-	if err := k.validationKeeper.EthereumNonceRequested.Set(ctx, k.GetMinterKeyID(ctx), true); err != nil {
+	if err := k.validationKeeper.EthereumNonceRequested.Set(ctx, k.GetEthMinterKeyID(ctx), true); err != nil {
 		return nil, err
 	}
 

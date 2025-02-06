@@ -22,7 +22,7 @@ var (
 		EthBatcherAddr:      "0x912D79F8d489d0d007aBE0E26fD5d2f06BA4A2AA",
 		DepositKeyringAddr:  "keyring1hpyh7xqr2w7h4eas5y8twnsg",
 		WithdrawerKeyID:     1,
-		MinterKeyID:         2,
+		EthMinterKeyID:      2,
 		ChangeAddressKeyIDs: []uint64{3},
 		UnstakerKeyID:       4,
 		RewardsDepositKeyID: 5,

@@ -38,6 +38,11 @@ service Query {
   rpc QuerySupply(QuerySupplyRequest) returns (QuerySupplyResponse) {
     option (google.api.http).get = "/zenbtc/supply";
   }
+
+  // Queries a list of BurnEvents items.
+  rpc QueryBurnEvents(QueryBurnEventsRequest) returns (QueryBurnEventsResponse) {
+    option (google.api.http).get = "/zenbtc/burn_events";
+  }
 }
 
 // QueryParamsRequest is request type for the Query/Params RPC method.
@@ -79,4 +84,15 @@ message QuerySupplyResponse {
   uint64 custodiedBTC = 1;
   uint64 mintedZenBTC = 2;
   double exchangeRate = 3;
+}
+
+message QueryBurnEventsRequest {
+  uint64 startIndex = 1;
+  string txID = 2;
+  uint64 logIndex = 3;
+  string chainID = 4;
+}
+
+message QueryBurnEventsResponse {
+  repeated BurnEvent burnEvents = 1;
 }
