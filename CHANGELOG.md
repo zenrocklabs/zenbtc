@@ -1,3 +1,45 @@
+# [1.10.0](https://github.com/zenrocklabs/zenbtc/compare/v1.9.6...v1.10.0) (2025-02-06)
+
+
+### Features
+
+* Add CAIP2 functionality ([#28](https://github.com/zenrocklabs/zenbtc/issues/28)) ([bb725e7](https://github.com/zenrocklabs/zenbtc/commit/bb725e78035e561a0f2d737c2f42614af8e4fe84))
+
+## [1.9.6](https://github.com/zenrocklabs/zenbtc/compare/v1.9.5...v1.9.6) (2025-02-03)
+
+
+### Bug Fixes
+
+* add temp debug log ([3df533d](https://github.com/zenrocklabs/zenbtc/commit/3df533d0c166dc3313b8021dde764849c5e06fd3))
+
+## [1.9.5](https://github.com/zenrocklabs/zenbtc/compare/v1.9.4...v1.9.5) (2025-02-03)
+
+
+### Bug Fixes
+
+* improve supply query ([de371dc](https://github.com/zenrocklabs/zenbtc/commit/de371dc19e81b972524e85d16d77624ff347cd84))
+
+## [1.9.4](https://github.com/zenrocklabs/zenbtc/compare/v1.9.3...v1.9.4) (2025-02-03)
+
+
+### Bug Fixes
+
+* supply query ([2762766](https://github.com/zenrocklabs/zenbtc/commit/27627665cc801171496c8cf3f29bfd47ede2cb4b))
+
+## [1.9.3](https://github.com/zenrocklabs/zenbtc/compare/v1.9.2...v1.9.3) (2025-01-30)
+
+
+### Bug Fixes
+
+* migration test import ([9b0f326](https://github.com/zenrocklabs/zenbtc/commit/9b0f3266b94b7ec4b70ee1f13237382ef3f43489))
+
+## [1.9.2](https://github.com/zenrocklabs/zenbtc/compare/v1.9.1...v1.9.2) (2025-01-30)
+
+
+### Bug Fixes
+
+* revert caip2 changes + add migration to fix state ([70024c3](https://github.com/zenrocklabs/zenbtc/commit/70024c34c58a4fad353d4afb1fe60b6556e84b14))
+
 ## [1.9.1](https://github.com/zenrocklabs/zenbtc/compare/v1.9.0...v1.9.1) (2025-01-28)
 
 

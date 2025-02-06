@@ -61,14 +61,18 @@ class QuerySupplyRequest(_message.Message):
     def __init__(self) -> None: ...
 
 class QuerySupplyResponse(_message.Message):
-    __slots__ = ("custodiedBTC", "mintedZenBTC", "exchangeRate")
+    __slots__ = ("custodiedBTC", "totalZenBTC", "mintedZenBTC", "pendingZenBTC", "exchangeRate")
     CUSTODIEDBTC_FIELD_NUMBER: _ClassVar[int]
+    TOTALZENBTC_FIELD_NUMBER: _ClassVar[int]
     MINTEDZENBTC_FIELD_NUMBER: _ClassVar[int]
+    PENDINGZENBTC_FIELD_NUMBER: _ClassVar[int]
     EXCHANGERATE_FIELD_NUMBER: _ClassVar[int]
     custodiedBTC: int
+    totalZenBTC: int
     mintedZenBTC: int
-    exchangeRate: float
-    def __init__(self, custodiedBTC: _Optional[int] = ..., mintedZenBTC: _Optional[int] = ..., exchangeRate: _Optional[float] = ...) -> None: ...
+    pendingZenBTC: int
+    exchangeRate: str
+    def __init__(self, custodiedBTC: _Optional[int] = ..., totalZenBTC: _Optional[int] = ..., mintedZenBTC: _Optional[int] = ..., pendingZenBTC: _Optional[int] = ..., exchangeRate: _Optional[str] = ...) -> None: ...
 
 class QueryBurnEventsRequest(_message.Message):
     __slots__ = ("startIndex", "txID", "logIndex", "chainID")

@@ -1,7 +1,8 @@
-package v3
+package v4
 
 import (
 	"errors"
+	"fmt"
 
 	"cosmossdk.io/collections"
 	"github.com/cosmos/cosmos-sdk/codec"
@@ -10,7 +11,7 @@ import (
 	"github.com/zenrocklabs/zenbtc/x/zenbtc/types"
 )
 
-func RemoveBadTestnetState(ctx sdk.Context, pendingMintTxCol collections.Item[types.PendingMintTransactions], codec codec.BinaryCodec) error {
+func ChangePendingMintTxChainIdtoCaip2Id(ctx sdk.Context, pendingMintTxCol collections.Item[types.PendingMintTransactions], codec codec.BinaryCodec) error {
 	p, err := pendingMintTxCol.Get(ctx)
 	if err != nil {
 		if errors.Is(err, collections.ErrNotFound) {
@@ -22,8 +23,9 @@ func RemoveBadTestnetState(ctx sdk.Context, pendingMintTxCol collections.Item[ty
 	pTxs := types.PendingMintTransactions{}
 
 	for _, pendingMintTx := range p.Txs {
-		if pendingMintTx.ChainId != 17000 {
-			continue
+		switch pendingMintTx.ChainType {
+		case types.WalletType_WALLET_TYPE_EVM:
+			pendingMintTx.Caip2ChainId = fmt.Sprintf("eip155:%d", pendingMintTx.ChainId)
 		}
 
 		pTxs.Txs = append(pTxs.Txs, pendingMintTx)

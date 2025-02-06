@@ -1,22 +1,22 @@
-package v3_test
+package v4_test
 
 import (
 	"testing"
 
 	"cosmossdk.io/collections"
 	storetypes "cosmossdk.io/store/types"
+	validation "github.com/Zenrock-Foundation/zrchain/v5/x/validation/module"
 	"github.com/cosmos/cosmos-sdk/codec"
 	"github.com/cosmos/cosmos-sdk/runtime"
 	"github.com/cosmos/cosmos-sdk/testutil"
 	moduletestutil "github.com/cosmos/cosmos-sdk/types/module/testutil"
 	"github.com/test-go/testify/require"
-	v3 "github.com/zenrocklabs/zenbtc/x/zenbtc/migrations/v3"
-	zenbtc "github.com/zenrocklabs/zenbtc/x/zenbtc/module"
+	v4 "github.com/zenrocklabs/zenbtc/x/zenbtc/migrations/v4"
 	"github.com/zenrocklabs/zenbtc/x/zenbtc/types"
 )
 
 func TestMigrate(t *testing.T) {
-	encCfg := moduletestutil.MakeTestEncodingConfig(zenbtc.AppModuleBasic{})
+	encCfg := moduletestutil.MakeTestEncodingConfig(validation.AppModuleBasic{})
 	cdc := encCfg.Codec
 
 	storeKey := storetypes.NewKVStoreKey(types.ModuleName)
@@ -49,22 +49,12 @@ func TestMigrate(t *testing.T) {
 		KeyId:            123,
 	}
 
-	tx3 := &types.PendingMintTransaction{ // this tx should be removed
-		ChainId:          1,
-		ChainType:        types.WalletType_WALLET_TYPE_EVM,
-		RecipientAddress: "0x123",
-		Amount:           0,
-		Creator:          "zen13y3tm68gmu9kntcxwvmue82p6akacnpt2v7nty",
-		KeyId:            123,
-	}
-
 	ptxs.Txs = append(ptxs.Txs, tx)
 	ptxs.Txs = append(ptxs.Txs, tx2)
-	ptxs.Txs = append(ptxs.Txs, tx3)
 	err := pendingTxs.Set(ctx, ptxs)
 	require.NoError(t, err)
 
-	require.NoError(t, v3.RemoveBadTestnetState(ctx, pendingTxs, cdc))
+	require.NoError(t, v4.ChangePendingMintTxChainIdtoCaip2Id(ctx, pendingTxs, cdc))
 
 	var res types.PendingMintTransactions
 	bz, err := store.Get(types.PendingMintTransactionsKey)
@@ -74,11 +64,11 @@ func TestMigrate(t *testing.T) {
 	resTxs, err := pendingTxs.Get(ctx)
 	require.NoError(t, err)
 
-	require.Equal(t, len(ptxs.Txs)-1, len(resTxs.Txs))
+	require.Equal(t, resTxs, res)
 }
 
 func TestMigrate_Fail(t *testing.T) {
-	encCfg := moduletestutil.MakeTestEncodingConfig(zenbtc.AppModuleBasic{})
+	encCfg := moduletestutil.MakeTestEncodingConfig(validation.AppModuleBasic{})
 	cdc := encCfg.Codec
 
 	storeKey := storetypes.NewKVStoreKey(types.ModuleName)
@@ -91,7 +81,7 @@ func TestMigrate_Fail(t *testing.T) {
 
 	pendingTxs := collections.NewItem(sb, types.PendingMintTransactionsKey, types.PendingMintTransactionsIndex, codec.CollValue[types.PendingMintTransactions](cdc))
 
-	require.NoError(t, v3.RemoveBadTestnetState(ctx, pendingTxs, cdc))
+	require.NoError(t, v4.ChangePendingMintTxChainIdtoCaip2Id(ctx, pendingTxs, cdc))
 
 	var res types.PendingMintTransactions
 	bz, err := store.Get(types.PendingMintTransactionsKey)

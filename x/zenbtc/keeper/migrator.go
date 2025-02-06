@@ -3,6 +3,8 @@ package keeper
 import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	v2 "github.com/zenrocklabs/zenbtc/x/zenbtc/migrations/v2"
+	v3 "github.com/zenrocklabs/zenbtc/x/zenbtc/migrations/v3"
+	v4 "github.com/zenrocklabs/zenbtc/x/zenbtc/migrations/v4"
 )
 
 // Migrator is a struct for handling in-place store migrations.
@@ -22,6 +24,10 @@ func (m Migrator) Migrate1to2(ctx sdk.Context) error {
 	return v2.UpdateParams(ctx, m.keeper.Params)
 }
 
-// func (m Migrator) Migrate2to3(ctx sdk.Context) error {
-// 	return v3.ChangePendingMintTxChainIdtoCaip2Id(ctx, m.keeper.PendingMintTransactions, m.keeper.cdc)
-// }
+func (m Migrator) Migrate2to3(ctx sdk.Context) error {
+	return v3.RemoveBadTestnetState(ctx, m.keeper.PendingMintTransactions, m.keeper.cdc)
+}
+
+func (m Migrator) Migrate3to4(ctx sdk.Context) error {
+	return v4.ChangePendingMintTxChainIdtoCaip2Id(ctx, m.keeper.PendingMintTransactions, m.keeper.cdc)
+}
