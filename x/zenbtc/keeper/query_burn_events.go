@@ -2,7 +2,9 @@ package keeper
 
 import (
 	"context"
+	"errors"
 
+	"cosmossdk.io/collections"
 	"github.com/zenrocklabs/zenbtc/x/zenbtc/types"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
@@ -15,6 +17,9 @@ func (k Keeper) QueryBurnEvents(ctx context.Context, req *types.QueryBurnEventsR
 
 	burnEvents, err := k.BurnEvents.Get(ctx)
 	if err != nil {
+		if errors.Is(err, collections.ErrNotFound) {
+			return nil, nil
+		}
 		return nil, err
 	}
 
