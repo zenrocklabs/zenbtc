@@ -1,3 +1,10 @@
+# [1.11.0](https://github.com/zenrocklabs/zenbtc/compare/v1.10.0...v1.11.0) (2025-02-06)
+
+
+### Features
+
+* multichain impl ([#27](https://github.com/zenrocklabs/zenbtc/issues/27)) ([e7de42e](https://github.com/zenrocklabs/zenbtc/commit/e7de42e058562aa0e39aa0958a37caefb199a7df))
+
 # [1.10.0](https://github.com/zenrocklabs/zenbtc/compare/v1.9.6...v1.10.0) (2025-02-06)
 
 
