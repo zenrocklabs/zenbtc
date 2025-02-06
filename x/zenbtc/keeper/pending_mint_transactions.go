@@ -23,7 +23,7 @@ func (k Keeper) CreatePendingMintTransaction(ctx sdk.Context, mintTransaction *t
 
 	mintTransaction.Status = types.MintTransactionStatus_MINT_TRANSACTION_STATUS_DEPOSITED
 
-	if err := k.PendingMintTransactions.Set(ctx, mintTransaction.Id, *mintTransaction); err != nil {
+	if err := k.PendingMintTransactionsMap.Set(ctx, mintTransaction.Id, *mintTransaction); err != nil {
 		return 0, err
 	}
 

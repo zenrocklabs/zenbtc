@@ -21,6 +21,7 @@ var (
 	SupplyKey                      = collections.NewPrefix(4)
 	PendingMintTransactionCountKey = collections.NewPrefix(5)
 	BurnEventsKey                  = collections.NewPrefix(6)
+	PendingMintTransactionsMapKey  = collections.NewPrefix(7)
 
 	ParamsIndex                      = "params"
 	LockTransactionsIndex            = "lock_transactions"
@@ -29,4 +30,5 @@ var (
 	SupplyIndex                      = "supply"
 	PendingMintTransactionCountIndex = "pending_mint_transaction_count"
 	BurnEventsIndex                  = "burn_events"
+	PendingMintTransactionsMapIndex  = "pending_mint_transactions_map"
 )

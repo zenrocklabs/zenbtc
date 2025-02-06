@@ -14,7 +14,7 @@ var _ types.QueryServer = Keeper{}
 
 func (k Keeper) QueryPendingMintTransactions(ctx context.Context, req *types.QueryPendingMintTransactionsRequest) (*types.QueryPendingMintTransactionsResponse, error) {
 	var pendingMintResponses []*types.PendingMintTransaction
-	if err := k.PendingMintTransactions.Walk(ctx, nil, func(_ uint64, mint types.PendingMintTransaction) (stop bool, err error) {
+	if err := k.PendingMintTransactionsMap.Walk(ctx, nil, func(_ uint64, mint types.PendingMintTransaction) (stop bool, err error) {
 		pendingMintResponses = append(pendingMintResponses, &mint)
 		return false, nil
 	}); err != nil {

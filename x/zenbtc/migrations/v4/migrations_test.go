@@ -9,6 +9,7 @@ import (
 	"github.com/cosmos/cosmos-sdk/codec"
 	"github.com/cosmos/cosmos-sdk/runtime"
 	"github.com/cosmos/cosmos-sdk/testutil"
+	sdk "github.com/cosmos/cosmos-sdk/types"
 	moduletestutil "github.com/cosmos/cosmos-sdk/types/module/testutil"
 	"github.com/test-go/testify/require"
 	v4 "github.com/zenrocklabs/zenbtc/x/zenbtc/migrations/v4"
@@ -24,7 +25,6 @@ func TestMigrate(t *testing.T) {
 	ctx := testutil.DefaultContext(storeKey, tKey)
 
 	kvStoreService := runtime.NewKVStoreService(storeKey)
-	store := kvStoreService.OpenKVStore(ctx)
 	sb := collections.NewSchemaBuilder(kvStoreService)
 
 	pendingTxs := collections.NewItem(sb, types.PendingMintTransactionsKey, types.PendingMintTransactionsIndex, codec.CollValue[types.PendingMintTransactions](cdc))
@@ -54,17 +54,19 @@ func TestMigrate(t *testing.T) {
 	err := pendingTxs.Set(ctx, ptxs)
 	require.NoError(t, err)
 
-	require.NoError(t, v4.ChangePendingMintTxChainIdtoCaip2Id(ctx, pendingTxs, cdc))
+	createdTxs := []*types.PendingMintTransaction{}
+	createPendingMintTx := func(ctx sdk.Context, tx *types.PendingMintTransaction) error {
+		createdTxs = append(createdTxs, tx)
+		return nil
+	}
 
-	var res types.PendingMintTransactions
-	bz, err := store.Get(types.PendingMintTransactionsKey)
-	require.NoError(t, err)
-	require.NoError(t, cdc.Unmarshal(bz, &res))
+	require.NoError(t, v4.ChangePendingMintTxChainIdtoCaip2Id(ctx, pendingTxs, createPendingMintTx))
 
-	resTxs, err := pendingTxs.Get(ctx)
-	require.NoError(t, err)
-
-	require.Equal(t, resTxs, res)
+	// Verify that both transactions were created with the correct CAIP-2 chain ID
+	require.Len(t, createdTxs, 2)
+	for _, tx := range createdTxs {
+		require.Equal(t, "eip155:17000", tx.Caip2ChainId)
+	}
 }
 
 func TestMigrate_Fail(t *testing.T) {
@@ -76,17 +78,13 @@ func TestMigrate_Fail(t *testing.T) {
 	ctx := testutil.DefaultContext(storeKey, tKey)
 
 	kvStoreService := runtime.NewKVStoreService(storeKey)
-	store := kvStoreService.OpenKVStore(ctx)
 	sb := collections.NewSchemaBuilder(kvStoreService)
 
 	pendingTxs := collections.NewItem(sb, types.PendingMintTransactionsKey, types.PendingMintTransactionsIndex, codec.CollValue[types.PendingMintTransactions](cdc))
 
-	require.NoError(t, v4.ChangePendingMintTxChainIdtoCaip2Id(ctx, pendingTxs, cdc))
+	createPendingMintTx := func(ctx sdk.Context, tx *types.PendingMintTransaction) error {
+		return nil
+	}
 
-	var res types.PendingMintTransactions
-	bz, err := store.Get(types.PendingMintTransactionsKey)
-	require.NoError(t, err)
-	require.NoError(t, cdc.Unmarshal(bz, &res))
-
-	require.Equal(t, types.PendingMintTransactions{}, res)
+	require.NoError(t, v4.ChangePendingMintTxChainIdtoCaip2Id(ctx, pendingTxs, createPendingMintTx))
 }
