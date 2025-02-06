@@ -1,3 +1,10 @@
+# [1.10.0](https://github.com/zenrocklabs/zenbtc/compare/v1.9.6...v1.10.0) (2025-02-06)
+
+
+### Features
+
+* Add CAIP2 functionality ([#28](https://github.com/zenrocklabs/zenbtc/issues/28)) ([bb725e7](https://github.com/zenrocklabs/zenbtc/commit/bb725e78035e561a0f2d737c2f42614af8e4fe84))
+
 ## [1.9.6](https://github.com/zenrocklabs/zenbtc/compare/v1.9.5...v1.9.6) (2025-02-03)
 
 
