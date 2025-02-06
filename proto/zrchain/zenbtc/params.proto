@@ -13,7 +13,7 @@ message Params {
 
   string ethBatcherAddr = 1;
   string depositKeyringAddr = 2;
-  uint64 ethMinterKeyID = 3;
+  uint64 minterKeyID = 3 [deprecated = true];
   uint64 withdrawerKeyID = 4 [deprecated = true];
   uint64 unstakerKeyID = 5;
   uint64 rewardsDepositKeyID = 6;
@@ -22,4 +22,5 @@ message Params {
   string authority = 9;
   uint64 stakerKeyID = 10;
   uint64 completerKeyID = 11;
+  uint64 ethMinterKeyID = 12;
 }

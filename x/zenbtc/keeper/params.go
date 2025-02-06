@@ -23,12 +23,12 @@ var (
 )
 
 // NewParams creates a new Params instance
-func NewParams(ethBatcherAddr, depositKeyringAddr string, stakerKeyID, minterKeyID, unstakerKeyID, completerKeyID uint64, changeAddressKeyIDs []uint64, rewardsDepositKeyID uint64, bitcoinProxyAddress, authority string) *types.Params {
+func NewParams(ethBatcherAddr, depositKeyringAddr string, stakerKeyID, ethMinterKeyID, unstakerKeyID, completerKeyID uint64, changeAddressKeyIDs []uint64, rewardsDepositKeyID uint64, bitcoinProxyAddress, authority string) *types.Params {
 	return &types.Params{
 		EthBatcherAddr:      ethBatcherAddr,
 		DepositKeyringAddr:  depositKeyringAddr,
 		StakerKeyID:         stakerKeyID,
-		EthMinterKeyID:      minterKeyID,
+		EthMinterKeyID:      ethMinterKeyID,
 		UnstakerKeyID:       unstakerKeyID,
 		CompleterKeyID:      completerKeyID,
 		ChangeAddressKeyIDs: changeAddressKeyIDs,
