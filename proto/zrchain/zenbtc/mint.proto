@@ -33,10 +33,20 @@ message PendingMintTransaction {
   string creator = 5;
   uint64 key_id = 6;
   string caip2_chain_id = 7;
+  uint64 id = 8;
+  MintTransactionStatus status = 9;
 }
 
-// PendingMintTransactions is a collection of pending mint transactions.
+enum MintTransactionStatus {
+  MINT_TRANSACTION_STATUS_UNSPECIFIED = 0;
+  MINT_TRANSACTION_STATUS_DEPOSITED = 1;
+  MINT_TRANSACTION_STATUS_STAKED = 2;
+  MINT_TRANSACTION_STATUS_MINTED = 3;
+}
+
+// Deprecated: This message is deprecated and should no longer be used.
 message PendingMintTransactions {
+  option deprecated = true;
   repeated PendingMintTransaction txs = 1;
 }
 

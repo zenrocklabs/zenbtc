@@ -28,6 +28,8 @@ type QueryClient interface {
 	QueryPendingMintTransactions(ctx context.Context, in *QueryPendingMintTransactionsRequest, opts ...grpc.CallOption) (*QueryPendingMintTransactionsResponse, error)
 	// Queries the current supply of zenBTC.
 	QuerySupply(ctx context.Context, in *QuerySupplyRequest, opts ...grpc.CallOption) (*QuerySupplyResponse, error)
+	// Queries a list of BurnEvents items.
+	QueryBurnEvents(ctx context.Context, in *QueryBurnEventsRequest, opts ...grpc.CallOption) (*QueryBurnEventsResponse, error)
 }
 
 type queryClient struct {
@@ -83,6 +85,15 @@ func (c *queryClient) QuerySupply(ctx context.Context, in *QuerySupplyRequest, o
 	return out, nil
 }
 
+func (c *queryClient) QueryBurnEvents(ctx context.Context, in *QueryBurnEventsRequest, opts ...grpc.CallOption) (*QueryBurnEventsResponse, error) {
+	out := new(QueryBurnEventsResponse)
+	err := c.cc.Invoke(ctx, "/zrchain.zenbtc.Query/QueryBurnEvents", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // QueryServer is the server API for Query service.
 // All implementations must embed UnimplementedQueryServer
 // for forward compatibility
@@ -97,6 +108,8 @@ type QueryServer interface {
 	QueryPendingMintTransactions(context.Context, *QueryPendingMintTransactionsRequest) (*QueryPendingMintTransactionsResponse, error)
 	// Queries the current supply of zenBTC.
 	QuerySupply(context.Context, *QuerySupplyRequest) (*QuerySupplyResponse, error)
+	// Queries a list of BurnEvents items.
+	QueryBurnEvents(context.Context, *QueryBurnEventsRequest) (*QueryBurnEventsResponse, error)
 	mustEmbedUnimplementedQueryServer()
 }
 
@@ -118,6 +131,9 @@ func (UnimplementedQueryServer) QueryPendingMintTransactions(context.Context, *Q
 }
 func (UnimplementedQueryServer) QuerySupply(context.Context, *QuerySupplyRequest) (*QuerySupplyResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method QuerySupply not implemented")
+}
+func (UnimplementedQueryServer) QueryBurnEvents(context.Context, *QueryBurnEventsRequest) (*QueryBurnEventsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method QueryBurnEvents not implemented")
 }
 func (UnimplementedQueryServer) mustEmbedUnimplementedQueryServer() {}
 
@@ -222,6 +238,24 @@ func _Query_QuerySupply_Handler(srv interface{}, ctx context.Context, dec func(i
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Query_QueryBurnEvents_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryBurnEventsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(QueryServer).QueryBurnEvents(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/zrchain.zenbtc.Query/QueryBurnEvents",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(QueryServer).QueryBurnEvents(ctx, req.(*QueryBurnEventsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Query_ServiceDesc is the grpc.ServiceDesc for Query service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -248,6 +282,10 @@ var Query_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "QuerySupply",
 			Handler:    _Query_QuerySupply_Handler,
+		},
+		{
+			MethodName: "QueryBurnEvents",
+			Handler:    _Query_QueryBurnEvents_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

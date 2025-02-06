@@ -25,3 +25,15 @@ enum RedemptionStatus {
   BURNED = 3;
   COMPLETED = 4;
 }
+
+message BurnEvent {
+  string txID = 1;
+  uint64 logIndex = 2;
+  string chainID = 3;
+  bytes destinationAddr = 4;
+  uint64 amount = 5;
+}
+
+message BurnEvents {
+  repeated BurnEvent events = 1;
+}

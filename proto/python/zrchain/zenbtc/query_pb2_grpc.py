@@ -40,6 +40,11 @@ class QueryStub(object):
                 request_serializer=zrchain_dot_zenbtc_dot_query__pb2.QuerySupplyRequest.SerializeToString,
                 response_deserializer=zrchain_dot_zenbtc_dot_query__pb2.QuerySupplyResponse.FromString,
                 )
+        self.QueryBurnEvents = channel.unary_unary(
+                '/zrchain.zenbtc.Query/QueryBurnEvents',
+                request_serializer=zrchain_dot_zenbtc_dot_query__pb2.QueryBurnEventsRequest.SerializeToString,
+                response_deserializer=zrchain_dot_zenbtc_dot_query__pb2.QueryBurnEventsResponse.FromString,
+                )
 
 
 class QueryServicer(object):
@@ -81,6 +86,13 @@ class QueryServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def QueryBurnEvents(self, request, context):
+        """Queries a list of BurnEvents items.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_QueryServicer_to_server(servicer, server):
     rpc_method_handlers = {
@@ -108,6 +120,11 @@ def add_QueryServicer_to_server(servicer, server):
                     servicer.QuerySupply,
                     request_deserializer=zrchain_dot_zenbtc_dot_query__pb2.QuerySupplyRequest.FromString,
                     response_serializer=zrchain_dot_zenbtc_dot_query__pb2.QuerySupplyResponse.SerializeToString,
+            ),
+            'QueryBurnEvents': grpc.unary_unary_rpc_method_handler(
+                    servicer.QueryBurnEvents,
+                    request_deserializer=zrchain_dot_zenbtc_dot_query__pb2.QueryBurnEventsRequest.FromString,
+                    response_serializer=zrchain_dot_zenbtc_dot_query__pb2.QueryBurnEventsResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -202,5 +219,22 @@ class Query(object):
         return grpc.experimental.unary_unary(request, target, '/zrchain.zenbtc.Query/QuerySupply',
             zrchain_dot_zenbtc_dot_query__pb2.QuerySupplyRequest.SerializeToString,
             zrchain_dot_zenbtc_dot_query__pb2.QuerySupplyResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def QueryBurnEvents(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/zrchain.zenbtc.Query/QueryBurnEvents',
+            zrchain_dot_zenbtc_dot_query__pb2.QueryBurnEventsRequest.SerializeToString,
+            zrchain_dot_zenbtc_dot_query__pb2.QueryBurnEventsResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

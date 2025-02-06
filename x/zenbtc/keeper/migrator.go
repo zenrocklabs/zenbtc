@@ -5,6 +5,7 @@ import (
 	v2 "github.com/zenrocklabs/zenbtc/x/zenbtc/migrations/v2"
 	v3 "github.com/zenrocklabs/zenbtc/x/zenbtc/migrations/v3"
 	v4 "github.com/zenrocklabs/zenbtc/x/zenbtc/migrations/v4"
+	"github.com/zenrocklabs/zenbtc/x/zenbtc/types"
 )
 
 // Migrator is a struct for handling in-place store migrations.
@@ -29,5 +30,9 @@ func (m Migrator) Migrate2to3(ctx sdk.Context) error {
 }
 
 func (m Migrator) Migrate3to4(ctx sdk.Context) error {
-	return v4.ChangePendingMintTxChainIdtoCaip2Id(ctx, m.keeper.PendingMintTransactions, m.keeper.cdc)
+	shim := func(ctx sdk.Context, tx *types.PendingMintTransaction) error {
+		_, err := m.keeper.CreatePendingMintTransaction(ctx, tx)
+		return err
+	}
+	return v4.ChangePendingMintTxChainIdtoCaip2Id(ctx, m.keeper.PendingMintTransactions, shim)
 }

@@ -29,7 +29,13 @@ type (
 		// LockTransactionStore - key: lock transaction rawTx + vout | value: lock transaction data
 		LockTransactionStore collections.Map[collections.Pair[string, uint64], types.LockTransaction]
 		// PendingMintTransactions - key: pending zenBTC mint transaction
-		PendingMintTransactions collections.Item[types.PendingMintTransactions]
+		PendingMintTransactions collections.Item[types.PendingMintTransactions] // DEPRECATED
+		// PendingMintTransactionsMap - key: pending zenBTC mint transaction id | value: pending zenBTC mint transaction
+		PendingMintTransactionsMap collections.Map[uint64, types.PendingMintTransaction]
+		// PendingMintTransactionCount - value: count of pending zenBTC mint transactions
+		PendingMintTransactionCount collections.Item[uint64]
+		// BurnEvents - key: burn event index | value: burn event data
+		BurnEvents collections.Item[types.BurnEvents]
 		// Redemptions - key: redemption index | value: redemption data
 		Redemptions collections.Map[uint64, types.Redemption]
 		// Supply - value: zenBTC supply data
@@ -54,11 +60,14 @@ func NewKeeper(
 		validationKeeper: validationKeeper,
 		treasuryKeeper:   treasuryKeeper,
 
-		Params:                  collections.NewItem(sb, types.ParamsKey, types.ParamsIndex, codec.CollValue[types.Params](cdc)),
-		LockTransactionStore:    collections.NewMap(sb, types.LockTransactionsKey, types.LockTransactionsIndex, collections.PairKeyCodec(collections.StringKey, collections.Uint64Key), codec.CollValue[types.LockTransaction](cdc)),
-		PendingMintTransactions: collections.NewItem(sb, types.PendingMintTransactionsKey, types.PendingMintTransactionsIndex, codec.CollValue[types.PendingMintTransactions](cdc)),
-		Redemptions:             collections.NewMap(sb, types.RedemptionsKey, types.RedemptionsIndex, collections.Uint64Key, codec.CollValue[types.Redemption](cdc)),
-		Supply:                  collections.NewItem(sb, types.SupplyKey, types.SupplyIndex, codec.CollValue[types.Supply](cdc)),
+		Params:                      collections.NewItem(sb, types.ParamsKey, types.ParamsIndex, codec.CollValue[types.Params](cdc)),
+		LockTransactionStore:        collections.NewMap(sb, types.LockTransactionsKey, types.LockTransactionsIndex, collections.PairKeyCodec(collections.StringKey, collections.Uint64Key), codec.CollValue[types.LockTransaction](cdc)),
+		PendingMintTransactions:     collections.NewItem(sb, types.PendingMintTransactionsKey, types.PendingMintTransactionsIndex, codec.CollValue[types.PendingMintTransactions](cdc)),
+		PendingMintTransactionsMap:  collections.NewMap(sb, types.PendingMintTransactionsMapKey, types.PendingMintTransactionsMapIndex, collections.Uint64Key, codec.CollValue[types.PendingMintTransaction](cdc)),
+		PendingMintTransactionCount: collections.NewItem(sb, types.PendingMintTransactionCountKey, types.PendingMintTransactionCountIndex, collections.Uint64Value),
+		Redemptions:                 collections.NewMap(sb, types.RedemptionsKey, types.RedemptionsIndex, collections.Uint64Key, codec.CollValue[types.Redemption](cdc)),
+		Supply:                      collections.NewItem(sb, types.SupplyKey, types.SupplyIndex, codec.CollValue[types.Supply](cdc)),
+		BurnEvents:                  collections.NewItem(sb, types.BurnEventsKey, types.BurnEventsIndex, codec.CollValue[types.BurnEvents](cdc)),
 	}
 
 	schema, err := sb.Build()
@@ -95,12 +104,12 @@ func (k Keeper) GetExchangeRate(ctx context.Context) (float64, error) {
 	return float64(supply.CustodiedBTC) / float64(totalZenBTC), nil
 }
 
-func (k Keeper) GetPendingMintTransactions(ctx context.Context) (types.PendingMintTransactions, error) {
-	return k.PendingMintTransactions.Get(ctx)
+func (k Keeper) SetPendingMintTransaction(ctx context.Context, pendingMintTransaction types.PendingMintTransaction) error {
+	return k.PendingMintTransactionsMap.Set(ctx, pendingMintTransaction.Id, pendingMintTransaction)
 }
 
-func (k Keeper) SetPendingMintTransactions(ctx context.Context, pendingMintTransactions types.PendingMintTransactions) error {
-	return k.PendingMintTransactions.Set(ctx, pendingMintTransactions)
+func (k Keeper) WalkPendingMintTransactions(ctx context.Context, fn func(id uint64, pendingMintTransaction types.PendingMintTransaction) (stop bool, err error)) error {
+	return k.PendingMintTransactionsMap.Walk(ctx, nil, fn)
 }
 
 func (k Keeper) HasRedemption(ctx context.Context, id uint64) (bool, error) {
@@ -121,4 +130,12 @@ func (k Keeper) GetSupply(ctx context.Context) (types.Supply, error) {
 
 func (k Keeper) SetSupply(ctx context.Context, supply types.Supply) error {
 	return k.Supply.Set(ctx, supply)
+}
+
+func (k Keeper) GetBurnEvents(ctx context.Context) (types.BurnEvents, error) {
+	return k.BurnEvents.Get(ctx)
+}
+
+func (k Keeper) SetBurnEvents(ctx context.Context, burnEvents types.BurnEvents) error {
+	return k.BurnEvents.Set(ctx, burnEvents)
 }

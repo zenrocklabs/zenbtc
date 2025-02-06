@@ -73,3 +73,21 @@ class QuerySupplyResponse(_message.Message):
     pendingZenBTC: int
     exchangeRate: str
     def __init__(self, custodiedBTC: _Optional[int] = ..., totalZenBTC: _Optional[int] = ..., mintedZenBTC: _Optional[int] = ..., pendingZenBTC: _Optional[int] = ..., exchangeRate: _Optional[str] = ...) -> None: ...
+
+class QueryBurnEventsRequest(_message.Message):
+    __slots__ = ("startIndex", "txID", "logIndex", "chainID")
+    STARTINDEX_FIELD_NUMBER: _ClassVar[int]
+    TXID_FIELD_NUMBER: _ClassVar[int]
+    LOGINDEX_FIELD_NUMBER: _ClassVar[int]
+    CHAINID_FIELD_NUMBER: _ClassVar[int]
+    startIndex: int
+    txID: str
+    logIndex: int
+    chainID: str
+    def __init__(self, startIndex: _Optional[int] = ..., txID: _Optional[str] = ..., logIndex: _Optional[int] = ..., chainID: _Optional[str] = ...) -> None: ...
+
+class QueryBurnEventsResponse(_message.Message):
+    __slots__ = ("burnEvents",)
+    BURNEVENTS_FIELD_NUMBER: _ClassVar[int]
+    burnEvents: _containers.RepeatedCompositeFieldContainer[_redemptions_pb2.BurnEvent]
+    def __init__(self, burnEvents: _Optional[_Iterable[_Union[_redemptions_pb2.BurnEvent, _Mapping]]] = ...) -> None: ...

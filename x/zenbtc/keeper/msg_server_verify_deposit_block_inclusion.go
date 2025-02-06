@@ -142,14 +142,6 @@ func (k msgServer) VerifyDepositBlockInclusion(goCtx context.Context, msg *types
 		return &types.MsgVerifyDepositBlockInclusionResponse{}, nil
 	}
 
-	pendingTxs, err := k.PendingMintTransactions.Get(ctx)
-	if err != nil {
-		if !errors.Is(err, collections.ErrNotFound) {
-			return nil, err
-		}
-		pendingTxs = types.PendingMintTransactions{Txs: []*types.PendingMintTransaction{}}
-	}
-
 	tx := &types.PendingMintTransaction{
 		// ChainId:          q.Response.Key.ZenbtcMetadata.ChainId,
 		Caip2ChainId:     q.Response.Key.ZenbtcMetadata.Caip2ChainId,
@@ -157,15 +149,14 @@ func (k msgServer) VerifyDepositBlockInclusion(goCtx context.Context, msg *types
 		RecipientAddress: q.Response.Key.ZenbtcMetadata.RecipientAddr,
 		Amount:           zenBTCAmount,
 		Creator:          msg.Creator,
-		KeyId:            k.GetMinterKeyID(ctx),
+		KeyId:            k.GetEthMinterKeyID(ctx),
 	}
-	pendingTxs.Txs = append(pendingTxs.Txs, tx)
-	if err := k.PendingMintTransactions.Set(ctx, pendingTxs); err != nil {
+	if _, err := k.CreatePendingMintTransaction(ctx, tx); err != nil {
 		return nil, err
 	}
 	k.validationKeeper.Logger(ctx).Warn("added pending mint transaction", "tx", fmt.Sprintf("%+v", tx))
 
-	if err := k.validationKeeper.EthereumNonceRequested.Set(ctx, k.GetMinterKeyID(ctx), true); err != nil {
+	if err := k.validationKeeper.EthereumNonceRequested.Set(ctx, k.GetEthMinterKeyID(ctx), true); err != nil {
 		return nil, err
 	}
 
