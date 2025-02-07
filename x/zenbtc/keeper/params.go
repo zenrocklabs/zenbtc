@@ -7,7 +7,8 @@ import (
 )
 
 var (
-	DefaultEthBatcherAddr             = "0x912D79F8d489d0d007aBE0E26fD5d2f06BA4A2AA"
+	DefaultEthBatcherAddr             = "0x5b9Ea8d5486D388a158F026c337DF950866dA5e9"
+	DefaultEthTokenAddr               = "0xC8CdeDd20cCb4c06884ac4C2fF952A0B7cC230a3"
 	DefaultDepositKeyringAddr         = "keyring1k6vc6vhp6e6l3rxalue9v4ux"
 	DefaultEthMinterKeyID      uint64 = 2
 	DefaultChangeAddressKeyIDs        = []uint64{3}
@@ -23,9 +24,10 @@ var (
 )
 
 // NewParams creates a new Params instance
-func NewParams(ethBatcherAddr, depositKeyringAddr string, stakerKeyID, ethMinterKeyID, unstakerKeyID, completerKeyID uint64, changeAddressKeyIDs []uint64, rewardsDepositKeyID uint64, bitcoinProxyAddress, authority string) *types.Params {
+func NewParams(ethBatcherAddr, ethTokenAddr, depositKeyringAddr string, stakerKeyID, ethMinterKeyID, unstakerKeyID, completerKeyID uint64, changeAddressKeyIDs []uint64, rewardsDepositKeyID uint64, bitcoinProxyAddress, authority string) *types.Params {
 	return &types.Params{
 		EthBatcherAddr:      ethBatcherAddr,
+		EthTokenAddr:        ethTokenAddr,
 		DepositKeyringAddr:  depositKeyringAddr,
 		StakerKeyID:         stakerKeyID,
 		EthMinterKeyID:      ethMinterKeyID,
@@ -42,6 +44,7 @@ func NewParams(ethBatcherAddr, depositKeyringAddr string, stakerKeyID, ethMinter
 func DefaultParams() *types.Params {
 	return NewParams(
 		DefaultEthBatcherAddr,
+		DefaultEthTokenAddr,
 		DefaultDepositKeyringAddr,
 		DefaultStakerKeyID,
 		DefaultEthMinterKeyID,
@@ -60,6 +63,14 @@ func (k Keeper) GetEthBatcherAddr(ctx context.Context) string {
 		return DefaultEthBatcherAddr
 	}
 	return params.EthBatcherAddr
+}
+
+func (k Keeper) GetEthTokenAddr(ctx context.Context) string {
+	params, err := k.Params.Get(ctx)
+	if err != nil {
+		return DefaultEthTokenAddr
+	}
+	return params.EthTokenAddr
 }
 
 func (k Keeper) GetDepositKeyringAddr(ctx context.Context) string {

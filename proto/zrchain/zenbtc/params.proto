@@ -23,4 +23,5 @@ message Params {
   uint64 stakerKeyID = 10;
   uint64 completerKeyID = 11;
   uint64 ethMinterKeyID = 12;
+  string ethTokenAddr = 13;
 }
