@@ -1,3 +1,10 @@
+## [1.11.2](https://github.com/zenrocklabs/zenbtc/compare/v1.11.1...v1.11.2) (2025-02-07)
+
+
+### Bug Fixes
+
+* add `EthTokenAddr` param field ([c363d76](https://github.com/zenrocklabs/zenbtc/commit/c363d76f629be1264f8131bda95cbe4745a2fa9d))
+
 ## [1.11.1](https://github.com/zenrocklabs/zenbtc/compare/v1.11.0...v1.11.1) (2025-02-07)
 
 
