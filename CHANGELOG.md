@@ -1,3 +1,10 @@
+## [1.11.1](https://github.com/zenrocklabs/zenbtc/compare/v1.11.0...v1.11.1) (2025-02-07)
+
+
+### Bug Fixes
+
+* `VerifyDepositBlockInclusion` handler ([3be9dbf](https://github.com/zenrocklabs/zenbtc/commit/3be9dbf5b15fe2f5b85692d25a2dfa0a455be9a1))
+
 # [1.11.0](https://github.com/zenrocklabs/zenbtc/compare/v1.10.0...v1.11.0) (2025-02-06)
 
 
