@@ -1,3 +1,10 @@
+# [1.12.0](https://github.com/zenrocklabs/zenbtc/compare/v1.11.2...v1.12.0) (2025-02-10)
+
+
+### Features
+
+* store redemption txbytes in sign request ([a42e275](https://github.com/zenrocklabs/zenbtc/commit/a42e275633a3c117561ca35230bc69ba5c9bc43a))
+
 ## [1.11.2](https://github.com/zenrocklabs/zenbtc/compare/v1.11.1...v1.11.2) (2025-02-07)
 
 
