@@ -15,7 +15,7 @@ func (k msgServer) SubmitUnsignedRedemptionTx(goCtx context.Context, msg *types.
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
 	//For Debugging Only
-	
+
 	//if err := k.validationKeeper.ZenBTCRedemptions.Set(ctx, 1, types.Redemption{
 	//	Data: types.RedemptionData{ // populate data below
 	//		Id:                 1,
@@ -54,6 +54,7 @@ func (k msgServer) SubmitUnsignedRedemptionTx(goCtx context.Context, msg *types.
 		KeyIds:         keyIDs,
 		DataForSigning: strings.Join(hashes, ","), // hex string, each unsigned utxo is separated by comma
 		CacheId:        msg.CacheId,
+		ZenbtcTxBytes:  msg.Txbytes,
 	}
 	if _, err := k.treasuryKeeper.HandleSignatureRequest(ctx, sigReq); err != nil {
 		return nil, err
