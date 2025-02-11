@@ -126,6 +126,11 @@ func (k msgServer) VerifyDepositBlockInclusion(goCtx context.Context, msg *types
 	k.Logger().Warn("custodied supply updated", "custodied_old", supply.CustodiedBTC-msg.Amount, "custodied_new", supply.CustodiedBTC)
 	k.Logger().Warn("pending mint supply updated", "pending_mint_old", supply.PendingZenBTC-zenBTCAmount, "pending_mint_new", supply.PendingZenBTC)
 
+	metaData := q.Response.Key.ZenbtcMetadata
+	if metaData.RecipientAddr == "" || metaData.Caip2ChainId == "" {
+		return nil, errors.New("lock tx - Key Metadata is invalid")
+	}
+
 	if err := k.LockTransactionStore.Set(ctx, collections.Join(msg.RawTx, msg.Vout), types.LockTransaction{
 		RawTx:         msg.RawTx,
 		Vout:          msg.Vout,
