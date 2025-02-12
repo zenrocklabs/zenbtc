@@ -79,6 +79,11 @@ func (k msgServer) VerifyDepositBlockInclusion(goCtx context.Context, msg *types
 		return nil, errors.New("zenBTC deposit address does not correspond to correct key (no wallets returned)")
 	}
 
+	metaData := q.Response.Key.ZenbtcMetadata
+	if metaData == nil || metaData.RecipientAddr == "" || metaData.Caip2ChainId == "" {
+		return nil, errors.New("lock tx - Key Metadata is invalid")
+	}
+
 	found = false
 	for _, wallet := range q.Response.Wallets {
 		if wallet.Address == msg.DepositAddr {
