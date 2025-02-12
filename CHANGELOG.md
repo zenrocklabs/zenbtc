@@ -1,3 +1,10 @@
+## [1.12.3](https://github.com/zenrocklabs/zenbtc/compare/v1.12.2...v1.12.3) (2025-02-12)
+
+
+### Bug Fixes
+
+* add CreateBurnEvent method ([33d7535](https://github.com/zenrocklabs/zenbtc/commit/33d7535161d332385551b64bb3af752856687509))
+
 ## [1.12.2](https://github.com/zenrocklabs/zenbtc/compare/v1.12.1...v1.12.2) (2025-02-12)
 
 
