@@ -47,8 +47,12 @@ class QueryRedemptionsResponse(_message.Message):
     def __init__(self, redemptions: _Optional[_Iterable[_Union[_redemptions_pb2.Redemption, _Mapping]]] = ...) -> None: ...
 
 class QueryPendingMintTransactionsRequest(_message.Message):
-    __slots__ = ()
-    def __init__(self) -> None: ...
+    __slots__ = ("start_index", "status")
+    START_INDEX_FIELD_NUMBER: _ClassVar[int]
+    STATUS_FIELD_NUMBER: _ClassVar[int]
+    start_index: int
+    status: _mint_pb2.MintTransactionStatus
+    def __init__(self, start_index: _Optional[int] = ..., status: _Optional[_Union[_mint_pb2.MintTransactionStatus, str]] = ...) -> None: ...
 
 class QueryPendingMintTransactionsResponse(_message.Message):
     __slots__ = ("pending_mint_transactions",)
@@ -75,16 +79,18 @@ class QuerySupplyResponse(_message.Message):
     def __init__(self, custodiedBTC: _Optional[int] = ..., totalZenBTC: _Optional[int] = ..., mintedZenBTC: _Optional[int] = ..., pendingZenBTC: _Optional[int] = ..., exchangeRate: _Optional[str] = ...) -> None: ...
 
 class QueryBurnEventsRequest(_message.Message):
-    __slots__ = ("startIndex", "txID", "logIndex", "chainID")
-    STARTINDEX_FIELD_NUMBER: _ClassVar[int]
+    __slots__ = ("start_index", "txID", "logIndex", "chainID", "status")
+    START_INDEX_FIELD_NUMBER: _ClassVar[int]
     TXID_FIELD_NUMBER: _ClassVar[int]
     LOGINDEX_FIELD_NUMBER: _ClassVar[int]
     CHAINID_FIELD_NUMBER: _ClassVar[int]
-    startIndex: int
+    STATUS_FIELD_NUMBER: _ClassVar[int]
+    start_index: int
     txID: str
     logIndex: int
     chainID: str
-    def __init__(self, startIndex: _Optional[int] = ..., txID: _Optional[str] = ..., logIndex: _Optional[int] = ..., chainID: _Optional[str] = ...) -> None: ...
+    status: _redemptions_pb2.BurnStatus
+    def __init__(self, start_index: _Optional[int] = ..., txID: _Optional[str] = ..., logIndex: _Optional[int] = ..., chainID: _Optional[str] = ..., status: _Optional[_Union[_redemptions_pb2.BurnStatus, str]] = ...) -> None: ...
 
 class QueryBurnEventsResponse(_message.Message):
     __slots__ = ("burnEvents",)

@@ -72,7 +72,10 @@ message QueryRedemptionsResponse {
   repeated Redemption redemptions = 1 [(gogoproto.nullable) = false];
 }
 
-message QueryPendingMintTransactionsRequest {}
+message QueryPendingMintTransactionsRequest {
+  uint64 start_index = 1;
+  MintTransactionStatus status = 2;
+}
 
 message QueryPendingMintTransactionsResponse {
   repeated PendingMintTransaction pending_mint_transactions = 1;
@@ -89,10 +92,11 @@ message QuerySupplyResponse {
 }
 
 message QueryBurnEventsRequest {
-  uint64 startIndex = 1;
+  uint64 start_index = 1;
   string txID = 2;
   uint64 logIndex = 3;
   string chainID = 4;
+  BurnStatus status = 5;
 }
 
 message QueryBurnEventsResponse {
