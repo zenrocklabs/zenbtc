@@ -1,3 +1,10 @@
+## [1.12.4](https://github.com/zenrocklabs/zenbtc/compare/v1.12.3...v1.12.4) (2025-02-12)
+
+
+### Bug Fixes
+
+* minor polish ([88a8938](https://github.com/zenrocklabs/zenbtc/commit/88a89387550d23a506ec983faf9dea7d2d87cc5e))
+
 ## [1.12.3](https://github.com/zenrocklabs/zenbtc/compare/v1.12.2...v1.12.3) (2025-02-12)
 
 
