@@ -1,3 +1,11 @@
+## [1.12.1](https://github.com/zenrocklabs/zenbtc/compare/v1.12.0...v1.12.1) (2025-02-12)
+
+
+### Bug Fixes
+
+* add check to ensure key has metadata and is therefore a ZenBTC key ([674d92d](https://github.com/zenrocklabs/zenbtc/commit/674d92dcc55f238c6fe89734a93c539edfe4775a))
+* re-order metadata test before supply change, and check for nil metadata ([4cb8ff4](https://github.com/zenrocklabs/zenbtc/commit/4cb8ff403caf7c3cffec95ffa51a971d976a07fb))
+
 # [1.12.0](https://github.com/zenrocklabs/zenbtc/compare/v1.11.2...v1.12.0) (2025-02-10)
 
 
