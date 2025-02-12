@@ -142,3 +142,7 @@ func (k Keeper) GetBurnEvent(ctx context.Context, id uint64) (types.BurnEvent, e
 func (k Keeper) SetBurnEvent(ctx context.Context, id uint64, burnEvent types.BurnEvent) error {
 	return k.BurnEvents.Set(ctx, id, burnEvent)
 }
+
+func (k Keeper) WalkBurnEvents(ctx context.Context, fn func(id uint64, burnEvent types.BurnEvent) (stop bool, err error)) error {
+	return k.BurnEvents.Walk(ctx, nil, fn)
+}
