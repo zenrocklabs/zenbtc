@@ -36,6 +36,8 @@ type (
 		PendingMintTransactionCount collections.Item[uint64]
 		// BurnEvents - key: burn event index | value: burn event data
 		BurnEvents collections.Map[uint64, types.BurnEvent]
+		// BurnEventCount - value: count of burn events
+		BurnEventCount collections.Item[uint64]
 		// Redemptions - key: redemption index | value: redemption data
 		Redemptions collections.Map[uint64, types.Redemption]
 		// Supply - value: zenBTC supply data
@@ -68,6 +70,7 @@ func NewKeeper(
 		Redemptions:                 collections.NewMap(sb, types.RedemptionsKey, types.RedemptionsIndex, collections.Uint64Key, codec.CollValue[types.Redemption](cdc)),
 		Supply:                      collections.NewItem(sb, types.SupplyKey, types.SupplyIndex, codec.CollValue[types.Supply](cdc)),
 		BurnEvents:                  collections.NewMap(sb, types.BurnEventsKey, types.BurnEventsIndex, collections.Uint64Key, codec.CollValue[types.BurnEvent](cdc)),
+		BurnEventCount:              collections.NewItem(sb, types.BurnEventCountKey, types.BurnEventCountIndex, collections.Uint64Value),
 	}
 
 	schema, err := sb.Build()

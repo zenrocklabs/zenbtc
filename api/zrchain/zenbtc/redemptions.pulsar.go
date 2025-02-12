@@ -1016,6 +1016,7 @@ func (x *fastReflection_RedemptionData) ProtoMethods() *protoiface.Methods {
 
 var (
 	md_BurnEvent                 protoreflect.MessageDescriptor
+	fd_BurnEvent_id              protoreflect.FieldDescriptor
 	fd_BurnEvent_txID            protoreflect.FieldDescriptor
 	fd_BurnEvent_logIndex        protoreflect.FieldDescriptor
 	fd_BurnEvent_chainID         protoreflect.FieldDescriptor
@@ -1027,6 +1028,7 @@ var (
 func init() {
 	file_zrchain_zenbtc_redemptions_proto_init()
 	md_BurnEvent = File_zrchain_zenbtc_redemptions_proto.Messages().ByName("BurnEvent")
+	fd_BurnEvent_id = md_BurnEvent.Fields().ByName("id")
 	fd_BurnEvent_txID = md_BurnEvent.Fields().ByName("txID")
 	fd_BurnEvent_logIndex = md_BurnEvent.Fields().ByName("logIndex")
 	fd_BurnEvent_chainID = md_BurnEvent.Fields().ByName("chainID")
@@ -1100,6 +1102,12 @@ func (x *fastReflection_BurnEvent) Interface() protoreflect.ProtoMessage {
 // While iterating, mutating operations may only be performed
 // on the current field descriptor.
 func (x *fastReflection_BurnEvent) Range(f func(protoreflect.FieldDescriptor, protoreflect.Value) bool) {
+	if x.Id != uint64(0) {
+		value := protoreflect.ValueOfUint64(x.Id)
+		if !f(fd_BurnEvent_id, value) {
+			return
+		}
+	}
 	if x.TxID != "" {
 		value := protoreflect.ValueOfString(x.TxID)
 		if !f(fd_BurnEvent_txID, value) {
@@ -1151,6 +1159,8 @@ func (x *fastReflection_BurnEvent) Range(f func(protoreflect.FieldDescriptor, pr
 // a repeated field is populated if it is non-empty.
 func (x *fastReflection_BurnEvent) Has(fd protoreflect.FieldDescriptor) bool {
 	switch fd.FullName() {
+	case "zrchain.zenbtc.BurnEvent.id":
+		return x.Id != uint64(0)
 	case "zrchain.zenbtc.BurnEvent.txID":
 		return x.TxID != ""
 	case "zrchain.zenbtc.BurnEvent.logIndex":
@@ -1179,6 +1189,8 @@ func (x *fastReflection_BurnEvent) Has(fd protoreflect.FieldDescriptor) bool {
 // Clear is a mutating operation and unsafe for concurrent use.
 func (x *fastReflection_BurnEvent) Clear(fd protoreflect.FieldDescriptor) {
 	switch fd.FullName() {
+	case "zrchain.zenbtc.BurnEvent.id":
+		x.Id = uint64(0)
 	case "zrchain.zenbtc.BurnEvent.txID":
 		x.TxID = ""
 	case "zrchain.zenbtc.BurnEvent.logIndex":
@@ -1207,6 +1219,9 @@ func (x *fastReflection_BurnEvent) Clear(fd protoreflect.FieldDescriptor) {
 // of the value; to obtain a mutable reference, use Mutable.
 func (x *fastReflection_BurnEvent) Get(descriptor protoreflect.FieldDescriptor) protoreflect.Value {
 	switch descriptor.FullName() {
+	case "zrchain.zenbtc.BurnEvent.id":
+		value := x.Id
+		return protoreflect.ValueOfUint64(value)
 	case "zrchain.zenbtc.BurnEvent.txID":
 		value := x.TxID
 		return protoreflect.ValueOfString(value)
@@ -1245,6 +1260,8 @@ func (x *fastReflection_BurnEvent) Get(descriptor protoreflect.FieldDescriptor) 
 // Set is a mutating operation and unsafe for concurrent use.
 func (x *fastReflection_BurnEvent) Set(fd protoreflect.FieldDescriptor, value protoreflect.Value) {
 	switch fd.FullName() {
+	case "zrchain.zenbtc.BurnEvent.id":
+		x.Id = value.Uint()
 	case "zrchain.zenbtc.BurnEvent.txID":
 		x.TxID = value.Interface().(string)
 	case "zrchain.zenbtc.BurnEvent.logIndex":
@@ -1277,6 +1294,8 @@ func (x *fastReflection_BurnEvent) Set(fd protoreflect.FieldDescriptor, value pr
 // Mutable is a mutating operation and unsafe for concurrent use.
 func (x *fastReflection_BurnEvent) Mutable(fd protoreflect.FieldDescriptor) protoreflect.Value {
 	switch fd.FullName() {
+	case "zrchain.zenbtc.BurnEvent.id":
+		panic(fmt.Errorf("field id of message zrchain.zenbtc.BurnEvent is not mutable"))
 	case "zrchain.zenbtc.BurnEvent.txID":
 		panic(fmt.Errorf("field txID of message zrchain.zenbtc.BurnEvent is not mutable"))
 	case "zrchain.zenbtc.BurnEvent.logIndex":
@@ -1302,6 +1321,8 @@ func (x *fastReflection_BurnEvent) Mutable(fd protoreflect.FieldDescriptor) prot
 // For lists, maps, and messages, this returns a new, empty, mutable value.
 func (x *fastReflection_BurnEvent) NewField(fd protoreflect.FieldDescriptor) protoreflect.Value {
 	switch fd.FullName() {
+	case "zrchain.zenbtc.BurnEvent.id":
+		return protoreflect.ValueOfUint64(uint64(0))
 	case "zrchain.zenbtc.BurnEvent.txID":
 		return protoreflect.ValueOfString("")
 	case "zrchain.zenbtc.BurnEvent.logIndex":
@@ -1383,6 +1404,9 @@ func (x *fastReflection_BurnEvent) ProtoMethods() *protoiface.Methods {
 		var n int
 		var l int
 		_ = l
+		if x.Id != 0 {
+			n += 1 + runtime.Sov(uint64(x.Id))
+		}
 		l = len(x.TxID)
 		if l > 0 {
 			n += 1 + l + runtime.Sov(uint64(l))
@@ -1436,38 +1460,43 @@ func (x *fastReflection_BurnEvent) ProtoMethods() *protoiface.Methods {
 		if x.Status != 0 {
 			i = runtime.EncodeVarint(dAtA, i, uint64(x.Status))
 			i--
-			dAtA[i] = 0x30
+			dAtA[i] = 0x38
 		}
 		if x.Amount != 0 {
 			i = runtime.EncodeVarint(dAtA, i, uint64(x.Amount))
 			i--
-			dAtA[i] = 0x28
+			dAtA[i] = 0x30
 		}
 		if len(x.DestinationAddr) > 0 {
 			i -= len(x.DestinationAddr)
 			copy(dAtA[i:], x.DestinationAddr)
 			i = runtime.EncodeVarint(dAtA, i, uint64(len(x.DestinationAddr)))
 			i--
-			dAtA[i] = 0x22
+			dAtA[i] = 0x2a
 		}
 		if len(x.ChainID) > 0 {
 			i -= len(x.ChainID)
 			copy(dAtA[i:], x.ChainID)
 			i = runtime.EncodeVarint(dAtA, i, uint64(len(x.ChainID)))
 			i--
-			dAtA[i] = 0x1a
+			dAtA[i] = 0x22
 		}
 		if x.LogIndex != 0 {
 			i = runtime.EncodeVarint(dAtA, i, uint64(x.LogIndex))
 			i--
-			dAtA[i] = 0x10
+			dAtA[i] = 0x18
 		}
 		if len(x.TxID) > 0 {
 			i -= len(x.TxID)
 			copy(dAtA[i:], x.TxID)
 			i = runtime.EncodeVarint(dAtA, i, uint64(len(x.TxID)))
 			i--
-			dAtA[i] = 0xa
+			dAtA[i] = 0x12
+		}
+		if x.Id != 0 {
+			i = runtime.EncodeVarint(dAtA, i, uint64(x.Id))
+			i--
+			dAtA[i] = 0x8
 		}
 		if input.Buf != nil {
 			input.Buf = append(input.Buf, dAtA...)
@@ -1519,6 +1548,25 @@ func (x *fastReflection_BurnEvent) ProtoMethods() *protoiface.Methods {
 			}
 			switch fieldNum {
 			case 1:
+				if wireType != 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field Id", wireType)
+				}
+				x.Id = 0
+				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
+					}
+					if iNdEx >= l {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+					}
+					b := dAtA[iNdEx]
+					iNdEx++
+					x.Id |= uint64(b&0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+			case 2:
 				if wireType != 2 {
 					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field TxID", wireType)
 				}
@@ -1550,7 +1598,7 @@ func (x *fastReflection_BurnEvent) ProtoMethods() *protoiface.Methods {
 				}
 				x.TxID = string(dAtA[iNdEx:postIndex])
 				iNdEx = postIndex
-			case 2:
+			case 3:
 				if wireType != 0 {
 					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field LogIndex", wireType)
 				}
@@ -1569,7 +1617,7 @@ func (x *fastReflection_BurnEvent) ProtoMethods() *protoiface.Methods {
 						break
 					}
 				}
-			case 3:
+			case 4:
 				if wireType != 2 {
 					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field ChainID", wireType)
 				}
@@ -1601,7 +1649,7 @@ func (x *fastReflection_BurnEvent) ProtoMethods() *protoiface.Methods {
 				}
 				x.ChainID = string(dAtA[iNdEx:postIndex])
 				iNdEx = postIndex
-			case 4:
+			case 5:
 				if wireType != 2 {
 					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field DestinationAddr", wireType)
 				}
@@ -1635,7 +1683,7 @@ func (x *fastReflection_BurnEvent) ProtoMethods() *protoiface.Methods {
 					x.DestinationAddr = []byte{}
 				}
 				iNdEx = postIndex
-			case 5:
+			case 6:
 				if wireType != 0 {
 					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field Amount", wireType)
 				}
@@ -1654,7 +1702,7 @@ func (x *fastReflection_BurnEvent) ProtoMethods() *protoiface.Methods {
 						break
 					}
 				}
-			case 6:
+			case 7:
 				if wireType != 0 {
 					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field Status", wireType)
 				}
@@ -1926,12 +1974,13 @@ type BurnEvent struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	TxID            string     `protobuf:"bytes,1,opt,name=txID,proto3" json:"txID,omitempty"`
-	LogIndex        uint64     `protobuf:"varint,2,opt,name=logIndex,proto3" json:"logIndex,omitempty"`
-	ChainID         string     `protobuf:"bytes,3,opt,name=chainID,proto3" json:"chainID,omitempty"`
-	DestinationAddr []byte     `protobuf:"bytes,4,opt,name=destinationAddr,proto3" json:"destinationAddr,omitempty"`
-	Amount          uint64     `protobuf:"varint,5,opt,name=amount,proto3" json:"amount,omitempty"`
-	Status          BurnStatus `protobuf:"varint,6,opt,name=status,proto3,enum=zrchain.zenbtc.BurnStatus" json:"status,omitempty"`
+	Id              uint64     `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	TxID            string     `protobuf:"bytes,2,opt,name=txID,proto3" json:"txID,omitempty"`
+	LogIndex        uint64     `protobuf:"varint,3,opt,name=logIndex,proto3" json:"logIndex,omitempty"`
+	ChainID         string     `protobuf:"bytes,4,opt,name=chainID,proto3" json:"chainID,omitempty"`
+	DestinationAddr []byte     `protobuf:"bytes,5,opt,name=destinationAddr,proto3" json:"destinationAddr,omitempty"`
+	Amount          uint64     `protobuf:"varint,6,opt,name=amount,proto3" json:"amount,omitempty"`
+	Status          BurnStatus `protobuf:"varint,7,opt,name=status,proto3,enum=zrchain.zenbtc.BurnStatus" json:"status,omitempty"`
 }
 
 func (x *BurnEvent) Reset() {
@@ -1952,6 +2001,13 @@ func (*BurnEvent) ProtoMessage() {}
 // Deprecated: Use BurnEvent.ProtoReflect.Descriptor instead.
 func (*BurnEvent) Descriptor() ([]byte, []int) {
 	return file_zrchain_zenbtc_redemptions_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *BurnEvent) GetId() uint64 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
 }
 
 func (x *BurnEvent) GetTxID() string {
@@ -2018,17 +2074,18 @@ var file_zrchain_zenbtc_redemptions_proto_rawDesc = []byte{
 	0x72, 0x65, 0x73, 0x73, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0c, 0x52, 0x12, 0x64, 0x65, 0x73, 0x74,
 	0x69, 0x6e, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x41, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x12, 0x16,
 	0x0a, 0x06, 0x61, 0x6d, 0x6f, 0x75, 0x6e, 0x74, 0x18, 0x03, 0x20, 0x01, 0x28, 0x04, 0x52, 0x06,
-	0x61, 0x6d, 0x6f, 0x75, 0x6e, 0x74, 0x22, 0xcb, 0x01, 0x0a, 0x09, 0x42, 0x75, 0x72, 0x6e, 0x45,
-	0x76, 0x65, 0x6e, 0x74, 0x12, 0x12, 0x0a, 0x04, 0x74, 0x78, 0x49, 0x44, 0x18, 0x01, 0x20, 0x01,
+	0x61, 0x6d, 0x6f, 0x75, 0x6e, 0x74, 0x22, 0xdb, 0x01, 0x0a, 0x09, 0x42, 0x75, 0x72, 0x6e, 0x45,
+	0x76, 0x65, 0x6e, 0x74, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x04,
+	0x52, 0x02, 0x69, 0x64, 0x12, 0x12, 0x0a, 0x04, 0x74, 0x78, 0x49, 0x44, 0x18, 0x02, 0x20, 0x01,
 	0x28, 0x09, 0x52, 0x04, 0x74, 0x78, 0x49, 0x44, 0x12, 0x1a, 0x0a, 0x08, 0x6c, 0x6f, 0x67, 0x49,
-	0x6e, 0x64, 0x65, 0x78, 0x18, 0x02, 0x20, 0x01, 0x28, 0x04, 0x52, 0x08, 0x6c, 0x6f, 0x67, 0x49,
+	0x6e, 0x64, 0x65, 0x78, 0x18, 0x03, 0x20, 0x01, 0x28, 0x04, 0x52, 0x08, 0x6c, 0x6f, 0x67, 0x49,
 	0x6e, 0x64, 0x65, 0x78, 0x12, 0x18, 0x0a, 0x07, 0x63, 0x68, 0x61, 0x69, 0x6e, 0x49, 0x44, 0x18,
-	0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x63, 0x68, 0x61, 0x69, 0x6e, 0x49, 0x44, 0x12, 0x28,
+	0x04, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x63, 0x68, 0x61, 0x69, 0x6e, 0x49, 0x44, 0x12, 0x28,
 	0x0a, 0x0f, 0x64, 0x65, 0x73, 0x74, 0x69, 0x6e, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x41, 0x64, 0x64,
-	0x72, 0x18, 0x04, 0x20, 0x01, 0x28, 0x0c, 0x52, 0x0f, 0x64, 0x65, 0x73, 0x74, 0x69, 0x6e, 0x61,
+	0x72, 0x18, 0x05, 0x20, 0x01, 0x28, 0x0c, 0x52, 0x0f, 0x64, 0x65, 0x73, 0x74, 0x69, 0x6e, 0x61,
 	0x74, 0x69, 0x6f, 0x6e, 0x41, 0x64, 0x64, 0x72, 0x12, 0x16, 0x0a, 0x06, 0x61, 0x6d, 0x6f, 0x75,
-	0x6e, 0x74, 0x18, 0x05, 0x20, 0x01, 0x28, 0x04, 0x52, 0x06, 0x61, 0x6d, 0x6f, 0x75, 0x6e, 0x74,
-	0x12, 0x32, 0x0a, 0x06, 0x73, 0x74, 0x61, 0x74, 0x75, 0x73, 0x18, 0x06, 0x20, 0x01, 0x28, 0x0e,
+	0x6e, 0x74, 0x18, 0x06, 0x20, 0x01, 0x28, 0x04, 0x52, 0x06, 0x61, 0x6d, 0x6f, 0x75, 0x6e, 0x74,
+	0x12, 0x32, 0x0a, 0x06, 0x73, 0x74, 0x61, 0x74, 0x75, 0x73, 0x18, 0x07, 0x20, 0x01, 0x28, 0x0e,
 	0x32, 0x1a, 0x2e, 0x7a, 0x72, 0x63, 0x68, 0x61, 0x69, 0x6e, 0x2e, 0x7a, 0x65, 0x6e, 0x62, 0x74,
 	0x63, 0x2e, 0x42, 0x75, 0x72, 0x6e, 0x53, 0x74, 0x61, 0x74, 0x75, 0x73, 0x52, 0x06, 0x73, 0x74,
 	0x61, 0x74, 0x75, 0x73, 0x2a, 0x5f, 0x0a, 0x10, 0x52, 0x65, 0x64, 0x65, 0x6d, 0x70, 0x74, 0x69,

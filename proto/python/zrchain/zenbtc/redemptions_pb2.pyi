@@ -47,17 +47,19 @@ class RedemptionData(_message.Message):
     def __init__(self, id: _Optional[int] = ..., destination_address: _Optional[bytes] = ..., amount: _Optional[int] = ...) -> None: ...
 
 class BurnEvent(_message.Message):
-    __slots__ = ("txID", "logIndex", "chainID", "destinationAddr", "amount", "status")
+    __slots__ = ("id", "txID", "logIndex", "chainID", "destinationAddr", "amount", "status")
+    ID_FIELD_NUMBER: _ClassVar[int]
     TXID_FIELD_NUMBER: _ClassVar[int]
     LOGINDEX_FIELD_NUMBER: _ClassVar[int]
     CHAINID_FIELD_NUMBER: _ClassVar[int]
     DESTINATIONADDR_FIELD_NUMBER: _ClassVar[int]
     AMOUNT_FIELD_NUMBER: _ClassVar[int]
     STATUS_FIELD_NUMBER: _ClassVar[int]
+    id: int
     txID: str
     logIndex: int
     chainID: str
     destinationAddr: bytes
     amount: int
     status: BurnStatus
-    def __init__(self, txID: _Optional[str] = ..., logIndex: _Optional[int] = ..., chainID: _Optional[str] = ..., destinationAddr: _Optional[bytes] = ..., amount: _Optional[int] = ..., status: _Optional[_Union[BurnStatus, str]] = ...) -> None: ...
+    def __init__(self, id: _Optional[int] = ..., txID: _Optional[str] = ..., logIndex: _Optional[int] = ..., chainID: _Optional[str] = ..., destinationAddr: _Optional[bytes] = ..., amount: _Optional[int] = ..., status: _Optional[_Union[BurnStatus, str]] = ...) -> None: ...
