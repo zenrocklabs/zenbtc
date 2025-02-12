@@ -1,3 +1,10 @@
+## [1.12.5](https://github.com/zenrocklabs/zenbtc/compare/v1.12.4...v1.12.5) (2025-02-12)
+
+
+### Bug Fixes
+
+* add WalkBurnEvents method ([f70ffc1](https://github.com/zenrocklabs/zenbtc/commit/f70ffc1f14f88266e4c0b8234ddbfceee47f017d))
+
 ## [1.12.4](https://github.com/zenrocklabs/zenbtc/compare/v1.12.3...v1.12.4) (2025-02-12)
 
 
