@@ -2,7 +2,6 @@ package keeper
 
 import (
 	"context"
-	"errors"
 
 	"cosmossdk.io/collections"
 	"github.com/zenrocklabs/zenbtc/x/zenbtc/types"
@@ -15,24 +14,20 @@ func (k Keeper) QueryBurnEvents(ctx context.Context, req *types.QueryBurnEventsR
 		return nil, status.Error(codes.InvalidArgument, "invalid request")
 	}
 
-	burnEvents, err := k.BurnEvents.Get(ctx)
-	if err != nil {
-		if errors.Is(err, collections.ErrNotFound) {
-			return nil, nil
-		}
-		return nil, err
-	}
+	var matchingBurnEvents []*types.BurnEvent
+	var queryRange collections.Range[uint64]
 
-	matchingBurnEvents := make([]*types.BurnEvent, 0)
-
-	for _, burnEvent := range burnEvents.Events[req.StartIndex:] {
-
+	if err := k.BurnEvents.Walk(ctx, queryRange.StartInclusive(req.StartIndex), func(_ uint64, burnEvent types.BurnEvent) (bool, error) {
 		if (req.TxID == "" || burnEvent.TxID == req.TxID) &&
 			(req.LogIndex == 0 || burnEvent.LogIndex == req.LogIndex) &&
-			(req.ChainID == "" || burnEvent.ChainID == req.ChainID) {
+			(req.ChainID == "" || burnEvent.ChainID == req.ChainID) &&
+			(req.Status == types.BurnStatus_BURN_STATUS_UNSPECIFIED || burnEvent.Status == req.Status) {
 
-			matchingBurnEvents = append(matchingBurnEvents, burnEvent)
+			matchingBurnEvents = append(matchingBurnEvents, &burnEvent)
 		}
+		return false, nil
+	}); err != nil {
+		return nil, err
 	}
 
 	return &types.QueryBurnEventsResponse{BurnEvents: matchingBurnEvents}, nil

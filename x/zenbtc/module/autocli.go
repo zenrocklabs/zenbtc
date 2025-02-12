@@ -43,15 +43,10 @@ func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 					PositionalArgs: []*autocliv1.PositionalArgDescriptor{},
 				},
 				{
-					RpcMethod: "QueryBurnEvents",
-					Use:       "burn-events [start-index] [tx-id] [log-index] [chain-id]",
-					Short:     "Query BurnEvents",
-					PositionalArgs: []*autocliv1.PositionalArgDescriptor{
-						{ProtoField: "startIndex"},
-						{ProtoField: "txID"},
-						{ProtoField: "logIndex"},
-						{ProtoField: "chainID"},
-					},
+					RpcMethod:      "QueryBurnEvents",
+					Use:            "burn-events --start-index [start-index] --tx-id [tx-id] --log-index [log-index] --chain-id [chain-id]",
+					Short:          "Query BurnEvents",
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{},
 				},
 				// this line is used by ignite scaffolding # autocli/query
 			},

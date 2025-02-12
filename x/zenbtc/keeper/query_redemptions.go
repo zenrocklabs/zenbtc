@@ -31,10 +31,6 @@ func (k Keeper) GetRedemptions(goCtx context.Context, req *types.QueryRedemption
 			if redemption.Status == types.RedemptionStatus_UNSTAKED {
 				redemptions = append(redemptions, redemption)
 			}
-		case types.RedemptionStatus_BURNED:
-			if redemption.Status == types.RedemptionStatus_BURNED {
-				redemptions = append(redemptions, redemption)
-			}
 		case types.RedemptionStatus_COMPLETED:
 			if redemption.Status == types.RedemptionStatus_COMPLETED {
 				redemptions = append(redemptions, redemption)

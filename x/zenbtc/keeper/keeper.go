@@ -35,7 +35,7 @@ type (
 		// PendingMintTransactionCount - value: count of pending zenBTC mint transactions
 		PendingMintTransactionCount collections.Item[uint64]
 		// BurnEvents - key: burn event index | value: burn event data
-		BurnEvents collections.Item[types.BurnEvents]
+		BurnEvents collections.Map[uint64, types.BurnEvent]
 		// Redemptions - key: redemption index | value: redemption data
 		Redemptions collections.Map[uint64, types.Redemption]
 		// Supply - value: zenBTC supply data
@@ -67,7 +67,7 @@ func NewKeeper(
 		PendingMintTransactionCount: collections.NewItem(sb, types.PendingMintTransactionCountKey, types.PendingMintTransactionCountIndex, collections.Uint64Value),
 		Redemptions:                 collections.NewMap(sb, types.RedemptionsKey, types.RedemptionsIndex, collections.Uint64Key, codec.CollValue[types.Redemption](cdc)),
 		Supply:                      collections.NewItem(sb, types.SupplyKey, types.SupplyIndex, codec.CollValue[types.Supply](cdc)),
-		BurnEvents:                  collections.NewItem(sb, types.BurnEventsKey, types.BurnEventsIndex, codec.CollValue[types.BurnEvents](cdc)),
+		BurnEvents:                  collections.NewMap(sb, types.BurnEventsKey, types.BurnEventsIndex, collections.Uint64Key, codec.CollValue[types.BurnEvent](cdc)),
 	}
 
 	schema, err := sb.Build()
@@ -132,10 +132,10 @@ func (k Keeper) SetSupply(ctx context.Context, supply types.Supply) error {
 	return k.Supply.Set(ctx, supply)
 }
 
-func (k Keeper) GetBurnEvents(ctx context.Context) (types.BurnEvents, error) {
-	return k.BurnEvents.Get(ctx)
+func (k Keeper) GetBurnEvent(ctx context.Context, id uint64) (types.BurnEvent, error) {
+	return k.BurnEvents.Get(ctx, id)
 }
 
-func (k Keeper) SetBurnEvents(ctx context.Context, burnEvents types.BurnEvents) error {
-	return k.BurnEvents.Set(ctx, burnEvents)
+func (k Keeper) SetBurnEvent(ctx context.Context, id uint64, burnEvent types.BurnEvent) error {
+	return k.BurnEvents.Set(ctx, id, burnEvent)
 }
