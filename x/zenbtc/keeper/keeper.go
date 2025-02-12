@@ -146,3 +146,15 @@ func (k Keeper) SetBurnEvent(ctx context.Context, id uint64, burnEvent types.Bur
 func (k Keeper) WalkBurnEvents(ctx context.Context, fn func(id uint64, burnEvent types.BurnEvent) (stop bool, err error)) error {
 	return k.BurnEvents.Walk(ctx, nil, fn)
 }
+
+func (k Keeper) GetPendingMintTransactionsStore() collections.Map[uint64, types.PendingMintTransaction] {
+	return k.PendingMintTransactionsMap
+}
+
+func (k Keeper) GetBurnEventsStore() collections.Map[uint64, types.BurnEvent] {
+	return k.BurnEvents
+}
+
+func (k Keeper) GetRedemptionsStore() collections.Map[uint64, types.Redemption] {
+	return k.Redemptions
+}
