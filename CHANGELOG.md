@@ -1,3 +1,10 @@
+## [1.12.2](https://github.com/zenrocklabs/zenbtc/compare/v1.12.1...v1.12.2) (2025-02-12)
+
+
+### Bug Fixes
+
+* update BurnEvents to use map + improve queries ([#30](https://github.com/zenrocklabs/zenbtc/issues/30)) ([a159929](https://github.com/zenrocklabs/zenbtc/commit/a1599291ff8f087d447c390165969fa5e3e96239))
+
 ## [1.12.1](https://github.com/zenrocklabs/zenbtc/compare/v1.12.0...v1.12.1) (2025-02-12)
 
 
