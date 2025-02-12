@@ -1,15 +1,15 @@
 package keeper
 
 import (
+	"context"
 	"errors"
 
 	"cosmossdk.io/collections"
-	sdk "github.com/cosmos/cosmos-sdk/types"
 
 	types "github.com/zenrocklabs/zenbtc/x/zenbtc/types"
 )
 
-func (k Keeper) CreatePendingMintTransaction(ctx sdk.Context, mintTransaction *types.PendingMintTransaction) (uint64, error) {
+func (k Keeper) CreatePendingMintTransaction(ctx context.Context, mintTransaction *types.PendingMintTransaction) (uint64, error) {
 	count, err := k.PendingMintTransactionCount.Get(ctx)
 	if err != nil {
 		if !errors.Is(err, collections.ErrNotFound) {

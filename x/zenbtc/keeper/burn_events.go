@@ -1,15 +1,15 @@
 package keeper
 
 import (
+	"context"
 	"errors"
 
 	"cosmossdk.io/collections"
-	sdk "github.com/cosmos/cosmos-sdk/types"
 
 	types "github.com/zenrocklabs/zenbtc/x/zenbtc/types"
 )
 
-func (k Keeper) CreateBurnEvent(ctx sdk.Context, burnEvent *types.BurnEvent) (uint64, error) {
+func (k Keeper) CreateBurnEvent(ctx context.Context, burnEvent *types.BurnEvent) (uint64, error) {
 	count, err := k.BurnEventCount.Get(ctx)
 	if err != nil {
 		if !errors.Is(err, collections.ErrNotFound) {
