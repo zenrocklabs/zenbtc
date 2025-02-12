@@ -1,3 +1,10 @@
+## [1.12.6](https://github.com/zenrocklabs/zenbtc/compare/v1.12.5...v1.12.6) (2025-02-12)
+
+
+### Bug Fixes
+
+* add store getters ([85b65fc](https://github.com/zenrocklabs/zenbtc/commit/85b65fc47d7ffc1ce3991b15e0c9bb46c5fa24e8))
+
 ## [1.12.5](https://github.com/zenrocklabs/zenbtc/compare/v1.12.4...v1.12.5) (2025-02-12)
 
 
