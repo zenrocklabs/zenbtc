@@ -23,6 +23,7 @@ var (
 	BurnEventsKey                  = collections.NewPrefix(6)
 	PendingMintTransactionsMapKey  = collections.NewPrefix(7)
 	BurnEventCountKey              = collections.NewPrefix(8)
+	UTXOSpentKey                   = collections.NewPrefix(9)
 
 	ParamsIndex                      = "params"
 	LockTransactionsIndex            = "lock_transactions"
@@ -33,4 +34,5 @@ var (
 	BurnEventsIndex                  = "burn_events"
 	PendingMintTransactionsMapIndex  = "pending_mint_transactions_map"
 	BurnEventCountIndex              = "burn_event_count"
+	UTXOSpentIndex                   = "redemption_utxo_usage"
 )

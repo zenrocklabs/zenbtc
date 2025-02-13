@@ -2,12 +2,11 @@ package keeper
 
 import (
 	"context"
-	"errors"
-	"fmt"
-
 	"cosmossdk.io/collections"
 	"cosmossdk.io/core/store"
 	"cosmossdk.io/log"
+	"errors"
+	"fmt"
 	"github.com/cosmos/cosmos-sdk/codec"
 	"github.com/zenrocklabs/zenbtc/x/zenbtc/types"
 
@@ -42,6 +41,8 @@ type (
 		Redemptions collections.Map[uint64, types.Redemption]
 		// Supply - value: zenBTC supply data
 		Supply collections.Item[types.Supply]
+		// Redemption re-use
+		UTXOSpent collections.Map[collections.Pair[string, uint64], bool]
 	}
 )
 
@@ -71,6 +72,7 @@ func NewKeeper(
 		Supply:                      collections.NewItem(sb, types.SupplyKey, types.SupplyIndex, codec.CollValue[types.Supply](cdc)),
 		BurnEvents:                  collections.NewMap(sb, types.BurnEventsKey, types.BurnEventsIndex, collections.Uint64Key, codec.CollValue[types.BurnEvent](cdc)),
 		BurnEventCount:              collections.NewItem(sb, types.BurnEventCountKey, types.BurnEventCountIndex, collections.Uint64Value),
+		UTXOSpent:                   collections.NewMap(sb, types.UTXOSpentKey, types.UTXOSpentIndex, collections.PairKeyCodec(collections.StringKey, collections.Uint64Key), collections.BoolValue),
 	}
 
 	schema, err := sb.Build()
