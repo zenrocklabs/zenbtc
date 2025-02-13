@@ -4,6 +4,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	sdk "github.com/cosmos/cosmos-sdk/types"
 
 	"cosmossdk.io/collections"
 	"cosmossdk.io/core/store"
@@ -42,6 +43,8 @@ type (
 		Redemptions collections.Map[uint64, types.Redemption]
 		// Supply - value: zenBTC supply data
 		Supply collections.Item[types.Supply]
+		// Redemption re-use
+		UTXOSpent collections.Map[collections.Pair[string, uint64], bool]
 	}
 )
 
@@ -71,6 +74,7 @@ func NewKeeper(
 		Supply:                      collections.NewItem(sb, types.SupplyKey, types.SupplyIndex, codec.CollValue[types.Supply](cdc)),
 		BurnEvents:                  collections.NewMap(sb, types.BurnEventsKey, types.BurnEventsIndex, collections.Uint64Key, codec.CollValue[types.BurnEvent](cdc)),
 		BurnEventCount:              collections.NewItem(sb, types.BurnEventCountKey, types.BurnEventCountIndex, collections.Uint64Value),
+		UTXOSpent:                   collections.NewMap(sb, types.UTXOSpentKey, types.UTXOSpentIndex, collections.PairKeyCodec(collections.StringKey, collections.Uint64Key), collections.BoolValue),
 	}
 
 	schema, err := sb.Build()
@@ -125,6 +129,18 @@ func (k Keeper) SetRedemption(ctx context.Context, id uint64, redemption types.R
 
 func (k Keeper) WalkRedemptions(ctx context.Context, fn func(id uint64, redemption types.Redemption) (stop bool, err error)) error {
 	return k.Redemptions.Walk(ctx, nil, fn)
+}
+
+func (k *Keeper) SetUTXOUsed(ctx sdk.Context, txid string, index uint64) error {
+	return k.UTXOSpent.Set(ctx, collections.Join(txid, index), true)
+}
+
+func (k *Keeper) HasUTXOUsed(ctx sdk.Context, txid string, index uint64) (bool, error) {
+	exist, err := k.UTXOSpent.Get(ctx, collections.Join(txid, index))
+	if err != nil {
+		return false, err
+	}
+	return exist, nil
 }
 
 func (k Keeper) GetSupply(ctx context.Context) (types.Supply, error) {

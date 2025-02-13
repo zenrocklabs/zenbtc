@@ -2,6 +2,7 @@ package keeper
 
 import (
 	"context"
+	"cosmossdk.io/collections"
 	"encoding/hex"
 	"fmt"
 	"slices"
@@ -35,6 +36,16 @@ func (k msgServer) VerifyUnsignedRedemptionTX(ctx sdk.Context, msg *types.MsgSub
 	// Verify that the outputs in the supplied BTC TX all match redemptions
 	if err := k.verifyOutputsAgainstRedemptions(ctx, msg, msgTX); err != nil {
 		return fmt.Errorf("failed to verify outputs against redemptions: %w", err)
+	}
+
+	//Verify all UTXO in transaction are not spent
+	if err := k.verifyUTXOUnspent(ctx, msgTX); err != nil {
+		return fmt.Errorf("UTXO already spent in redemption transaction: %w", err)
+	}
+
+	//Update all the input UTXOS to spent, so they can't be used in a subsequent BTC transaction
+	if err := k.updateSpentUTXOs(ctx, msgTX); err != nil {
+		return fmt.Errorf("UTXO failed to update to spent: %w", err)
 	}
 
 	// Update the redemptions to complete
@@ -204,11 +215,41 @@ func (k msgServer) verifyOutputsAgainstRedemptions(ctx context.Context, msg *typ
 	return nil
 }
 
+func (k msgServer) verifyUTXOUnspent(ctx context.Context, msgTX *wire.MsgTx) error {
+	if msgTX == nil {
+		return fmt.Errorf("msgTX is nil")
+	}
+	for _, txin := range msgTX.TxIn {
+		txid := txin.PreviousOutPoint.Hash.String()
+		index := uint64(txin.PreviousOutPoint.Index)
+		exists, err := k.Keeper.UTXOSpent.Has(ctx, collections.Join(txid, index))
+		if err != nil {
+			return err
+		}
+		if exists {
+			return fmt.Errorf("UTXO already spent in redemption transaction")
+		}
+	}
+	return nil
+}
+
+func (k msgServer) updateSpentUTXOs(ctx context.Context, msgTX *wire.MsgTx) error {
+	for _, txin := range msgTX.TxIn {
+		txid := txin.PreviousOutPoint.Hash.String()
+		index := uint64(txin.PreviousOutPoint.Index)
+		if err := k.Keeper.UTXOSpent.Set(ctx, collections.Join(txid, index), true); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func (k msgServer) verifyInputsInRedemption(ctx context.Context, inputs []*types.InputHashes) error {
 	changeAddressKeyIDs := k.Keeper.GetChangeAddressKeyIDs(ctx)
 
 	for _, input := range inputs {
 		// skip validation for change inputs.
+
 		if ok := slices.Contains(changeAddressKeyIDs, input.Keyid); ok {
 			continue
 		}
