@@ -1,3 +1,10 @@
+## [1.13.1](https://github.com/zenrocklabs/zenbtc/compare/v1.13.0...v1.13.1) (2025-02-16)
+
+
+### Bug Fixes
+
+* add `FirstPendingStakeTransaction` store ([ce75a47](https://github.com/zenrocklabs/zenbtc/commit/ce75a475bf9b30501875b9c77e56943a1d458f38))
+
 # [1.13.0](https://github.com/zenrocklabs/zenbtc/compare/v1.12.6...v1.13.0) (2025-02-16)
 
 
