@@ -32,14 +32,20 @@ type (
 		PendingMintTransactions collections.Item[types.PendingMintTransactions] // DEPRECATED
 		// PendingMintTransactionsMap - key: pending zenBTC mint transaction id | value: pending zenBTC mint transaction
 		PendingMintTransactionsMap collections.Map[uint64, types.PendingMintTransaction]
+		// FirstPendingMintTransaction - value: lowest key of pending mint transaction
+		FirstPendingMintTransaction collections.Item[uint64]
 		// PendingMintTransactionCount - value: count of pending zenBTC mint transactions
 		PendingMintTransactionCount collections.Item[uint64]
 		// BurnEvents - key: burn event index | value: burn event data
 		BurnEvents collections.Map[uint64, types.BurnEvent]
+		// FirstPendingBurnEvent - value: lowest key of pending burn event
+		FirstPendingBurnEvent collections.Item[uint64]
 		// BurnEventCount - value: count of burn events
 		BurnEventCount collections.Item[uint64]
 		// Redemptions - key: redemption index | value: redemption data
 		Redemptions collections.Map[uint64, types.Redemption]
+		// FirstPendingRedemption - value: lowest key of pending redemption
+		FirstPendingRedemption collections.Item[uint64]
 		// Supply - value: zenBTC supply data
 		Supply collections.Item[types.Supply]
 	}
@@ -66,11 +72,14 @@ func NewKeeper(
 		LockTransactionStore:        collections.NewMap(sb, types.LockTransactionsKey, types.LockTransactionsIndex, collections.PairKeyCodec(collections.StringKey, collections.Uint64Key), codec.CollValue[types.LockTransaction](cdc)),
 		PendingMintTransactions:     collections.NewItem(sb, types.PendingMintTransactionsKey, types.PendingMintTransactionsIndex, codec.CollValue[types.PendingMintTransactions](cdc)),
 		PendingMintTransactionsMap:  collections.NewMap(sb, types.PendingMintTransactionsMapKey, types.PendingMintTransactionsMapIndex, collections.Uint64Key, codec.CollValue[types.PendingMintTransaction](cdc)),
+		FirstPendingMintTransaction: collections.NewItem(sb, types.FirstPendingMintTransactionKey, types.FirstPendingMintTransactionIndex, collections.Uint64Value),
 		PendingMintTransactionCount: collections.NewItem(sb, types.PendingMintTransactionCountKey, types.PendingMintTransactionCountIndex, collections.Uint64Value),
-		Redemptions:                 collections.NewMap(sb, types.RedemptionsKey, types.RedemptionsIndex, collections.Uint64Key, codec.CollValue[types.Redemption](cdc)),
-		Supply:                      collections.NewItem(sb, types.SupplyKey, types.SupplyIndex, codec.CollValue[types.Supply](cdc)),
 		BurnEvents:                  collections.NewMap(sb, types.BurnEventsKey, types.BurnEventsIndex, collections.Uint64Key, codec.CollValue[types.BurnEvent](cdc)),
+		FirstPendingBurnEvent:       collections.NewItem(sb, types.FirstPendingBurnEventKey, types.FirstPendingBurnEventIndex, collections.Uint64Value),
 		BurnEventCount:              collections.NewItem(sb, types.BurnEventCountKey, types.BurnEventCountIndex, collections.Uint64Value),
+		Redemptions:                 collections.NewMap(sb, types.RedemptionsKey, types.RedemptionsIndex, collections.Uint64Key, codec.CollValue[types.Redemption](cdc)),
+		FirstPendingRedemption:      collections.NewItem(sb, types.FirstPendingRedemptionKey, types.FirstPendingRedemptionIndex, collections.Uint64Value),
+		Supply:                      collections.NewItem(sb, types.SupplyKey, types.SupplyIndex, codec.CollValue[types.Supply](cdc)),
 	}
 
 	schema, err := sb.Build()
@@ -157,4 +166,34 @@ func (k Keeper) GetBurnEventsStore() collections.Map[uint64, types.BurnEvent] {
 
 func (k Keeper) GetRedemptionsStore() collections.Map[uint64, types.Redemption] {
 	return k.Redemptions
+}
+
+// GetFirstPendingMintTransaction returns the ID of the first pending mint transaction
+func (k Keeper) GetFirstPendingMintTransaction(ctx context.Context) (uint64, error) {
+	return k.FirstPendingMintTransaction.Get(ctx)
+}
+
+// SetFirstPendingMintTransaction sets the ID of the first pending mint transaction
+func (k Keeper) SetFirstPendingMintTransaction(ctx context.Context, id uint64) error {
+	return k.FirstPendingMintTransaction.Set(ctx, id)
+}
+
+// GetFirstPendingBurnEvent returns the ID of the first pending burn event
+func (k Keeper) GetFirstPendingBurnEvent(ctx context.Context) (uint64, error) {
+	return k.FirstPendingBurnEvent.Get(ctx)
+}
+
+// SetFirstPendingBurnEvent sets the ID of the first pending burn event
+func (k Keeper) SetFirstPendingBurnEvent(ctx context.Context, id uint64) error {
+	return k.FirstPendingBurnEvent.Set(ctx, id)
+}
+
+// GetFirstPendingRedemption returns the ID of the first pending redemption
+func (k Keeper) GetFirstPendingRedemption(ctx context.Context) (uint64, error) {
+	return k.FirstPendingRedemption.Get(ctx)
+}
+
+// SetFirstPendingRedemption sets the ID of the first pending redemption
+func (k Keeper) SetFirstPendingRedemption(ctx context.Context, id uint64) error {
+	return k.FirstPendingRedemption.Set(ctx, id)
 }

@@ -23,6 +23,9 @@ var (
 	BurnEventsKey                  = collections.NewPrefix(6)
 	PendingMintTransactionsMapKey  = collections.NewPrefix(7)
 	BurnEventCountKey              = collections.NewPrefix(8)
+	FirstPendingMintTransactionKey = collections.NewPrefix(9)
+	FirstPendingBurnEventKey       = collections.NewPrefix(10)
+	FirstPendingRedemptionKey      = collections.NewPrefix(11)
 
 	ParamsIndex                      = "params"
 	LockTransactionsIndex            = "lock_transactions"
@@ -33,4 +36,7 @@ var (
 	BurnEventsIndex                  = "burn_events"
 	PendingMintTransactionsMapIndex  = "pending_mint_transactions_map"
 	BurnEventCountIndex              = "burn_event_count"
+	FirstPendingMintTransactionIndex = "first_pending_mint_transaction"
+	FirstPendingBurnEventIndex       = "first_pending_burn_event"
+	FirstPendingRedemptionIndex      = "first_pending_redemption"
 )
