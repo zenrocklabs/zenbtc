@@ -48,6 +48,8 @@ type (
 		FirstPendingRedemption collections.Item[uint64]
 		// Supply - value: zenBTC supply data
 		Supply collections.Item[types.Supply]
+		// FirstPendingStakeTransaction - value: lowest key of pending stake transaction
+		FirstPendingStakeTransaction collections.Item[uint64]
 	}
 )
 
@@ -68,18 +70,19 @@ func NewKeeper(
 		validationKeeper: validationKeeper,
 		treasuryKeeper:   treasuryKeeper,
 
-		Params:                      collections.NewItem(sb, types.ParamsKey, types.ParamsIndex, codec.CollValue[types.Params](cdc)),
-		LockTransactionStore:        collections.NewMap(sb, types.LockTransactionsKey, types.LockTransactionsIndex, collections.PairKeyCodec(collections.StringKey, collections.Uint64Key), codec.CollValue[types.LockTransaction](cdc)),
-		PendingMintTransactions:     collections.NewItem(sb, types.PendingMintTransactionsKey, types.PendingMintTransactionsIndex, codec.CollValue[types.PendingMintTransactions](cdc)),
-		PendingMintTransactionsMap:  collections.NewMap(sb, types.PendingMintTransactionsMapKey, types.PendingMintTransactionsMapIndex, collections.Uint64Key, codec.CollValue[types.PendingMintTransaction](cdc)),
-		FirstPendingMintTransaction: collections.NewItem(sb, types.FirstPendingMintTransactionKey, types.FirstPendingMintTransactionIndex, collections.Uint64Value),
-		PendingMintTransactionCount: collections.NewItem(sb, types.PendingMintTransactionCountKey, types.PendingMintTransactionCountIndex, collections.Uint64Value),
-		BurnEvents:                  collections.NewMap(sb, types.BurnEventsKey, types.BurnEventsIndex, collections.Uint64Key, codec.CollValue[types.BurnEvent](cdc)),
-		FirstPendingBurnEvent:       collections.NewItem(sb, types.FirstPendingBurnEventKey, types.FirstPendingBurnEventIndex, collections.Uint64Value),
-		BurnEventCount:              collections.NewItem(sb, types.BurnEventCountKey, types.BurnEventCountIndex, collections.Uint64Value),
-		Redemptions:                 collections.NewMap(sb, types.RedemptionsKey, types.RedemptionsIndex, collections.Uint64Key, codec.CollValue[types.Redemption](cdc)),
-		FirstPendingRedemption:      collections.NewItem(sb, types.FirstPendingRedemptionKey, types.FirstPendingRedemptionIndex, collections.Uint64Value),
-		Supply:                      collections.NewItem(sb, types.SupplyKey, types.SupplyIndex, codec.CollValue[types.Supply](cdc)),
+		Params:                       collections.NewItem(sb, types.ParamsKey, types.ParamsIndex, codec.CollValue[types.Params](cdc)),
+		LockTransactionStore:         collections.NewMap(sb, types.LockTransactionsKey, types.LockTransactionsIndex, collections.PairKeyCodec(collections.StringKey, collections.Uint64Key), codec.CollValue[types.LockTransaction](cdc)),
+		PendingMintTransactions:      collections.NewItem(sb, types.PendingMintTransactionsKey, types.PendingMintTransactionsIndex, codec.CollValue[types.PendingMintTransactions](cdc)),
+		PendingMintTransactionsMap:   collections.NewMap(sb, types.PendingMintTransactionsMapKey, types.PendingMintTransactionsMapIndex, collections.Uint64Key, codec.CollValue[types.PendingMintTransaction](cdc)),
+		FirstPendingMintTransaction:  collections.NewItem(sb, types.FirstPendingMintTransactionKey, types.FirstPendingMintTransactionIndex, collections.Uint64Value),
+		PendingMintTransactionCount:  collections.NewItem(sb, types.PendingMintTransactionCountKey, types.PendingMintTransactionCountIndex, collections.Uint64Value),
+		BurnEvents:                   collections.NewMap(sb, types.BurnEventsKey, types.BurnEventsIndex, collections.Uint64Key, codec.CollValue[types.BurnEvent](cdc)),
+		FirstPendingBurnEvent:        collections.NewItem(sb, types.FirstPendingBurnEventKey, types.FirstPendingBurnEventIndex, collections.Uint64Value),
+		BurnEventCount:               collections.NewItem(sb, types.BurnEventCountKey, types.BurnEventCountIndex, collections.Uint64Value),
+		Redemptions:                  collections.NewMap(sb, types.RedemptionsKey, types.RedemptionsIndex, collections.Uint64Key, codec.CollValue[types.Redemption](cdc)),
+		FirstPendingRedemption:       collections.NewItem(sb, types.FirstPendingRedemptionKey, types.FirstPendingRedemptionIndex, collections.Uint64Value),
+		Supply:                       collections.NewItem(sb, types.SupplyKey, types.SupplyIndex, codec.CollValue[types.Supply](cdc)),
+		FirstPendingStakeTransaction: collections.NewItem(sb, types.FirstPendingStakeTransactionKey, types.FirstPendingStakeTransactionIndex, collections.Uint64Value),
 	}
 
 	schema, err := sb.Build()
@@ -196,4 +199,14 @@ func (k Keeper) GetFirstPendingRedemption(ctx context.Context) (uint64, error) {
 // SetFirstPendingRedemption sets the ID of the first pending redemption
 func (k Keeper) SetFirstPendingRedemption(ctx context.Context, id uint64) error {
 	return k.FirstPendingRedemption.Set(ctx, id)
+}
+
+// GetFirstPendingStakeTransaction returns the ID of the first pending stake transaction
+func (k Keeper) GetFirstPendingStakeTransaction(ctx context.Context) (uint64, error) {
+	return k.FirstPendingStakeTransaction.Get(ctx)
+}
+
+// SetFirstPendingStakeTransaction sets the ID of the first pending stake transaction
+func (k Keeper) SetFirstPendingStakeTransaction(ctx context.Context, id uint64) error {
+	return k.FirstPendingStakeTransaction.Set(ctx, id)
 }
