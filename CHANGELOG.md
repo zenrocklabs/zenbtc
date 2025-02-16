@@ -1,3 +1,10 @@
+# [1.13.0](https://github.com/zenrocklabs/zenbtc/compare/v1.12.6...v1.13.0) (2025-02-16)
+
+
+### Features
+
+* add FirstPending key stores ([7dc6cdd](https://github.com/zenrocklabs/zenbtc/commit/7dc6cdd350ad4481dee413591a754a6ff40eec80))
+
 ## [1.12.6](https://github.com/zenrocklabs/zenbtc/compare/v1.12.5...v1.12.6) (2025-02-12)
 
 
