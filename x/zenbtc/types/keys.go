@@ -27,6 +27,7 @@ var (
 	FirstPendingBurnEventKey        = collections.NewPrefix(10)
 	FirstPendingRedemptionKey       = collections.NewPrefix(11)
 	FirstPendingStakeTransactionKey = collections.NewPrefix(12)
+	UTXOSpentKey                    = collections.NewPrefix(13)
 
 	ParamsIndex                       = "params"
 	LockTransactionsIndex             = "lock_transactions"
@@ -41,4 +42,5 @@ var (
 	FirstPendingBurnEventIndex        = "first_pending_burn_event"
 	FirstPendingRedemptionIndex       = "first_pending_redemption"
 	FirstPendingStakeTransactionIndex = "first_pending_stake_transaction"
+	UTXOSpentIndex                    = "redemption_utxo_usage"
 )

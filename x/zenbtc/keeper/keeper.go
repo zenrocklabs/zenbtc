@@ -2,12 +2,11 @@ package keeper
 
 import (
 	"context"
-	"errors"
-	"fmt"
-
 	"cosmossdk.io/collections"
 	"cosmossdk.io/core/store"
 	"cosmossdk.io/log"
+	"errors"
+	"fmt"
 	"github.com/cosmos/cosmos-sdk/codec"
 	"github.com/zenrocklabs/zenbtc/x/zenbtc/types"
 
@@ -50,6 +49,8 @@ type (
 		Supply collections.Item[types.Supply]
 		// FirstPendingStakeTransaction - value: lowest key of pending stake transaction
 		FirstPendingStakeTransaction collections.Item[uint64]
+		// Redemption re-use
+		UTXOSpent collections.Map[collections.Pair[string, uint64], bool]
 	}
 )
 
@@ -83,6 +84,7 @@ func NewKeeper(
 		FirstPendingRedemption:       collections.NewItem(sb, types.FirstPendingRedemptionKey, types.FirstPendingRedemptionIndex, collections.Uint64Value),
 		Supply:                       collections.NewItem(sb, types.SupplyKey, types.SupplyIndex, codec.CollValue[types.Supply](cdc)),
 		FirstPendingStakeTransaction: collections.NewItem(sb, types.FirstPendingStakeTransactionKey, types.FirstPendingStakeTransactionIndex, collections.Uint64Value),
+		UTXOSpent:                    collections.NewMap(sb, types.UTXOSpentKey, types.UTXOSpentIndex, collections.PairKeyCodec(collections.StringKey, collections.Uint64Key), collections.BoolValue),
 	}
 
 	schema, err := sb.Build()
