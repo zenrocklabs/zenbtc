@@ -8,6 +8,7 @@ import (
 	"cosmossdk.io/collections"
 	"cosmossdk.io/core/store"
 	"cosmossdk.io/log"
+	"cosmossdk.io/math"
 	"github.com/cosmos/cosmos-sdk/codec"
 	"github.com/zenrocklabs/zenbtc/x/zenbtc/types"
 
@@ -23,6 +24,8 @@ type (
 
 		validationKeeper *validation.Keeper
 		treasuryKeeper   *treasury.Keeper
+
+		authority string
 
 		Schema collections.Schema
 		Params collections.Item[types.Params]
@@ -57,6 +60,7 @@ func NewKeeper(
 	cdc codec.BinaryCodec,
 	storeService store.KVStoreService,
 	logger log.Logger,
+	authority string,
 	validationKeeper *validation.Keeper,
 	treasuryKeeper *treasury.Keeper,
 ) *Keeper {
@@ -64,12 +68,12 @@ func NewKeeper(
 	sb := collections.NewSchemaBuilder(storeService)
 
 	k := Keeper{
-		cdc:              cdc,
-		storeService:     storeService,
-		logger:           logger,
-		validationKeeper: validationKeeper,
-		treasuryKeeper:   treasuryKeeper,
-
+		cdc:                          cdc,
+		storeService:                 storeService,
+		logger:                       logger,
+		validationKeeper:             validationKeeper,
+		treasuryKeeper:               treasuryKeeper,
+		authority:                    authority,
 		Params:                       collections.NewItem(sb, types.ParamsKey, types.ParamsIndex, codec.CollValue[types.Params](cdc)),
 		LockTransactionStore:         collections.NewMap(sb, types.LockTransactionsKey, types.LockTransactionsIndex, collections.PairKeyCodec(collections.StringKey, collections.Uint64Key), codec.CollValue[types.LockTransaction](cdc)),
 		PendingMintTransactions:      collections.NewItem(sb, types.PendingMintTransactionsKey, types.PendingMintTransactionsIndex, codec.CollValue[types.PendingMintTransactions](cdc)),
@@ -102,21 +106,21 @@ func (k Keeper) Logger() log.Logger {
 
 // GetZenBTCExchangeRate returns the current exchange rate between BTC and zenBTC
 // Returns the number of BTC represented by 1 zenBTC
-func (k Keeper) GetExchangeRate(ctx context.Context) (float64, error) {
+func (k Keeper) GetExchangeRate(ctx context.Context) (math.LegacyDec, error) {
 	supply, err := k.Supply.Get(ctx)
 	if err != nil {
 		if !errors.Is(err, collections.ErrNotFound) {
-			return 0, err
+			return math.LegacyNewDec(0), err
 		}
-		return 1.0, nil // Initial exchange rate of 1:1
+		return math.LegacyNewDec(1), nil // Initial exchange rate of 1:1
 	}
 
 	totalZenBTC := supply.MintedZenBTC + supply.PendingZenBTC
 	if totalZenBTC == 0 {
-		return 1.0, nil // If no mints/deposits yet, use 1:1 rate
+		return math.LegacyNewDec(1), nil // If no mints/deposits yet, use 1:1 rate
 	}
 
-	return float64(supply.CustodiedBTC) / float64(totalZenBTC), nil
+	return math.LegacyNewDecFromInt(math.NewIntFromUint64(supply.CustodiedBTC)).Quo(math.LegacyNewDecFromInt(math.NewIntFromUint64(totalZenBTC))), nil
 }
 
 func (k Keeper) SetPendingMintTransaction(ctx context.Context, pendingMintTransaction types.PendingMintTransaction) error {
@@ -209,4 +213,8 @@ func (k Keeper) GetFirstPendingStakeTransaction(ctx context.Context) (uint64, er
 // SetFirstPendingStakeTransaction sets the ID of the first pending stake transaction
 func (k Keeper) SetFirstPendingStakeTransaction(ctx context.Context, id uint64) error {
 	return k.FirstPendingStakeTransaction.Set(ctx, id)
+}
+
+func (k Keeper) GetAuthority() string {
+	return k.authority
 }
