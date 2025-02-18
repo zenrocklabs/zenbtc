@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"slices"
 
+	"cosmossdk.io/math"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
 	"github.com/Zenrock-Foundation/zrchain/v5/bitcoin"
@@ -72,7 +73,7 @@ func (k msgServer) updateCompletedRedemptions(ctx sdk.Context, redemptionIndices
 
 		// redemption.Data.Amount is in zenBTC (what user wants to redeem)
 		// Calculate how much BTC they should receive based on current exchange rate
-		btcToRelease := uint64(float64(redemption.Data.Amount) * exchangeRate)
+		btcToRelease := uint64(math.LegacyNewDecFromInt(math.NewInt(int64(redemption.Data.Amount))).Quo(exchangeRate).RoundInt64())
 
 		// Invariant checks
 		if supply.MintedZenBTC < redemption.Data.Amount {

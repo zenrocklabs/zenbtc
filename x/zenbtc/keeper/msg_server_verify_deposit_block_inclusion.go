@@ -11,6 +11,7 @@ import (
 	"github.com/btcsuite/btcd/chaincfg/chainhash"
 
 	"cosmossdk.io/collections"
+	"cosmossdk.io/math"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
 	"github.com/Zenrock-Foundation/zrchain/v5/bitcoin"
@@ -111,7 +112,7 @@ func (k msgServer) VerifyDepositBlockInclusion(goCtx context.Context, msg *types
 	}
 
 	// Calculate zenBTC amount using current exchange rate
-	zenBTCAmount := uint64(float64(msg.Amount) / exchangeRate)
+	zenBTCAmount := uint64(math.LegacyNewDecFromInt(math.NewInt(int64(msg.Amount))).Quo(exchangeRate).RoundInt64())
 
 	supply, err := k.Supply.Get(ctx)
 	if err != nil {
