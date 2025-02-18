@@ -120,7 +120,7 @@ func (k Keeper) GetExchangeRate(ctx context.Context) (math.LegacyDec, error) {
 		return math.LegacyNewDec(1), nil // If no mints/deposits yet, use 1:1 rate
 	}
 
-	return math.LegacyNewDec(int64(supply.CustodiedBTC)).Quo(math.LegacyNewDec(int64(totalZenBTC))), nil
+	return math.LegacyNewDecFromInt(math.NewIntFromUint64(supply.CustodiedBTC)).Quo(math.LegacyNewDecFromInt(math.NewIntFromUint64(totalZenBTC))), nil
 }
 
 func (k Keeper) SetPendingMintTransaction(ctx context.Context, pendingMintTransaction types.PendingMintTransaction) error {
