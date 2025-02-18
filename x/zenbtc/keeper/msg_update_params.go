@@ -9,8 +9,8 @@ import (
 )
 
 func (k msgServer) UpdateParams(ctx context.Context, req *types.MsgUpdateParams) (*types.MsgUpdateParamsResponse, error) {
-	if k.GetParamsAuthority(ctx) != req.Authority {
-		return nil, errorsmod.Wrapf(types.ErrInvalidSigner, "invalid authority; expected %s, got %s", k.GetParamsAuthority(ctx), req.Authority)
+	if k.GetAuthority() != req.Authority {
+		return nil, errorsmod.Wrapf(types.ErrInvalidSigner, "invalid authority; expected %s, got %s", k.GetAuthority(), req.Authority)
 	}
 
 	if err := k.Params.Set(ctx, req.Params); err != nil {

@@ -17,14 +17,13 @@ var (
 	DefaultStakerKeyID         uint64 = 6
 	DefaultCompleterKeyID      uint64 = 7
 	DefaultProxyAddress               = "zen13y3tm68gmu9kntcxwvmue82p6akacnpt2v7nty"
-	DefaultParamsAuthority            = "zen1sd3fwcpw2mdw3pxexmlg34gsd78r0sxrk5weh3"
 	// DefaultStrategyAddr               = "0x0000000000000000000000000000000000000000"
 	// DefaultStakerKeyID = 0
 	// DefaultBurnerKeyID = 0
 )
 
 // NewParams creates a new Params instance
-func NewParams(ethBatcherAddr, ethTokenAddr, depositKeyringAddr string, stakerKeyID, ethMinterKeyID, unstakerKeyID, completerKeyID uint64, changeAddressKeyIDs []uint64, rewardsDepositKeyID uint64, bitcoinProxyAddress, authority string) *types.Params {
+func NewParams(ethBatcherAddr, ethTokenAddr, depositKeyringAddr string, stakerKeyID, ethMinterKeyID, unstakerKeyID, completerKeyID uint64, changeAddressKeyIDs []uint64, rewardsDepositKeyID uint64, bitcoinProxyAddress string) *types.Params {
 	return &types.Params{
 		EthBatcherAddr:      ethBatcherAddr,
 		EthTokenAddr:        ethTokenAddr,
@@ -36,7 +35,6 @@ func NewParams(ethBatcherAddr, ethTokenAddr, depositKeyringAddr string, stakerKe
 		ChangeAddressKeyIDs: changeAddressKeyIDs,
 		RewardsDepositKeyID: rewardsDepositKeyID,
 		BitcoinProxyAddress: bitcoinProxyAddress,
-		Authority:           authority,
 	}
 }
 
@@ -53,7 +51,6 @@ func DefaultParams() *types.Params {
 		DefaultChangeAddressKeyIDs,
 		DefaultRewardsDepositKeyID,
 		DefaultProxyAddress,
-		DefaultParamsAuthority,
 	)
 }
 
@@ -139,12 +136,4 @@ func (k Keeper) GetRewardsDepositKeyID(ctx context.Context) uint64 {
 		return DefaultRewardsDepositKeyID
 	}
 	return params.RewardsDepositKeyID
-}
-
-func (k Keeper) GetParamsAuthority(ctx context.Context) string {
-	params, err := k.Params.Get(ctx)
-	if err != nil {
-		return DefaultParamsAuthority
-	}
-	return params.Authority
 }
