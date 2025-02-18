@@ -8,31 +8,25 @@ from typing import ClassVar as _ClassVar, Iterable as _Iterable, Optional as _Op
 DESCRIPTOR: _descriptor.FileDescriptor
 
 class Params(_message.Message):
-    __slots__ = ("ethBatcherAddr", "depositKeyringAddr", "minterKeyID", "withdrawerKeyID", "unstakerKeyID", "rewardsDepositKeyID", "changeAddressKeyIDs", "bitcoinProxyAddress", "authority", "stakerKeyID", "completerKeyID", "ethMinterKeyID", "ethTokenAddr")
-    ETHBATCHERADDR_FIELD_NUMBER: _ClassVar[int]
+    __slots__ = ("depositKeyringAddr", "stakerKeyID", "ethMinterKeyID", "unstakerKeyID", "completerKeyID", "rewardsDepositKeyID", "changeAddressKeyIDs", "bitcoinProxyAddress", "ethTokenAddr", "controllerAddr")
     DEPOSITKEYRINGADDR_FIELD_NUMBER: _ClassVar[int]
-    MINTERKEYID_FIELD_NUMBER: _ClassVar[int]
-    WITHDRAWERKEYID_FIELD_NUMBER: _ClassVar[int]
+    STAKERKEYID_FIELD_NUMBER: _ClassVar[int]
+    ETHMINTERKEYID_FIELD_NUMBER: _ClassVar[int]
     UNSTAKERKEYID_FIELD_NUMBER: _ClassVar[int]
+    COMPLETERKEYID_FIELD_NUMBER: _ClassVar[int]
     REWARDSDEPOSITKEYID_FIELD_NUMBER: _ClassVar[int]
     CHANGEADDRESSKEYIDS_FIELD_NUMBER: _ClassVar[int]
     BITCOINPROXYADDRESS_FIELD_NUMBER: _ClassVar[int]
-    AUTHORITY_FIELD_NUMBER: _ClassVar[int]
-    STAKERKEYID_FIELD_NUMBER: _ClassVar[int]
-    COMPLETERKEYID_FIELD_NUMBER: _ClassVar[int]
-    ETHMINTERKEYID_FIELD_NUMBER: _ClassVar[int]
     ETHTOKENADDR_FIELD_NUMBER: _ClassVar[int]
-    ethBatcherAddr: str
+    CONTROLLERADDR_FIELD_NUMBER: _ClassVar[int]
     depositKeyringAddr: str
-    minterKeyID: int
-    withdrawerKeyID: int
+    stakerKeyID: int
+    ethMinterKeyID: int
     unstakerKeyID: int
+    completerKeyID: int
     rewardsDepositKeyID: int
     changeAddressKeyIDs: _containers.RepeatedScalarFieldContainer[int]
     bitcoinProxyAddress: str
-    authority: str
-    stakerKeyID: int
-    completerKeyID: int
-    ethMinterKeyID: int
     ethTokenAddr: str
-    def __init__(self, ethBatcherAddr: _Optional[str] = ..., depositKeyringAddr: _Optional[str] = ..., minterKeyID: _Optional[int] = ..., withdrawerKeyID: _Optional[int] = ..., unstakerKeyID: _Optional[int] = ..., rewardsDepositKeyID: _Optional[int] = ..., changeAddressKeyIDs: _Optional[_Iterable[int]] = ..., bitcoinProxyAddress: _Optional[str] = ..., authority: _Optional[str] = ..., stakerKeyID: _Optional[int] = ..., completerKeyID: _Optional[int] = ..., ethMinterKeyID: _Optional[int] = ..., ethTokenAddr: _Optional[str] = ...) -> None: ...
+    controllerAddr: str
+    def __init__(self, depositKeyringAddr: _Optional[str] = ..., stakerKeyID: _Optional[int] = ..., ethMinterKeyID: _Optional[int] = ..., unstakerKeyID: _Optional[int] = ..., completerKeyID: _Optional[int] = ..., rewardsDepositKeyID: _Optional[int] = ..., changeAddressKeyIDs: _Optional[_Iterable[int]] = ..., bitcoinProxyAddress: _Optional[str] = ..., ethTokenAddr: _Optional[str] = ..., controllerAddr: _Optional[str] = ...) -> None: ...

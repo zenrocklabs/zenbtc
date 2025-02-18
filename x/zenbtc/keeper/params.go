@@ -7,7 +7,7 @@ import (
 )
 
 var (
-	DefaultEthBatcherAddr             = "0x5b9Ea8d5486D388a158F026c337DF950866dA5e9"
+	DefaultcontrollerAddr             = "0x5b9Ea8d5486D388a158F026c337DF950866dA5e9"
 	DefaultEthTokenAddr               = "0xC8CdeDd20cCb4c06884ac4C2fF952A0B7cC230a3"
 	DefaultDepositKeyringAddr         = "keyring1k6vc6vhp6e6l3rxalue9v4ux"
 	DefaultEthMinterKeyID      uint64 = 2
@@ -23,43 +23,54 @@ var (
 )
 
 // NewParams creates a new Params instance
-func NewParams(ethBatcherAddr, ethTokenAddr, depositKeyringAddr string, stakerKeyID, ethMinterKeyID, unstakerKeyID, completerKeyID uint64, changeAddressKeyIDs []uint64, rewardsDepositKeyID uint64, bitcoinProxyAddress string) *types.Params {
+func NewParams(
+	depositKeyringAddr string,
+	stakerKeyID,
+	ethMinterKeyID,
+	unstakerKeyID,
+	completerKeyID,
+	rewardsDepositKeyID uint64,
+	changeAddressKeyIDs []uint64,
+	bitcoinProxyAddress,
+	ethTokenAddr,
+	controllerAddr string,
+) *types.Params {
 	return &types.Params{
-		EthBatcherAddr:      ethBatcherAddr,
-		EthTokenAddr:        ethTokenAddr,
 		DepositKeyringAddr:  depositKeyringAddr,
 		StakerKeyID:         stakerKeyID,
 		EthMinterKeyID:      ethMinterKeyID,
 		UnstakerKeyID:       unstakerKeyID,
 		CompleterKeyID:      completerKeyID,
-		ChangeAddressKeyIDs: changeAddressKeyIDs,
 		RewardsDepositKeyID: rewardsDepositKeyID,
+		ChangeAddressKeyIDs: changeAddressKeyIDs,
 		BitcoinProxyAddress: bitcoinProxyAddress,
+		EthTokenAddr:        ethTokenAddr,
+		ControllerAddr:      controllerAddr,
 	}
 }
 
 // DefaultParams returns a default set of parameters.
 func DefaultParams() *types.Params {
 	return NewParams(
-		DefaultEthBatcherAddr,
-		DefaultEthTokenAddr,
 		DefaultDepositKeyringAddr,
 		DefaultStakerKeyID,
 		DefaultEthMinterKeyID,
 		DefaultUnstakerKeyID,
 		DefaultCompleterKeyID,
-		DefaultChangeAddressKeyIDs,
 		DefaultRewardsDepositKeyID,
+		DefaultChangeAddressKeyIDs,
 		DefaultProxyAddress,
+		DefaultEthTokenAddr,
+		DefaultcontrollerAddr,
 	)
 }
 
-func (k Keeper) GetEthBatcherAddr(ctx context.Context) string {
+func (k Keeper) GetcontrollerAddr(ctx context.Context) string {
 	params, err := k.Params.Get(ctx)
 	if err != nil {
-		return DefaultEthBatcherAddr
+		return DefaultcontrollerAddr
 	}
-	return params.EthBatcherAddr
+	return params.ControllerAddr
 }
 
 func (k Keeper) GetEthTokenAddr(ctx context.Context) string {

@@ -62,37 +62,31 @@ func (x *_Params_7_list) IsValid() bool {
 
 var (
 	md_Params                     protoreflect.MessageDescriptor
-	fd_Params_ethBatcherAddr      protoreflect.FieldDescriptor
 	fd_Params_depositKeyringAddr  protoreflect.FieldDescriptor
-	fd_Params_minterKeyID         protoreflect.FieldDescriptor
-	fd_Params_withdrawerKeyID     protoreflect.FieldDescriptor
+	fd_Params_stakerKeyID         protoreflect.FieldDescriptor
+	fd_Params_ethMinterKeyID      protoreflect.FieldDescriptor
 	fd_Params_unstakerKeyID       protoreflect.FieldDescriptor
+	fd_Params_completerKeyID      protoreflect.FieldDescriptor
 	fd_Params_rewardsDepositKeyID protoreflect.FieldDescriptor
 	fd_Params_changeAddressKeyIDs protoreflect.FieldDescriptor
 	fd_Params_bitcoinProxyAddress protoreflect.FieldDescriptor
-	fd_Params_authority           protoreflect.FieldDescriptor
-	fd_Params_stakerKeyID         protoreflect.FieldDescriptor
-	fd_Params_completerKeyID      protoreflect.FieldDescriptor
-	fd_Params_ethMinterKeyID      protoreflect.FieldDescriptor
 	fd_Params_ethTokenAddr        protoreflect.FieldDescriptor
+	fd_Params_controllerAddr      protoreflect.FieldDescriptor
 )
 
 func init() {
 	file_zrchain_zenbtc_params_proto_init()
 	md_Params = File_zrchain_zenbtc_params_proto.Messages().ByName("Params")
-	fd_Params_ethBatcherAddr = md_Params.Fields().ByName("ethBatcherAddr")
 	fd_Params_depositKeyringAddr = md_Params.Fields().ByName("depositKeyringAddr")
-	fd_Params_minterKeyID = md_Params.Fields().ByName("minterKeyID")
-	fd_Params_withdrawerKeyID = md_Params.Fields().ByName("withdrawerKeyID")
+	fd_Params_stakerKeyID = md_Params.Fields().ByName("stakerKeyID")
+	fd_Params_ethMinterKeyID = md_Params.Fields().ByName("ethMinterKeyID")
 	fd_Params_unstakerKeyID = md_Params.Fields().ByName("unstakerKeyID")
+	fd_Params_completerKeyID = md_Params.Fields().ByName("completerKeyID")
 	fd_Params_rewardsDepositKeyID = md_Params.Fields().ByName("rewardsDepositKeyID")
 	fd_Params_changeAddressKeyIDs = md_Params.Fields().ByName("changeAddressKeyIDs")
 	fd_Params_bitcoinProxyAddress = md_Params.Fields().ByName("bitcoinProxyAddress")
-	fd_Params_authority = md_Params.Fields().ByName("authority")
-	fd_Params_stakerKeyID = md_Params.Fields().ByName("stakerKeyID")
-	fd_Params_completerKeyID = md_Params.Fields().ByName("completerKeyID")
-	fd_Params_ethMinterKeyID = md_Params.Fields().ByName("ethMinterKeyID")
 	fd_Params_ethTokenAddr = md_Params.Fields().ByName("ethTokenAddr")
+	fd_Params_controllerAddr = md_Params.Fields().ByName("controllerAddr")
 }
 
 var _ protoreflect.Message = (*fastReflection_Params)(nil)
@@ -160,33 +154,33 @@ func (x *fastReflection_Params) Interface() protoreflect.ProtoMessage {
 // While iterating, mutating operations may only be performed
 // on the current field descriptor.
 func (x *fastReflection_Params) Range(f func(protoreflect.FieldDescriptor, protoreflect.Value) bool) {
-	if x.EthBatcherAddr != "" {
-		value := protoreflect.ValueOfString(x.EthBatcherAddr)
-		if !f(fd_Params_ethBatcherAddr, value) {
-			return
-		}
-	}
 	if x.DepositKeyringAddr != "" {
 		value := protoreflect.ValueOfString(x.DepositKeyringAddr)
 		if !f(fd_Params_depositKeyringAddr, value) {
 			return
 		}
 	}
-	if x.MinterKeyID != uint64(0) {
-		value := protoreflect.ValueOfUint64(x.MinterKeyID)
-		if !f(fd_Params_minterKeyID, value) {
+	if x.StakerKeyID != uint64(0) {
+		value := protoreflect.ValueOfUint64(x.StakerKeyID)
+		if !f(fd_Params_stakerKeyID, value) {
 			return
 		}
 	}
-	if x.WithdrawerKeyID != uint64(0) {
-		value := protoreflect.ValueOfUint64(x.WithdrawerKeyID)
-		if !f(fd_Params_withdrawerKeyID, value) {
+	if x.EthMinterKeyID != uint64(0) {
+		value := protoreflect.ValueOfUint64(x.EthMinterKeyID)
+		if !f(fd_Params_ethMinterKeyID, value) {
 			return
 		}
 	}
 	if x.UnstakerKeyID != uint64(0) {
 		value := protoreflect.ValueOfUint64(x.UnstakerKeyID)
 		if !f(fd_Params_unstakerKeyID, value) {
+			return
+		}
+	}
+	if x.CompleterKeyID != uint64(0) {
+		value := protoreflect.ValueOfUint64(x.CompleterKeyID)
+		if !f(fd_Params_completerKeyID, value) {
 			return
 		}
 	}
@@ -208,33 +202,15 @@ func (x *fastReflection_Params) Range(f func(protoreflect.FieldDescriptor, proto
 			return
 		}
 	}
-	if x.Authority != "" {
-		value := protoreflect.ValueOfString(x.Authority)
-		if !f(fd_Params_authority, value) {
-			return
-		}
-	}
-	if x.StakerKeyID != uint64(0) {
-		value := protoreflect.ValueOfUint64(x.StakerKeyID)
-		if !f(fd_Params_stakerKeyID, value) {
-			return
-		}
-	}
-	if x.CompleterKeyID != uint64(0) {
-		value := protoreflect.ValueOfUint64(x.CompleterKeyID)
-		if !f(fd_Params_completerKeyID, value) {
-			return
-		}
-	}
-	if x.EthMinterKeyID != uint64(0) {
-		value := protoreflect.ValueOfUint64(x.EthMinterKeyID)
-		if !f(fd_Params_ethMinterKeyID, value) {
-			return
-		}
-	}
 	if x.EthTokenAddr != "" {
 		value := protoreflect.ValueOfString(x.EthTokenAddr)
 		if !f(fd_Params_ethTokenAddr, value) {
+			return
+		}
+	}
+	if x.ControllerAddr != "" {
+		value := protoreflect.ValueOfString(x.ControllerAddr)
+		if !f(fd_Params_controllerAddr, value) {
 			return
 		}
 	}
@@ -253,32 +229,26 @@ func (x *fastReflection_Params) Range(f func(protoreflect.FieldDescriptor, proto
 // a repeated field is populated if it is non-empty.
 func (x *fastReflection_Params) Has(fd protoreflect.FieldDescriptor) bool {
 	switch fd.FullName() {
-	case "zrchain.zenbtc.Params.ethBatcherAddr":
-		return x.EthBatcherAddr != ""
 	case "zrchain.zenbtc.Params.depositKeyringAddr":
 		return x.DepositKeyringAddr != ""
-	case "zrchain.zenbtc.Params.minterKeyID":
-		return x.MinterKeyID != uint64(0)
-	case "zrchain.zenbtc.Params.withdrawerKeyID":
-		return x.WithdrawerKeyID != uint64(0)
+	case "zrchain.zenbtc.Params.stakerKeyID":
+		return x.StakerKeyID != uint64(0)
+	case "zrchain.zenbtc.Params.ethMinterKeyID":
+		return x.EthMinterKeyID != uint64(0)
 	case "zrchain.zenbtc.Params.unstakerKeyID":
 		return x.UnstakerKeyID != uint64(0)
+	case "zrchain.zenbtc.Params.completerKeyID":
+		return x.CompleterKeyID != uint64(0)
 	case "zrchain.zenbtc.Params.rewardsDepositKeyID":
 		return x.RewardsDepositKeyID != uint64(0)
 	case "zrchain.zenbtc.Params.changeAddressKeyIDs":
 		return len(x.ChangeAddressKeyIDs) != 0
 	case "zrchain.zenbtc.Params.bitcoinProxyAddress":
 		return x.BitcoinProxyAddress != ""
-	case "zrchain.zenbtc.Params.authority":
-		return x.Authority != ""
-	case "zrchain.zenbtc.Params.stakerKeyID":
-		return x.StakerKeyID != uint64(0)
-	case "zrchain.zenbtc.Params.completerKeyID":
-		return x.CompleterKeyID != uint64(0)
-	case "zrchain.zenbtc.Params.ethMinterKeyID":
-		return x.EthMinterKeyID != uint64(0)
 	case "zrchain.zenbtc.Params.ethTokenAddr":
 		return x.EthTokenAddr != ""
+	case "zrchain.zenbtc.Params.controllerAddr":
+		return x.ControllerAddr != ""
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: zrchain.zenbtc.Params"))
@@ -295,32 +265,26 @@ func (x *fastReflection_Params) Has(fd protoreflect.FieldDescriptor) bool {
 // Clear is a mutating operation and unsafe for concurrent use.
 func (x *fastReflection_Params) Clear(fd protoreflect.FieldDescriptor) {
 	switch fd.FullName() {
-	case "zrchain.zenbtc.Params.ethBatcherAddr":
-		x.EthBatcherAddr = ""
 	case "zrchain.zenbtc.Params.depositKeyringAddr":
 		x.DepositKeyringAddr = ""
-	case "zrchain.zenbtc.Params.minterKeyID":
-		x.MinterKeyID = uint64(0)
-	case "zrchain.zenbtc.Params.withdrawerKeyID":
-		x.WithdrawerKeyID = uint64(0)
+	case "zrchain.zenbtc.Params.stakerKeyID":
+		x.StakerKeyID = uint64(0)
+	case "zrchain.zenbtc.Params.ethMinterKeyID":
+		x.EthMinterKeyID = uint64(0)
 	case "zrchain.zenbtc.Params.unstakerKeyID":
 		x.UnstakerKeyID = uint64(0)
+	case "zrchain.zenbtc.Params.completerKeyID":
+		x.CompleterKeyID = uint64(0)
 	case "zrchain.zenbtc.Params.rewardsDepositKeyID":
 		x.RewardsDepositKeyID = uint64(0)
 	case "zrchain.zenbtc.Params.changeAddressKeyIDs":
 		x.ChangeAddressKeyIDs = nil
 	case "zrchain.zenbtc.Params.bitcoinProxyAddress":
 		x.BitcoinProxyAddress = ""
-	case "zrchain.zenbtc.Params.authority":
-		x.Authority = ""
-	case "zrchain.zenbtc.Params.stakerKeyID":
-		x.StakerKeyID = uint64(0)
-	case "zrchain.zenbtc.Params.completerKeyID":
-		x.CompleterKeyID = uint64(0)
-	case "zrchain.zenbtc.Params.ethMinterKeyID":
-		x.EthMinterKeyID = uint64(0)
 	case "zrchain.zenbtc.Params.ethTokenAddr":
 		x.EthTokenAddr = ""
+	case "zrchain.zenbtc.Params.controllerAddr":
+		x.ControllerAddr = ""
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: zrchain.zenbtc.Params"))
@@ -337,20 +301,20 @@ func (x *fastReflection_Params) Clear(fd protoreflect.FieldDescriptor) {
 // of the value; to obtain a mutable reference, use Mutable.
 func (x *fastReflection_Params) Get(descriptor protoreflect.FieldDescriptor) protoreflect.Value {
 	switch descriptor.FullName() {
-	case "zrchain.zenbtc.Params.ethBatcherAddr":
-		value := x.EthBatcherAddr
-		return protoreflect.ValueOfString(value)
 	case "zrchain.zenbtc.Params.depositKeyringAddr":
 		value := x.DepositKeyringAddr
 		return protoreflect.ValueOfString(value)
-	case "zrchain.zenbtc.Params.minterKeyID":
-		value := x.MinterKeyID
+	case "zrchain.zenbtc.Params.stakerKeyID":
+		value := x.StakerKeyID
 		return protoreflect.ValueOfUint64(value)
-	case "zrchain.zenbtc.Params.withdrawerKeyID":
-		value := x.WithdrawerKeyID
+	case "zrchain.zenbtc.Params.ethMinterKeyID":
+		value := x.EthMinterKeyID
 		return protoreflect.ValueOfUint64(value)
 	case "zrchain.zenbtc.Params.unstakerKeyID":
 		value := x.UnstakerKeyID
+		return protoreflect.ValueOfUint64(value)
+	case "zrchain.zenbtc.Params.completerKeyID":
+		value := x.CompleterKeyID
 		return protoreflect.ValueOfUint64(value)
 	case "zrchain.zenbtc.Params.rewardsDepositKeyID":
 		value := x.RewardsDepositKeyID
@@ -364,20 +328,11 @@ func (x *fastReflection_Params) Get(descriptor protoreflect.FieldDescriptor) pro
 	case "zrchain.zenbtc.Params.bitcoinProxyAddress":
 		value := x.BitcoinProxyAddress
 		return protoreflect.ValueOfString(value)
-	case "zrchain.zenbtc.Params.authority":
-		value := x.Authority
-		return protoreflect.ValueOfString(value)
-	case "zrchain.zenbtc.Params.stakerKeyID":
-		value := x.StakerKeyID
-		return protoreflect.ValueOfUint64(value)
-	case "zrchain.zenbtc.Params.completerKeyID":
-		value := x.CompleterKeyID
-		return protoreflect.ValueOfUint64(value)
-	case "zrchain.zenbtc.Params.ethMinterKeyID":
-		value := x.EthMinterKeyID
-		return protoreflect.ValueOfUint64(value)
 	case "zrchain.zenbtc.Params.ethTokenAddr":
 		value := x.EthTokenAddr
+		return protoreflect.ValueOfString(value)
+	case "zrchain.zenbtc.Params.controllerAddr":
+		value := x.ControllerAddr
 		return protoreflect.ValueOfString(value)
 	default:
 		if descriptor.IsExtension() {
@@ -399,16 +354,16 @@ func (x *fastReflection_Params) Get(descriptor protoreflect.FieldDescriptor) pro
 // Set is a mutating operation and unsafe for concurrent use.
 func (x *fastReflection_Params) Set(fd protoreflect.FieldDescriptor, value protoreflect.Value) {
 	switch fd.FullName() {
-	case "zrchain.zenbtc.Params.ethBatcherAddr":
-		x.EthBatcherAddr = value.Interface().(string)
 	case "zrchain.zenbtc.Params.depositKeyringAddr":
 		x.DepositKeyringAddr = value.Interface().(string)
-	case "zrchain.zenbtc.Params.minterKeyID":
-		x.MinterKeyID = value.Uint()
-	case "zrchain.zenbtc.Params.withdrawerKeyID":
-		x.WithdrawerKeyID = value.Uint()
+	case "zrchain.zenbtc.Params.stakerKeyID":
+		x.StakerKeyID = value.Uint()
+	case "zrchain.zenbtc.Params.ethMinterKeyID":
+		x.EthMinterKeyID = value.Uint()
 	case "zrchain.zenbtc.Params.unstakerKeyID":
 		x.UnstakerKeyID = value.Uint()
+	case "zrchain.zenbtc.Params.completerKeyID":
+		x.CompleterKeyID = value.Uint()
 	case "zrchain.zenbtc.Params.rewardsDepositKeyID":
 		x.RewardsDepositKeyID = value.Uint()
 	case "zrchain.zenbtc.Params.changeAddressKeyIDs":
@@ -417,16 +372,10 @@ func (x *fastReflection_Params) Set(fd protoreflect.FieldDescriptor, value proto
 		x.ChangeAddressKeyIDs = *clv.list
 	case "zrchain.zenbtc.Params.bitcoinProxyAddress":
 		x.BitcoinProxyAddress = value.Interface().(string)
-	case "zrchain.zenbtc.Params.authority":
-		x.Authority = value.Interface().(string)
-	case "zrchain.zenbtc.Params.stakerKeyID":
-		x.StakerKeyID = value.Uint()
-	case "zrchain.zenbtc.Params.completerKeyID":
-		x.CompleterKeyID = value.Uint()
-	case "zrchain.zenbtc.Params.ethMinterKeyID":
-		x.EthMinterKeyID = value.Uint()
 	case "zrchain.zenbtc.Params.ethTokenAddr":
 		x.EthTokenAddr = value.Interface().(string)
+	case "zrchain.zenbtc.Params.controllerAddr":
+		x.ControllerAddr = value.Interface().(string)
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: zrchain.zenbtc.Params"))
@@ -453,30 +402,24 @@ func (x *fastReflection_Params) Mutable(fd protoreflect.FieldDescriptor) protore
 		}
 		value := &_Params_7_list{list: &x.ChangeAddressKeyIDs}
 		return protoreflect.ValueOfList(value)
-	case "zrchain.zenbtc.Params.ethBatcherAddr":
-		panic(fmt.Errorf("field ethBatcherAddr of message zrchain.zenbtc.Params is not mutable"))
 	case "zrchain.zenbtc.Params.depositKeyringAddr":
 		panic(fmt.Errorf("field depositKeyringAddr of message zrchain.zenbtc.Params is not mutable"))
-	case "zrchain.zenbtc.Params.minterKeyID":
-		panic(fmt.Errorf("field minterKeyID of message zrchain.zenbtc.Params is not mutable"))
-	case "zrchain.zenbtc.Params.withdrawerKeyID":
-		panic(fmt.Errorf("field withdrawerKeyID of message zrchain.zenbtc.Params is not mutable"))
+	case "zrchain.zenbtc.Params.stakerKeyID":
+		panic(fmt.Errorf("field stakerKeyID of message zrchain.zenbtc.Params is not mutable"))
+	case "zrchain.zenbtc.Params.ethMinterKeyID":
+		panic(fmt.Errorf("field ethMinterKeyID of message zrchain.zenbtc.Params is not mutable"))
 	case "zrchain.zenbtc.Params.unstakerKeyID":
 		panic(fmt.Errorf("field unstakerKeyID of message zrchain.zenbtc.Params is not mutable"))
+	case "zrchain.zenbtc.Params.completerKeyID":
+		panic(fmt.Errorf("field completerKeyID of message zrchain.zenbtc.Params is not mutable"))
 	case "zrchain.zenbtc.Params.rewardsDepositKeyID":
 		panic(fmt.Errorf("field rewardsDepositKeyID of message zrchain.zenbtc.Params is not mutable"))
 	case "zrchain.zenbtc.Params.bitcoinProxyAddress":
 		panic(fmt.Errorf("field bitcoinProxyAddress of message zrchain.zenbtc.Params is not mutable"))
-	case "zrchain.zenbtc.Params.authority":
-		panic(fmt.Errorf("field authority of message zrchain.zenbtc.Params is not mutable"))
-	case "zrchain.zenbtc.Params.stakerKeyID":
-		panic(fmt.Errorf("field stakerKeyID of message zrchain.zenbtc.Params is not mutable"))
-	case "zrchain.zenbtc.Params.completerKeyID":
-		panic(fmt.Errorf("field completerKeyID of message zrchain.zenbtc.Params is not mutable"))
-	case "zrchain.zenbtc.Params.ethMinterKeyID":
-		panic(fmt.Errorf("field ethMinterKeyID of message zrchain.zenbtc.Params is not mutable"))
 	case "zrchain.zenbtc.Params.ethTokenAddr":
 		panic(fmt.Errorf("field ethTokenAddr of message zrchain.zenbtc.Params is not mutable"))
+	case "zrchain.zenbtc.Params.controllerAddr":
+		panic(fmt.Errorf("field controllerAddr of message zrchain.zenbtc.Params is not mutable"))
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: zrchain.zenbtc.Params"))
@@ -490,15 +433,15 @@ func (x *fastReflection_Params) Mutable(fd protoreflect.FieldDescriptor) protore
 // For lists, maps, and messages, this returns a new, empty, mutable value.
 func (x *fastReflection_Params) NewField(fd protoreflect.FieldDescriptor) protoreflect.Value {
 	switch fd.FullName() {
-	case "zrchain.zenbtc.Params.ethBatcherAddr":
-		return protoreflect.ValueOfString("")
 	case "zrchain.zenbtc.Params.depositKeyringAddr":
 		return protoreflect.ValueOfString("")
-	case "zrchain.zenbtc.Params.minterKeyID":
+	case "zrchain.zenbtc.Params.stakerKeyID":
 		return protoreflect.ValueOfUint64(uint64(0))
-	case "zrchain.zenbtc.Params.withdrawerKeyID":
+	case "zrchain.zenbtc.Params.ethMinterKeyID":
 		return protoreflect.ValueOfUint64(uint64(0))
 	case "zrchain.zenbtc.Params.unstakerKeyID":
+		return protoreflect.ValueOfUint64(uint64(0))
+	case "zrchain.zenbtc.Params.completerKeyID":
 		return protoreflect.ValueOfUint64(uint64(0))
 	case "zrchain.zenbtc.Params.rewardsDepositKeyID":
 		return protoreflect.ValueOfUint64(uint64(0))
@@ -507,15 +450,9 @@ func (x *fastReflection_Params) NewField(fd protoreflect.FieldDescriptor) protor
 		return protoreflect.ValueOfList(&_Params_7_list{list: &list})
 	case "zrchain.zenbtc.Params.bitcoinProxyAddress":
 		return protoreflect.ValueOfString("")
-	case "zrchain.zenbtc.Params.authority":
-		return protoreflect.ValueOfString("")
-	case "zrchain.zenbtc.Params.stakerKeyID":
-		return protoreflect.ValueOfUint64(uint64(0))
-	case "zrchain.zenbtc.Params.completerKeyID":
-		return protoreflect.ValueOfUint64(uint64(0))
-	case "zrchain.zenbtc.Params.ethMinterKeyID":
-		return protoreflect.ValueOfUint64(uint64(0))
 	case "zrchain.zenbtc.Params.ethTokenAddr":
+		return protoreflect.ValueOfString("")
+	case "zrchain.zenbtc.Params.controllerAddr":
 		return protoreflect.ValueOfString("")
 	default:
 		if fd.IsExtension() {
@@ -586,22 +523,21 @@ func (x *fastReflection_Params) ProtoMethods() *protoiface.Methods {
 		var n int
 		var l int
 		_ = l
-		l = len(x.EthBatcherAddr)
-		if l > 0 {
-			n += 1 + l + runtime.Sov(uint64(l))
-		}
 		l = len(x.DepositKeyringAddr)
 		if l > 0 {
 			n += 1 + l + runtime.Sov(uint64(l))
 		}
-		if x.MinterKeyID != 0 {
-			n += 1 + runtime.Sov(uint64(x.MinterKeyID))
+		if x.StakerKeyID != 0 {
+			n += 1 + runtime.Sov(uint64(x.StakerKeyID))
 		}
-		if x.WithdrawerKeyID != 0 {
-			n += 1 + runtime.Sov(uint64(x.WithdrawerKeyID))
+		if x.EthMinterKeyID != 0 {
+			n += 1 + runtime.Sov(uint64(x.EthMinterKeyID))
 		}
 		if x.UnstakerKeyID != 0 {
 			n += 1 + runtime.Sov(uint64(x.UnstakerKeyID))
+		}
+		if x.CompleterKeyID != 0 {
+			n += 1 + runtime.Sov(uint64(x.CompleterKeyID))
 		}
 		if x.RewardsDepositKeyID != 0 {
 			n += 1 + runtime.Sov(uint64(x.RewardsDepositKeyID))
@@ -617,20 +553,11 @@ func (x *fastReflection_Params) ProtoMethods() *protoiface.Methods {
 		if l > 0 {
 			n += 1 + l + runtime.Sov(uint64(l))
 		}
-		l = len(x.Authority)
+		l = len(x.EthTokenAddr)
 		if l > 0 {
 			n += 1 + l + runtime.Sov(uint64(l))
 		}
-		if x.StakerKeyID != 0 {
-			n += 1 + runtime.Sov(uint64(x.StakerKeyID))
-		}
-		if x.CompleterKeyID != 0 {
-			n += 1 + runtime.Sov(uint64(x.CompleterKeyID))
-		}
-		if x.EthMinterKeyID != 0 {
-			n += 1 + runtime.Sov(uint64(x.EthMinterKeyID))
-		}
-		l = len(x.EthTokenAddr)
+		l = len(x.ControllerAddr)
 		if l > 0 {
 			n += 1 + l + runtime.Sov(uint64(l))
 		}
@@ -663,32 +590,17 @@ func (x *fastReflection_Params) ProtoMethods() *protoiface.Methods {
 			i -= len(x.unknownFields)
 			copy(dAtA[i:], x.unknownFields)
 		}
+		if len(x.ControllerAddr) > 0 {
+			i -= len(x.ControllerAddr)
+			copy(dAtA[i:], x.ControllerAddr)
+			i = runtime.EncodeVarint(dAtA, i, uint64(len(x.ControllerAddr)))
+			i--
+			dAtA[i] = 0x52
+		}
 		if len(x.EthTokenAddr) > 0 {
 			i -= len(x.EthTokenAddr)
 			copy(dAtA[i:], x.EthTokenAddr)
 			i = runtime.EncodeVarint(dAtA, i, uint64(len(x.EthTokenAddr)))
-			i--
-			dAtA[i] = 0x6a
-		}
-		if x.EthMinterKeyID != 0 {
-			i = runtime.EncodeVarint(dAtA, i, uint64(x.EthMinterKeyID))
-			i--
-			dAtA[i] = 0x60
-		}
-		if x.CompleterKeyID != 0 {
-			i = runtime.EncodeVarint(dAtA, i, uint64(x.CompleterKeyID))
-			i--
-			dAtA[i] = 0x58
-		}
-		if x.StakerKeyID != 0 {
-			i = runtime.EncodeVarint(dAtA, i, uint64(x.StakerKeyID))
-			i--
-			dAtA[i] = 0x50
-		}
-		if len(x.Authority) > 0 {
-			i -= len(x.Authority)
-			copy(dAtA[i:], x.Authority)
-			i = runtime.EncodeVarint(dAtA, i, uint64(len(x.Authority)))
 			i--
 			dAtA[i] = 0x4a
 		}
@@ -724,32 +636,30 @@ func (x *fastReflection_Params) ProtoMethods() *protoiface.Methods {
 			i--
 			dAtA[i] = 0x30
 		}
-		if x.UnstakerKeyID != 0 {
-			i = runtime.EncodeVarint(dAtA, i, uint64(x.UnstakerKeyID))
+		if x.CompleterKeyID != 0 {
+			i = runtime.EncodeVarint(dAtA, i, uint64(x.CompleterKeyID))
 			i--
 			dAtA[i] = 0x28
 		}
-		if x.WithdrawerKeyID != 0 {
-			i = runtime.EncodeVarint(dAtA, i, uint64(x.WithdrawerKeyID))
+		if x.UnstakerKeyID != 0 {
+			i = runtime.EncodeVarint(dAtA, i, uint64(x.UnstakerKeyID))
 			i--
 			dAtA[i] = 0x20
 		}
-		if x.MinterKeyID != 0 {
-			i = runtime.EncodeVarint(dAtA, i, uint64(x.MinterKeyID))
+		if x.EthMinterKeyID != 0 {
+			i = runtime.EncodeVarint(dAtA, i, uint64(x.EthMinterKeyID))
 			i--
 			dAtA[i] = 0x18
+		}
+		if x.StakerKeyID != 0 {
+			i = runtime.EncodeVarint(dAtA, i, uint64(x.StakerKeyID))
+			i--
+			dAtA[i] = 0x10
 		}
 		if len(x.DepositKeyringAddr) > 0 {
 			i -= len(x.DepositKeyringAddr)
 			copy(dAtA[i:], x.DepositKeyringAddr)
 			i = runtime.EncodeVarint(dAtA, i, uint64(len(x.DepositKeyringAddr)))
-			i--
-			dAtA[i] = 0x12
-		}
-		if len(x.EthBatcherAddr) > 0 {
-			i -= len(x.EthBatcherAddr)
-			copy(dAtA[i:], x.EthBatcherAddr)
-			i = runtime.EncodeVarint(dAtA, i, uint64(len(x.EthBatcherAddr)))
 			i--
 			dAtA[i] = 0xa
 		}
@@ -804,38 +714,6 @@ func (x *fastReflection_Params) ProtoMethods() *protoiface.Methods {
 			switch fieldNum {
 			case 1:
 				if wireType != 2 {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field EthBatcherAddr", wireType)
-				}
-				var stringLen uint64
-				for shift := uint(0); ; shift += 7 {
-					if shift >= 64 {
-						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
-					}
-					if iNdEx >= l {
-						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
-					}
-					b := dAtA[iNdEx]
-					iNdEx++
-					stringLen |= uint64(b&0x7F) << shift
-					if b < 0x80 {
-						break
-					}
-				}
-				intStringLen := int(stringLen)
-				if intStringLen < 0 {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
-				}
-				postIndex := iNdEx + intStringLen
-				if postIndex < 0 {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
-				}
-				if postIndex > l {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
-				}
-				x.EthBatcherAddr = string(dAtA[iNdEx:postIndex])
-				iNdEx = postIndex
-			case 2:
-				if wireType != 2 {
 					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field DepositKeyringAddr", wireType)
 				}
 				var stringLen uint64
@@ -866,11 +744,11 @@ func (x *fastReflection_Params) ProtoMethods() *protoiface.Methods {
 				}
 				x.DepositKeyringAddr = string(dAtA[iNdEx:postIndex])
 				iNdEx = postIndex
-			case 3:
+			case 2:
 				if wireType != 0 {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field MinterKeyID", wireType)
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field StakerKeyID", wireType)
 				}
-				x.MinterKeyID = 0
+				x.StakerKeyID = 0
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
 						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
@@ -880,31 +758,31 @@ func (x *fastReflection_Params) ProtoMethods() *protoiface.Methods {
 					}
 					b := dAtA[iNdEx]
 					iNdEx++
-					x.MinterKeyID |= uint64(b&0x7F) << shift
+					x.StakerKeyID |= uint64(b&0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+			case 3:
+				if wireType != 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field EthMinterKeyID", wireType)
+				}
+				x.EthMinterKeyID = 0
+				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
+					}
+					if iNdEx >= l {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+					}
+					b := dAtA[iNdEx]
+					iNdEx++
+					x.EthMinterKeyID |= uint64(b&0x7F) << shift
 					if b < 0x80 {
 						break
 					}
 				}
 			case 4:
-				if wireType != 0 {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field WithdrawerKeyID", wireType)
-				}
-				x.WithdrawerKeyID = 0
-				for shift := uint(0); ; shift += 7 {
-					if shift >= 64 {
-						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
-					}
-					if iNdEx >= l {
-						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
-					}
-					b := dAtA[iNdEx]
-					iNdEx++
-					x.WithdrawerKeyID |= uint64(b&0x7F) << shift
-					if b < 0x80 {
-						break
-					}
-				}
-			case 5:
 				if wireType != 0 {
 					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field UnstakerKeyID", wireType)
 				}
@@ -919,6 +797,25 @@ func (x *fastReflection_Params) ProtoMethods() *protoiface.Methods {
 					b := dAtA[iNdEx]
 					iNdEx++
 					x.UnstakerKeyID |= uint64(b&0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+			case 5:
+				if wireType != 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field CompleterKeyID", wireType)
+				}
+				x.CompleterKeyID = 0
+				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
+					}
+					if iNdEx >= l {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+					}
+					b := dAtA[iNdEx]
+					iNdEx++
+					x.CompleterKeyID |= uint64(b&0x7F) << shift
 					if b < 0x80 {
 						break
 					}
@@ -1052,95 +949,6 @@ func (x *fastReflection_Params) ProtoMethods() *protoiface.Methods {
 				iNdEx = postIndex
 			case 9:
 				if wireType != 2 {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field Authority", wireType)
-				}
-				var stringLen uint64
-				for shift := uint(0); ; shift += 7 {
-					if shift >= 64 {
-						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
-					}
-					if iNdEx >= l {
-						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
-					}
-					b := dAtA[iNdEx]
-					iNdEx++
-					stringLen |= uint64(b&0x7F) << shift
-					if b < 0x80 {
-						break
-					}
-				}
-				intStringLen := int(stringLen)
-				if intStringLen < 0 {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
-				}
-				postIndex := iNdEx + intStringLen
-				if postIndex < 0 {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
-				}
-				if postIndex > l {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
-				}
-				x.Authority = string(dAtA[iNdEx:postIndex])
-				iNdEx = postIndex
-			case 10:
-				if wireType != 0 {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field StakerKeyID", wireType)
-				}
-				x.StakerKeyID = 0
-				for shift := uint(0); ; shift += 7 {
-					if shift >= 64 {
-						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
-					}
-					if iNdEx >= l {
-						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
-					}
-					b := dAtA[iNdEx]
-					iNdEx++
-					x.StakerKeyID |= uint64(b&0x7F) << shift
-					if b < 0x80 {
-						break
-					}
-				}
-			case 11:
-				if wireType != 0 {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field CompleterKeyID", wireType)
-				}
-				x.CompleterKeyID = 0
-				for shift := uint(0); ; shift += 7 {
-					if shift >= 64 {
-						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
-					}
-					if iNdEx >= l {
-						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
-					}
-					b := dAtA[iNdEx]
-					iNdEx++
-					x.CompleterKeyID |= uint64(b&0x7F) << shift
-					if b < 0x80 {
-						break
-					}
-				}
-			case 12:
-				if wireType != 0 {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field EthMinterKeyID", wireType)
-				}
-				x.EthMinterKeyID = 0
-				for shift := uint(0); ; shift += 7 {
-					if shift >= 64 {
-						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
-					}
-					if iNdEx >= l {
-						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
-					}
-					b := dAtA[iNdEx]
-					iNdEx++
-					x.EthMinterKeyID |= uint64(b&0x7F) << shift
-					if b < 0x80 {
-						break
-					}
-				}
-			case 13:
-				if wireType != 2 {
 					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field EthTokenAddr", wireType)
 				}
 				var stringLen uint64
@@ -1170,6 +978,38 @@ func (x *fastReflection_Params) ProtoMethods() *protoiface.Methods {
 					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
 				}
 				x.EthTokenAddr = string(dAtA[iNdEx:postIndex])
+				iNdEx = postIndex
+			case 10:
+				if wireType != 2 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field ControllerAddr", wireType)
+				}
+				var stringLen uint64
+				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
+					}
+					if iNdEx >= l {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+					}
+					b := dAtA[iNdEx]
+					iNdEx++
+					stringLen |= uint64(b&0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+				intStringLen := int(stringLen)
+				if intStringLen < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				postIndex := iNdEx + intStringLen
+				if postIndex < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				if postIndex > l {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+				}
+				x.ControllerAddr = string(dAtA[iNdEx:postIndex])
 				iNdEx = postIndex
 			default:
 				iNdEx = preIndex
@@ -1225,21 +1065,16 @@ type Params struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	EthBatcherAddr     string `protobuf:"bytes,1,opt,name=ethBatcherAddr,proto3" json:"ethBatcherAddr,omitempty"`
-	DepositKeyringAddr string `protobuf:"bytes,2,opt,name=depositKeyringAddr,proto3" json:"depositKeyringAddr,omitempty"`
-	// Deprecated: Do not use.
-	MinterKeyID uint64 `protobuf:"varint,3,opt,name=minterKeyID,proto3" json:"minterKeyID,omitempty"`
-	// Deprecated: Do not use.
-	WithdrawerKeyID     uint64   `protobuf:"varint,4,opt,name=withdrawerKeyID,proto3" json:"withdrawerKeyID,omitempty"`
-	UnstakerKeyID       uint64   `protobuf:"varint,5,opt,name=unstakerKeyID,proto3" json:"unstakerKeyID,omitempty"`
+	DepositKeyringAddr  string   `protobuf:"bytes,1,opt,name=depositKeyringAddr,proto3" json:"depositKeyringAddr,omitempty"`
+	StakerKeyID         uint64   `protobuf:"varint,2,opt,name=stakerKeyID,proto3" json:"stakerKeyID,omitempty"`
+	EthMinterKeyID      uint64   `protobuf:"varint,3,opt,name=ethMinterKeyID,proto3" json:"ethMinterKeyID,omitempty"`
+	UnstakerKeyID       uint64   `protobuf:"varint,4,opt,name=unstakerKeyID,proto3" json:"unstakerKeyID,omitempty"`
+	CompleterKeyID      uint64   `protobuf:"varint,5,opt,name=completerKeyID,proto3" json:"completerKeyID,omitempty"`
 	RewardsDepositKeyID uint64   `protobuf:"varint,6,opt,name=rewardsDepositKeyID,proto3" json:"rewardsDepositKeyID,omitempty"`
 	ChangeAddressKeyIDs []uint64 `protobuf:"varint,7,rep,packed,name=changeAddressKeyIDs,proto3" json:"changeAddressKeyIDs,omitempty"`
 	BitcoinProxyAddress string   `protobuf:"bytes,8,opt,name=bitcoinProxyAddress,proto3" json:"bitcoinProxyAddress,omitempty"`
-	Authority           string   `protobuf:"bytes,9,opt,name=authority,proto3" json:"authority,omitempty"`
-	StakerKeyID         uint64   `protobuf:"varint,10,opt,name=stakerKeyID,proto3" json:"stakerKeyID,omitempty"`
-	CompleterKeyID      uint64   `protobuf:"varint,11,opt,name=completerKeyID,proto3" json:"completerKeyID,omitempty"`
-	EthMinterKeyID      uint64   `protobuf:"varint,12,opt,name=ethMinterKeyID,proto3" json:"ethMinterKeyID,omitempty"`
-	EthTokenAddr        string   `protobuf:"bytes,13,opt,name=ethTokenAddr,proto3" json:"ethTokenAddr,omitempty"`
+	EthTokenAddr        string   `protobuf:"bytes,9,opt,name=ethTokenAddr,proto3" json:"ethTokenAddr,omitempty"`
+	ControllerAddr      string   `protobuf:"bytes,10,opt,name=controllerAddr,proto3" json:"controllerAddr,omitempty"`
 }
 
 func (x *Params) Reset() {
@@ -1262,13 +1097,6 @@ func (*Params) Descriptor() ([]byte, []int) {
 	return file_zrchain_zenbtc_params_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *Params) GetEthBatcherAddr() string {
-	if x != nil {
-		return x.EthBatcherAddr
-	}
-	return ""
-}
-
 func (x *Params) GetDepositKeyringAddr() string {
 	if x != nil {
 		return x.DepositKeyringAddr
@@ -1276,18 +1104,16 @@ func (x *Params) GetDepositKeyringAddr() string {
 	return ""
 }
 
-// Deprecated: Do not use.
-func (x *Params) GetMinterKeyID() uint64 {
+func (x *Params) GetStakerKeyID() uint64 {
 	if x != nil {
-		return x.MinterKeyID
+		return x.StakerKeyID
 	}
 	return 0
 }
 
-// Deprecated: Do not use.
-func (x *Params) GetWithdrawerKeyID() uint64 {
+func (x *Params) GetEthMinterKeyID() uint64 {
 	if x != nil {
-		return x.WithdrawerKeyID
+		return x.EthMinterKeyID
 	}
 	return 0
 }
@@ -1295,6 +1121,13 @@ func (x *Params) GetWithdrawerKeyID() uint64 {
 func (x *Params) GetUnstakerKeyID() uint64 {
 	if x != nil {
 		return x.UnstakerKeyID
+	}
+	return 0
+}
+
+func (x *Params) GetCompleterKeyID() uint64 {
+	if x != nil {
+		return x.CompleterKeyID
 	}
 	return 0
 }
@@ -1320,37 +1153,16 @@ func (x *Params) GetBitcoinProxyAddress() string {
 	return ""
 }
 
-func (x *Params) GetAuthority() string {
+func (x *Params) GetEthTokenAddr() string {
 	if x != nil {
-		return x.Authority
+		return x.EthTokenAddr
 	}
 	return ""
 }
 
-func (x *Params) GetStakerKeyID() uint64 {
+func (x *Params) GetControllerAddr() string {
 	if x != nil {
-		return x.StakerKeyID
-	}
-	return 0
-}
-
-func (x *Params) GetCompleterKeyID() uint64 {
-	if x != nil {
-		return x.CompleterKeyID
-	}
-	return 0
-}
-
-func (x *Params) GetEthMinterKeyID() uint64 {
-	if x != nil {
-		return x.EthMinterKeyID
-	}
-	return 0
-}
-
-func (x *Params) GetEthTokenAddr() string {
-	if x != nil {
-		return x.EthTokenAddr
+		return x.ControllerAddr
 	}
 	return ""
 }
@@ -1363,54 +1175,47 @@ var file_zrchain_zenbtc_params_proto_rawDesc = []byte{
 	0x72, 0x63, 0x68, 0x61, 0x69, 0x6e, 0x2e, 0x7a, 0x65, 0x6e, 0x62, 0x74, 0x63, 0x1a, 0x11, 0x61,
 	0x6d, 0x69, 0x6e, 0x6f, 0x2f, 0x61, 0x6d, 0x69, 0x6e, 0x6f, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f,
 	0x1a, 0x14, 0x67, 0x6f, 0x67, 0x6f, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2f, 0x67, 0x6f, 0x67, 0x6f,
-	0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x22, 0xc6, 0x04, 0x0a, 0x06, 0x50, 0x61, 0x72, 0x61, 0x6d,
-	0x73, 0x12, 0x26, 0x0a, 0x0e, 0x65, 0x74, 0x68, 0x42, 0x61, 0x74, 0x63, 0x68, 0x65, 0x72, 0x41,
-	0x64, 0x64, 0x72, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0e, 0x65, 0x74, 0x68, 0x42, 0x61,
-	0x74, 0x63, 0x68, 0x65, 0x72, 0x41, 0x64, 0x64, 0x72, 0x12, 0x2e, 0x0a, 0x12, 0x64, 0x65, 0x70,
-	0x6f, 0x73, 0x69, 0x74, 0x4b, 0x65, 0x79, 0x72, 0x69, 0x6e, 0x67, 0x41, 0x64, 0x64, 0x72, 0x18,
-	0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x12, 0x64, 0x65, 0x70, 0x6f, 0x73, 0x69, 0x74, 0x4b, 0x65,
-	0x79, 0x72, 0x69, 0x6e, 0x67, 0x41, 0x64, 0x64, 0x72, 0x12, 0x24, 0x0a, 0x0b, 0x6d, 0x69, 0x6e,
-	0x74, 0x65, 0x72, 0x4b, 0x65, 0x79, 0x49, 0x44, 0x18, 0x03, 0x20, 0x01, 0x28, 0x04, 0x42, 0x02,
-	0x18, 0x01, 0x52, 0x0b, 0x6d, 0x69, 0x6e, 0x74, 0x65, 0x72, 0x4b, 0x65, 0x79, 0x49, 0x44, 0x12,
-	0x2c, 0x0a, 0x0f, 0x77, 0x69, 0x74, 0x68, 0x64, 0x72, 0x61, 0x77, 0x65, 0x72, 0x4b, 0x65, 0x79,
-	0x49, 0x44, 0x18, 0x04, 0x20, 0x01, 0x28, 0x04, 0x42, 0x02, 0x18, 0x01, 0x52, 0x0f, 0x77, 0x69,
-	0x74, 0x68, 0x64, 0x72, 0x61, 0x77, 0x65, 0x72, 0x4b, 0x65, 0x79, 0x49, 0x44, 0x12, 0x24, 0x0a,
-	0x0d, 0x75, 0x6e, 0x73, 0x74, 0x61, 0x6b, 0x65, 0x72, 0x4b, 0x65, 0x79, 0x49, 0x44, 0x18, 0x05,
-	0x20, 0x01, 0x28, 0x04, 0x52, 0x0d, 0x75, 0x6e, 0x73, 0x74, 0x61, 0x6b, 0x65, 0x72, 0x4b, 0x65,
-	0x79, 0x49, 0x44, 0x12, 0x30, 0x0a, 0x13, 0x72, 0x65, 0x77, 0x61, 0x72, 0x64, 0x73, 0x44, 0x65,
-	0x70, 0x6f, 0x73, 0x69, 0x74, 0x4b, 0x65, 0x79, 0x49, 0x44, 0x18, 0x06, 0x20, 0x01, 0x28, 0x04,
-	0x52, 0x13, 0x72, 0x65, 0x77, 0x61, 0x72, 0x64, 0x73, 0x44, 0x65, 0x70, 0x6f, 0x73, 0x69, 0x74,
-	0x4b, 0x65, 0x79, 0x49, 0x44, 0x12, 0x30, 0x0a, 0x13, 0x63, 0x68, 0x61, 0x6e, 0x67, 0x65, 0x41,
-	0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x4b, 0x65, 0x79, 0x49, 0x44, 0x73, 0x18, 0x07, 0x20, 0x03,
-	0x28, 0x04, 0x52, 0x13, 0x63, 0x68, 0x61, 0x6e, 0x67, 0x65, 0x41, 0x64, 0x64, 0x72, 0x65, 0x73,
-	0x73, 0x4b, 0x65, 0x79, 0x49, 0x44, 0x73, 0x12, 0x30, 0x0a, 0x13, 0x62, 0x69, 0x74, 0x63, 0x6f,
-	0x69, 0x6e, 0x50, 0x72, 0x6f, 0x78, 0x79, 0x41, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x18, 0x08,
-	0x20, 0x01, 0x28, 0x09, 0x52, 0x13, 0x62, 0x69, 0x74, 0x63, 0x6f, 0x69, 0x6e, 0x50, 0x72, 0x6f,
-	0x78, 0x79, 0x41, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x12, 0x1c, 0x0a, 0x09, 0x61, 0x75, 0x74,
-	0x68, 0x6f, 0x72, 0x69, 0x74, 0x79, 0x18, 0x09, 0x20, 0x01, 0x28, 0x09, 0x52, 0x09, 0x61, 0x75,
-	0x74, 0x68, 0x6f, 0x72, 0x69, 0x74, 0x79, 0x12, 0x20, 0x0a, 0x0b, 0x73, 0x74, 0x61, 0x6b, 0x65,
-	0x72, 0x4b, 0x65, 0x79, 0x49, 0x44, 0x18, 0x0a, 0x20, 0x01, 0x28, 0x04, 0x52, 0x0b, 0x73, 0x74,
-	0x61, 0x6b, 0x65, 0x72, 0x4b, 0x65, 0x79, 0x49, 0x44, 0x12, 0x26, 0x0a, 0x0e, 0x63, 0x6f, 0x6d,
-	0x70, 0x6c, 0x65, 0x74, 0x65, 0x72, 0x4b, 0x65, 0x79, 0x49, 0x44, 0x18, 0x0b, 0x20, 0x01, 0x28,
-	0x04, 0x52, 0x0e, 0x63, 0x6f, 0x6d, 0x70, 0x6c, 0x65, 0x74, 0x65, 0x72, 0x4b, 0x65, 0x79, 0x49,
-	0x44, 0x12, 0x26, 0x0a, 0x0e, 0x65, 0x74, 0x68, 0x4d, 0x69, 0x6e, 0x74, 0x65, 0x72, 0x4b, 0x65,
-	0x79, 0x49, 0x44, 0x18, 0x0c, 0x20, 0x01, 0x28, 0x04, 0x52, 0x0e, 0x65, 0x74, 0x68, 0x4d, 0x69,
-	0x6e, 0x74, 0x65, 0x72, 0x4b, 0x65, 0x79, 0x49, 0x44, 0x12, 0x22, 0x0a, 0x0c, 0x65, 0x74, 0x68,
-	0x54, 0x6f, 0x6b, 0x65, 0x6e, 0x41, 0x64, 0x64, 0x72, 0x18, 0x0d, 0x20, 0x01, 0x28, 0x09, 0x52,
-	0x0c, 0x65, 0x74, 0x68, 0x54, 0x6f, 0x6b, 0x65, 0x6e, 0x41, 0x64, 0x64, 0x72, 0x3a, 0x20, 0xe8,
-	0xa0, 0x1f, 0x01, 0x8a, 0xe7, 0xb0, 0x2a, 0x17, 0x7a, 0x72, 0x63, 0x68, 0x61, 0x69, 0x6e, 0x2f,
-	0x78, 0x2f, 0x7a, 0x65, 0x6e, 0x62, 0x74, 0x63, 0x2f, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x42,
-	0x9b, 0x01, 0x0a, 0x12, 0x63, 0x6f, 0x6d, 0x2e, 0x7a, 0x72, 0x63, 0x68, 0x61, 0x69, 0x6e, 0x2e,
-	0x7a, 0x65, 0x6e, 0x62, 0x74, 0x63, 0x42, 0x0b, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x50, 0x72,
-	0x6f, 0x74, 0x6f, 0x50, 0x01, 0x5a, 0x1f, 0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x73, 0x64, 0x6b,
-	0x2e, 0x69, 0x6f, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x7a, 0x72, 0x63, 0x68, 0x61, 0x69, 0x6e, 0x2f,
-	0x7a, 0x65, 0x6e, 0x62, 0x74, 0x63, 0xa2, 0x02, 0x03, 0x5a, 0x5a, 0x58, 0xaa, 0x02, 0x0e, 0x5a,
-	0x72, 0x63, 0x68, 0x61, 0x69, 0x6e, 0x2e, 0x5a, 0x65, 0x6e, 0x62, 0x74, 0x63, 0xca, 0x02, 0x0e,
-	0x5a, 0x72, 0x63, 0x68, 0x61, 0x69, 0x6e, 0x5c, 0x5a, 0x65, 0x6e, 0x62, 0x74, 0x63, 0xe2, 0x02,
-	0x1a, 0x5a, 0x72, 0x63, 0x68, 0x61, 0x69, 0x6e, 0x5c, 0x5a, 0x65, 0x6e, 0x62, 0x74, 0x63, 0x5c,
-	0x47, 0x50, 0x42, 0x4d, 0x65, 0x74, 0x61, 0x64, 0x61, 0x74, 0x61, 0xea, 0x02, 0x0f, 0x5a, 0x72,
-	0x63, 0x68, 0x61, 0x69, 0x6e, 0x3a, 0x3a, 0x5a, 0x65, 0x6e, 0x62, 0x74, 0x63, 0x62, 0x06, 0x70,
-	0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x22, 0xd4, 0x03, 0x0a, 0x06, 0x50, 0x61, 0x72, 0x61, 0x6d,
+	0x73, 0x12, 0x2e, 0x0a, 0x12, 0x64, 0x65, 0x70, 0x6f, 0x73, 0x69, 0x74, 0x4b, 0x65, 0x79, 0x72,
+	0x69, 0x6e, 0x67, 0x41, 0x64, 0x64, 0x72, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x12, 0x64,
+	0x65, 0x70, 0x6f, 0x73, 0x69, 0x74, 0x4b, 0x65, 0x79, 0x72, 0x69, 0x6e, 0x67, 0x41, 0x64, 0x64,
+	0x72, 0x12, 0x20, 0x0a, 0x0b, 0x73, 0x74, 0x61, 0x6b, 0x65, 0x72, 0x4b, 0x65, 0x79, 0x49, 0x44,
+	0x18, 0x02, 0x20, 0x01, 0x28, 0x04, 0x52, 0x0b, 0x73, 0x74, 0x61, 0x6b, 0x65, 0x72, 0x4b, 0x65,
+	0x79, 0x49, 0x44, 0x12, 0x26, 0x0a, 0x0e, 0x65, 0x74, 0x68, 0x4d, 0x69, 0x6e, 0x74, 0x65, 0x72,
+	0x4b, 0x65, 0x79, 0x49, 0x44, 0x18, 0x03, 0x20, 0x01, 0x28, 0x04, 0x52, 0x0e, 0x65, 0x74, 0x68,
+	0x4d, 0x69, 0x6e, 0x74, 0x65, 0x72, 0x4b, 0x65, 0x79, 0x49, 0x44, 0x12, 0x24, 0x0a, 0x0d, 0x75,
+	0x6e, 0x73, 0x74, 0x61, 0x6b, 0x65, 0x72, 0x4b, 0x65, 0x79, 0x49, 0x44, 0x18, 0x04, 0x20, 0x01,
+	0x28, 0x04, 0x52, 0x0d, 0x75, 0x6e, 0x73, 0x74, 0x61, 0x6b, 0x65, 0x72, 0x4b, 0x65, 0x79, 0x49,
+	0x44, 0x12, 0x26, 0x0a, 0x0e, 0x63, 0x6f, 0x6d, 0x70, 0x6c, 0x65, 0x74, 0x65, 0x72, 0x4b, 0x65,
+	0x79, 0x49, 0x44, 0x18, 0x05, 0x20, 0x01, 0x28, 0x04, 0x52, 0x0e, 0x63, 0x6f, 0x6d, 0x70, 0x6c,
+	0x65, 0x74, 0x65, 0x72, 0x4b, 0x65, 0x79, 0x49, 0x44, 0x12, 0x30, 0x0a, 0x13, 0x72, 0x65, 0x77,
+	0x61, 0x72, 0x64, 0x73, 0x44, 0x65, 0x70, 0x6f, 0x73, 0x69, 0x74, 0x4b, 0x65, 0x79, 0x49, 0x44,
+	0x18, 0x06, 0x20, 0x01, 0x28, 0x04, 0x52, 0x13, 0x72, 0x65, 0x77, 0x61, 0x72, 0x64, 0x73, 0x44,
+	0x65, 0x70, 0x6f, 0x73, 0x69, 0x74, 0x4b, 0x65, 0x79, 0x49, 0x44, 0x12, 0x30, 0x0a, 0x13, 0x63,
+	0x68, 0x61, 0x6e, 0x67, 0x65, 0x41, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x4b, 0x65, 0x79, 0x49,
+	0x44, 0x73, 0x18, 0x07, 0x20, 0x03, 0x28, 0x04, 0x52, 0x13, 0x63, 0x68, 0x61, 0x6e, 0x67, 0x65,
+	0x41, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x4b, 0x65, 0x79, 0x49, 0x44, 0x73, 0x12, 0x30, 0x0a,
+	0x13, 0x62, 0x69, 0x74, 0x63, 0x6f, 0x69, 0x6e, 0x50, 0x72, 0x6f, 0x78, 0x79, 0x41, 0x64, 0x64,
+	0x72, 0x65, 0x73, 0x73, 0x18, 0x08, 0x20, 0x01, 0x28, 0x09, 0x52, 0x13, 0x62, 0x69, 0x74, 0x63,
+	0x6f, 0x69, 0x6e, 0x50, 0x72, 0x6f, 0x78, 0x79, 0x41, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x12,
+	0x22, 0x0a, 0x0c, 0x65, 0x74, 0x68, 0x54, 0x6f, 0x6b, 0x65, 0x6e, 0x41, 0x64, 0x64, 0x72, 0x18,
+	0x09, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0c, 0x65, 0x74, 0x68, 0x54, 0x6f, 0x6b, 0x65, 0x6e, 0x41,
+	0x64, 0x64, 0x72, 0x12, 0x26, 0x0a, 0x0e, 0x63, 0x6f, 0x6e, 0x74, 0x72, 0x6f, 0x6c, 0x6c, 0x65,
+	0x72, 0x41, 0x64, 0x64, 0x72, 0x18, 0x0a, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0e, 0x63, 0x6f, 0x6e,
+	0x74, 0x72, 0x6f, 0x6c, 0x6c, 0x65, 0x72, 0x41, 0x64, 0x64, 0x72, 0x3a, 0x20, 0xe8, 0xa0, 0x1f,
+	0x01, 0x8a, 0xe7, 0xb0, 0x2a, 0x17, 0x7a, 0x72, 0x63, 0x68, 0x61, 0x69, 0x6e, 0x2f, 0x78, 0x2f,
+	0x7a, 0x65, 0x6e, 0x62, 0x74, 0x63, 0x2f, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x42, 0x9b, 0x01,
+	0x0a, 0x12, 0x63, 0x6f, 0x6d, 0x2e, 0x7a, 0x72, 0x63, 0x68, 0x61, 0x69, 0x6e, 0x2e, 0x7a, 0x65,
+	0x6e, 0x62, 0x74, 0x63, 0x42, 0x0b, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x50, 0x72, 0x6f, 0x74,
+	0x6f, 0x50, 0x01, 0x5a, 0x1f, 0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x73, 0x64, 0x6b, 0x2e, 0x69,
+	0x6f, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x7a, 0x72, 0x63, 0x68, 0x61, 0x69, 0x6e, 0x2f, 0x7a, 0x65,
+	0x6e, 0x62, 0x74, 0x63, 0xa2, 0x02, 0x03, 0x5a, 0x5a, 0x58, 0xaa, 0x02, 0x0e, 0x5a, 0x72, 0x63,
+	0x68, 0x61, 0x69, 0x6e, 0x2e, 0x5a, 0x65, 0x6e, 0x62, 0x74, 0x63, 0xca, 0x02, 0x0e, 0x5a, 0x72,
+	0x63, 0x68, 0x61, 0x69, 0x6e, 0x5c, 0x5a, 0x65, 0x6e, 0x62, 0x74, 0x63, 0xe2, 0x02, 0x1a, 0x5a,
+	0x72, 0x63, 0x68, 0x61, 0x69, 0x6e, 0x5c, 0x5a, 0x65, 0x6e, 0x62, 0x74, 0x63, 0x5c, 0x47, 0x50,
+	0x42, 0x4d, 0x65, 0x74, 0x61, 0x64, 0x61, 0x74, 0x61, 0xea, 0x02, 0x0f, 0x5a, 0x72, 0x63, 0x68,
+	0x61, 0x69, 0x6e, 0x3a, 0x3a, 0x5a, 0x65, 0x6e, 0x62, 0x74, 0x63, 0x62, 0x06, 0x70, 0x72, 0x6f,
+	0x74, 0x6f, 0x33,
 }
 
 var (
