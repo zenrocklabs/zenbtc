@@ -112,7 +112,7 @@ func (k msgServer) VerifyDepositBlockInclusion(goCtx context.Context, msg *types
 	}
 
 	// Calculate zenBTC amount using current exchange rate
-	zenBTCAmount := uint64(math.LegacyNewDecFromInt(math.NewInt(int64(msg.Amount))).Quo(exchangeRate).RoundInt64())
+	zenBTCAmount := uint64(math.LegacyNewDecFromInt(math.NewIntFromUint64(msg.Amount)).Quo(exchangeRate).TruncateInt64())
 
 	supply, err := k.Supply.Get(ctx)
 	if err != nil {
