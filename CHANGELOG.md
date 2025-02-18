@@ -1,3 +1,10 @@
+## [1.13.2](https://github.com/zenrocklabs/zenbtc/compare/v1.13.1...v1.13.2) (2025-02-18)
+
+
+### Bug Fixes
+
+* remove float64 ([eb324a2](https://github.com/zenrocklabs/zenbtc/commit/eb324a2c60108d620d2c37680ec053f1817588d0))
+
 ## [1.13.1](https://github.com/zenrocklabs/zenbtc/compare/v1.13.0...v1.13.1) (2025-02-16)
 
 
