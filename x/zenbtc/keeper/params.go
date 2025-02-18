@@ -7,7 +7,7 @@ import (
 )
 
 var (
-	DefaultcontrollerAddr             = "0x5b9Ea8d5486D388a158F026c337DF950866dA5e9"
+	DefaultControllerAddr             = "0x5b9Ea8d5486D388a158F026c337DF950866dA5e9"
 	DefaultEthTokenAddr               = "0xC8CdeDd20cCb4c06884ac4C2fF952A0B7cC230a3"
 	DefaultDepositKeyringAddr         = "keyring1k6vc6vhp6e6l3rxalue9v4ux"
 	DefaultEthMinterKeyID      uint64 = 2
@@ -61,14 +61,14 @@ func DefaultParams() *types.Params {
 		DefaultChangeAddressKeyIDs,
 		DefaultProxyAddress,
 		DefaultEthTokenAddr,
-		DefaultcontrollerAddr,
+		DefaultControllerAddr,
 	)
 }
 
-func (k Keeper) GetcontrollerAddr(ctx context.Context) string {
+func (k Keeper) GetControllerAddr(ctx context.Context) string {
 	params, err := k.Params.Get(ctx)
 	if err != nil {
-		return DefaultcontrollerAddr
+		return DefaultControllerAddr
 	}
 	return params.ControllerAddr
 }
