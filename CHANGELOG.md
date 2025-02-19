@@ -1,3 +1,10 @@
+## [1.13.3](https://github.com/zenrocklabs/zenbtc/compare/v1.13.2...v1.13.3) (2025-02-19)
+
+
+### Bug Fixes
+
+* update bindings ([e5d69fd](https://github.com/zenrocklabs/zenbtc/commit/e5d69fd81f78cc0ad3caeedb0e0afc3cf1e62984))
+
 ## [1.13.2](https://github.com/zenrocklabs/zenbtc/compare/v1.13.1...v1.13.2) (2025-02-18)
 
 
