@@ -1,3 +1,10 @@
+## [1.13.4](https://github.com/zenrocklabs/zenbtc/compare/v1.13.3...v1.13.4) (2025-02-19)
+
+
+### Bug Fixes
+
+* squash migrations into v2 ([#33](https://github.com/zenrocklabs/zenbtc/issues/33)) ([45471ea](https://github.com/zenrocklabs/zenbtc/commit/45471eace067111a8280066379b4024f0095f6d5))
+
 ## [1.13.3](https://github.com/zenrocklabs/zenbtc/compare/v1.13.2...v1.13.3) (2025-02-19)
 
 
