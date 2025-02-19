@@ -22,13 +22,13 @@ var (
 		DepositKeyringAddr:  "keyring1hpyh7xqr2w7h4eas5y8twnsg",
 		StakerKeyID:         1,
 		EthMinterKeyID:      2,
-		UnstakerKeyID:       4,
-		CompleterKeyID:      5,
+		UnstakerKeyID:       3,
+		CompleterKeyID:      4,
 		RewardsDepositKeyID: 5,
-		ChangeAddressKeyIDs: []uint64{3},
+		ChangeAddressKeyIDs: []uint64{6},
 		BitcoinProxyAddress: "zen13y3tm68gmu9kntcxwvmue82p6akacnpt2v7nty",
 		EthTokenAddr:        "0xC8CdeDd20cCb4c06884ac4C2fF952A0B7cC230a3",
-		ControllerAddr:      "0x912D79F8d489d0d007aBE0E26fD5d2f06BA4A2AA",
+		ControllerAddr:      "0x5b9Ea8d5486D388a158F026c337DF950866dA5e9",
 	}
 )
 
