@@ -11,17 +11,14 @@ message Params {
   option (amino.name) = "zrchain/x/zenbtc/Params";
   option (gogoproto.equal) = true;
 
-  string ethBatcherAddr = 1;
-  string depositKeyringAddr = 2;
-  uint64 minterKeyID = 3 [deprecated = true];
-  uint64 withdrawerKeyID = 4 [deprecated = true];
-  uint64 unstakerKeyID = 5;
+  string depositKeyringAddr = 1;
+  uint64 stakerKeyID = 2;
+  uint64 ethMinterKeyID = 3;
+  uint64 unstakerKeyID = 4;
+  uint64 completerKeyID = 5;
   uint64 rewardsDepositKeyID = 6;
   repeated uint64 changeAddressKeyIDs = 7;
   string bitcoinProxyAddress = 8;
-  string authority = 9;
-  uint64 stakerKeyID = 10;
-  uint64 completerKeyID = 11;
-  uint64 ethMinterKeyID = 12;
-  string ethTokenAddr = 13;
+  string ethTokenAddr = 9;
+  string controllerAddr = 10;
 }
