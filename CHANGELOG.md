@@ -1,3 +1,10 @@
+## [1.13.5](https://github.com/zenrocklabs/zenbtc/compare/v1.13.4...v1.13.5) (2025-02-19)
+
+
+### Bug Fixes
+
+* update params migration ([84c5b04](https://github.com/zenrocklabs/zenbtc/commit/84c5b047c1c83f392f0f9ea168e63f18cc496d90))
+
 ## [1.13.4](https://github.com/zenrocklabs/zenbtc/compare/v1.13.3...v1.13.4) (2025-02-19)
 
 
