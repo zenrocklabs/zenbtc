@@ -1,4 +1,4 @@
-package v2
+package v3
 
 import (
 	"strings"
@@ -55,8 +55,8 @@ func UpdateParams(ctx sdk.Context, params collections.Item[types.Params]) error 
 			RewardsDepositKeyID: 20,
 			ChangeAddressKeyIDs: []uint64{18},
 			BitcoinProxyAddress: "zen13y3tm68gmu9kntcxwvmue82p6akacnpt2v7nty",
-			EthTokenAddr:        "",
-			ControllerAddr:      "",
+			EthTokenAddr:        "0x2fE9754d5D28bac0ea8971C0Ca59428b8644C776",
+			ControllerAddr:      "0xa87bE298115bE701A12F34F9B4585586dF052008",
 		},
 	}
 
