@@ -13,6 +13,7 @@ class RedemptionStatus(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     UNSTAKED: _ClassVar[RedemptionStatus]
     BURNED: _ClassVar[RedemptionStatus]
     COMPLETED: _ClassVar[RedemptionStatus]
+    AWAITING_SIGN: _ClassVar[RedemptionStatus]
 
 class BurnStatus(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     __slots__ = ()
@@ -24,6 +25,7 @@ INITIATED: RedemptionStatus
 UNSTAKED: RedemptionStatus
 BURNED: RedemptionStatus
 COMPLETED: RedemptionStatus
+AWAITING_SIGN: RedemptionStatus
 BURN_STATUS_UNSPECIFIED: BurnStatus
 BURN_STATUS_BURNED: BurnStatus
 BURN_STATUS_UNSTAKING: BurnStatus
