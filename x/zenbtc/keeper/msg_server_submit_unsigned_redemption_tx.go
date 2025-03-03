@@ -49,15 +49,30 @@ func (k msgServer) SubmitUnsignedRedemptionTx(goCtx context.Context, msg *types.
 		hashes[i] = input.Hash
 	}
 
-	sigReq := &treasurytypes.MsgNewSignatureRequest{
+	signReq := &treasurytypes.MsgNewSignatureRequest{
 		Creator:        msg.Creator,
 		KeyIds:         keyIDs,
 		DataForSigning: strings.Join(hashes, ","), // hex string, each unsigned utxo is separated by comma
 		CacheId:        msg.CacheId,
 		ZenbtcTxBytes:  msg.Txbytes,
 	}
-	if _, err := k.treasuryKeeper.HandleSignatureRequest(ctx, sigReq); err != nil {
+
+	resp, err := k.treasuryKeeper.HandleSignatureRequest(ctx, signReq)
+	if err != nil {
 		return nil, err
+	}
+
+	for _, idx := range msg.RedemptionIndexes {
+		redemption, err := k.Redemptions.Get(ctx, idx)
+		if err != nil {
+			return nil, err
+		}
+
+		redemption.Data.SignReqId = resp.SigReqId
+
+		if err := k.Redemptions.Set(ctx, idx, redemption); err != nil {
+			return nil, err
+		}
 	}
 
 	return &types.MsgSubmitUnsignedRedemptionTxResponse{}, nil
