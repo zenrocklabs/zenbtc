@@ -49,6 +49,8 @@ type (
 		Redemptions collections.Map[uint64, types.Redemption]
 		// FirstPendingRedemption - value: lowest key of pending redemption
 		FirstPendingRedemption collections.Item[uint64]
+		// FirstRedemptionAwaitingSign - value: lowest key of pending redemption awaiting signature
+		FirstRedemptionAwaitingSign collections.Item[uint64]
 		// Supply - value: zenBTC supply data
 		Supply collections.Item[types.Supply]
 		// FirstPendingStakeTransaction - value: lowest key of pending stake transaction
@@ -78,6 +80,7 @@ func NewKeeper(
 		LockTransactionStore:         collections.NewMap(sb, types.LockTransactionsKey, types.LockTransactionsIndex, collections.PairKeyCodec(collections.StringKey, collections.Uint64Key), codec.CollValue[types.LockTransaction](cdc)),
 		PendingMintTransactions:      collections.NewItem(sb, types.PendingMintTransactionsKey, types.PendingMintTransactionsIndex, codec.CollValue[types.PendingMintTransactions](cdc)),
 		PendingMintTransactionsMap:   collections.NewMap(sb, types.PendingMintTransactionsMapKey, types.PendingMintTransactionsMapIndex, collections.Uint64Key, codec.CollValue[types.PendingMintTransaction](cdc)),
+		FirstPendingStakeTransaction: collections.NewItem(sb, types.FirstPendingStakeTransactionKey, types.FirstPendingStakeTransactionIndex, collections.Uint64Value),
 		FirstPendingMintTransaction:  collections.NewItem(sb, types.FirstPendingMintTransactionKey, types.FirstPendingMintTransactionIndex, collections.Uint64Value),
 		PendingMintTransactionCount:  collections.NewItem(sb, types.PendingMintTransactionCountKey, types.PendingMintTransactionCountIndex, collections.Uint64Value),
 		BurnEvents:                   collections.NewMap(sb, types.BurnEventsKey, types.BurnEventsIndex, collections.Uint64Key, codec.CollValue[types.BurnEvent](cdc)),
@@ -85,8 +88,8 @@ func NewKeeper(
 		BurnEventCount:               collections.NewItem(sb, types.BurnEventCountKey, types.BurnEventCountIndex, collections.Uint64Value),
 		Redemptions:                  collections.NewMap(sb, types.RedemptionsKey, types.RedemptionsIndex, collections.Uint64Key, codec.CollValue[types.Redemption](cdc)),
 		FirstPendingRedemption:       collections.NewItem(sb, types.FirstPendingRedemptionKey, types.FirstPendingRedemptionIndex, collections.Uint64Value),
+		FirstRedemptionAwaitingSign:  collections.NewItem(sb, types.FirstRedemptionAwaitingSignKey, types.FirstRedemptionAwaitingSignIndex, collections.Uint64Value),
 		Supply:                       collections.NewItem(sb, types.SupplyKey, types.SupplyIndex, codec.CollValue[types.Supply](cdc)),
-		FirstPendingStakeTransaction: collections.NewItem(sb, types.FirstPendingStakeTransactionKey, types.FirstPendingStakeTransactionIndex, collections.Uint64Value),
 	}
 
 	schema, err := sb.Build()
