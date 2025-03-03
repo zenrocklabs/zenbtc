@@ -6,7 +6,6 @@ import (
 	"fmt"
 	"slices"
 
-	"cosmossdk.io/math"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
 	"github.com/Zenrock-Foundation/zrchain/v5/bitcoin"
@@ -38,23 +37,17 @@ func (k msgServer) VerifyUnsignedRedemptionTX(ctx sdk.Context, msg *types.MsgSub
 		return fmt.Errorf("failed to verify outputs against redemptions: %w", err)
 	}
 
-	// Update the redemptions to complete
-	if err := k.updateCompletedRedemptions(ctx, msg.RedemptionIndexes); err != nil {
-		return fmt.Errorf("failed to update redemptions to complete: %w", err)
+	// Update the redemptions to awaiting signature
+	if err := k.updateRedemptions(ctx, msg.RedemptionIndexes); err != nil {
+		return fmt.Errorf("failed to update redemptions to awaiting signature: %w", err)
 	}
 
 	return nil
 }
 
-func (k msgServer) updateCompletedRedemptions(ctx sdk.Context, redemptionIndices []uint64) error {
+func (k msgServer) updateRedemptions(ctx sdk.Context, redemptionIndices []uint64) error {
 	if len(redemptionIndices) == 0 {
 		return fmt.Errorf("no redemption indices provided")
-	}
-
-	// Get current supply
-	supply, err := k.Keeper.Supply.Get(ctx)
-	if err != nil {
-		return fmt.Errorf("failed to get zenBTC supply: %w", err)
 	}
 
 	// Iterate over the redemption indices, starting from the second element
@@ -65,43 +58,13 @@ func (k msgServer) updateCompletedRedemptions(ctx sdk.Context, redemptionIndices
 			return fmt.Errorf("failed to retrieve redemption at index %d: %w", redemptionIndex, err)
 		}
 
-		// Get current exchange rate
-		exchangeRate, err := k.GetExchangeRate(ctx)
-		if err != nil {
-			return fmt.Errorf("failed to get exchange rate: %w", err)
-		}
-
-		// redemption.Data.Amount is in zenBTC (what user wants to redeem)
-		// Calculate how much BTC they should receive based on current exchange rate
-		btcToRelease := uint64(math.LegacyNewDecFromInt(math.NewIntFromUint64(redemption.Data.Amount)).Quo(exchangeRate).TruncateInt64())
-
-		// Invariant checks
-		if supply.MintedZenBTC < redemption.Data.Amount {
-			return fmt.Errorf("insufficient minted zenBTC for redemption at index %d", redemptionIndex)
-		}
-		if supply.CustodiedBTC < btcToRelease {
-			return fmt.Errorf("insufficient custodied BTC for redemption at index %d", redemptionIndex)
-		}
-
-		// Update supplies (zenBTC burned, BTC released)
-		supply.MintedZenBTC -= redemption.Data.Amount
-		supply.CustodiedBTC -= btcToRelease
-
-		k.Logger().Warn("minted supply updated", "minted_old", supply.MintedZenBTC+redemption.Data.Amount, "minted_new", supply.MintedZenBTC)
-		k.Logger().Warn("custodied supply updated", "custodied_old", supply.CustodiedBTC+btcToRelease, "custodied_new", supply.CustodiedBTC)
-
-		// Mark the redemption as completed
-		redemption.Status = types.RedemptionStatus_COMPLETED
+		// Mark the redemption as awaiting signature
+		redemption.Status = types.RedemptionStatus_AWAITING_SIGN
 
 		// Save the updated redemption entry
 		if err := k.Keeper.Redemptions.Set(ctx, redemptionIndex, redemption); err != nil {
 			return fmt.Errorf("failed to update redemption at index %d: %w", redemptionIndex, err)
 		}
-	}
-
-	// Save updated supply
-	if err := k.Keeper.Supply.Set(ctx, supply); err != nil {
-		return fmt.Errorf("failed to update zenBTC supply: %w", err)
 	}
 
 	return nil
