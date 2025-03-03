@@ -16,6 +16,7 @@ message RedemptionData {
   uint64 id = 1;
   bytes destination_address = 2;
   uint64 amount = 3;
+  uint64 sign_req_id = 4;
 }
 
 enum RedemptionStatus {
@@ -24,6 +25,7 @@ enum RedemptionStatus {
   UNSTAKED = 2; // after calling unstakeComplete
   BURNED = 3 [deprecated = true];
   COMPLETED = 4;
+  AWAITING_SIGN = 5;
 }
 
 message BurnEvent {
