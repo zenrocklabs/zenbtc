@@ -24,6 +24,7 @@ enum RedemptionStatus {
   UNSTAKED = 2; // after calling unstakeComplete
   BURNED = 3 [deprecated = true];
   COMPLETED = 4;
+  AWAITING_SIGN = 5;
 }
 
 message BurnEvent {
