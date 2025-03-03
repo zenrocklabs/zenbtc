@@ -218,6 +218,16 @@ func (k Keeper) SetFirstPendingStakeTransaction(ctx context.Context, id uint64) 
 	return k.FirstPendingStakeTransaction.Set(ctx, id)
 }
 
+// GetFirstRedemptionAwaitingSign returns the ID of the first pending redemption awaiting signature
+func (k Keeper) GetFirstRedemptionAwaitingSign(ctx context.Context) (uint64, error) {
+	return k.FirstRedemptionAwaitingSign.Get(ctx)
+}
+
+// SetFirstRedemptionAwaitingSign sets the ID of the first pending redemption awaiting signature
+func (k Keeper) SetFirstRedemptionAwaitingSign(ctx context.Context, id uint64) error {
+	return k.FirstRedemptionAwaitingSign.Set(ctx, id)
+}
+
 func (k Keeper) GetAuthority() string {
 	return k.authority
 }
