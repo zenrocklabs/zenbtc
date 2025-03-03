@@ -1,3 +1,10 @@
+# [1.14.0](https://github.com/zenrocklabs/zenbtc/compare/v1.13.6...v1.14.0) (2025-03-03)
+
+
+### Features
+
+* retry redemption after signrequest rejected ([#35](https://github.com/zenrocklabs/zenbtc/issues/35)) ([2570210](https://github.com/zenrocklabs/zenbtc/commit/2570210e836cb72d3f3421b58a9302853285e300))
+
 ## [1.13.6](https://github.com/zenrocklabs/zenbtc/compare/v1.13.5...v1.13.6) (2025-02-24)
 
 
