@@ -39,14 +39,16 @@ class Redemption(_message.Message):
     def __init__(self, data: _Optional[_Union[RedemptionData, _Mapping]] = ..., status: _Optional[_Union[RedemptionStatus, str]] = ...) -> None: ...
 
 class RedemptionData(_message.Message):
-    __slots__ = ("id", "destination_address", "amount")
+    __slots__ = ("id", "destination_address", "amount", "sign_req_id")
     ID_FIELD_NUMBER: _ClassVar[int]
     DESTINATION_ADDRESS_FIELD_NUMBER: _ClassVar[int]
     AMOUNT_FIELD_NUMBER: _ClassVar[int]
+    SIGN_REQ_ID_FIELD_NUMBER: _ClassVar[int]
     id: int
     destination_address: bytes
     amount: int
-    def __init__(self, id: _Optional[int] = ..., destination_address: _Optional[bytes] = ..., amount: _Optional[int] = ...) -> None: ...
+    sign_req_id: int
+    def __init__(self, id: _Optional[int] = ..., destination_address: _Optional[bytes] = ..., amount: _Optional[int] = ..., sign_req_id: _Optional[int] = ...) -> None: ...
 
 class BurnEvent(_message.Message):
     __slots__ = ("id", "txID", "logIndex", "chainID", "destinationAddr", "amount", "status")
