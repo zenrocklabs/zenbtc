@@ -111,6 +111,7 @@ func claimCommand(logger eigensdkLogger.Logger, ethClient *ethclient.Client, eth
 
 		_, err = elClient.ClaimRewards(earner, broadcast)
 		if err != nil {
+			logger.Errorf("Error while claiming rewards for operator %s: %v", earner, err)
 			return errors.Wrapf(err, "error while claiming rewards for operator %s", earner)
 		}
 		return nil
