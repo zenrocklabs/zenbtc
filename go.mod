@@ -5,7 +5,7 @@ go 1.23.2
 replace (
 	cosmossdk.io/core => cosmossdk.io/core v0.11.0
 	github.com/Layr-Labs/eigensdk-go => github.com/zenrocklabs/eigensdk-go v0.1.7-zenrock2
-	github.com/Zenrock-Foundation/zrchain/v5 => github.com/zenrocklabs/zrchain/v5 v5.12.0
+	github.com/Zenrock-Foundation/zrchain/v5 => github.com/zenrocklabs/zrchain/v5 v5.19.1
 	github.com/btcsuite/btcd/btcec => github.com/btcsuite/btcd/btcec/v2 v2.3.3
 	github.com/btcsuite/btcutil => github.com/btcsuite/btcd/btcutil v1.1.5
 	github.com/cosmos/cosmos-sdk => github.com/zenrocklabs/cosmos-sdk v0.50.10-zenrock
@@ -24,7 +24,7 @@ require (
 	github.com/Layr-Labs/eigenlayer-contracts v1.1.1
 	github.com/Layr-Labs/eigenlayer-rewards-proofs v0.2.13
 	github.com/Layr-Labs/eigensdk-go v0.1.12
-	github.com/Zenrock-Foundation/zrchain/v5 v5.11.0
+	github.com/Zenrock-Foundation/zrchain/v5 v5.19.1
 	github.com/btcsuite/btcd v0.24.2
 	github.com/btcsuite/btcd/chaincfg/chainhash v1.1.0
 	github.com/btcsuite/btcutil v1.0.3-0.20201208143702-a53e38424cce
@@ -36,7 +36,7 @@ require (
 	github.com/grpc-ecosystem/grpc-gateway v1.16.0
 	github.com/miguelmota/go-ethereum-hdwallet v0.1.2
 	github.com/pkg/errors v0.9.1
-	github.com/stretchr/testify v1.9.0
+	github.com/stretchr/testify v1.10.0
 	github.com/urfave/cli/v2 v2.27.4
 	google.golang.org/genproto/googleapis/api v0.0.0-20241118233622-e639e219e697
 	google.golang.org/grpc v1.68.0
@@ -46,8 +46,8 @@ require (
 )
 
 require (
-	cosmossdk.io/depinject v1.0.0 // indirect
-	cosmossdk.io/x/tx v0.13.5 // indirect
+	cosmossdk.io/depinject v1.1.0 // indirect
+	cosmossdk.io/x/tx v0.13.7 // indirect
 	cosmossdk.io/x/upgrade v0.1.4 // indirect
 	filippo.io/edwards25519 v1.1.0 // indirect
 	github.com/99designs/go-keychain v0.0.0-20191008050251-8e49817e8af4 // indirect
@@ -80,14 +80,14 @@ require (
 	github.com/consensys/gnark-crypto v0.14.0 // indirect
 	github.com/containerd/continuity v0.4.2 // indirect
 	github.com/cosmos/btcutil v1.0.5 // indirect
-	github.com/cosmos/cosmos-db v1.0.2 // indirect
+	github.com/cosmos/cosmos-db v1.1.1 // indirect
 	github.com/cosmos/go-bip39 v1.0.0 // indirect
 	github.com/cosmos/gogogateway v1.2.0 // indirect
 	github.com/cosmos/iavl v1.3.0 // indirect
 	github.com/cosmos/ibc-go/modules/capability v1.0.1 // indirect
 	github.com/cosmos/ibc-go/v8 v8.5.1 // indirect
 	github.com/cosmos/ics23/go v0.11.0 // indirect
-	github.com/cosmos/ledger-cosmos-go v0.13.3 // indirect
+	github.com/cosmos/ledger-cosmos-go v0.14.0 // indirect
 	github.com/cpuguy83/go-md2man/v2 v2.0.6 // indirect
 	github.com/crate-crypto/go-ipa v0.0.0-20240724233137-53bbb0ceb27a // indirect
 	github.com/crate-crypto/go-kzg-4844 v1.1.0 // indirect
@@ -197,7 +197,7 @@ require (
 	github.com/shopspring/decimal v1.4.0 // indirect
 	github.com/sourcegraph/conc v0.3.0 // indirect
 	github.com/spf13/afero v1.11.0 // indirect
-	github.com/spf13/cast v1.7.0 // indirect
+	github.com/spf13/cast v1.7.1 // indirect
 	github.com/spf13/cobra v1.8.1 // indirect
 	github.com/spf13/pflag v1.0.5 // indirect
 	github.com/spf13/viper v1.19.0 // indirect
