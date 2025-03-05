@@ -22,7 +22,7 @@ require (
 	cosmossdk.io/math v1.4.0
 	cosmossdk.io/store v1.1.1
 	github.com/Layr-Labs/eigenlayer-contracts v1.1.1
-	github.com/Layr-Labs/eigenlayer-rewards-proofs v0.2.13
+	github.com/Layr-Labs/eigenlayer-rewards-proofs v0.2.14-0.20250219175207-db412abfccef
 	github.com/Layr-Labs/eigensdk-go v0.1.12
 	github.com/Zenrock-Foundation/zrchain/v5 v5.19.1
 	github.com/btcsuite/btcd v0.24.2
