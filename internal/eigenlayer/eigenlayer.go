@@ -27,11 +27,6 @@ import (
 	"github.com/ethereum/go-ethereum/accounts/abi/bind"
 )
 
-type elChainReader interface {
-	GetRootIndexFromHash(opts *bind.CallOpts, hash [32]byte) (uint32, error)
-	GetCurrentClaimableDistributionRoot(opts *bind.CallOpts) (rewardscoordinator.IRewardsCoordinatorDistributionRoot, error)
-}
-
 type EigenlayerClient interface {
 	ClaimRewards(earnerAddress string, broadcast bool) (*types.Receipt, error)
 }
@@ -99,8 +94,6 @@ func (c *eigenlayerClient) ClaimRewards(earnerAddress string, broadcast bool) (*
 	ctx := context.Background()
 
 	rewardCoordinatorAddress := common.HexToAddress(ChainMetadataMap[c.chainId.Int64()].ELRewardsCoordinatorAddress)
-	// delegationManagerAddress := common.HexToAddress(ChainMetadataMap[c.chainId.Int64()].DelegationManagerAddress)
-	// avsDirectoryAddress := common.HexToAddress(ChainMetadataMap[c.chainId.Int64()].AVSDirectoryAddress)
 	earner := common.HexToAddress(earnerAddress)
 	recvAddr := c.ethAccount.GetAddress()
 
@@ -117,18 +110,6 @@ func (c *eigenlayerClient) ClaimRewards(earnerAddress string, broadcast bool) (*
 		return nil, fmt.Errorf("claimer for earner %s doesnt match signer %s", claimerFor, recvAddr)
 	}
 
-	// elReader, err := elcontracts.BuildELChainReader(
-	// 	delegationManagerAddress,
-	// 	avsDirectoryAddress,
-	// 	c.ethClient,
-	// 	c.logger,
-	// )
-	// if err != nil {
-	// 	return nil, errors.Wrap(err, "could not create elreader")
-	// }
-
-	// TODO: uncomment above block
-
 	df := httpProofDataFetcher.NewHttpProofDataFetcher(
 		ChainMetadataMap[c.chainId.Int64()].ProofStoreBaseURL,
 		c.environment,
@@ -136,7 +117,7 @@ func (c *eigenlayerClient) ClaimRewards(earnerAddress string, broadcast bool) (*
 		http.DefaultClient,
 	)
 
-	claimDate, rootIndex, err := getClaimDistributionRoot(ctx, nil, c.logger) // TODO: pass elReader
+	claimDate, rootIndex, err := getClaimDistributionRoot(ctx, rc, c.logger) // TODO: pass elReader
 	if err != nil {
 		return nil, errors.Wrap(err, "failed to get claim distribution root")
 	}
@@ -167,11 +148,11 @@ func (c *eigenlayerClient) ClaimRewards(earnerAddress string, broadcast bool) (*
 		return nil, errors.Wrap(err, "failed to generate claim proof for earner")
 	}
 
-	elClaim := rewardscoordinator.IRewardsCoordinatorRewardsMerkleClaim{
+	elClaim := rewardscoordinator.IRewardsCoordinatorTypesRewardsMerkleClaim{
 		RootIndex:       claim.RootIndex,
 		EarnerIndex:     claim.EarnerIndex,
 		EarnerTreeProof: claim.EarnerTreeProof,
-		EarnerLeaf: rewardscoordinator.IRewardsCoordinatorEarnerTreeMerkleLeaf{
+		EarnerLeaf: rewardscoordinator.IRewardsCoordinatorTypesEarnerTreeMerkleLeaf{
 			Earner:          claim.EarnerLeaf.Earner,
 			EarnerTokenRoot: claim.EarnerLeaf.EarnerTokenRoot,
 		},
@@ -224,7 +205,7 @@ func (c *eigenlayerClient) ClaimRewards(earnerAddress string, broadcast bool) (*
 
 func getClaimDistributionRoot(
 	ctx context.Context,
-	elReader elChainReader,
+	elReader *rewardscoordinator.IRewardsCoordinator,
 	logger eigensdkLogger.Logger,
 ) (string, uint32, error) {
 	latestClaimableRoot, err := elReader.GetCurrentClaimableDistributionRoot(&bind.CallOpts{Context: ctx})
@@ -244,11 +225,11 @@ func getClaimDistributionRoot(
 }
 
 func convertClaimTokenLeaves(
-	claimTokenLeaves []contractrewardscoordinator.IRewardsCoordinatorTokenTreeMerkleLeaf,
-) []rewardscoordinator.IRewardsCoordinatorTokenTreeMerkleLeaf {
-	var tokenLeaves []rewardscoordinator.IRewardsCoordinatorTokenTreeMerkleLeaf
+	claimTokenLeaves []contractrewardscoordinator.IRewardsCoordinatorTypesTokenTreeMerkleLeaf,
+) []rewardscoordinator.IRewardsCoordinatorTypesTokenTreeMerkleLeaf {
+	var tokenLeaves []rewardscoordinator.IRewardsCoordinatorTypesTokenTreeMerkleLeaf
 	for _, claimTokenLeaf := range claimTokenLeaves {
-		tokenLeaves = append(tokenLeaves, rewardscoordinator.IRewardsCoordinatorTokenTreeMerkleLeaf{
+		tokenLeaves = append(tokenLeaves, rewardscoordinator.IRewardsCoordinatorTypesTokenTreeMerkleLeaf{
 			Token:              claimTokenLeaf.Token,
 			CumulativeEarnings: claimTokenLeaf.CumulativeEarnings,
 		})

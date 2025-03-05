@@ -19,8 +19,9 @@ require (
 	cosmossdk.io/core v1.0.0-alpha.5
 	cosmossdk.io/errors v1.0.1
 	cosmossdk.io/log v1.4.1
+	cosmossdk.io/math v1.4.0
 	cosmossdk.io/store v1.1.1
-	github.com/Layr-Labs/eigenlayer-contracts v0.4.1-holesky-pepe.0.20240813143901-00fc4b95e9c1
+	github.com/Layr-Labs/eigenlayer-contracts v1.1.1
 	github.com/Layr-Labs/eigenlayer-rewards-proofs v0.2.13
 	github.com/Layr-Labs/eigensdk-go v0.1.12
 	github.com/Zenrock-Foundation/zrchain/v5 v5.11.0
@@ -36,7 +37,6 @@ require (
 	github.com/miguelmota/go-ethereum-hdwallet v0.1.2
 	github.com/pkg/errors v0.9.1
 	github.com/stretchr/testify v1.9.0
-	github.com/test-go/testify v1.1.4
 	github.com/urfave/cli/v2 v2.27.4
 	google.golang.org/genproto/googleapis/api v0.0.0-20241118233622-e639e219e697
 	google.golang.org/grpc v1.68.0
@@ -47,7 +47,6 @@ require (
 
 require (
 	cosmossdk.io/depinject v1.0.0 // indirect
-	cosmossdk.io/math v1.4.0 // indirect
 	cosmossdk.io/x/tx v0.13.5 // indirect
 	cosmossdk.io/x/upgrade v0.1.4 // indirect
 	filippo.io/edwards25519 v1.1.0 // indirect
