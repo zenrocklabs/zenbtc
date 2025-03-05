@@ -54,6 +54,23 @@ func setup() {
 	}
 }
 
+func TestCreateAVSRewards(t *testing.T) {
+	setup()
+
+	app := &cli.App{
+		Commands: []*cli.Command{
+			{
+				Name:   "create-avs-rewards",
+				Action: createAVSRewardsCommand(logger, ethClient, ethAccount),
+			},
+		},
+	}
+
+	args := []string{"cmd", "create-avs-rewards", "1000000000000000000", "1710000000", "86400", "true"}
+	err := app.Run(args)
+	assert.Nil(t, err)
+}
+
 func TestClaimRewards(t *testing.T) {
 	setup()
 	if len(cfg.EthConfig.Operators) == 0 {

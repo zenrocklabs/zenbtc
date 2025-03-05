@@ -58,6 +58,12 @@ func main() {
 	app := &cli.App{
 		Commands: []*cli.Command{
 			{
+				Name:      "create-avs-rewards",
+				Usage:     "Create AVS rewards submission",
+				UsageText: "create-avs-rewards [amount] [startTimestamp] [duration] [broadcast]",
+				Action:    createAVSRewardsCommand(logger, ethClient, ethAccount),
+			},
+			{
 				Name:      "claim",
 				Usage:     "claim eigenlayer rewards",
 				UsageText: "claim [earner] [broadcast]",
@@ -92,6 +98,43 @@ func main() {
 
 	if err := app.Run(os.Args); err != nil {
 		panic(err)
+	}
+}
+
+func createAVSRewardsCommand(logger eigensdkLogger.Logger, ethClient *ethclient.Client, ethAccount *chain.EthAccount) func(*cli.Context) error {
+	return func(cCtx *cli.Context) error {
+		amountParam := cCtx.Args().Get(0)
+		amount, ok := new(big.Int).SetString(amountParam, 10)
+		if !ok {
+			return errors.New("invalid amount")
+		}
+
+		startTimestamp, err := strconv.ParseUint(cCtx.Args().Get(1), 10, 32)
+		if err != nil {
+			return errors.Wrap(err, "invalid start timestamp")
+		}
+
+		duration, err := strconv.ParseUint(cCtx.Args().Get(2), 10, 32)
+		if err != nil {
+			return errors.Wrap(err, "invalid duration")
+		}
+
+		broadcastParam := cCtx.Args().Get(3)
+		broadcast := broadcastParam == "true"
+
+		elClient, err := eigenlayer.NewEigenlayerClient(logger, ethClient, ethAccount)
+		if err != nil {
+			return err
+		}
+
+		_, err = elClient.CreateAVSRewardsSubmission(amount, uint32(startTimestamp), uint32(duration), broadcast)
+		if err != nil {
+			logger.Errorf("Error creating AVS rewards submission: %v", err)
+			return errors.Wrap(err, "failed to create AVS rewards submission")
+		}
+
+		logger.Infof("AVS rewards submission successfully initiated")
+		return nil
 	}
 }
 
