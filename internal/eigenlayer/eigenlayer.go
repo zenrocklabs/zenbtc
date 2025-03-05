@@ -29,6 +29,12 @@ import (
 
 type EigenlayerClient interface {
 	ClaimRewards(earnerAddress string, broadcast bool) (*types.Receipt, error)
+	CreateAVSRewardsSubmission(
+		amount *big.Int,
+		startTimestamp uint32,
+		duration uint32,
+		broadcast bool,
+	) (*types.Receipt, error)
 }
 
 type eigenlayerClient struct {
@@ -67,6 +73,8 @@ type ChainMetadata struct {
 	ELRewardsCoordinatorAddress string
 	DelegationManagerAddress    string
 	AVSDirectoryAddress         string
+	RockBTCAddress              string
+	RockBTCStrategyAddress      string
 	ProofStoreBaseURL           string
 }
 
@@ -79,16 +87,86 @@ var (
 			DelegationManagerAddress:    "0x39053D51B77DC0d36036Fc1fCc8Cb819df8Ef37A",
 			AVSDirectoryAddress:         "0x135DDa560e946695d6f155dACaFC6f1F25C1F5AF",
 			ELRewardsCoordinatorAddress: "0x7750d328b314EfFa365A0402CcfD489B80B0adda",
+			RockBTCAddress:              "0xFe2D5188360667654070444B5490d2536889C40b",
+			RockBTCStrategyAddress:      "0xa5430Ca83713F877B77b54d5A24FD3D230DF854B",
 			ProofStoreBaseURL:           "https://eigenlabs-rewards-mainnet-ethereum.s3.amazonaws.com",
 		},
 		HoleskyChainId: {
 			DelegationManagerAddress:    "0xA44151489861Fe9e3055d95adC98FbD462B948e7",
 			AVSDirectoryAddress:         "0x055733000064333CaDDbC92763c58BF0192fFeBf",
 			ELRewardsCoordinatorAddress: "0xAcc1fb458a1317E886dB376Fc8141540537E68fE",
+			RockBTCAddress:              "0x863062D86e42Dd0BAC3E59B3847f86a862392514",
+			RockBTCStrategyAddress:      "0x909C0e4284F6F3cD5c0a807071C7c0DE3Bbd7585",
 			ProofStoreBaseURL:           "https://eigenlabs-rewards-testnet-holesky.s3.amazonaws.com",
 		},
 	}
 )
+
+func (c *eigenlayerClient) CreateAVSRewardsSubmission(
+	amount *big.Int,
+	startTimestamp uint32,
+	duration uint32,
+	broadcast bool,
+) (*types.Receipt, error) {
+	ctx := context.Background()
+
+	rewardsCoordinatorAddress := common.HexToAddress(ChainMetadataMap[c.chainId.Int64()].ELRewardsCoordinatorAddress)
+	token := common.HexToAddress(ChainMetadataMap[c.chainId.Int64()].RockBTCAddress)
+	strategy := common.HexToAddress(ChainMetadataMap[c.chainId.Int64()].RockBTCStrategyAddress)
+
+	if token == (common.Address{}) || strategy == (common.Address{}) {
+		return nil, errors.New("RockBTCAddress or RockBTCStrategyAddress is not set")
+	}
+
+	rc, err := rewardscoordinator.NewIRewardsCoordinator(rewardsCoordinatorAddress, c.ethClient)
+	if err != nil {
+		return nil, errors.Wrap(err, "could not create RewardsCoordinator client")
+	}
+
+	strategyMultipliers := []rewardscoordinator.IRewardsCoordinatorTypesStrategyAndMultiplier{
+		{
+			Strategy:   strategy,
+			Multiplier: big.NewInt(1),
+		},
+	}
+
+	rewardsSubmission := rewardscoordinator.IRewardsCoordinatorTypesRewardsSubmission{
+		StrategiesAndMultipliers: strategyMultipliers,
+		Token:                    token,
+		Amount:                   amount,
+		StartTimestamp:           startTimestamp,
+		Duration:                 duration,
+	}
+
+	txMgr, err := c.getTxMgr()
+	if err != nil {
+		return nil, errors.Wrap(err, "failed to create tx manager")
+	}
+
+	txOpts, err := txMgr.GetNoSendTxOpts()
+	if err != nil {
+		return nil, errors.Wrap(err, "failed to get tx options")
+	}
+
+	c.logger.Info("Preparing AVS Rewards Submission transaction")
+
+	tx, err := rc.CreateAVSRewardsSubmission(txOpts, []rewardscoordinator.IRewardsCoordinatorTypesRewardsSubmission{rewardsSubmission})
+	if err != nil {
+		return nil, errors.Wrap(err, "failed to create AVS Rewards Submission tx")
+	}
+
+	if broadcast {
+		c.logger.Info("Broadcasting transaction")
+		receipt, err := txMgr.Send(ctx, tx)
+		if err != nil {
+			return nil, errors.Wrap(err, "failed to broadcast AVS Rewards Submission")
+		}
+		c.logger.Infof("AVS Rewards Submission successful, tx hash: %s", receipt.TxHash.String())
+		return receipt, nil
+	}
+
+	return nil, nil
+}
 
 func (c *eigenlayerClient) ClaimRewards(earnerAddress string, broadcast bool) (*types.Receipt, error) {
 	ctx := context.Background()
