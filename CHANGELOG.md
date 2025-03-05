@@ -1,3 +1,10 @@
+## [1.15.2](https://github.com/zenrocklabs/zenbtc/compare/v1.15.1...v1.15.2) (2025-03-05)
+
+
+### Bug Fixes
+
+* eigenlayer dependency ([18cc315](https://github.com/zenrocklabs/zenbtc/commit/18cc31524722ff8f6709b5780822894d28228185))
+
 ## [1.15.1](https://github.com/zenrocklabs/zenbtc/compare/v1.15.0...v1.15.1) (2025-03-05)
 
 
