@@ -1,3 +1,10 @@
+## [1.15.1](https://github.com/zenrocklabs/zenbtc/compare/v1.15.0...v1.15.1) (2025-03-05)
+
+
+### Bug Fixes
+
+* bump zrchain ver ([dd060cb](https://github.com/zenrocklabs/zenbtc/commit/dd060cbff228bbff1b92a676f7b8b2dadf7c7059))
+
 # [1.15.0](https://github.com/zenrocklabs/zenbtc/compare/v1.14.1...v1.15.0) (2025-03-05)
 
 ## [1.14.1](https://github.com/zenrocklabs/zenbtc/compare/v1.14.0...v1.14.1) (2025-03-05)
