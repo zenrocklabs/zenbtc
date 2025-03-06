@@ -1,3 +1,10 @@
+## [1.15.3](https://github.com/zenrocklabs/zenbtc/compare/v1.15.2...v1.15.3) (2025-03-06)
+
+
+### Bug Fixes
+
+* Iterate redemptionIndexes starting from index 1 (not 0) ([#39](https://github.com/zenrocklabs/zenbtc/issues/39)) ([1d4fb07](https://github.com/zenrocklabs/zenbtc/commit/1d4fb07d3bbcf301efa731c860b940840b2e66b8))
+
 ## [1.15.2](https://github.com/zenrocklabs/zenbtc/compare/v1.15.1...v1.15.2) (2025-03-05)
 
 
