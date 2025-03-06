@@ -62,7 +62,7 @@ func (k msgServer) SubmitUnsignedRedemptionTx(goCtx context.Context, msg *types.
 		return nil, err
 	}
 
-	for _, idx := range msg.RedemptionIndexes {
+	for _, idx := range msg.RedemptionIndexes[1:] {
 		redemption, err := k.Redemptions.Get(ctx, idx)
 		if err != nil {
 			return nil, err
