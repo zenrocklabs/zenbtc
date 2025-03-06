@@ -13,30 +13,6 @@ import (
 
 func (k msgServer) SubmitUnsignedRedemptionTx(goCtx context.Context, msg *types.MsgSubmitUnsignedRedemptionTx) (*types.MsgSubmitUnsignedRedemptionTxResponse, error) {
 	ctx := sdk.UnwrapSDKContext(goCtx)
-
-	//For Debugging Only
-
-	//if err := k.validationKeeper.ZenBTCRedemptions.Set(ctx, 1, types.Redemption{
-	//	Data: types.RedemptionData{ // populate data below
-	//		Id:                 1,
-	//		DestinationAddress: []byte("tb1qypwjx7yj5jz0gw0vh76348ypa2ns7tfwsnhlh9"),
-	//		Amount:             9000,
-	//	},
-	//	Completed: false,
-	//}); err != nil {
-	//	return nil, err
-	//}
-	//if err := k.validationKeeper.ZenBTCRedemptions.Set(ctx, 2, types.Redemption{
-	//	Data: types.RedemptionData{ // populate data below
-	//		Id:                 2,
-	//		DestinationAddress: []byte("tb1qq9f55z0qs8ergppxv54gyrvglhhjtkx84gd8vq"),
-	//		Amount:             8000,
-	//	},
-	//	Completed: false,
-	//}); err != nil {
-	//	return nil, err
-	//}
-
 	err := k.VerifyUnsignedRedemptionTX(ctx, msg)
 	if err != nil {
 		return nil, err
@@ -62,7 +38,7 @@ func (k msgServer) SubmitUnsignedRedemptionTx(goCtx context.Context, msg *types.
 		return nil, err
 	}
 
-	for _, idx := range msg.RedemptionIndexes {
+	for _, idx := range msg.RedemptionIndexes[1:] {
 		redemption, err := k.Redemptions.Get(ctx, idx)
 		if err != nil {
 			return nil, err
