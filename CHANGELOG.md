@@ -1,3 +1,10 @@
+## [1.15.4](https://github.com/zenrocklabs/zenbtc/compare/v1.15.3...v1.15.4) (2025-03-08)
+
+
+### Bug Fixes
+
+* add corrected params migration ([9a48662](https://github.com/zenrocklabs/zenbtc/commit/9a48662250b40edaf5fd5c6c6d8fc225f907f749))
+
 ## [1.15.3](https://github.com/zenrocklabs/zenbtc/compare/v1.15.2...v1.15.3) (2025-03-06)
 
 
