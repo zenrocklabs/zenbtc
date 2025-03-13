@@ -122,15 +122,11 @@ func (k Keeper) GetCompleterKeyID(ctx context.Context) uint64 {
 }
 
 func (k Keeper) GetBitcoinProxyAddress(ctx context.Context) string {
-	// params, err := k.Params.Get(ctx)
-	// if err != nil {
-	// 	return DefaultProxyAddress
-	// }
-	// return params.BitcoinProxyAddress
-
-	// TODO: fix above block
-
-	return DefaultProxyAddress
+	params, err := k.Params.Get(ctx)
+	if err != nil {
+		return DefaultProxyAddress
+	}
+	return params.BitcoinProxyAddress
 }
 
 func (k Keeper) GetChangeAddressKeyIDs(ctx context.Context) []uint64 {

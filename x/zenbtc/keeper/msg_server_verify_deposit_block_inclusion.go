@@ -75,7 +75,6 @@ func (k msgServer) VerifyDepositBlockInclusion(goCtx context.Context, msg *types
 	if err != nil {
 		return nil, err
 	}
-
 	if q.Response == nil || q.Response.Wallets == nil {
 		return nil, errors.New("zenBTC deposit address does not correspond to correct key (no wallets returned)")
 	}
@@ -123,14 +122,23 @@ func (k msgServer) VerifyDepositBlockInclusion(goCtx context.Context, msg *types
 	}
 
 	supply.CustodiedBTC += msg.Amount
-	supply.PendingZenBTC += zenBTCAmount
+
+	// Check if it's a deposit of converted rewards from EigenLayer
+	isYieldDeposit := q.Response.Key.Id == k.GetRewardsDepositKeyID(ctx)
+
+	// Only mint zenBTC for user deposits, not yield
+	if !isYieldDeposit {
+		supply.PendingZenBTC += zenBTCAmount
+	}
 
 	if err := k.Supply.Set(ctx, supply); err != nil {
 		return nil, err
 	}
 
 	k.Logger().Warn("custodied supply updated", "custodied_old", supply.CustodiedBTC-msg.Amount, "custodied_new", supply.CustodiedBTC)
-	k.Logger().Warn("pending mint supply updated", "pending_mint_old", supply.PendingZenBTC-zenBTCAmount, "pending_mint_new", supply.PendingZenBTC)
+	if !isYieldDeposit {
+		k.Logger().Warn("pending mint supply updated", "pending_mint_old", supply.PendingZenBTC-zenBTCAmount, "pending_mint_new", supply.PendingZenBTC)
+	}
 
 	if err := k.LockTransactionStore.Set(ctx, collections.Join(msg.RawTx, msg.Vout), types.LockTransaction{
 		RawTx:         msg.RawTx,
@@ -144,7 +152,7 @@ func (k msgServer) VerifyDepositBlockInclusion(goCtx context.Context, msg *types
 	}
 
 	// Don't mint zenBTC tokens for rewards deposits; return early
-	if q.Response.Key.Id == k.GetRewardsDepositKeyID(ctx) {
+	if isYieldDeposit {
 		return &types.MsgVerifyDepositBlockInclusionResponse{}, nil
 	}
 
