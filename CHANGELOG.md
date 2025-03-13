@@ -1,3 +1,10 @@
+## [1.15.5](https://github.com/zenrocklabs/zenbtc/compare/v1.15.4...v1.15.5) (2025-03-13)
+
+
+### Bug Fixes
+
+* yield deposit accounting ([8e9405c](https://github.com/zenrocklabs/zenbtc/commit/8e9405c5eab5187459c55ab4edb0f931ed6ac6a1))
+
 ## [1.15.4](https://github.com/zenrocklabs/zenbtc/compare/v1.15.3...v1.15.4) (2025-03-08)
 
 
