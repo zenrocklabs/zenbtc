@@ -1,3 +1,10 @@
+## [1.15.7](https://github.com/zenrocklabs/zenbtc/compare/v1.15.6...v1.15.7) (2025-03-19)
+
+
+### Bug Fixes
+
+* proxy interface ([6d8e643](https://github.com/zenrocklabs/zenbtc/commit/6d8e6432e6eb61ec5d879e638be447a3086bb423))
+
 ## [1.15.6](https://github.com/zenrocklabs/zenbtc/compare/v1.15.5...v1.15.6) (2025-03-19)
 
 
