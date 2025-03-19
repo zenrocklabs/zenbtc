@@ -1,3 +1,10 @@
+## [1.15.6](https://github.com/zenrocklabs/zenbtc/compare/v1.15.5...v1.15.6) (2025-03-19)
+
+
+### Bug Fixes
+
+* bitcoin proxy address ([b6ede19](https://github.com/zenrocklabs/zenbtc/commit/b6ede19bc7b0782e40e7fe2bb98b1c82d597b8c3))
+
 ## [1.15.5](https://github.com/zenrocklabs/zenbtc/compare/v1.15.4...v1.15.5) (2025-03-13)
 
 
