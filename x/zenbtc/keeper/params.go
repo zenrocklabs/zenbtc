@@ -133,6 +133,10 @@ func (k Keeper) GetCompleterKeyID(ctx context.Context) uint64 {
 // return params.BitcoinProxyAddress
 // }
 
+func (k Keeper) GetBitcoinProxyAddress(ctx context.Context) string {
+	return GetDefaultBitcoinProxyAddress(ctx)
+}
+
 func GetDefaultBitcoinProxyAddress(ctx context.Context) string {
 	if strings.HasPrefix(sdk.UnwrapSDKContext(ctx).ChainID(), "diamond") {
 		return DefaultMainnetBitcoinProxyAddress
