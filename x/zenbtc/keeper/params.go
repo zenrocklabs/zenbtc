@@ -2,22 +2,25 @@ package keeper
 
 import (
 	"context"
+	"strings"
 
+	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/zenrocklabs/zenbtc/x/zenbtc/types"
 )
 
 var (
-	DefaultControllerAddr             = "0x5b9Ea8d5486D388a158F026c337DF950866dA5e9"
-	DefaultEthTokenAddr               = "0xC8CdeDd20cCb4c06884ac4C2fF952A0B7cC230a3"
-	DefaultDepositKeyringAddr         = "keyring1k6vc6vhp6e6l3rxalue9v4ux"
-	DefaultEthMinterKeyID      uint64 = 2
-	DefaultChangeAddressKeyIDs        = []uint64{3}
-	DefaultUnstakerKeyID       uint64 = 4
-	DefaultRewardsDepositKeyID uint64 = 5
-	DefaultStakerKeyID         uint64 = 6
-	DefaultCompleterKeyID      uint64 = 7
-	DefaultSolMinterKeyID      uint64 = 8
-	DefaultProxyAddress               = "zen13y3tm68gmu9kntcxwvmue82p6akacnpt2v7nty"
+	DefaultControllerAddr                    = "0x5b9Ea8d5486D388a158F026c337DF950866dA5e9"
+	DefaultEthTokenAddr                      = "0xC8CdeDd20cCb4c06884ac4C2fF952A0B7cC230a3"
+	DefaultDepositKeyringAddr                = "keyring1k6vc6vhp6e6l3rxalue9v4ux"
+	DefaultEthMinterKeyID             uint64 = 2
+	DefaultChangeAddressKeyIDs               = []uint64{3}
+	DefaultUnstakerKeyID              uint64 = 4
+	DefaultRewardsDepositKeyID        uint64 = 5
+	DefaultStakerKeyID                uint64 = 6
+	DefaultCompleterKeyID             uint64 = 7
+	DefaultSolMinterKeyID             uint64 = 8
+	DefaultTestnetBitcoinProxyAddress        = "zen13y3tm68gmu9kntcxwvmue82p6akacnpt2v7nty"
+	DefaultMainnetBitcoinProxyAddress        = "zen1mgl98jt30nemuqtt5asldk49ju9lnx0pfke79q"
 	// DefaultStrategyAddr               = "0x0000000000000000000000000000000000000000"
 	// DefaultStakerKeyID = 0
 	// DefaultBurnerKeyID = 0
@@ -63,7 +66,7 @@ func DefaultParams() *types.Params {
 		DefaultCompleterKeyID,
 		DefaultRewardsDepositKeyID,
 		DefaultChangeAddressKeyIDs,
-		DefaultProxyAddress,
+		DefaultTestnetBitcoinProxyAddress,
 		DefaultEthTokenAddr,
 		DefaultControllerAddr,
 	)
@@ -133,12 +136,24 @@ func (k Keeper) GetCompleterKeyID(ctx context.Context) uint64 {
 	return params.CompleterKeyID
 }
 
+// func (k Keeper) GetBitcoinProxyAddress(ctx context.Context) string {
+// TODO: why does the commented line below panic?
+// params, err := k.Params.Get(ctx)
+// if err != nil {
+// return DefaultProxyAddress
+// }
+// return params.BitcoinProxyAddress
+// }
+
 func (k Keeper) GetBitcoinProxyAddress(ctx context.Context) string {
-	params, err := k.Params.Get(ctx)
-	if err != nil {
-		return DefaultProxyAddress
+	return GetDefaultBitcoinProxyAddress(ctx)
+}
+
+func GetDefaultBitcoinProxyAddress(ctx context.Context) string {
+	if strings.HasPrefix(sdk.UnwrapSDKContext(ctx).ChainID(), "diamond") {
+		return DefaultMainnetBitcoinProxyAddress
 	}
-	return params.BitcoinProxyAddress
+	return DefaultTestnetBitcoinProxyAddress
 }
 
 func (k Keeper) GetChangeAddressKeyIDs(ctx context.Context) []uint64 {
