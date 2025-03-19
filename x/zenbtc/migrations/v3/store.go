@@ -54,7 +54,7 @@ func UpdateParams(ctx sdk.Context, params collections.Item[types.Params]) error 
 			CompleterKeyID:      28,
 			RewardsDepositKeyID: 20,
 			ChangeAddressKeyIDs: []uint64{18},
-			BitcoinProxyAddress: "zen13y3tm68gmu9kntcxwvmue82p6akacnpt2v7nty",
+			BitcoinProxyAddress: "zen1pek2w72jlwa990vf66gczg4wn5tp84l27wa3a2",
 			EthTokenAddr:        "0x2fE9754d5D28bac0ea8971C0Ca59428b8644C776",
 			ControllerAddr:      "0xa87bE298115bE701A12F34F9B4585586dF052008",
 		},
