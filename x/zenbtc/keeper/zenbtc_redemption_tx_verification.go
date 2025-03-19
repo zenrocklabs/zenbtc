@@ -119,9 +119,9 @@ func (k msgServer) checkChangeAddress(ctx context.Context, msg *types.MsgSubmitU
 }
 
 func (k msgServer) checkRedemptionTXCreator(ctx context.Context, msg *types.MsgSubmitUnsignedRedemptionTx) error {
-	bitcoinProxyAddress := k.GetBitcoinProxyAddress(ctx)
+	bitcoinProxyAddress := GetDefaultBitcoinProxyAddress(ctx)
 	if bitcoinProxyAddress == "" {
-		return fmt.Errorf("failed to retrieve BitcoinProxyAddress")
+		return fmt.Errorf("invalid BitcoinProxyAddress")
 	}
 
 	if msg.Creator != bitcoinProxyAddress {
