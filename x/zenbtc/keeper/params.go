@@ -16,6 +16,7 @@ var (
 	DefaultRewardsDepositKeyID uint64 = 5
 	DefaultStakerKeyID         uint64 = 6
 	DefaultCompleterKeyID      uint64 = 7
+	DefaultSolMinterKeyID      uint64 = 8
 	DefaultProxyAddress               = "zen13y3tm68gmu9kntcxwvmue82p6akacnpt2v7nty"
 	// DefaultStrategyAddr               = "0x0000000000000000000000000000000000000000"
 	// DefaultStakerKeyID = 0
@@ -27,6 +28,7 @@ func NewParams(
 	depositKeyringAddr string,
 	stakerKeyID,
 	ethMinterKeyID,
+	solMinterKeyID,
 	unstakerKeyID,
 	completerKeyID,
 	rewardsDepositKeyID uint64,
@@ -39,6 +41,7 @@ func NewParams(
 		DepositKeyringAddr:  depositKeyringAddr,
 		StakerKeyID:         stakerKeyID,
 		EthMinterKeyID:      ethMinterKeyID,
+		SolMinterKeyID:      solMinterKeyID,
 		UnstakerKeyID:       unstakerKeyID,
 		CompleterKeyID:      completerKeyID,
 		RewardsDepositKeyID: rewardsDepositKeyID,
@@ -55,6 +58,7 @@ func DefaultParams() *types.Params {
 		DefaultDepositKeyringAddr,
 		DefaultStakerKeyID,
 		DefaultEthMinterKeyID,
+		DefaultSolMinterKeyID,
 		DefaultUnstakerKeyID,
 		DefaultCompleterKeyID,
 		DefaultRewardsDepositKeyID,
@@ -103,6 +107,14 @@ func (k Keeper) GetEthMinterKeyID(ctx context.Context) uint64 {
 		return DefaultEthMinterKeyID
 	}
 	return params.EthMinterKeyID
+}
+
+func (k Keeper) GetSolMinterKeyID(ctx context.Context) uint64 {
+	params, err := k.Params.Get(ctx)
+	if err != nil {
+		return DefaultSolMinterKeyID
+	}
+	return params.SolMinterKeyID
 }
 
 func (k Keeper) GetUnstakerKeyID(ctx context.Context) uint64 {

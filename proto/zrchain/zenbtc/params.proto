@@ -21,4 +21,5 @@ message Params {
   string bitcoinProxyAddress = 8;
   string ethTokenAddr = 9;
   string controllerAddr = 10;
+  uint64 solMinterKeyID = 11;
 }

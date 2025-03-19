@@ -8,7 +8,7 @@ from typing import ClassVar as _ClassVar, Iterable as _Iterable, Optional as _Op
 DESCRIPTOR: _descriptor.FileDescriptor
 
 class Params(_message.Message):
-    __slots__ = ("depositKeyringAddr", "stakerKeyID", "ethMinterKeyID", "unstakerKeyID", "completerKeyID", "rewardsDepositKeyID", "changeAddressKeyIDs", "bitcoinProxyAddress", "ethTokenAddr", "controllerAddr")
+    __slots__ = ("depositKeyringAddr", "stakerKeyID", "ethMinterKeyID", "unstakerKeyID", "completerKeyID", "rewardsDepositKeyID", "changeAddressKeyIDs", "bitcoinProxyAddress", "ethTokenAddr", "controllerAddr", "solMinterKeyID")
     DEPOSITKEYRINGADDR_FIELD_NUMBER: _ClassVar[int]
     STAKERKEYID_FIELD_NUMBER: _ClassVar[int]
     ETHMINTERKEYID_FIELD_NUMBER: _ClassVar[int]
@@ -19,6 +19,7 @@ class Params(_message.Message):
     BITCOINPROXYADDRESS_FIELD_NUMBER: _ClassVar[int]
     ETHTOKENADDR_FIELD_NUMBER: _ClassVar[int]
     CONTROLLERADDR_FIELD_NUMBER: _ClassVar[int]
+    SOLMINTERKEYID_FIELD_NUMBER: _ClassVar[int]
     depositKeyringAddr: str
     stakerKeyID: int
     ethMinterKeyID: int
@@ -29,4 +30,5 @@ class Params(_message.Message):
     bitcoinProxyAddress: str
     ethTokenAddr: str
     controllerAddr: str
-    def __init__(self, depositKeyringAddr: _Optional[str] = ..., stakerKeyID: _Optional[int] = ..., ethMinterKeyID: _Optional[int] = ..., unstakerKeyID: _Optional[int] = ..., completerKeyID: _Optional[int] = ..., rewardsDepositKeyID: _Optional[int] = ..., changeAddressKeyIDs: _Optional[_Iterable[int]] = ..., bitcoinProxyAddress: _Optional[str] = ..., ethTokenAddr: _Optional[str] = ..., controllerAddr: _Optional[str] = ...) -> None: ...
+    solMinterKeyID: int
+    def __init__(self, depositKeyringAddr: _Optional[str] = ..., stakerKeyID: _Optional[int] = ..., ethMinterKeyID: _Optional[int] = ..., unstakerKeyID: _Optional[int] = ..., completerKeyID: _Optional[int] = ..., rewardsDepositKeyID: _Optional[int] = ..., changeAddressKeyIDs: _Optional[_Iterable[int]] = ..., bitcoinProxyAddress: _Optional[str] = ..., ethTokenAddr: _Optional[str] = ..., controllerAddr: _Optional[str] = ..., solMinterKeyID: _Optional[int] = ...) -> None: ...
