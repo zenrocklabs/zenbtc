@@ -6,7 +6,7 @@ import (
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	treasurytypes "github.com/Zenrock-Foundation/zrchain/v5/x/treasury/types"
+	treasurytypes "github.com/Zenrock-Foundation/zrchain/v6/x/treasury/types"
 
 	"github.com/zenrocklabs/zenbtc/x/zenbtc/types"
 )
