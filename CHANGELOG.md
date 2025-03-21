@@ -1,3 +1,10 @@
+## [1.15.8](https://github.com/zenrocklabs/zenbtc/compare/v1.15.7...v1.15.8) (2025-03-21)
+
+
+### Bug Fixes
+
+* use v6 zrchain imports ([#40](https://github.com/zenrocklabs/zenbtc/issues/40)) ([0938024](https://github.com/zenrocklabs/zenbtc/commit/0938024efbdb9caebb611487ba4f5f956b27e667))
+
 ## [1.15.7](https://github.com/zenrocklabs/zenbtc/compare/v1.15.6...v1.15.7) (2025-03-19)
 
 
