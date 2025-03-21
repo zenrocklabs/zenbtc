@@ -14,9 +14,9 @@ import (
 	"cosmossdk.io/math"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	"github.com/Zenrock-Foundation/zrchain/v5/bitcoin"
-	"github.com/Zenrock-Foundation/zrchain/v5/sidecar/proto/api"
-	treasurytypes "github.com/Zenrock-Foundation/zrchain/v5/x/treasury/types"
+	"github.com/Zenrock-Foundation/zrchain/v6/bitcoin"
+	"github.com/Zenrock-Foundation/zrchain/v6/sidecar/proto/api"
+	treasurytypes "github.com/Zenrock-Foundation/zrchain/v6/x/treasury/types"
 
 	"github.com/zenrocklabs/zenbtc/x/zenbtc/types"
 )
