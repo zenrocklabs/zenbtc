@@ -86,6 +86,8 @@ github.com/VividCortex/gohistogram v1.0.0 h1:6+hBz+qvs0JOrrNhhmR7lFxo5sINxBCGXrd
 github.com/VividCortex/gohistogram v1.0.0/go.mod h1:Pf5mBqqDxYaXu3hDrrU+w6nw50o/4+TcAqDqk/vUH7g=
 github.com/Zenrock-Foundation/zrchain/v5 v5.24.4 h1:2VwytA43gk5tWgDGZlxHzjS7SkWUvwK+C6+FhjCfEy4=
 github.com/Zenrock-Foundation/zrchain/v5 v5.24.4/go.mod h1:idMFDNeOt4tBOTEFR8K5Kp27cjsNYz6OC1p8sfGNpUs=
+github.com/Zenrock-Foundation/zrchain/v6 v6.0.0 h1:hKEeBENBgFPECyF9xjpQ3iHaEiTZrGvurQLWNWH/0Tg=
+github.com/Zenrock-Foundation/zrchain/v6 v6.0.0/go.mod h1:lqGb1ZuEAH23b9a5jOJTWNvY+SAdDQmfBwGTzODc8HY=
 github.com/adlio/schema v1.3.6 h1:k1/zc2jNfeiZBA5aFTRy37jlBIuCkXCm0XmvpzCKI9I=
 github.com/adlio/schema v1.3.6/go.mod h1:qkxwLgPBd1FgLRHYVCmQT/rrBr3JH38J9LjmVzWNudg=
 github.com/aead/siphash v1.0.1/go.mod h1:Nywa3cDsYNNK3gaciGTWPwHt0wlpNV15vwmswBAUSII=
@@ -937,8 +939,6 @@ github.com/zenrocklabs/cosmos-sdk v0.50.13-zenrock h1:XBVSukvo+6qoCKHg7bKVw2ijin
 github.com/zenrocklabs/cosmos-sdk v0.50.13-zenrock/go.mod h1:hrWEFMU1eoXqLJeE6VVESpJDQH67FS1nnMrQIjO2daw=
 github.com/zenrocklabs/eigensdk-go v0.1.7-zenrock2 h1:mip7GbIne2Aneeoe3MsaestQoqcXVA7LSXq/6ztw97Q=
 github.com/zenrocklabs/eigensdk-go v0.1.7-zenrock2/go.mod h1:ECU8/Ocsf+dGcN2rs8I1PScq4dOkQqY+vgwnq30Ov4M=
-github.com/zenrocklabs/zrchain/v6 v6.0.0 h1:wvrZWEN8iH49hTzHcv+i/oP5czRiOD4knxB9buSFU5Y=
-github.com/zenrocklabs/zrchain/v6 v6.0.0/go.mod h1:lqGb1ZuEAH23b9a5jOJTWNvY+SAdDQmfBwGTzODc8HY=
 github.com/zondax/hid v0.9.2 h1:WCJFnEDMiqGF64nlZz28E9qLVZ0KSJ7xpc5DLEyma2U=
 github.com/zondax/hid v0.9.2/go.mod h1:l5wttcP0jwtdLjqjMMWFVEE7d1zO0jvSPA9OPZxWpEM=
 github.com/zondax/ledger-go v1.0.0 h1:BvNoksIyRqyQTW78rIZP9A44WwAminKiomQa7jXp9EI=
