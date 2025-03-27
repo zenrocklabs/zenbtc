@@ -1,3 +1,10 @@
+## [1.15.10](https://github.com/zenrocklabs/zenbtc/compare/v1.15.9...v1.15.10) (2025-03-27)
+
+
+### Bug Fixes
+
+* upgrade btcsuite for workspace ([37eb1e5](https://github.com/zenrocklabs/zenbtc/commit/37eb1e5b8e08f70fd25bd8874a970c2fff45563f))
+
 ## [1.15.9](https://github.com/zenrocklabs/zenbtc/compare/v1.15.8...v1.15.9) (2025-03-21)
 
 
