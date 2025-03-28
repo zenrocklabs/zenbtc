@@ -35,6 +35,7 @@ message PendingMintTransaction {
   string caip2_chain_id = 7;
   uint64 id = 8;
   MintTransactionStatus status = 9;
+  uint64 zrchain_tx_id = 10;
 }
 
 enum MintTransactionStatus {
@@ -42,6 +43,7 @@ enum MintTransactionStatus {
   MINT_TRANSACTION_STATUS_DEPOSITED = 1;
   MINT_TRANSACTION_STATUS_STAKED = 2;
   MINT_TRANSACTION_STATUS_MINTED = 3;
+  MINT_TRANSACTION_STATUS_MINT_PENDING = 4;
 }
 
 // Deprecated: This message is deprecated and should no longer be used.

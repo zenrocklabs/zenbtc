@@ -23,6 +23,15 @@ var (
 	// DefaultStrategyAddr               = "0x0000000000000000000000000000000000000000"
 	// DefaultStakerKeyID = 0
 	// DefaultBurnerKeyID = 0
+	DefaultSolana = &types.Solana{
+		SignerKeyId:       1,
+		ProgramId:         "zTsNe6inwEA8Z6WdogiA1vPLLAkaheGdU6WNvxdaXUx",
+		NonceAccountKey:   11,
+		NonceAuthorityKey: 12,
+		MintAddress:       "Ce1gvD5BG1gjEjuDKJXPcQgNfwDPJH9VvgfcSEzyNZn4",
+		FeeWallet:         "FzqGcRG98v1KhKxatX2Abb2z1aJ2rViQwBK5GHByKCAd",
+		Fee:               0,
+	}
 )
 
 // NewParams creates a new Params instance
@@ -37,11 +46,13 @@ func NewParams(
 	bitcoinProxyAddress,
 	ethTokenAddr,
 	controllerAddr string,
+	solana *types.Solana,
 ) *types.Params {
 	return &types.Params{
 		DepositKeyringAddr:  depositKeyringAddr,
 		StakerKeyID:         stakerKeyID,
 		EthMinterKeyID:      ethMinterKeyID,
+		Solana:              solana,
 		UnstakerKeyID:       unstakerKeyID,
 		CompleterKeyID:      completerKeyID,
 		RewardsDepositKeyID: rewardsDepositKeyID,
@@ -65,6 +76,7 @@ func DefaultParams() *types.Params {
 		DefaultTestnetBitcoinProxyAddress,
 		DefaultEthTokenAddr,
 		DefaultControllerAddr,
+		DefaultSolana,
 	)
 }
 
@@ -106,6 +118,14 @@ func (k Keeper) GetEthMinterKeyID(ctx context.Context) uint64 {
 		return DefaultEthMinterKeyID
 	}
 	return params.EthMinterKeyID
+}
+
+func (k Keeper) GetSolanaParams(ctx context.Context) *types.Solana {
+	params, err := k.Params.Get(ctx)
+	if err != nil {
+		return DefaultSolana
+	}
+	return params.Solana
 }
 
 func (k Keeper) GetUnstakerKeyID(ctx context.Context) uint64 {
