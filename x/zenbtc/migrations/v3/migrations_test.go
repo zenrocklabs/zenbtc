@@ -4,7 +4,7 @@ import (
 	"testing"
 
 	"cosmossdk.io/collections"
-	validation "github.com/Zenrock-Foundation/zrchain/v5/x/validation/module"
+	validation "github.com/Zenrock-Foundation/zrchain/v6/x/validation/module"
 	"github.com/cosmos/cosmos-sdk/codec"
 	"github.com/stretchr/testify/require"
 	v3 "github.com/zenrocklabs/zenbtc/x/zenbtc/migrations/v3"
