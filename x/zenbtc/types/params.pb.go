@@ -36,7 +36,7 @@ type Params struct {
 	BitcoinProxyAddress string   `protobuf:"bytes,8,opt,name=bitcoinProxyAddress,proto3" json:"bitcoinProxyAddress,omitempty"`
 	EthTokenAddr        string   `protobuf:"bytes,9,opt,name=ethTokenAddr,proto3" json:"ethTokenAddr,omitempty"`
 	ControllerAddr      string   `protobuf:"bytes,10,opt,name=controllerAddr,proto3" json:"controllerAddr,omitempty"`
-	SolMinterKeyID      uint64   `protobuf:"varint,11,opt,name=solMinterKeyID,proto3" json:"solMinterKeyID,omitempty"`
+	Solana              *Solana  `protobuf:"bytes,11,opt,name=solana,proto3" json:"solana,omitempty"`
 }
 
 func (m *Params) Reset()         { *m = Params{} }
@@ -142,46 +142,148 @@ func (m *Params) GetControllerAddr() string {
 	return ""
 }
 
-func (m *Params) GetSolMinterKeyID() uint64 {
+func (m *Params) GetSolana() *Solana {
 	if m != nil {
-		return m.SolMinterKeyID
+		return m.Solana
+	}
+	return nil
+}
+
+type Solana struct {
+	SignerKeyId       uint64 `protobuf:"varint,1,opt,name=signer_key_id,json=signerKeyId,proto3" json:"signer_key_id,omitempty"`
+	ProgramId         string `protobuf:"bytes,2,opt,name=program_id,json=programId,proto3" json:"program_id,omitempty"`
+	NonceAccountKey   uint64 `protobuf:"varint,3,opt,name=nonce_account_key,json=nonceAccountKey,proto3" json:"nonce_account_key,omitempty"`
+	NonceAuthorityKey uint64 `protobuf:"varint,4,opt,name=nonce_authority_key,json=nonceAuthorityKey,proto3" json:"nonce_authority_key,omitempty"`
+	MintAddress       string `protobuf:"bytes,5,opt,name=mint_address,json=mintAddress,proto3" json:"mint_address,omitempty"`
+	FeeWallet         string `protobuf:"bytes,6,opt,name=fee_wallet,json=feeWallet,proto3" json:"fee_wallet,omitempty"`
+	Fee               uint64 `protobuf:"varint,7,opt,name=fee,proto3" json:"fee,omitempty"`
+}
+
+func (m *Solana) Reset()         { *m = Solana{} }
+func (m *Solana) String() string { return proto.CompactTextString(m) }
+func (*Solana) ProtoMessage()    {}
+func (*Solana) Descriptor() ([]byte, []int) {
+	return fileDescriptor_53cfc222fdb324be, []int{1}
+}
+func (m *Solana) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *Solana) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_Solana.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *Solana) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Solana.Merge(m, src)
+}
+func (m *Solana) XXX_Size() int {
+	return m.Size()
+}
+func (m *Solana) XXX_DiscardUnknown() {
+	xxx_messageInfo_Solana.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_Solana proto.InternalMessageInfo
+
+func (m *Solana) GetSignerKeyId() uint64 {
+	if m != nil {
+		return m.SignerKeyId
+	}
+	return 0
+}
+
+func (m *Solana) GetProgramId() string {
+	if m != nil {
+		return m.ProgramId
+	}
+	return ""
+}
+
+func (m *Solana) GetNonceAccountKey() uint64 {
+	if m != nil {
+		return m.NonceAccountKey
+	}
+	return 0
+}
+
+func (m *Solana) GetNonceAuthorityKey() uint64 {
+	if m != nil {
+		return m.NonceAuthorityKey
+	}
+	return 0
+}
+
+func (m *Solana) GetMintAddress() string {
+	if m != nil {
+		return m.MintAddress
+	}
+	return ""
+}
+
+func (m *Solana) GetFeeWallet() string {
+	if m != nil {
+		return m.FeeWallet
+	}
+	return ""
+}
+
+func (m *Solana) GetFee() uint64 {
+	if m != nil {
+		return m.Fee
 	}
 	return 0
 }
 
 func init() {
 	proto.RegisterType((*Params)(nil), "zrchain.zenbtc.Params")
+	proto.RegisterType((*Solana)(nil), "zrchain.zenbtc.Solana")
 }
 
 func init() { proto.RegisterFile("zrchain/zenbtc/params.proto", fileDescriptor_53cfc222fdb324be) }
 
 var fileDescriptor_53cfc222fdb324be = []byte{
-	// 390 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x6c, 0x92, 0xc1, 0x4a, 0xe3, 0x40,
-	0x1c, 0xc6, 0x9b, 0x6d, 0xb7, 0xbb, 0x9d, 0xee, 0x16, 0x76, 0x76, 0x61, 0x43, 0x85, 0x18, 0x8a,
-	0x48, 0x11, 0x49, 0x04, 0x6f, 0xde, 0x94, 0x22, 0x94, 0x22, 0x94, 0xe2, 0xc9, 0xdb, 0x24, 0x19,
-	0x92, 0xa1, 0xc9, 0x4c, 0x98, 0x99, 0x62, 0xd3, 0x47, 0xf0, 0xe4, 0x23, 0xf8, 0x08, 0x3e, 0x86,
-	0xc7, 0x1e, 0x3d, 0x4a, 0x7b, 0xd0, 0x87, 0xf0, 0x20, 0x33, 0x69, 0x4a, 0x53, 0x72, 0x09, 0xc3,
-	0xf7, 0xfd, 0xbe, 0x8f, 0xcc, 0x7f, 0xfe, 0xe0, 0x60, 0xc1, 0xfd, 0x08, 0x11, 0xea, 0x2e, 0x30,
-	0xf5, 0xa4, 0xef, 0xa6, 0x88, 0xa3, 0x44, 0x38, 0x29, 0x67, 0x92, 0xc1, 0xce, 0xc6, 0x74, 0x72,
-	0xb3, 0xfb, 0x07, 0x25, 0x84, 0x32, 0x57, 0x7f, 0x73, 0xa4, 0xfb, 0x2f, 0x64, 0x21, 0xd3, 0x47,
-	0x57, 0x9d, 0x72, 0xb5, 0xf7, 0x59, 0x07, 0xcd, 0xb1, 0x6e, 0x82, 0x0e, 0x80, 0x01, 0x4e, 0x99,
-	0x20, 0x72, 0x84, 0x33, 0x4e, 0x68, 0x78, 0x19, 0x04, 0xdc, 0x34, 0x6c, 0xa3, 0xdf, 0x9a, 0x54,
-	0x38, 0xd0, 0x06, 0x6d, 0x21, 0xd1, 0x14, 0xf3, 0x11, 0xce, 0x86, 0x03, 0xf3, 0x9b, 0x6d, 0xf4,
-	0x1b, 0x93, 0x5d, 0x09, 0x1e, 0x83, 0x0e, 0x96, 0xd1, 0x0d, 0xa1, 0xb2, 0x80, 0xea, 0x1a, 0xda,
-	0x53, 0xe1, 0x11, 0xf8, 0x3d, 0xa3, 0xbb, 0x5d, 0x0d, 0x8d, 0x95, 0x45, 0xd5, 0xe6, 0xb3, 0x24,
-	0x8d, 0xf1, 0xb6, 0xed, 0x7b, 0xde, 0x56, 0x56, 0xe1, 0x19, 0xf8, 0xcb, 0xf1, 0x3d, 0xe2, 0x81,
-	0x18, 0x6c, 0x7f, 0x7a, 0x38, 0x30, 0x9b, 0x1a, 0xae, 0xb2, 0x54, 0xc2, 0x8f, 0x10, 0x0d, 0xb1,
-	0xba, 0x17, 0x16, 0x42, 0xab, 0xc2, 0xfc, 0x61, 0xd7, 0x55, 0xa2, 0xc2, 0x52, 0x09, 0x8f, 0x48,
-	0x9f, 0x11, 0x3a, 0xe6, 0x6c, 0x9e, 0x6d, 0x4c, 0xf3, 0xa7, 0x1e, 0x56, 0x95, 0x05, 0x7b, 0xe0,
-	0x17, 0x96, 0xd1, 0x2d, 0x9b, 0x62, 0xaa, 0xe7, 0xda, 0xd2, 0x68, 0x49, 0xcb, 0x6f, 0x48, 0x25,
-	0x67, 0x71, 0x8c, 0xb9, 0xa6, 0x80, 0xa6, 0xf6, 0x54, 0xc5, 0x09, 0x16, 0xef, 0xce, 0xb5, 0x9d,
-	0x4f, 0xa2, 0xac, 0x5e, 0xd8, 0x1f, 0x4f, 0x87, 0xc6, 0xc3, 0xfb, 0xf3, 0xc9, 0xff, 0x62, 0x77,
-	0xe6, 0xc5, 0xf6, 0xe4, 0x6f, 0x7e, 0x75, 0xfd, 0xb2, 0xb2, 0x8c, 0xe5, 0xca, 0x32, 0xde, 0x56,
-	0x96, 0xf1, 0xb8, 0xb6, 0x6a, 0xcb, 0xb5, 0x55, 0x7b, 0x5d, 0x5b, 0xb5, 0xbb, 0xd3, 0x90, 0xc8,
-	0x68, 0xe6, 0x39, 0x3e, 0x4b, 0x54, 0x86, 0x33, 0x7f, 0x1a, 0x23, 0x4f, 0x14, 0xf9, 0x6d, 0x91,
-	0xcc, 0x52, 0x2c, 0xbc, 0xa6, 0xde, 0xa6, 0xf3, 0xaf, 0x00, 0x00, 0x00, 0xff, 0xff, 0x45, 0x96,
-	0x6c, 0x0b, 0xa5, 0x02, 0x00, 0x00,
+	// 542 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x6c, 0x53, 0x41, 0x6b, 0x13, 0x41,
+	0x14, 0xee, 0x26, 0x69, 0x6a, 0x26, 0x6d, 0xb5, 0x53, 0xd1, 0xa5, 0xd2, 0x75, 0x0d, 0x22, 0xa1,
+	0xc8, 0x46, 0xf4, 0xd6, 0x5b, 0x24, 0x08, 0x21, 0x08, 0x25, 0x0a, 0x82, 0x97, 0x30, 0xd9, 0x7d,
+	0xd9, 0x1d, 0xb2, 0x3b, 0xb3, 0xcc, 0x4e, 0x68, 0xb7, 0x37, 0xc1, 0x93, 0x27, 0x7f, 0x82, 0x3f,
+	0xc1, 0x9f, 0xe1, 0xb1, 0x47, 0x8f, 0x92, 0x1c, 0xf4, 0x67, 0xc8, 0xbc, 0xdd, 0x0d, 0x4d, 0xc9,
+	0x65, 0x19, 0xbe, 0xef, 0x7b, 0xdf, 0xcc, 0xfb, 0xde, 0x5b, 0xf2, 0xe4, 0x5a, 0xf9, 0x11, 0xe3,
+	0xa2, 0x77, 0x0d, 0x62, 0xaa, 0xfd, 0x5e, 0xca, 0x14, 0x4b, 0x32, 0x2f, 0x55, 0x52, 0x4b, 0x7a,
+	0x58, 0x92, 0x5e, 0x41, 0x9e, 0x1c, 0xb1, 0x84, 0x0b, 0xd9, 0xc3, 0x6f, 0x21, 0x39, 0x79, 0x18,
+	0xca, 0x50, 0xe2, 0xb1, 0x67, 0x4e, 0x05, 0xda, 0xf9, 0xda, 0x20, 0xcd, 0x0b, 0x74, 0xa2, 0x1e,
+	0xa1, 0x01, 0xa4, 0x32, 0xe3, 0x7a, 0x04, 0xb9, 0xe2, 0x22, 0xec, 0x07, 0x81, 0xb2, 0x2d, 0xd7,
+	0xea, 0xb6, 0xc6, 0x5b, 0x18, 0xea, 0x92, 0x76, 0xa6, 0xd9, 0x1c, 0xd4, 0x08, 0xf2, 0xe1, 0xc0,
+	0xae, 0xb9, 0x56, 0xb7, 0x31, 0xbe, 0x0d, 0xd1, 0x17, 0xe4, 0x10, 0x74, 0xf4, 0x9e, 0x0b, 0x5d,
+	0x89, 0xea, 0x28, 0xba, 0x83, 0xd2, 0xe7, 0xe4, 0x60, 0x21, 0x6e, 0x7b, 0x35, 0x50, 0xb6, 0x09,
+	0x1a, 0x37, 0x5f, 0x26, 0x69, 0x0c, 0x6b, 0xb7, 0xdd, 0xc2, 0x6d, 0x13, 0xa5, 0xaf, 0xc8, 0xb1,
+	0x82, 0x4b, 0xa6, 0x82, 0x6c, 0xb0, 0x7e, 0xf4, 0x70, 0x60, 0x37, 0x51, 0xbc, 0x8d, 0x32, 0x15,
+	0x7e, 0xc4, 0x44, 0x08, 0xa6, 0x2f, 0xc8, 0x32, 0x44, 0x33, 0x7b, 0xcf, 0xad, 0x9b, 0x8a, 0x2d,
+	0x94, 0xa9, 0x98, 0x72, 0xed, 0x4b, 0x2e, 0x2e, 0x94, 0xbc, 0xca, 0x4b, 0xd2, 0xbe, 0x87, 0x61,
+	0x6d, 0xa3, 0x68, 0x87, 0xec, 0x83, 0x8e, 0x3e, 0xca, 0x39, 0x08, 0xcc, 0xb5, 0x85, 0xd2, 0x0d,
+	0xac, 0xe8, 0x50, 0x68, 0x25, 0xe3, 0x18, 0x14, 0xaa, 0x08, 0xaa, 0xee, 0xa0, 0xd4, 0x23, 0xcd,
+	0x4c, 0xc6, 0x4c, 0x30, 0xbb, 0xed, 0x5a, 0xdd, 0xf6, 0xeb, 0x47, 0xde, 0xe6, 0xf8, 0xbd, 0x0f,
+	0xc8, 0x8e, 0x4b, 0xd5, 0xb9, 0xfb, 0xef, 0xc7, 0x53, 0xeb, 0xdb, 0xdf, 0x9f, 0x67, 0x8f, 0xab,
+	0x1d, 0xba, 0xaa, 0xb6, 0xa8, 0x98, 0x7d, 0xe7, 0x4b, 0x8d, 0x34, 0x8b, 0x22, 0xda, 0x21, 0x07,
+	0x19, 0x0f, 0x05, 0xa8, 0xc9, 0x1c, 0xf2, 0x09, 0x0f, 0x70, 0x03, 0xcc, 0x60, 0x11, 0x34, 0xfd,
+	0x07, 0xf4, 0x94, 0x90, 0x54, 0xc9, 0x50, 0xb1, 0xc4, 0x08, 0x6a, 0xf8, 0xc8, 0x56, 0x89, 0x0c,
+	0x03, 0x7a, 0x46, 0x8e, 0x84, 0x14, 0x3e, 0x4c, 0x98, 0xef, 0xcb, 0x85, 0xd0, 0xc6, 0xa9, 0x1c,
+	0xfd, 0x7d, 0x24, 0xfa, 0x05, 0x3e, 0x82, 0x9c, 0x7a, 0xe4, 0xb8, 0xd4, 0x2e, 0x74, 0x24, 0x15,
+	0xd7, 0x39, 0xaa, 0x8b, 0x0d, 0x28, 0x6c, 0xfa, 0x15, 0x63, 0xf4, 0xcf, 0xc8, 0x7e, 0xc2, 0x85,
+	0x9e, 0xb0, 0x32, 0xf2, 0x5d, 0xbc, 0xbc, 0x6d, 0xb0, 0x2a, 0xea, 0x53, 0x42, 0x66, 0x00, 0x93,
+	0x4b, 0x16, 0xc7, 0xa0, 0x71, 0xee, 0xad, 0x71, 0x6b, 0x06, 0xf0, 0x09, 0x01, 0xfa, 0x80, 0xd4,
+	0x67, 0x00, 0xf6, 0x1e, 0xde, 0x60, 0x8e, 0xe7, 0x0d, 0x93, 0xcf, 0xdb, 0x77, 0xbf, 0x96, 0x8e,
+	0x75, 0xb3, 0x74, 0xac, 0x3f, 0x4b, 0xc7, 0xfa, 0xbe, 0x72, 0x76, 0x6e, 0x56, 0xce, 0xce, 0xef,
+	0x95, 0xb3, 0xf3, 0xf9, 0x65, 0xc8, 0x75, 0xb4, 0x98, 0x7a, 0xbe, 0x4c, 0x4c, 0x6e, 0x4a, 0xfa,
+	0xf3, 0x98, 0x4d, 0xb3, 0x2a, 0xc3, 0x75, 0x98, 0x3a, 0x4f, 0x21, 0x9b, 0x36, 0xf1, 0xcf, 0x7a,
+	0xf3, 0x3f, 0x00, 0x00, 0xff, 0xff, 0x5e, 0x47, 0x81, 0xf0, 0xb1, 0x03, 0x00, 0x00,
 }
 
 func (this *Params) Equal(that interface{}) bool {
@@ -238,7 +340,49 @@ func (this *Params) Equal(that interface{}) bool {
 	if this.ControllerAddr != that1.ControllerAddr {
 		return false
 	}
-	if this.SolMinterKeyID != that1.SolMinterKeyID {
+	if !this.Solana.Equal(that1.Solana) {
+		return false
+	}
+	return true
+}
+func (this *Solana) Equal(that interface{}) bool {
+	if that == nil {
+		return this == nil
+	}
+
+	that1, ok := that.(*Solana)
+	if !ok {
+		that2, ok := that.(Solana)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
+	}
+	if that1 == nil {
+		return this == nil
+	} else if this == nil {
+		return false
+	}
+	if this.SignerKeyId != that1.SignerKeyId {
+		return false
+	}
+	if this.ProgramId != that1.ProgramId {
+		return false
+	}
+	if this.NonceAccountKey != that1.NonceAccountKey {
+		return false
+	}
+	if this.NonceAuthorityKey != that1.NonceAuthorityKey {
+		return false
+	}
+	if this.MintAddress != that1.MintAddress {
+		return false
+	}
+	if this.FeeWallet != that1.FeeWallet {
+		return false
+	}
+	if this.Fee != that1.Fee {
 		return false
 	}
 	return true
@@ -263,10 +407,17 @@ func (m *Params) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	_ = i
 	var l int
 	_ = l
-	if m.SolMinterKeyID != 0 {
-		i = encodeVarintParams(dAtA, i, uint64(m.SolMinterKeyID))
+	if m.Solana != nil {
+		{
+			size, err := m.Solana.MarshalToSizedBuffer(dAtA[:i])
+			if err != nil {
+				return 0, err
+			}
+			i -= size
+			i = encodeVarintParams(dAtA, i, uint64(size))
+		}
 		i--
-		dAtA[i] = 0x58
+		dAtA[i] = 0x5a
 	}
 	if len(m.ControllerAddr) > 0 {
 		i -= len(m.ControllerAddr)
@@ -290,20 +441,20 @@ func (m *Params) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 		dAtA[i] = 0x42
 	}
 	if len(m.ChangeAddressKeyIDs) > 0 {
-		dAtA2 := make([]byte, len(m.ChangeAddressKeyIDs)*10)
-		var j1 int
+		dAtA3 := make([]byte, len(m.ChangeAddressKeyIDs)*10)
+		var j2 int
 		for _, num := range m.ChangeAddressKeyIDs {
 			for num >= 1<<7 {
-				dAtA2[j1] = uint8(uint64(num)&0x7f | 0x80)
+				dAtA3[j2] = uint8(uint64(num)&0x7f | 0x80)
 				num >>= 7
-				j1++
+				j2++
 			}
-			dAtA2[j1] = uint8(num)
-			j1++
+			dAtA3[j2] = uint8(num)
+			j2++
 		}
-		i -= j1
-		copy(dAtA[i:], dAtA2[:j1])
-		i = encodeVarintParams(dAtA, i, uint64(j1))
+		i -= j2
+		copy(dAtA[i:], dAtA3[:j2])
+		i = encodeVarintParams(dAtA, i, uint64(j2))
 		i--
 		dAtA[i] = 0x3a
 	}
@@ -338,6 +489,70 @@ func (m *Params) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 		i = encodeVarintParams(dAtA, i, uint64(len(m.DepositKeyringAddr)))
 		i--
 		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *Solana) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *Solana) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *Solana) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if m.Fee != 0 {
+		i = encodeVarintParams(dAtA, i, uint64(m.Fee))
+		i--
+		dAtA[i] = 0x38
+	}
+	if len(m.FeeWallet) > 0 {
+		i -= len(m.FeeWallet)
+		copy(dAtA[i:], m.FeeWallet)
+		i = encodeVarintParams(dAtA, i, uint64(len(m.FeeWallet)))
+		i--
+		dAtA[i] = 0x32
+	}
+	if len(m.MintAddress) > 0 {
+		i -= len(m.MintAddress)
+		copy(dAtA[i:], m.MintAddress)
+		i = encodeVarintParams(dAtA, i, uint64(len(m.MintAddress)))
+		i--
+		dAtA[i] = 0x2a
+	}
+	if m.NonceAuthorityKey != 0 {
+		i = encodeVarintParams(dAtA, i, uint64(m.NonceAuthorityKey))
+		i--
+		dAtA[i] = 0x20
+	}
+	if m.NonceAccountKey != 0 {
+		i = encodeVarintParams(dAtA, i, uint64(m.NonceAccountKey))
+		i--
+		dAtA[i] = 0x18
+	}
+	if len(m.ProgramId) > 0 {
+		i -= len(m.ProgramId)
+		copy(dAtA[i:], m.ProgramId)
+		i = encodeVarintParams(dAtA, i, uint64(len(m.ProgramId)))
+		i--
+		dAtA[i] = 0x12
+	}
+	if m.SignerKeyId != 0 {
+		i = encodeVarintParams(dAtA, i, uint64(m.SignerKeyId))
+		i--
+		dAtA[i] = 0x8
 	}
 	return len(dAtA) - i, nil
 }
@@ -397,8 +612,42 @@ func (m *Params) Size() (n int) {
 	if l > 0 {
 		n += 1 + l + sovParams(uint64(l))
 	}
-	if m.SolMinterKeyID != 0 {
-		n += 1 + sovParams(uint64(m.SolMinterKeyID))
+	if m.Solana != nil {
+		l = m.Solana.Size()
+		n += 1 + l + sovParams(uint64(l))
+	}
+	return n
+}
+
+func (m *Solana) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	if m.SignerKeyId != 0 {
+		n += 1 + sovParams(uint64(m.SignerKeyId))
+	}
+	l = len(m.ProgramId)
+	if l > 0 {
+		n += 1 + l + sovParams(uint64(l))
+	}
+	if m.NonceAccountKey != 0 {
+		n += 1 + sovParams(uint64(m.NonceAccountKey))
+	}
+	if m.NonceAuthorityKey != 0 {
+		n += 1 + sovParams(uint64(m.NonceAuthorityKey))
+	}
+	l = len(m.MintAddress)
+	if l > 0 {
+		n += 1 + l + sovParams(uint64(l))
+	}
+	l = len(m.FeeWallet)
+	if l > 0 {
+		n += 1 + l + sovParams(uint64(l))
+	}
+	if m.Fee != 0 {
+		n += 1 + sovParams(uint64(m.Fee))
 	}
 	return n
 }
@@ -738,10 +987,10 @@ func (m *Params) Unmarshal(dAtA []byte) error {
 			m.ControllerAddr = string(dAtA[iNdEx:postIndex])
 			iNdEx = postIndex
 		case 11:
-			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field SolMinterKeyID", wireType)
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Solana", wireType)
 			}
-			m.SolMinterKeyID = 0
+			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
 					return ErrIntOverflowParams
@@ -751,7 +1000,246 @@ func (m *Params) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				m.SolMinterKeyID |= uint64(b&0x7F) << shift
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthParams
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthParams
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if m.Solana == nil {
+				m.Solana = &Solana{}
+			}
+			if err := m.Solana.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipParams(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthParams
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *Solana) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowParams
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: Solana: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: Solana: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field SignerKeyId", wireType)
+			}
+			m.SignerKeyId = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowParams
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.SignerKeyId |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		case 2:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field ProgramId", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowParams
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthParams
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthParams
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.ProgramId = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 3:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field NonceAccountKey", wireType)
+			}
+			m.NonceAccountKey = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowParams
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.NonceAccountKey |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		case 4:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field NonceAuthorityKey", wireType)
+			}
+			m.NonceAuthorityKey = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowParams
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.NonceAuthorityKey |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		case 5:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field MintAddress", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowParams
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthParams
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthParams
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.MintAddress = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 6:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field FeeWallet", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowParams
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthParams
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthParams
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.FeeWallet = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 7:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Fee", wireType)
+			}
+			m.Fee = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowParams
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.Fee |= uint64(b&0x7F) << shift
 				if b < 0x80 {
 					break
 				}

@@ -18,12 +18,20 @@ var (
 	DefaultRewardsDepositKeyID        uint64 = 5
 	DefaultStakerKeyID                uint64 = 6
 	DefaultCompleterKeyID             uint64 = 7
-	DefaultSolMinterKeyID             uint64 = 8
 	DefaultTestnetBitcoinProxyAddress        = "zen13y3tm68gmu9kntcxwvmue82p6akacnpt2v7nty"
 	DefaultMainnetBitcoinProxyAddress        = "zen1mgl98jt30nemuqtt5asldk49ju9lnx0pfke79q"
 	// DefaultStrategyAddr               = "0x0000000000000000000000000000000000000000"
 	// DefaultStakerKeyID = 0
 	// DefaultBurnerKeyID = 0
+	DefaultSolana = &types.Solana{
+		SignerKeyId:       1,
+		ProgramId:         "zTsNe6inwEA8Z6WdogiA1vPLLAkaheGdU6WNvxdaXUx",
+		NonceAccountKey:   11,
+		NonceAuthorityKey: 12,
+		MintAddress:       "Ce1gvD5BG1gjEjuDKJXPcQgNfwDPJH9VvgfcSEzyNZn4",
+		FeeWallet:         "FzqGcRG98v1KhKxatX2Abb2z1aJ2rViQwBK5GHByKCAd",
+		Fee:               0,
+	}
 )
 
 // NewParams creates a new Params instance
@@ -31,7 +39,6 @@ func NewParams(
 	depositKeyringAddr string,
 	stakerKeyID,
 	ethMinterKeyID,
-	solMinterKeyID,
 	unstakerKeyID,
 	completerKeyID,
 	rewardsDepositKeyID uint64,
@@ -39,12 +46,13 @@ func NewParams(
 	bitcoinProxyAddress,
 	ethTokenAddr,
 	controllerAddr string,
+	solana *types.Solana,
 ) *types.Params {
 	return &types.Params{
 		DepositKeyringAddr:  depositKeyringAddr,
 		StakerKeyID:         stakerKeyID,
 		EthMinterKeyID:      ethMinterKeyID,
-		SolMinterKeyID:      solMinterKeyID,
+		Solana:              solana,
 		UnstakerKeyID:       unstakerKeyID,
 		CompleterKeyID:      completerKeyID,
 		RewardsDepositKeyID: rewardsDepositKeyID,
@@ -61,7 +69,6 @@ func DefaultParams() *types.Params {
 		DefaultDepositKeyringAddr,
 		DefaultStakerKeyID,
 		DefaultEthMinterKeyID,
-		DefaultSolMinterKeyID,
 		DefaultUnstakerKeyID,
 		DefaultCompleterKeyID,
 		DefaultRewardsDepositKeyID,
@@ -69,6 +76,7 @@ func DefaultParams() *types.Params {
 		DefaultTestnetBitcoinProxyAddress,
 		DefaultEthTokenAddr,
 		DefaultControllerAddr,
+		DefaultSolana,
 	)
 }
 
@@ -112,12 +120,12 @@ func (k Keeper) GetEthMinterKeyID(ctx context.Context) uint64 {
 	return params.EthMinterKeyID
 }
 
-func (k Keeper) GetSolMinterKeyID(ctx context.Context) uint64 {
+func (k Keeper) GetSolanaParams(ctx context.Context) *types.Solana {
 	params, err := k.Params.Get(ctx)
 	if err != nil {
-		return DefaultSolMinterKeyID
+		return DefaultSolana
 	}
-	return params.SolMinterKeyID
+	return params.Solana
 }
 
 func (k Keeper) GetUnstakerKeyID(ctx context.Context) uint64 {
