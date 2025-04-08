@@ -178,6 +178,10 @@ func (k msgServer) VerifyDepositBlockInclusion(goCtx context.Context, msg *types
 		if err := k.validationKeeper.SolanaNonceRequested.Set(ctx, k.GetStakerKeyID(ctx), true); err != nil {
 			return nil, err
 		}
+		if err := k.validationKeeper.SetSolanaRequestedAccount(goCtx, tx.RecipientAddress, true); err != nil {
+			return nil, err
+
+		}
 	}
 
 	return &types.MsgVerifyDepositBlockInclusionResponse{}, nil

@@ -11,7 +11,7 @@ import (
 var (
 	DefaultControllerAddr                    = "0x5b9Ea8d5486D388a158F026c337DF950866dA5e9"
 	DefaultEthTokenAddr                      = "0xC8CdeDd20cCb4c06884ac4C2fF952A0B7cC230a3"
-	DefaultDepositKeyringAddr                = "keyring1k6vc6vhp6e6l3rxalue9v4ux"
+	DefaultDepositKeyringAddr                = "keyring1pfnq7r04rept47gaf5cpdew2"
 	DefaultEthMinterKeyID             uint64 = 2
 	DefaultChangeAddressKeyIDs               = []uint64{3}
 	DefaultUnstakerKeyID              uint64 = 4
@@ -24,13 +24,14 @@ var (
 	// DefaultStakerKeyID = 0
 	// DefaultBurnerKeyID = 0
 	DefaultSolana = &types.Solana{
-		SignerKeyId:       10,
-		ProgramId:         "zTsNe6inwEA8Z6WdogiA1vPLLAkaheGdU6WNvxdaXUx",
-		NonceAccountKey:   11,
-		NonceAuthorityKey: 12,
-		MintAddress:       "Ce1gvD5BG1gjEjuDKJXPcQgNfwDPJH9VvgfcSEzyNZn4",
-		FeeWallet:         "FzqGcRG98v1KhKxatX2Abb2z1aJ2rViQwBK5GHByKCAd",
-		Fee:               0,
+		SignerKeyId:        10,
+		ProgramId:          "3jo4mdc6QbGRigia2jvmKShbmz3aWq4Y8bgUXfur5StT",
+		NonceAuthorityKey:  11,
+		NonceAccountKey:    12,
+		MintAddress:        "9oBkgQUkq8jvzK98D7Uib6GYSZZmjnZ6QEGJRrAeKnDj",
+		FeeWallet:          "FzqGcRG98v1KhKxatX2Abb2z1aJ2rViQwBK5GHByKCAd",
+		Fee:                0,
+		MultisigKeyAddress: "8cmZY2id22vxpXs2H3YYQNARuPHNuYwa7jipW1q1v9Fy",
 	}
 )
 
