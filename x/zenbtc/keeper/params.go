@@ -32,6 +32,7 @@ var (
 		FeeWallet:          "FzqGcRG98v1KhKxatX2Abb2z1aJ2rViQwBK5GHByKCAd",
 		Fee:                0,
 		MultisigKeyAddress: "8cmZY2id22vxpXs2H3YYQNARuPHNuYwa7jipW1q1v9Fy",
+		Btl:                21,
 	}
 )
 

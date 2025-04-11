@@ -30,13 +30,13 @@ func (k msgServer) VerifyDepositBlockInclusion(goCtx context.Context, msg *types
 
 	//CSM For Debugging Only
 	//try and get missing Blockheader over RPC - WARNING for debugging only!!!!
-	//if err != nil {
-	//	bh, _ := debugRetrieveBlockHeaderViaRPC(msg.ChainName, msg.BlockHeight)
-	//	if bh != nil {
-	//		err = nil
-	//		blockHeader = *bh
-	//	}
-	//}
+	if err != nil {
+		bh, _ := debugRetrieveBlockHeaderViaRPC(msg.ChainName, msg.BlockHeight)
+		if bh != nil {
+			err = nil
+			blockHeader = *bh
+		}
+	}
 	// END of debug code
 
 	if err != nil {
@@ -70,7 +70,7 @@ func (k msgServer) VerifyDepositBlockInclusion(goCtx context.Context, msg *types
 
 	q, err := k.treasuryKeeper.KeyByAddress(ctx, &treasurytypes.QueryKeyByAddressRequest{
 		Address:     msg.DepositAddr,
-		KeyringAddr: k.GetDepositKeyringAddr(ctx),
+		KeyringAddr: "keyring1pfnq7r04rept47gaf5cpdew2", //k.GetDepositKeyringAddr(ctx),
 		KeyType:     treasurytypes.KeyType_KEY_TYPE_BITCOIN_SECP256K1,
 		WalletType:  WalletTypeFromChainName(msg),
 	})
@@ -170,18 +170,9 @@ func (k msgServer) VerifyDepositBlockInclusion(goCtx context.Context, msg *types
 	}
 	k.validationKeeper.Logger(ctx).Warn("added pending mint transaction", "tx", fmt.Sprintf("%+v", tx))
 
-	if validationtypes.IsEthereumCAIP2(tx.Caip2ChainId) {
-		if err := k.validationKeeper.EthereumNonceRequested.Set(ctx, k.GetStakerKeyID(ctx), true); err != nil {
-			return nil, err
-		}
-	} else if validationtypes.IsSolanaCAIP2(tx.Caip2ChainId) {
-		if err := k.validationKeeper.SolanaNonceRequested.Set(ctx, k.GetStakerKeyID(ctx), true); err != nil {
-			return nil, err
-		}
-		if err := k.validationKeeper.SetSolanaRequestedAccount(goCtx, tx.RecipientAddress, true); err != nil {
-			return nil, err
-
-		}
+	validationtypes.IsEthereumCAIP2(tx.Caip2ChainId)
+	if err := k.validationKeeper.EthereumNonceRequested.Set(ctx, k.GetStakerKeyID(ctx), true); err != nil {
+		return nil, err
 	}
 
 	return &types.MsgVerifyDepositBlockInclusionResponse{}, nil

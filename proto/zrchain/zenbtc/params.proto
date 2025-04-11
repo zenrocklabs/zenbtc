@@ -34,4 +34,5 @@ message Solana {
   string fee_wallet = 6;
   uint64 fee = 7;
   string multisig_key_address = 8;
+  int64 btl = 9;
 }

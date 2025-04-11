@@ -12,7 +12,6 @@ class MintTransactionStatus(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     MINT_TRANSACTION_STATUS_DEPOSITED: _ClassVar[MintTransactionStatus]
     MINT_TRANSACTION_STATUS_STAKED: _ClassVar[MintTransactionStatus]
     MINT_TRANSACTION_STATUS_MINTED: _ClassVar[MintTransactionStatus]
-    MINT_TRANSACTION_STATUS_MINT_PENDING: _ClassVar[MintTransactionStatus]
 
 class WalletType(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     __slots__ = ()
@@ -27,7 +26,6 @@ MINT_TRANSACTION_STATUS_UNSPECIFIED: MintTransactionStatus
 MINT_TRANSACTION_STATUS_DEPOSITED: MintTransactionStatus
 MINT_TRANSACTION_STATUS_STAKED: MintTransactionStatus
 MINT_TRANSACTION_STATUS_MINTED: MintTransactionStatus
-MINT_TRANSACTION_STATUS_MINT_PENDING: MintTransactionStatus
 WALLET_TYPE_UNSPECIFIED: WalletType
 WALLET_TYPE_NATIVE: WalletType
 WALLET_TYPE_EVM: WalletType
@@ -71,7 +69,7 @@ class LockTransaction(_message.Message):
     def __init__(self, raw_tx: _Optional[str] = ..., vout: _Optional[int] = ..., sender: _Optional[str] = ..., mint_recipient: _Optional[str] = ..., amount: _Optional[int] = ..., block_height: _Optional[int] = ...) -> None: ...
 
 class PendingMintTransaction(_message.Message):
-    __slots__ = ("chain_id", "chain_type", "recipient_address", "amount", "creator", "key_id", "caip2_chain_id", "id", "status", "zrchain_tx_id")
+    __slots__ = ("chain_id", "chain_type", "recipient_address", "amount", "creator", "key_id", "caip2_chain_id", "id", "status", "zrchain_tx_id", "block_height")
     CHAIN_ID_FIELD_NUMBER: _ClassVar[int]
     CHAIN_TYPE_FIELD_NUMBER: _ClassVar[int]
     RECIPIENT_ADDRESS_FIELD_NUMBER: _ClassVar[int]
@@ -82,6 +80,7 @@ class PendingMintTransaction(_message.Message):
     ID_FIELD_NUMBER: _ClassVar[int]
     STATUS_FIELD_NUMBER: _ClassVar[int]
     ZRCHAIN_TX_ID_FIELD_NUMBER: _ClassVar[int]
+    BLOCK_HEIGHT_FIELD_NUMBER: _ClassVar[int]
     chain_id: int
     chain_type: WalletType
     recipient_address: str
@@ -92,7 +91,8 @@ class PendingMintTransaction(_message.Message):
     id: int
     status: MintTransactionStatus
     zrchain_tx_id: int
-    def __init__(self, chain_id: _Optional[int] = ..., chain_type: _Optional[_Union[WalletType, str]] = ..., recipient_address: _Optional[str] = ..., amount: _Optional[int] = ..., creator: _Optional[str] = ..., key_id: _Optional[int] = ..., caip2_chain_id: _Optional[str] = ..., id: _Optional[int] = ..., status: _Optional[_Union[MintTransactionStatus, str]] = ..., zrchain_tx_id: _Optional[int] = ...) -> None: ...
+    block_height: int
+    def __init__(self, chain_id: _Optional[int] = ..., chain_type: _Optional[_Union[WalletType, str]] = ..., recipient_address: _Optional[str] = ..., amount: _Optional[int] = ..., creator: _Optional[str] = ..., key_id: _Optional[int] = ..., caip2_chain_id: _Optional[str] = ..., id: _Optional[int] = ..., status: _Optional[_Union[MintTransactionStatus, str]] = ..., zrchain_tx_id: _Optional[int] = ..., block_height: _Optional[int] = ...) -> None: ...
 
 class PendingMintTransactions(_message.Message):
     __slots__ = ("txs",)
