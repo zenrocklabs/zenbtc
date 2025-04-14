@@ -1,3 +1,10 @@
+# [1.16.0](https://github.com/zenrocklabs/zenbtc/compare/v1.15.10...v1.16.0) (2025-04-14)
+
+
+### Features
+
+* solana impl ([#41](https://github.com/zenrocklabs/zenbtc/issues/41)) ([319b634](https://github.com/zenrocklabs/zenbtc/commit/319b6340860830aa16db18c79ade78e90876830e))
+
 ## [1.15.10](https://github.com/zenrocklabs/zenbtc/compare/v1.15.9...v1.15.10) (2025-03-27)
 
 
