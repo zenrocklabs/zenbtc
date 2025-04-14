@@ -21,4 +21,18 @@ message Params {
   string bitcoinProxyAddress = 8;
   string ethTokenAddr = 9;
   string controllerAddr = 10;
+  Solana solana = 11;
+}
+
+message Solana {
+  option (gogoproto.equal) = true;
+  uint64 signer_key_id = 1;
+  string program_id = 2;
+  uint64 nonce_account_key = 3;
+  uint64 nonce_authority_key = 4;
+  string mint_address = 5;
+  string fee_wallet = 6;
+  uint64 fee = 7;
+  string multisig_key_address = 8;
+  int64 btl = 9;
 }

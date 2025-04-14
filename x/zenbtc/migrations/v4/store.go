@@ -11,7 +11,7 @@ import (
 func UpdateParams(ctx sdk.Context, params collections.Item[types.Params]) error {
 	paramsMap := map[string]types.Params{
 		"zenrock": { // local
-			DepositKeyringAddr:  "keyring1hpyh7xqr2w7h4eas5y8twnsg",
+			DepositKeyringAddr:  "keyring1k6vc6vhp6e6l3rxalue9v4ux",
 			StakerKeyID:         1,
 			EthMinterKeyID:      2,
 			UnstakerKeyID:       3,
