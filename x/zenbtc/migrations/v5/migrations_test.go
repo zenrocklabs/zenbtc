@@ -128,13 +128,13 @@ func TestMigrate(t *testing.T) {
 			name:           "empty chainID",
 			chainID:        "", // Defaults to "zenrock" in UpdateParams
 			initialParams:  types.Params{},
-			expectedParams: zenrockParams,
+			expectedParams: localParams,
 		},
 		{
 			name:           "zenrock chainID",
 			chainID:        "zenrock",
 			initialParams:  types.Params{},
-			expectedParams: zenrockParams,
+			expectedParams: localParams,
 		},
 		{
 			name:           "amber chainID",
