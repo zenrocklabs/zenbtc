@@ -1,3 +1,10 @@
+## [1.16.2](https://github.com/zenrocklabs/zenbtc/compare/v1.16.1...v1.16.2) (2025-04-15)
+
+
+### Bug Fixes
+
+* test ([f71ed2d](https://github.com/zenrocklabs/zenbtc/commit/f71ed2d60c34f3f346cc2e516420ff89d343662a))
+
 ## [1.16.1](https://github.com/zenrocklabs/zenbtc/compare/v1.16.0...v1.16.1) (2025-04-15)
 
 
