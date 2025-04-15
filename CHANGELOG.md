@@ -1,3 +1,10 @@
+## [1.16.1](https://github.com/zenrocklabs/zenbtc/compare/v1.16.0...v1.16.1) (2025-04-15)
+
+
+### Bug Fixes
+
+* add v5 store migration ([#44](https://github.com/zenrocklabs/zenbtc/issues/44)) ([0b01680](https://github.com/zenrocklabs/zenbtc/commit/0b016804f5a9ff04f9fdfad67f3b1303efccbca4))
+
 # [1.16.0](https://github.com/zenrocklabs/zenbtc/compare/v1.15.10...v1.16.0) (2025-04-14)
 
 
