@@ -1,3 +1,10 @@
+## [1.16.3](https://github.com/zenrocklabs/zenbtc/compare/v1.16.2...v1.16.3) (2025-04-16)
+
+
+### Bug Fixes
+
+* update solana params getter + migration ([97a974d](https://github.com/zenrocklabs/zenbtc/commit/97a974d3deb645834002c92d9f7bbb9d5100d25f))
+
 ## [1.16.2](https://github.com/zenrocklabs/zenbtc/compare/v1.16.1...v1.16.2) (2025-04-15)
 
 
