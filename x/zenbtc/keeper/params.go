@@ -24,15 +24,15 @@ var (
 	// DefaultStakerKeyID = 0
 	// DefaultBurnerKeyID = 0
 	DefaultSolana = &types.Solana{
-		SignerKeyId:        10,
+		SignerKeyId:        7,
 		ProgramId:          "3jo4mdc6QbGRigia2jvmKShbmz3aWq4Y8bgUXfur5StT",
-		NonceAuthorityKey:  11,
-		NonceAccountKey:    12,
+		NonceAuthorityKey:  8,
+		NonceAccountKey:    9,
 		MintAddress:        "9oBkgQUkq8jvzK98D7Uib6GYSZZmjnZ6QEGJRrAeKnDj",
 		FeeWallet:          "FzqGcRG98v1KhKxatX2Abb2z1aJ2rViQwBK5GHByKCAd",
 		Fee:                0,
 		MultisigKeyAddress: "8cmZY2id22vxpXs2H3YYQNARuPHNuYwa7jipW1q1v9Fy",
-		Btl:                21,
+		Btl:                20,
 	}
 )
 
@@ -122,14 +122,6 @@ func (k Keeper) GetEthMinterKeyID(ctx context.Context) uint64 {
 	return params.EthMinterKeyID
 }
 
-func (k Keeper) GetSolanaParams(ctx context.Context) *types.Solana {
-	params, err := k.Params.Get(ctx)
-	if err != nil {
-		return DefaultSolana
-	}
-	return params.Solana
-}
-
 func (k Keeper) GetUnstakerKeyID(ctx context.Context) uint64 {
 	params, err := k.Params.Get(ctx)
 	if err != nil {
@@ -180,4 +172,22 @@ func (k Keeper) GetRewardsDepositKeyID(ctx context.Context) uint64 {
 		return DefaultRewardsDepositKeyID
 	}
 	return params.RewardsDepositKeyID
+}
+
+func (k Keeper) GetSolanaParams(ctx context.Context) *types.Solana {
+	params, err := k.Params.Get(ctx)
+	if err != nil ||
+		params.Solana == nil ||
+		params.Solana.SignerKeyId == 0 ||
+		params.Solana.ProgramId == "" ||
+		params.Solana.MintAddress == "" ||
+		params.Solana.MultisigKeyAddress == "" ||
+		params.Solana.Btl == 0 ||
+		params.Solana.FeeWallet == "" ||
+		params.Solana.NonceAuthorityKey == 0 ||
+		params.Solana.NonceAccountKey == 0 {
+
+		return DefaultSolana
+	}
+	return params.Solana
 }
