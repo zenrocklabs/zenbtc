@@ -1,3 +1,10 @@
+## [1.16.4](https://github.com/zenrocklabs/zenbtc/compare/v1.16.3...v1.16.4) (2025-04-17)
+
+
+### Bug Fixes
+
+* remove hardcoded keyring addr ([399d32b](https://github.com/zenrocklabs/zenbtc/commit/399d32b4a2d3bd9bc7a0bbc353862325ddfa5b6b))
+
 ## [1.16.3](https://github.com/zenrocklabs/zenbtc/compare/v1.16.2...v1.16.3) (2025-04-16)
 
 
