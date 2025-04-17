@@ -48,7 +48,7 @@ func (k msgServer) VerifyDepositBlockInclusion(goCtx context.Context, msg *types
 	// List of addresses to ignore - we don't want to cause a mint for change
 	ignoreAddresses, err := k.ZenBTCChangeAddresses(ctx, msg.ChainName)
 	if err != nil {
-		return nil, errors.New("Error Retrieving the Change Addresses")
+		return nil, errors.New("error retrieving the change addresses")
 	}
 
 	// Verify the blockheader is valid and the proof, return a list of outputs in the transaction
@@ -70,7 +70,7 @@ func (k msgServer) VerifyDepositBlockInclusion(goCtx context.Context, msg *types
 
 	q, err := k.treasuryKeeper.KeyByAddress(ctx, &treasurytypes.QueryKeyByAddressRequest{
 		Address:     msg.DepositAddr,
-		KeyringAddr: "keyring1pfnq7r04rept47gaf5cpdew2", //k.GetDepositKeyringAddr(ctx),
+		KeyringAddr: k.GetDepositKeyringAddr(ctx),
 		KeyType:     treasurytypes.KeyType_KEY_TYPE_BITCOIN_SECP256K1,
 		WalletType:  WalletTypeFromChainName(msg),
 	})
