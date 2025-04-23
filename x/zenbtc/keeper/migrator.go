@@ -64,7 +64,7 @@ func (m Migrator) Migrate4to5(ctx sdk.Context) error {
 // Migrate5to6 migrates x/zenbtc params from consensus version 5 to 6.
 func (m Migrator) Migrate5to6(ctx sdk.Context) error {
 
-	if err := v6.MigrateLockTransactions(ctx, m.keeper.LockTransactionStore, m.keeper.LockTransactions); err != nil {
+	if err := v6.MigrateLockTransactions(ctx, m.keeper.LockTransactionStore, m.keeper.LockTransactions, m.keeper.SetAuthority); err != nil {
 		return err
 	}
 

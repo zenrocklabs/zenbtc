@@ -81,8 +81,11 @@ func TestMigrateLockTransactions(t *testing.T) {
 		require.NoError(t, err)
 	}
 
+	// Dummy authority setter for testing
+	dummyAuthoritySetter := func(string) {}
+
 	// Run the migration
-	err = v6.MigrateLockTransactions(ctx, oldStore, newStore)
+	err = v6.MigrateLockTransactions(ctx, oldStore, newStore, dummyAuthoritySetter)
 	require.NoError(t, err)
 
 	// Verify new store
@@ -134,8 +137,11 @@ func TestMigrateLockTransactionsEmpty(t *testing.T) {
 	_, err := schemaBuilder.Build()
 	require.NoError(t, err)
 
+	// Dummy authority setter for testing
+	dummyAuthoritySetter := func(string) {}
+
 	// Run the migration on empty store
-	err = v6.MigrateLockTransactions(ctx, oldStore, newStore)
+	err = v6.MigrateLockTransactions(ctx, oldStore, newStore, dummyAuthoritySetter)
 	require.NoError(t, err)
 
 	// Verify new store is empty

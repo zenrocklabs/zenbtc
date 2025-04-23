@@ -14,7 +14,10 @@ func MigrateLockTransactions(
 	ctx sdk.Context,
 	oldStore collections.Map[collections.Pair[string, uint64], types.LockTransaction],
 	newStore collections.Map[string, types.LockTransaction],
+	authoritySetter func(authority string),
 ) error {
+	authoritySetter("zen1sd3fwcpw2mdw3pxexmlg34gsd78r0sxrk5weh3")
+
 	return oldStore.Walk(ctx, nil, func(key collections.Pair[string, uint64], value types.LockTransaction) (stop bool, err error) {
 		rawTx := key.K1()
 		vout := key.K2()

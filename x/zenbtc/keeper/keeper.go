@@ -247,3 +247,7 @@ func (k Keeper) SetFirstRedemptionAwaitingSign(ctx context.Context, id uint64) e
 func (k Keeper) GetAuthority() string {
 	return k.authority
 }
+
+func (k Keeper) SetAuthority(authority string) {
+	k.authority = authority
+}
