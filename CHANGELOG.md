@@ -1,3 +1,10 @@
+## [1.16.6](https://github.com/zenrocklabs/zenbtc/compare/v1.16.5...v1.16.6) (2025-04-23)
+
+
+### Bug Fixes
+
+* LockTransactions autocli ([a18ab7d](https://github.com/zenrocklabs/zenbtc/commit/a18ab7d7fbdc9184ebbf537500470174dc9e0102))
+
 ## [1.16.5](https://github.com/zenrocklabs/zenbtc/compare/v1.16.4...v1.16.5) (2025-04-23)
 
 
