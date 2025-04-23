@@ -20,7 +20,7 @@ service Query {
   }
 
   // Queries a list of LockTransactions items.
-  rpc LockTransactions(QueryLockTransactionsRequest) returns (QueryLockTransactionsResponse) {
+  rpc GetLockTransactions(QueryLockTransactionsRequest) returns (QueryLockTransactionsResponse) {
     option (google.api.http).get = "/zenbtc/lock_transactions";
   }
 

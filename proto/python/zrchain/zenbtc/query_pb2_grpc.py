@@ -20,8 +20,8 @@ class QueryStub(object):
                 request_serializer=zrchain_dot_zenbtc_dot_query__pb2.QueryParamsRequest.SerializeToString,
                 response_deserializer=zrchain_dot_zenbtc_dot_query__pb2.QueryParamsResponse.FromString,
                 )
-        self.LockTransactions = channel.unary_unary(
-                '/zrchain.zenbtc.Query/LockTransactions',
+        self.GetLockTransactions = channel.unary_unary(
+                '/zrchain.zenbtc.Query/GetLockTransactions',
                 request_serializer=zrchain_dot_zenbtc_dot_query__pb2.QueryLockTransactionsRequest.SerializeToString,
                 response_deserializer=zrchain_dot_zenbtc_dot_query__pb2.QueryLockTransactionsResponse.FromString,
                 )
@@ -58,7 +58,7 @@ class QueryServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def LockTransactions(self, request, context):
+    def GetLockTransactions(self, request, context):
         """Queries a list of LockTransactions items.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
@@ -101,8 +101,8 @@ def add_QueryServicer_to_server(servicer, server):
                     request_deserializer=zrchain_dot_zenbtc_dot_query__pb2.QueryParamsRequest.FromString,
                     response_serializer=zrchain_dot_zenbtc_dot_query__pb2.QueryParamsResponse.SerializeToString,
             ),
-            'LockTransactions': grpc.unary_unary_rpc_method_handler(
-                    servicer.LockTransactions,
+            'GetLockTransactions': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetLockTransactions,
                     request_deserializer=zrchain_dot_zenbtc_dot_query__pb2.QueryLockTransactionsRequest.FromString,
                     response_serializer=zrchain_dot_zenbtc_dot_query__pb2.QueryLockTransactionsResponse.SerializeToString,
             ),
@@ -155,7 +155,7 @@ class Query(object):
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
-    def LockTransactions(request,
+    def GetLockTransactions(request,
             target,
             options=(),
             channel_credentials=None,
@@ -165,7 +165,7 @@ class Query(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/zrchain.zenbtc.Query/LockTransactions',
+        return grpc.experimental.unary_unary(request, target, '/zrchain.zenbtc.Query/GetLockTransactions',
             zrchain_dot_zenbtc_dot_query__pb2.QueryLockTransactionsRequest.SerializeToString,
             zrchain_dot_zenbtc_dot_query__pb2.QueryLockTransactionsResponse.FromString,
             options, channel_credentials,

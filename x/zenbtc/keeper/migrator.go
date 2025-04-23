@@ -6,6 +6,7 @@ import (
 	v3 "github.com/zenrocklabs/zenbtc/x/zenbtc/migrations/v3"
 	v4 "github.com/zenrocklabs/zenbtc/x/zenbtc/migrations/v4"
 	v5 "github.com/zenrocklabs/zenbtc/x/zenbtc/migrations/v5"
+	v6 "github.com/zenrocklabs/zenbtc/x/zenbtc/migrations/v6"
 )
 
 // Migrator is a struct for handling in-place store migrations.
@@ -54,6 +55,16 @@ func (m Migrator) Migrate3to4(ctx sdk.Context) error {
 func (m Migrator) Migrate4to5(ctx sdk.Context) error {
 
 	if err := v5.UpdateParams(ctx, m.keeper.Params); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+// Migrate5to6 migrates x/zenbtc params from consensus version 5 to 6.
+func (m Migrator) Migrate5to6(ctx sdk.Context) error {
+
+	if err := v6.MigrateLockTransactions(ctx, m.keeper.LockTransactionStore, m.keeper.LockTransactions); err != nil {
 		return err
 	}
 

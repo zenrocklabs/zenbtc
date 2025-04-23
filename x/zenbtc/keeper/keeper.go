@@ -29,10 +29,8 @@ type (
 
 		Schema collections.Schema
 		Params collections.Item[types.Params]
-		// LockTransactionStore - key: lock transaction rawTx + vout | value: lock transaction data
-		LockTransactionStore collections.Map[collections.Pair[string, uint64], types.LockTransaction]
-		// PendingMintTransactions - key: pending zenBTC mint transaction
-		PendingMintTransactions collections.Item[types.PendingMintTransactions] // DEPRECATED
+		// LockTransactions - key: hash of lock transaction rawTx + vout | value: lock transaction data
+		LockTransactions collections.Map[string, types.LockTransaction]
 		// PendingMintTransactionsMap - key: pending zenBTC mint transaction id | value: pending zenBTC mint transaction
 		PendingMintTransactionsMap collections.Map[uint64, types.PendingMintTransaction]
 		// FirstPendingEthMintTransaction - value: lowest key of pending Ethereum mint transaction
@@ -57,6 +55,10 @@ type (
 		Supply collections.Item[types.Supply]
 		// FirstPendingStakeTransaction - value: lowest key of pending stake transaction
 		FirstPendingStakeTransaction collections.Item[uint64]
+		// DEPRECATED
+		LockTransactionStore collections.Map[collections.Pair[string, uint64], types.LockTransaction]
+		// DEPRECATED
+		PendingMintTransactions collections.Item[types.PendingMintTransactions]
 	}
 )
 
@@ -79,6 +81,7 @@ func NewKeeper(
 		treasuryKeeper:                 treasuryKeeper,
 		authority:                      authority,
 		Params:                         collections.NewItem(sb, types.ParamsKey, types.ParamsIndex, codec.CollValue[types.Params](cdc)),
+		LockTransactions:               collections.NewMap(sb, types.LockTransactionsNewKey, types.LockTransactionsNewIndex, collections.StringKey, codec.CollValue[types.LockTransaction](cdc)),
 		LockTransactionStore:           collections.NewMap(sb, types.LockTransactionsKey, types.LockTransactionsIndex, collections.PairKeyCodec(collections.StringKey, collections.Uint64Key), codec.CollValue[types.LockTransaction](cdc)),
 		PendingMintTransactions:        collections.NewItem(sb, types.PendingMintTransactionsKey, types.PendingMintTransactionsIndex, codec.CollValue[types.PendingMintTransactions](cdc)),
 		PendingMintTransactionsMap:     collections.NewMap(sb, types.PendingMintTransactionsMapKey, types.PendingMintTransactionsMapIndex, collections.Uint64Key, codec.CollValue[types.PendingMintTransaction](cdc)),
