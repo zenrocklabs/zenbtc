@@ -20,8 +20,6 @@ import (
 	"github.com/Zenrock-Foundation/zrchain/v6/sidecar/proto/api"
 	treasurytypes "github.com/Zenrock-Foundation/zrchain/v6/x/treasury/types"
 
-	validationtypes "github.com/Zenrock-Foundation/zrchain/v6/x/validation/types"
-
 	"github.com/zenrocklabs/zenbtc/x/zenbtc/types"
 )
 
@@ -175,7 +173,6 @@ func (k msgServer) VerifyDepositBlockInclusion(goCtx context.Context, msg *types
 	}
 	k.validationKeeper.Logger(ctx).Warn("added pending mint transaction", "tx", fmt.Sprintf("%+v", tx))
 
-	validationtypes.IsEthereumCAIP2(tx.Caip2ChainId)
 	if err := k.validationKeeper.EthereumNonceRequested.Set(ctx, k.GetStakerKeyID(ctx), true); err != nil {
 		return nil, err
 	}
