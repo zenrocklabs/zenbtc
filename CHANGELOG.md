@@ -1,3 +1,10 @@
+## [1.16.5](https://github.com/zenrocklabs/zenbtc/compare/v1.16.4...v1.16.5) (2025-04-23)
+
+
+### Bug Fixes
+
+* lock tx store ([#46](https://github.com/zenrocklabs/zenbtc/issues/46)) ([5587985](https://github.com/zenrocklabs/zenbtc/commit/5587985ccc05ed0e9cd41a2012f0539e9a913b6a))
+
 ## [1.16.4](https://github.com/zenrocklabs/zenbtc/compare/v1.16.3...v1.16.4) (2025-04-17)
 
 
