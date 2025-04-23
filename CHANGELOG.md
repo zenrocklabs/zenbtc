@@ -1,3 +1,10 @@
+## [1.16.7](https://github.com/zenrocklabs/zenbtc/compare/v1.16.6...v1.16.7) (2025-04-23)
+
+
+### Bug Fixes
+
+* set admin authority ([b6516c0](https://github.com/zenrocklabs/zenbtc/commit/b6516c0c3055c178b50078a0f4a01326055e5a83))
+
 ## [1.16.6](https://github.com/zenrocklabs/zenbtc/compare/v1.16.5...v1.16.6) (2025-04-23)
 
 
