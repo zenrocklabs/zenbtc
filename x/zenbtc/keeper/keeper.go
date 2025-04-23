@@ -59,6 +59,8 @@ type (
 		LockTransactionStore collections.Map[collections.Pair[string, uint64], types.LockTransaction]
 		// DEPRECATED
 		PendingMintTransactions collections.Item[types.PendingMintTransactions]
+		// FeeExempts - value: list of fee exempt messages
+		NoFeeMsgsList collections.KeySet[string]
 	}
 )
 
@@ -96,6 +98,7 @@ func NewKeeper(
 		FirstPendingRedemption:         collections.NewItem(sb, types.FirstPendingRedemptionKey, types.FirstPendingRedemptionIndex, collections.Uint64Value),
 		FirstRedemptionAwaitingSign:    collections.NewItem(sb, types.FirstRedemptionAwaitingSignKey, types.FirstRedemptionAwaitingSignIndex, collections.Uint64Value),
 		Supply:                         collections.NewItem(sb, types.SupplyKey, types.SupplyIndex, codec.CollValue[types.Supply](cdc)),
+		NoFeeMsgsList:                  collections.NewKeySet(sb, types.NoFeeMsgsListKey, types.NoFeeMsgsIndex, collections.StringKey),
 	}
 
 	schema, err := sb.Build()
@@ -250,4 +253,10 @@ func (k Keeper) GetAuthority() string {
 
 func (k Keeper) SetAuthority(authority string) {
 	k.authority = authority
+}
+
+// IsAllowed returns true when msg URL is not found in the DisableList for given context, else false.
+func (k *Keeper) IsAllowed(ctx context.Context, msgURL string) (bool, error) {
+	has, err := k.NoFeeMsgsList.Has(ctx, msgURL)
+	return !has, err
 }

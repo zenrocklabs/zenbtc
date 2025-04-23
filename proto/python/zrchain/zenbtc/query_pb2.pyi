@@ -97,3 +97,13 @@ class QueryBurnEventsResponse(_message.Message):
     BURNEVENTS_FIELD_NUMBER: _ClassVar[int]
     burnEvents: _containers.RepeatedCompositeFieldContainer[_redemptions_pb2.BurnEvent]
     def __init__(self, burnEvents: _Optional[_Iterable[_Union[_redemptions_pb2.BurnEvent, _Mapping]]] = ...) -> None: ...
+
+class QueryFeeExemptsRequest(_message.Message):
+    __slots__ = ()
+    def __init__(self) -> None: ...
+
+class QueryFeeExemptsResponse(_message.Message):
+    __slots__ = ("no_fee_msgs",)
+    NO_FEE_MSGS_FIELD_NUMBER: _ClassVar[int]
+    no_fee_msgs: _containers.RepeatedScalarFieldContainer[str]
+    def __init__(self, no_fee_msgs: _Optional[_Iterable[str]] = ...) -> None: ...

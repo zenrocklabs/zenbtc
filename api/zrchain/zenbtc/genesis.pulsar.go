@@ -14,15 +14,63 @@ import (
 	sync "sync"
 )
 
+var _ protoreflect.List = (*_GenesisState_2_list)(nil)
+
+type _GenesisState_2_list struct {
+	list *[]string
+}
+
+func (x *_GenesisState_2_list) Len() int {
+	if x.list == nil {
+		return 0
+	}
+	return len(*x.list)
+}
+
+func (x *_GenesisState_2_list) Get(i int) protoreflect.Value {
+	return protoreflect.ValueOfString((*x.list)[i])
+}
+
+func (x *_GenesisState_2_list) Set(i int, value protoreflect.Value) {
+	valueUnwrapped := value.String()
+	concreteValue := valueUnwrapped
+	(*x.list)[i] = concreteValue
+}
+
+func (x *_GenesisState_2_list) Append(value protoreflect.Value) {
+	valueUnwrapped := value.String()
+	concreteValue := valueUnwrapped
+	*x.list = append(*x.list, concreteValue)
+}
+
+func (x *_GenesisState_2_list) AppendMutable() protoreflect.Value {
+	panic(fmt.Errorf("AppendMutable can not be called on message GenesisState at list field NoFeeMsgs as it is not of Message kind"))
+}
+
+func (x *_GenesisState_2_list) Truncate(n int) {
+	*x.list = (*x.list)[:n]
+}
+
+func (x *_GenesisState_2_list) NewElement() protoreflect.Value {
+	v := ""
+	return protoreflect.ValueOfString(v)
+}
+
+func (x *_GenesisState_2_list) IsValid() bool {
+	return x.list != nil
+}
+
 var (
-	md_GenesisState        protoreflect.MessageDescriptor
-	fd_GenesisState_params protoreflect.FieldDescriptor
+	md_GenesisState             protoreflect.MessageDescriptor
+	fd_GenesisState_params      protoreflect.FieldDescriptor
+	fd_GenesisState_no_fee_msgs protoreflect.FieldDescriptor
 )
 
 func init() {
 	file_zrchain_zenbtc_genesis_proto_init()
 	md_GenesisState = File_zrchain_zenbtc_genesis_proto.Messages().ByName("GenesisState")
 	fd_GenesisState_params = md_GenesisState.Fields().ByName("params")
+	fd_GenesisState_no_fee_msgs = md_GenesisState.Fields().ByName("no_fee_msgs")
 }
 
 var _ protoreflect.Message = (*fastReflection_GenesisState)(nil)
@@ -96,6 +144,12 @@ func (x *fastReflection_GenesisState) Range(f func(protoreflect.FieldDescriptor,
 			return
 		}
 	}
+	if len(x.NoFeeMsgs) != 0 {
+		value := protoreflect.ValueOfList(&_GenesisState_2_list{list: &x.NoFeeMsgs})
+		if !f(fd_GenesisState_no_fee_msgs, value) {
+			return
+		}
+	}
 }
 
 // Has reports whether a field is populated.
@@ -113,6 +167,8 @@ func (x *fastReflection_GenesisState) Has(fd protoreflect.FieldDescriptor) bool 
 	switch fd.FullName() {
 	case "zrchain.zenbtc.GenesisState.params":
 		return x.Params != nil
+	case "zrchain.zenbtc.GenesisState.no_fee_msgs":
+		return len(x.NoFeeMsgs) != 0
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: zrchain.zenbtc.GenesisState"))
@@ -131,6 +187,8 @@ func (x *fastReflection_GenesisState) Clear(fd protoreflect.FieldDescriptor) {
 	switch fd.FullName() {
 	case "zrchain.zenbtc.GenesisState.params":
 		x.Params = nil
+	case "zrchain.zenbtc.GenesisState.no_fee_msgs":
+		x.NoFeeMsgs = nil
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: zrchain.zenbtc.GenesisState"))
@@ -150,6 +208,12 @@ func (x *fastReflection_GenesisState) Get(descriptor protoreflect.FieldDescripto
 	case "zrchain.zenbtc.GenesisState.params":
 		value := x.Params
 		return protoreflect.ValueOfMessage(value.ProtoReflect())
+	case "zrchain.zenbtc.GenesisState.no_fee_msgs":
+		if len(x.NoFeeMsgs) == 0 {
+			return protoreflect.ValueOfList(&_GenesisState_2_list{})
+		}
+		listValue := &_GenesisState_2_list{list: &x.NoFeeMsgs}
+		return protoreflect.ValueOfList(listValue)
 	default:
 		if descriptor.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: zrchain.zenbtc.GenesisState"))
@@ -172,6 +236,10 @@ func (x *fastReflection_GenesisState) Set(fd protoreflect.FieldDescriptor, value
 	switch fd.FullName() {
 	case "zrchain.zenbtc.GenesisState.params":
 		x.Params = value.Message().Interface().(*Params)
+	case "zrchain.zenbtc.GenesisState.no_fee_msgs":
+		lv := value.List()
+		clv := lv.(*_GenesisState_2_list)
+		x.NoFeeMsgs = *clv.list
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: zrchain.zenbtc.GenesisState"))
@@ -197,6 +265,12 @@ func (x *fastReflection_GenesisState) Mutable(fd protoreflect.FieldDescriptor) p
 			x.Params = new(Params)
 		}
 		return protoreflect.ValueOfMessage(x.Params.ProtoReflect())
+	case "zrchain.zenbtc.GenesisState.no_fee_msgs":
+		if x.NoFeeMsgs == nil {
+			x.NoFeeMsgs = []string{}
+		}
+		value := &_GenesisState_2_list{list: &x.NoFeeMsgs}
+		return protoreflect.ValueOfList(value)
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: zrchain.zenbtc.GenesisState"))
@@ -213,6 +287,9 @@ func (x *fastReflection_GenesisState) NewField(fd protoreflect.FieldDescriptor) 
 	case "zrchain.zenbtc.GenesisState.params":
 		m := new(Params)
 		return protoreflect.ValueOfMessage(m.ProtoReflect())
+	case "zrchain.zenbtc.GenesisState.no_fee_msgs":
+		list := []string{}
+		return protoreflect.ValueOfList(&_GenesisState_2_list{list: &list})
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: zrchain.zenbtc.GenesisState"))
@@ -286,6 +363,12 @@ func (x *fastReflection_GenesisState) ProtoMethods() *protoiface.Methods {
 			l = options.Size(x.Params)
 			n += 1 + l + runtime.Sov(uint64(l))
 		}
+		if len(x.NoFeeMsgs) > 0 {
+			for _, s := range x.NoFeeMsgs {
+				l = len(s)
+				n += 1 + l + runtime.Sov(uint64(l))
+			}
+		}
 		if x.unknownFields != nil {
 			n += len(x.unknownFields)
 		}
@@ -314,6 +397,15 @@ func (x *fastReflection_GenesisState) ProtoMethods() *protoiface.Methods {
 		if x.unknownFields != nil {
 			i -= len(x.unknownFields)
 			copy(dAtA[i:], x.unknownFields)
+		}
+		if len(x.NoFeeMsgs) > 0 {
+			for iNdEx := len(x.NoFeeMsgs) - 1; iNdEx >= 0; iNdEx-- {
+				i -= len(x.NoFeeMsgs[iNdEx])
+				copy(dAtA[i:], x.NoFeeMsgs[iNdEx])
+				i = runtime.EncodeVarint(dAtA, i, uint64(len(x.NoFeeMsgs[iNdEx])))
+				i--
+				dAtA[i] = 0x12
+			}
 		}
 		if x.Params != nil {
 			encoded, err := options.Marshal(x.Params)
@@ -414,6 +506,38 @@ func (x *fastReflection_GenesisState) ProtoMethods() *protoiface.Methods {
 					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, err
 				}
 				iNdEx = postIndex
+			case 2:
+				if wireType != 2 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field NoFeeMsgs", wireType)
+				}
+				var stringLen uint64
+				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
+					}
+					if iNdEx >= l {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+					}
+					b := dAtA[iNdEx]
+					iNdEx++
+					stringLen |= uint64(b&0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+				intStringLen := int(stringLen)
+				if intStringLen < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				postIndex := iNdEx + intStringLen
+				if postIndex < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				if postIndex > l {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+				}
+				x.NoFeeMsgs = append(x.NoFeeMsgs, string(dAtA[iNdEx:postIndex]))
+				iNdEx = postIndex
 			default:
 				iNdEx = preIndex
 				skippy, err := runtime.Skip(dAtA[iNdEx:])
@@ -470,6 +594,8 @@ type GenesisState struct {
 
 	// params defines all the parameters of the module.
 	Params *Params `protobuf:"bytes,1,opt,name=params,proto3" json:"params,omitempty"`
+	// no_fee_msgs defines the messages that should not be charged for.
+	NoFeeMsgs []string `protobuf:"bytes,2,rep,name=no_fee_msgs,json=noFeeMsgs,proto3" json:"no_fee_msgs,omitempty"`
 }
 
 func (x *GenesisState) Reset() {
@@ -499,6 +625,13 @@ func (x *GenesisState) GetParams() *Params {
 	return nil
 }
 
+func (x *GenesisState) GetNoFeeMsgs() []string {
+	if x != nil {
+		return x.NoFeeMsgs
+	}
+	return nil
+}
+
 var File_zrchain_zenbtc_genesis_proto protoreflect.FileDescriptor
 
 var file_zrchain_zenbtc_genesis_proto_rawDesc = []byte{
@@ -509,11 +642,13 @@ var file_zrchain_zenbtc_genesis_proto_rawDesc = []byte{
 	0x6f, 0x1a, 0x14, 0x67, 0x6f, 0x67, 0x6f, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2f, 0x67, 0x6f, 0x67,
 	0x6f, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x1a, 0x1b, 0x7a, 0x72, 0x63, 0x68, 0x61, 0x69, 0x6e,
 	0x2f, 0x7a, 0x65, 0x6e, 0x62, 0x74, 0x63, 0x2f, 0x70, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x2e, 0x70,
-	0x72, 0x6f, 0x74, 0x6f, 0x22, 0x49, 0x0a, 0x0c, 0x47, 0x65, 0x6e, 0x65, 0x73, 0x69, 0x73, 0x53,
+	0x72, 0x6f, 0x74, 0x6f, 0x22, 0x69, 0x0a, 0x0c, 0x47, 0x65, 0x6e, 0x65, 0x73, 0x69, 0x73, 0x53,
 	0x74, 0x61, 0x74, 0x65, 0x12, 0x39, 0x0a, 0x06, 0x70, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x18, 0x01,
 	0x20, 0x01, 0x28, 0x0b, 0x32, 0x16, 0x2e, 0x7a, 0x72, 0x63, 0x68, 0x61, 0x69, 0x6e, 0x2e, 0x7a,
 	0x65, 0x6e, 0x62, 0x74, 0x63, 0x2e, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x42, 0x09, 0xc8, 0xde,
-	0x1f, 0x00, 0xa8, 0xe7, 0xb0, 0x2a, 0x01, 0x52, 0x06, 0x70, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x42,
+	0x1f, 0x00, 0xa8, 0xe7, 0xb0, 0x2a, 0x01, 0x52, 0x06, 0x70, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x12,
+	0x1e, 0x0a, 0x0b, 0x6e, 0x6f, 0x5f, 0x66, 0x65, 0x65, 0x5f, 0x6d, 0x73, 0x67, 0x73, 0x18, 0x02,
+	0x20, 0x03, 0x28, 0x09, 0x52, 0x09, 0x6e, 0x6f, 0x46, 0x65, 0x65, 0x4d, 0x73, 0x67, 0x73, 0x42,
 	0x9c, 0x01, 0x0a, 0x12, 0x63, 0x6f, 0x6d, 0x2e, 0x7a, 0x72, 0x63, 0x68, 0x61, 0x69, 0x6e, 0x2e,
 	0x7a, 0x65, 0x6e, 0x62, 0x74, 0x63, 0x42, 0x0c, 0x47, 0x65, 0x6e, 0x65, 0x73, 0x69, 0x73, 0x50,
 	0x72, 0x6f, 0x74, 0x6f, 0x50, 0x01, 0x5a, 0x1f, 0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x73, 0x64,

@@ -43,6 +43,11 @@ service Query {
   rpc QueryBurnEvents(QueryBurnEventsRequest) returns (QueryBurnEventsResponse) {
     option (google.api.http).get = "/zenbtc/burn_events";
   }
+
+  // Queries a list of FeeExempts items.
+  rpc FeeExempts(QueryFeeExemptsRequest) returns (QueryFeeExemptsResponse) {
+  option (google.api.http).get = "/zenbtc/fee_exempts";
+  }
 }
 
 // QueryParamsRequest is request type for the Query/Params RPC method.
@@ -101,4 +106,14 @@ message QueryBurnEventsRequest {
 
 message QueryBurnEventsResponse {
   repeated BurnEvent burnEvents = 1;
+}
+
+// QueryFeeExemptsRequest is request type for the  
+// Query/FeeExemptsRequest RPC method.
+message QueryFeeExemptsRequest {}
+
+// QueryFeeExemptsResponse is response type for the
+// Query/FeeExemptsResponse RPC method.
+message QueryFeeExemptsResponse {
+  repeated string no_fee_msgs = 1;
 }

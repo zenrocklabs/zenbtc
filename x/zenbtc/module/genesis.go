@@ -13,6 +13,13 @@ func InitGenesis(ctx sdk.Context, k keeper.Keeper, genState types.GenesisState) 
 	if err := k.Params.Set(ctx, genState.Params); err != nil {
 		panic(err)
 	}
+
+	for _, url := range genState.NoFeeMsgs {
+		// Set the disabled type urls
+		if err := k.NoFeeMsgsList.Set(ctx, url); err != nil {
+			panic(err)
+		}
+	}
 }
 
 // ExportGenesis returns the module's exported genesis.
@@ -23,6 +30,13 @@ func ExportGenesis(ctx sdk.Context, k keeper.Keeper) *types.GenesisState {
 		panic(err)
 	}
 	genesis.Params = params
+
+	if err := k.NoFeeMsgsList.Walk(ctx, nil, func(msgUrl string) (stop bool, err error) {
+		genesis.NoFeeMsgs = append(genesis.NoFeeMsgs, msgUrl)
+		return false, nil
+	}); err != nil {
+		panic(err)
+	}
 
 	// this line is used by starport scaffolding # genesis/module/export
 

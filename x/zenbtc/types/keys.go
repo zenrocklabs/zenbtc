@@ -30,6 +30,7 @@ var (
 	FirstRedemptionAwaitingSignKey    = collections.NewPrefix(13)
 	FirstPendingSolMintTransactionKey = collections.NewPrefix(14)
 	LockTransactionsNewKey            = collections.NewPrefix(15)
+	NoFeeMsgsListKey                  = collections.NewPrefix(16)
 
 	ParamsIndex                         = "params"
 	LockTransactionsIndex               = "lock_transactions"
@@ -47,4 +48,5 @@ var (
 	FirstPendingRedemptionIndex         = "first_pending_redemption"
 	FirstRedemptionAwaitingSignIndex    = "first_redemption_awaiting_sign"
 	LockTransactionsNewIndex            = "lock_transactions_new"
+	NoFeeMsgsIndex                      = "no_fee_msgs"
 )

@@ -20,10 +20,10 @@ require (
 	cosmossdk.io/log v1.4.1
 	cosmossdk.io/math v1.4.0
 	cosmossdk.io/store v1.1.1
-	github.com/Layr-Labs/eigenlayer-contracts v1.2.0
+	github.com/Layr-Labs/eigenlayer-contracts v1.3.0
 	github.com/Layr-Labs/eigenlayer-rewards-proofs v0.2.14-0.20250219175207-db412abfccef
 	github.com/Layr-Labs/eigensdk-go v0.1.12
-	github.com/Zenrock-Foundation/zrchain/v6 v6.0.1
+	github.com/Zenrock-Foundation/zrchain/v6 v6.1.14
 	github.com/btcsuite/btcd v0.24.2
 	github.com/btcsuite/btcd/chaincfg/chainhash v1.1.0
 	github.com/btcsuite/btcutil v1.0.3-0.20201208143702-a53e38424cce

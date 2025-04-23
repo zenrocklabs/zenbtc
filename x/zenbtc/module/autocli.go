@@ -47,6 +47,12 @@ func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 					Short:          "Query BurnEvents",
 					PositionalArgs: []*autocliv1.PositionalArgDescriptor{},
 				},
+				{
+					RpcMethod:      "FeeExempts",
+					Use:            "fee-exempts",
+					Short:          "Query FeeExempt messages",
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{},
+				},
 				// this line is used by ignite scaffolding # autocli/query
 			},
 		},

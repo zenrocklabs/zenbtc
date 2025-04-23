@@ -70,8 +70,8 @@ github.com/GoogleCloudPlatform/opentelemetry-operations-go/exporter/metric v0.49
 github.com/GoogleCloudPlatform/opentelemetry-operations-go/internal/resourcemapping v0.49.0 h1:GYUJLfvd++4DMuMhCFLgLXvFwofIxh/qOwoGuS/LTew=
 github.com/GoogleCloudPlatform/opentelemetry-operations-go/internal/resourcemapping v0.49.0/go.mod h1:wRbFgBQUVm1YXrvWKofAEmq9HNJTDphbAaJSSX01KUI=
 github.com/Knetic/govaluate v3.0.1-0.20171022003610-9aa49832a739+incompatible/go.mod h1:r7JcOSlj0wfOMncg0iLm8Leh48TZaKVeNIfJntJ2wa0=
-github.com/Layr-Labs/eigenlayer-contracts v1.2.0 h1:shlbyU6kITfd+rPL5gMsMp+SG6lruRRwxHCwYiHAybw=
-github.com/Layr-Labs/eigenlayer-contracts v1.2.0/go.mod h1:Ie8YE3EQkTHqG6/tnUS0He7/UPMkXPo/3OFXwSy0iRo=
+github.com/Layr-Labs/eigenlayer-contracts v1.3.0 h1:ZpmO21pYaS7CsJ+pBdWwu9rK2g5KkWHkVBqjN0gDsK8=
+github.com/Layr-Labs/eigenlayer-contracts v1.3.0/go.mod h1:Ie8YE3EQkTHqG6/tnUS0He7/UPMkXPo/3OFXwSy0iRo=
 github.com/Layr-Labs/eigenlayer-rewards-proofs v0.2.14-0.20250219175207-db412abfccef h1:/J5ICQKWbyWFIbLGTphy+JhMwW6N0cFG3zUSEC/SQo0=
 github.com/Layr-Labs/eigenlayer-rewards-proofs v0.2.14-0.20250219175207-db412abfccef/go.mod h1:YaLhsa0/+U2bfHzZXB9/C55uVRQfLdN+sRy3ZWDZ/r8=
 github.com/Microsoft/go-winio v0.6.2 h1:F2VQgta7ecxGYO8k3ZZz3RS8fVIXVxONVUPlNERoyfY=
@@ -84,8 +84,8 @@ github.com/VictoriaMetrics/fastcache v1.12.2 h1:N0y9ASrJ0F6h0QaC3o6uJb3NIZ9VKLjC
 github.com/VictoriaMetrics/fastcache v1.12.2/go.mod h1:AmC+Nzz1+3G2eCPapF6UcsnkThDcMsQicp4xDukwJYI=
 github.com/VividCortex/gohistogram v1.0.0 h1:6+hBz+qvs0JOrrNhhmR7lFxo5sINxBCGXrdtl/UvroE=
 github.com/VividCortex/gohistogram v1.0.0/go.mod h1:Pf5mBqqDxYaXu3hDrrU+w6nw50o/4+TcAqDqk/vUH7g=
-github.com/Zenrock-Foundation/zrchain/v6 v6.0.1 h1:Twj6J9UEgzxCZ0VPuCh/RWOw2r6ajtm2HJkhYq3PVFc=
-github.com/Zenrock-Foundation/zrchain/v6 v6.0.1/go.mod h1:fb1JRZojfoSuOa0Ed1yjA4OdZ7bOfprSaCX1jT4Q9bI=
+github.com/Zenrock-Foundation/zrchain/v6 v6.1.14 h1:Qay4mfJBrpSq28pBdeq9IIQrOPlulPVCljtX/olRRGo=
+github.com/Zenrock-Foundation/zrchain/v6 v6.1.14/go.mod h1:7al7rYL0tvGhoS5SwFOVTmQOH7SFuN5DBN0cnMB6xLU=
 github.com/adlio/schema v1.3.6 h1:k1/zc2jNfeiZBA5aFTRy37jlBIuCkXCm0XmvpzCKI9I=
 github.com/adlio/schema v1.3.6/go.mod h1:qkxwLgPBd1FgLRHYVCmQT/rrBr3JH38J9LjmVzWNudg=
 github.com/aead/siphash v1.0.1/go.mod h1:Nywa3cDsYNNK3gaciGTWPwHt0wlpNV15vwmswBAUSII=
