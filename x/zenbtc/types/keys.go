@@ -29,6 +29,7 @@ var (
 	FirstPendingStakeTransactionKey   = collections.NewPrefix(12)
 	FirstRedemptionAwaitingSignKey    = collections.NewPrefix(13)
 	FirstPendingSolMintTransactionKey = collections.NewPrefix(14)
+	LockTransactionsNewKey            = collections.NewPrefix(15)
 
 	ParamsIndex                         = "params"
 	LockTransactionsIndex               = "lock_transactions"
@@ -45,4 +46,5 @@ var (
 	FirstPendingBurnEventIndex          = "first_pending_burn_event"
 	FirstPendingRedemptionIndex         = "first_pending_redemption"
 	FirstRedemptionAwaitingSignIndex    = "first_redemption_awaiting_sign"
+	LockTransactionsNewIndex            = "lock_transactions_new"
 )

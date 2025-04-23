@@ -2,6 +2,8 @@ package keeper
 
 import (
 	"context"
+	"crypto/sha256"
+	"encoding/hex"
 	"errors"
 	"fmt"
 	"net/rpc"
@@ -98,7 +100,10 @@ func (k msgServer) VerifyDepositBlockInclusion(goCtx context.Context, msg *types
 	}
 
 	// Deposit/lock txs are stored in zenBTC module so they can't be used to mint zenBTC tokens more than once
-	txExists, err := k.LockTransactionStore.Has(ctx, collections.Join(msg.RawTx, msg.Vout))
+	toBeHashed := fmt.Sprintf("%s:%d", msg.RawTx, msg.Vout)
+	hash := sha256.Sum256([]byte(toBeHashed))
+	lockTxKey := hex.EncodeToString(hash[:])
+	txExists, err := k.LockTransactions.Has(ctx, lockTxKey)
 	if err != nil {
 		return nil, err
 	}
@@ -142,7 +147,7 @@ func (k msgServer) VerifyDepositBlockInclusion(goCtx context.Context, msg *types
 		k.Logger().Warn("pending mint supply updated", "pending_mint_old", supply.PendingZenBTC-zenBTCAmount, "pending_mint_new", supply.PendingZenBTC)
 	}
 
-	if err := k.LockTransactionStore.Set(ctx, collections.Join(msg.RawTx, msg.Vout), types.LockTransaction{
+	if err := k.LockTransactions.Set(ctx, lockTxKey, types.LockTransaction{
 		RawTx:         msg.RawTx,
 		Vout:          msg.Vout,
 		Sender:        msg.DepositAddr,

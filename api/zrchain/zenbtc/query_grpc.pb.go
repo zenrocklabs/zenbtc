@@ -21,7 +21,7 @@ type QueryClient interface {
 	// Parameters queries the parameters of the module.
 	GetParams(ctx context.Context, in *QueryParamsRequest, opts ...grpc.CallOption) (*QueryParamsResponse, error)
 	// Queries a list of LockTransactions items.
-	LockTransactions(ctx context.Context, in *QueryLockTransactionsRequest, opts ...grpc.CallOption) (*QueryLockTransactionsResponse, error)
+	GetLockTransactions(ctx context.Context, in *QueryLockTransactionsRequest, opts ...grpc.CallOption) (*QueryLockTransactionsResponse, error)
 	// Queries a list of Redemptions items.
 	GetRedemptions(ctx context.Context, in *QueryRedemptionsRequest, opts ...grpc.CallOption) (*QueryRedemptionsResponse, error)
 	// Queries a list of PendingMintTransactions items.
@@ -49,9 +49,9 @@ func (c *queryClient) GetParams(ctx context.Context, in *QueryParamsRequest, opt
 	return out, nil
 }
 
-func (c *queryClient) LockTransactions(ctx context.Context, in *QueryLockTransactionsRequest, opts ...grpc.CallOption) (*QueryLockTransactionsResponse, error) {
+func (c *queryClient) GetLockTransactions(ctx context.Context, in *QueryLockTransactionsRequest, opts ...grpc.CallOption) (*QueryLockTransactionsResponse, error) {
 	out := new(QueryLockTransactionsResponse)
-	err := c.cc.Invoke(ctx, "/zrchain.zenbtc.Query/LockTransactions", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/zrchain.zenbtc.Query/GetLockTransactions", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -101,7 +101,7 @@ type QueryServer interface {
 	// Parameters queries the parameters of the module.
 	GetParams(context.Context, *QueryParamsRequest) (*QueryParamsResponse, error)
 	// Queries a list of LockTransactions items.
-	LockTransactions(context.Context, *QueryLockTransactionsRequest) (*QueryLockTransactionsResponse, error)
+	GetLockTransactions(context.Context, *QueryLockTransactionsRequest) (*QueryLockTransactionsResponse, error)
 	// Queries a list of Redemptions items.
 	GetRedemptions(context.Context, *QueryRedemptionsRequest) (*QueryRedemptionsResponse, error)
 	// Queries a list of PendingMintTransactions items.
@@ -120,8 +120,8 @@ type UnimplementedQueryServer struct {
 func (UnimplementedQueryServer) GetParams(context.Context, *QueryParamsRequest) (*QueryParamsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetParams not implemented")
 }
-func (UnimplementedQueryServer) LockTransactions(context.Context, *QueryLockTransactionsRequest) (*QueryLockTransactionsResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method LockTransactions not implemented")
+func (UnimplementedQueryServer) GetLockTransactions(context.Context, *QueryLockTransactionsRequest) (*QueryLockTransactionsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetLockTransactions not implemented")
 }
 func (UnimplementedQueryServer) GetRedemptions(context.Context, *QueryRedemptionsRequest) (*QueryRedemptionsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetRedemptions not implemented")
@@ -166,20 +166,20 @@ func _Query_GetParams_Handler(srv interface{}, ctx context.Context, dec func(int
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Query_LockTransactions_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Query_GetLockTransactions_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(QueryLockTransactionsRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(QueryServer).LockTransactions(ctx, in)
+		return srv.(QueryServer).GetLockTransactions(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/zrchain.zenbtc.Query/LockTransactions",
+		FullMethod: "/zrchain.zenbtc.Query/GetLockTransactions",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(QueryServer).LockTransactions(ctx, req.(*QueryLockTransactionsRequest))
+		return srv.(QueryServer).GetLockTransactions(ctx, req.(*QueryLockTransactionsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -268,8 +268,8 @@ var Query_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Query_GetParams_Handler,
 		},
 		{
-			MethodName: "LockTransactions",
-			Handler:    _Query_LockTransactions_Handler,
+			MethodName: "GetLockTransactions",
+			Handler:    _Query_GetLockTransactions_Handler,
 		},
 		{
 			MethodName: "GetRedemptions",
