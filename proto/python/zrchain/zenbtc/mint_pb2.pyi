@@ -69,7 +69,7 @@ class LockTransaction(_message.Message):
     def __init__(self, raw_tx: _Optional[str] = ..., vout: _Optional[int] = ..., sender: _Optional[str] = ..., mint_recipient: _Optional[str] = ..., amount: _Optional[int] = ..., block_height: _Optional[int] = ...) -> None: ...
 
 class PendingMintTransaction(_message.Message):
-    __slots__ = ("chain_id", "chain_type", "recipient_address", "amount", "creator", "key_id", "caip2_chain_id", "id", "status", "zrchain_tx_id", "block_height")
+    __slots__ = ("chain_id", "chain_type", "recipient_address", "amount", "creator", "key_id", "caip2_chain_id", "id", "status", "zrchain_tx_id", "block_height", "awaiting_event_since")
     CHAIN_ID_FIELD_NUMBER: _ClassVar[int]
     CHAIN_TYPE_FIELD_NUMBER: _ClassVar[int]
     RECIPIENT_ADDRESS_FIELD_NUMBER: _ClassVar[int]
@@ -81,6 +81,7 @@ class PendingMintTransaction(_message.Message):
     STATUS_FIELD_NUMBER: _ClassVar[int]
     ZRCHAIN_TX_ID_FIELD_NUMBER: _ClassVar[int]
     BLOCK_HEIGHT_FIELD_NUMBER: _ClassVar[int]
+    AWAITING_EVENT_SINCE_FIELD_NUMBER: _ClassVar[int]
     chain_id: int
     chain_type: WalletType
     recipient_address: str
@@ -92,7 +93,8 @@ class PendingMintTransaction(_message.Message):
     status: MintTransactionStatus
     zrchain_tx_id: int
     block_height: int
-    def __init__(self, chain_id: _Optional[int] = ..., chain_type: _Optional[_Union[WalletType, str]] = ..., recipient_address: _Optional[str] = ..., amount: _Optional[int] = ..., creator: _Optional[str] = ..., key_id: _Optional[int] = ..., caip2_chain_id: _Optional[str] = ..., id: _Optional[int] = ..., status: _Optional[_Union[MintTransactionStatus, str]] = ..., zrchain_tx_id: _Optional[int] = ..., block_height: _Optional[int] = ...) -> None: ...
+    awaiting_event_since: int
+    def __init__(self, chain_id: _Optional[int] = ..., chain_type: _Optional[_Union[WalletType, str]] = ..., recipient_address: _Optional[str] = ..., amount: _Optional[int] = ..., creator: _Optional[str] = ..., key_id: _Optional[int] = ..., caip2_chain_id: _Optional[str] = ..., id: _Optional[int] = ..., status: _Optional[_Union[MintTransactionStatus, str]] = ..., zrchain_tx_id: _Optional[int] = ..., block_height: _Optional[int] = ..., awaiting_event_since: _Optional[int] = ...) -> None: ...
 
 class PendingMintTransactions(_message.Message):
     __slots__ = ("txs",)
