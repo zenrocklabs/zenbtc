@@ -1,3 +1,10 @@
+# [1.17.0](https://github.com/zenrocklabs/zenbtc/compare/v1.16.7...v1.17.0) (2025-05-06)
+
+
+### Features
+
+* add `awaiting_event_since` field for pending mints ([49eca0b](https://github.com/zenrocklabs/zenbtc/commit/49eca0bd2c447a7b8b0acc91be53475152856aca))
+
 ## [1.16.7](https://github.com/zenrocklabs/zenbtc/compare/v1.16.6...v1.16.7) (2025-04-23)
 
 
