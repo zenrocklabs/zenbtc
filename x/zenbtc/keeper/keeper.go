@@ -251,3 +251,7 @@ func (k Keeper) GetAuthority() string {
 func (k Keeper) SetAuthority(authority string) {
 	k.authority = authority
 }
+
+func (k Keeper) GetParams(ctx context.Context) (types.Params, error) {
+	return k.Params.Get(ctx)
+}

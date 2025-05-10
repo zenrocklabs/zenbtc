@@ -15,8 +15,8 @@ class QueryStub(object):
         Args:
             channel: A grpc.Channel.
         """
-        self.GetParams = channel.unary_unary(
-                '/zrchain.zenbtc.Query/GetParams',
+        self.QueryParams = channel.unary_unary(
+                '/zrchain.zenbtc.Query/QueryParams',
                 request_serializer=zrchain_dot_zenbtc_dot_query__pb2.QueryParamsRequest.SerializeToString,
                 response_deserializer=zrchain_dot_zenbtc_dot_query__pb2.QueryParamsResponse.FromString,
                 )
@@ -51,7 +51,7 @@ class QueryServicer(object):
     """Query defines the gRPC querier service.
     """
 
-    def GetParams(self, request, context):
+    def QueryParams(self, request, context):
         """Parameters queries the parameters of the module.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
@@ -96,8 +96,8 @@ class QueryServicer(object):
 
 def add_QueryServicer_to_server(servicer, server):
     rpc_method_handlers = {
-            'GetParams': grpc.unary_unary_rpc_method_handler(
-                    servicer.GetParams,
+            'QueryParams': grpc.unary_unary_rpc_method_handler(
+                    servicer.QueryParams,
                     request_deserializer=zrchain_dot_zenbtc_dot_query__pb2.QueryParamsRequest.FromString,
                     response_serializer=zrchain_dot_zenbtc_dot_query__pb2.QueryParamsResponse.SerializeToString,
             ),
@@ -138,7 +138,7 @@ class Query(object):
     """
 
     @staticmethod
-    def GetParams(request,
+    def QueryParams(request,
             target,
             options=(),
             channel_credentials=None,
@@ -148,7 +148,7 @@ class Query(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/zrchain.zenbtc.Query/GetParams',
+        return grpc.experimental.unary_unary(request, target, '/zrchain.zenbtc.Query/QueryParams',
             zrchain_dot_zenbtc_dot_query__pb2.QueryParamsRequest.SerializeToString,
             zrchain_dot_zenbtc_dot_query__pb2.QueryParamsResponse.FromString,
             options, channel_credentials,

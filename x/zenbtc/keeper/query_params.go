@@ -9,7 +9,7 @@ import (
 	"github.com/zenrocklabs/zenbtc/x/zenbtc/types"
 )
 
-func (k Keeper) GetParams(ctx context.Context, req *types.QueryParamsRequest) (*types.QueryParamsResponse, error) {
+func (k Keeper) QueryParams(ctx context.Context, req *types.QueryParamsRequest) (*types.QueryParamsResponse, error) {
 	if req == nil {
 		return nil, status.Error(codes.InvalidArgument, "invalid request")
 	}

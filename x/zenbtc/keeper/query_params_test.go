@@ -17,7 +17,7 @@ func TestParamsQuery(t *testing.T) {
 	params := keeper.DefaultParams()
 	require.NoError(t, zenBTCKeeper.Params.Set(ctx, *params))
 
-	response, err := zenBTCKeeper.GetParams(ctx, &types.QueryParamsRequest{})
+	response, err := zenBTCKeeper.QueryParams(ctx, &types.QueryParamsRequest{})
 	require.NoError(t, err)
 	require.Equal(t, &types.QueryParamsResponse{Params: *params}, response)
 }
