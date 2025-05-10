@@ -24,10 +24,10 @@ var (
 	// DefaultStakerKeyID = 0
 	// DefaultBurnerKeyID = 0
 	DefaultSolana = &types.Solana{
-		SignerKeyId:        7,
+		SignerKeyId:        10,
 		ProgramId:          "3jo4mdc6QbGRigia2jvmKShbmz3aWq4Y8bgUXfur5StT",
-		NonceAuthorityKey:  8,
-		NonceAccountKey:    9,
+		NonceAuthorityKey:  11,
+		NonceAccountKey:    12,
 		MintAddress:        "9oBkgQUkq8jvzK98D7Uib6GYSZZmjnZ6QEGJRrAeKnDj",
 		FeeWallet:          "FzqGcRG98v1KhKxatX2Abb2z1aJ2rViQwBK5GHByKCAd",
 		Fee:                0,
