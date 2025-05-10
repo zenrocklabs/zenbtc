@@ -1,3 +1,10 @@
+## [1.17.1](https://github.com/zenrocklabs/zenbtc/compare/v1.17.0...v1.17.1) (2025-05-10)
+
+
+### Bug Fixes
+
+* add getter for params ([0d62a33](https://github.com/zenrocklabs/zenbtc/commit/0d62a33d86162029e1c16ff8ac26125a5da75906))
+
 # [1.17.0](https://github.com/zenrocklabs/zenbtc/compare/v1.16.7...v1.17.0) (2025-05-06)
 
 
