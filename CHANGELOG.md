@@ -1,3 +1,10 @@
+## [1.17.2](https://github.com/zenrocklabs/zenbtc/compare/v1.17.1...v1.17.2) (2025-05-12)
+
+
+### Bug Fixes
+
+* use `params.BitcoinProxyAddress` instead of default ([d959705](https://github.com/zenrocklabs/zenbtc/commit/d959705045bd28f77fb1d03a2879f9b732aee845))
+
 ## [1.17.1](https://github.com/zenrocklabs/zenbtc/compare/v1.17.0...v1.17.1) (2025-05-10)
 
 
