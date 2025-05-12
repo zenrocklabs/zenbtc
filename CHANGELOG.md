@@ -1,3 +1,10 @@
+## [1.17.3](https://github.com/zenrocklabs/zenbtc/compare/v1.17.2...v1.17.3) (2025-05-12)
+
+
+### Bug Fixes
+
+* eigenlayer-contracts version to 1.1.1 ([6860bb5](https://github.com/zenrocklabs/zenbtc/commit/6860bb5d79f5402d760b4290dcc1d09c7aedc17e))
+
 ## [1.17.2](https://github.com/zenrocklabs/zenbtc/compare/v1.17.1...v1.17.2) (2025-05-12)
 
 
