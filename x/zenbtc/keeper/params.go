@@ -138,24 +138,15 @@ func (k Keeper) GetCompleterKeyID(ctx context.Context) uint64 {
 	return params.CompleterKeyID
 }
 
-// func (k Keeper) GetBitcoinProxyAddress(ctx context.Context) string {
-// TODO: why does the commented line below panic?
-// params, err := k.Params.Get(ctx)
-// if err != nil {
-// return DefaultProxyAddress
-// }
-// return params.BitcoinProxyAddress
-// }
-
 func (k Keeper) GetBitcoinProxyAddress(ctx context.Context) string {
-	return GetDefaultBitcoinProxyAddress(ctx)
-}
-
-func GetDefaultBitcoinProxyAddress(ctx context.Context) string {
-	if strings.HasPrefix(sdk.UnwrapSDKContext(ctx).ChainID(), "diamond") {
-		return DefaultMainnetBitcoinProxyAddress
+	params, err := k.Params.Get(ctx)
+	if err != nil || params.BitcoinProxyAddress == "" {
+		if strings.HasPrefix(sdk.UnwrapSDKContext(ctx).ChainID(), "diamond") {
+			return DefaultMainnetBitcoinProxyAddress
+		}
+		return DefaultTestnetBitcoinProxyAddress
 	}
-	return DefaultTestnetBitcoinProxyAddress
+	return params.BitcoinProxyAddress
 }
 
 func (k Keeper) GetChangeAddressKeyIDs(ctx context.Context) []uint64 {
