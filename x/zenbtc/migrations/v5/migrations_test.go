@@ -29,15 +29,15 @@ var localParams = types.Params{ // local
 	EthTokenAddr:        "0x7692E9a796001FeE9023853f490A692bAB2E4834",
 	ControllerAddr:      "0x2844bd31B68AE5a0335c672e6251e99324441B73",
 	Solana: &types.Solana{
-		SignerKeyId:        10,
+		SignerKeyId:        7,
 		ProgramId:          "3jo4mdc6QbGRigia2jvmKShbmz3aWq4Y8bgUXfur5StT",
-		NonceAuthorityKey:  11,
-		NonceAccountKey:    12,
+		NonceAuthorityKey:  8,
+		NonceAccountKey:    9,
 		MintAddress:        "9oBkgQUkq8jvzK98D7Uib6GYSZZmjnZ6QEGJRrAeKnDj",
 		FeeWallet:          "FzqGcRG98v1KhKxatX2Abb2z1aJ2rViQwBK5GHByKCAd",
 		Fee:                0,
 		MultisigKeyAddress: "8cmZY2id22vxpXs2H3YYQNARuPHNuYwa7jipW1q1v9Fy",
-		Btl:                21,
+		Btl:                20,
 	},
 }
 var amberParams = types.Params{ // devnet
@@ -52,15 +52,15 @@ var amberParams = types.Params{ // devnet
 	EthTokenAddr:        "0x7692E9a796001FeE9023853f490A692bAB2E4834",
 	ControllerAddr:      "0x2844bd31B68AE5a0335c672e6251e99324441B73",
 	Solana: &types.Solana{
-		SignerKeyId:        1925,
+		SignerKeyId:        7,
 		ProgramId:          "3jo4mdc6QbGRigia2jvmKShbmz3aWq4Y8bgUXfur5StT",
-		NonceAuthorityKey:  1923,
-		NonceAccountKey:    1924,
+		NonceAuthorityKey:  8,
+		NonceAccountKey:    9,
 		MintAddress:        "9oBkgQUkq8jvzK98D7Uib6GYSZZmjnZ6QEGJRrAeKnDj",
 		FeeWallet:          "FzqGcRG98v1KhKxatX2Abb2z1aJ2rViQwBK5GHByKCAd",
 		Fee:                0,
 		MultisigKeyAddress: "8cmZY2id22vxpXs2H3YYQNARuPHNuYwa7jipW1q1v9Fy",
-		Btl:                21,
+		Btl:                20,
 	},
 }
 var gardiaParams = types.Params{ // testnet
@@ -75,15 +75,15 @@ var gardiaParams = types.Params{ // testnet
 	EthTokenAddr:        "0xfA32a2D7546f8C7c229F94E693422A786DaE5E18",
 	ControllerAddr:      "0xaCE3634AAd9bCC48ef6A194f360F7ACe51F7d9f1",
 	Solana: &types.Solana{
-		SignerKeyId:        10,
+		SignerKeyId:        7,
 		ProgramId:          "3jo4mdc6QbGRigia2jvmKShbmz3aWq4Y8bgUXfur5StT",
-		NonceAuthorityKey:  11,
-		NonceAccountKey:    12,
+		NonceAuthorityKey:  8,
+		NonceAccountKey:    9,
 		MintAddress:        "9oBkgQUkq8jvzK98D7Uib6GYSZZmjnZ6QEGJRrAeKnDj",
 		FeeWallet:          "FzqGcRG98v1KhKxatX2Abb2z1aJ2rViQwBK5GHByKCAd",
 		Fee:                0,
 		MultisigKeyAddress: "8cmZY2id22vxpXs2H3YYQNARuPHNuYwa7jipW1q1v9Fy",
-		Btl:                21,
+		Btl:                20,
 	},
 }
 var diamondParams = types.Params{ // mainnet
@@ -98,15 +98,15 @@ var diamondParams = types.Params{ // mainnet
 	EthTokenAddr:        "0x2fE9754d5D28bac0ea8971C0Ca59428b8644C776",
 	ControllerAddr:      "0xa87bE298115bE701A12F34F9B4585586dF052008",
 	Solana: &types.Solana{
-		SignerKeyId:        10,
+		SignerKeyId:        7,
 		ProgramId:          "3jo4mdc6QbGRigia2jvmKShbmz3aWq4Y8bgUXfur5StT",
-		NonceAuthorityKey:  11,
-		NonceAccountKey:    12,
+		NonceAuthorityKey:  8,
+		NonceAccountKey:    9,
 		MintAddress:        "9oBkgQUkq8jvzK98D7Uib6GYSZZmjnZ6QEGJRrAeKnDj",
 		FeeWallet:          "FzqGcRG98v1KhKxatX2Abb2z1aJ2rViQwBK5GHByKCAd",
 		Fee:                0,
 		MultisigKeyAddress: "8cmZY2id22vxpXs2H3YYQNARuPHNuYwa7jipW1q1v9Fy",
-		Btl:                21,
+		Btl:                20,
 	},
 }
 var emptyParams = types.Params{}
