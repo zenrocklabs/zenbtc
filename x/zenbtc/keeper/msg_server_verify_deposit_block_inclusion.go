@@ -30,13 +30,13 @@ func (k msgServer) VerifyDepositBlockInclusion(goCtx context.Context, msg *types
 
 	//CSM For Debugging Only
 	//try and get missing Blockheader over RPC - WARNING for debugging only!!!!
-	if err != nil {
-		bh, _ := debugRetrieveBlockHeaderViaRPC(msg.ChainName, msg.BlockHeight)
-		if bh != nil {
-			err = nil
-			blockHeader = *bh
-		}
-	}
+	// if err != nil {
+	// 	bh, _ := debugRetrieveBlockHeaderViaRPC(msg.ChainName, msg.BlockHeight)
+	// 	if bh != nil {
+	// 		err = nil
+	// 		blockHeader = *bh
+	// 	}
+	// }
 	// END of debug code
 
 	if err != nil {
