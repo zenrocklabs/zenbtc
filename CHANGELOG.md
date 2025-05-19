@@ -1,3 +1,10 @@
+## [1.17.4](https://github.com/zenrocklabs/zenbtc/compare/v1.17.3...v1.17.4) (2025-05-19)
+
+
+### Bug Fixes
+
+* disable testing code ([69a8c86](https://github.com/zenrocklabs/zenbtc/commit/69a8c86b3f4b47c2a5361d1d94915f2828c26a01))
+
 ## [1.17.3](https://github.com/zenrocklabs/zenbtc/compare/v1.17.2...v1.17.3) (2025-05-12)
 
 
