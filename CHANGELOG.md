@@ -1,3 +1,10 @@
+## [1.17.5](https://github.com/zenrocklabs/zenbtc/compare/v1.17.4...v1.17.5) (2025-05-22)
+
+
+### Bug Fixes
+
+* go mod & tests ([9c43bea](https://github.com/zenrocklabs/zenbtc/commit/9c43beaccfd3c4318c4de124b53ad1c21621146a))
+
 ## [1.17.4](https://github.com/zenrocklabs/zenbtc/compare/v1.17.3...v1.17.4) (2025-05-19)
 
 
