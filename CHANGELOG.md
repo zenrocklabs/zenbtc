@@ -1,3 +1,10 @@
+## [1.17.6](https://github.com/zenrocklabs/zenbtc/compare/v1.17.5...v1.17.6) (2025-05-29)
+
+
+### Bug Fixes
+
+* devnet cleanup (revert later) ([8c6c0bd](https://github.com/zenrocklabs/zenbtc/commit/8c6c0bd65a8abae64635f6001ea61f4fc2c2b64d))
+
 ## [1.17.5](https://github.com/zenrocklabs/zenbtc/compare/v1.17.4...v1.17.5) (2025-05-22)
 
 
