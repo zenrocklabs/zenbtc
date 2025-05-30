@@ -1,3 +1,15 @@
+## [1.17.7](https://github.com/zenrocklabs/zenbtc/compare/v1.17.6...v1.17.7) (2025-05-30)
+
+
+### Bug Fixes
+
+* revert temp devnet changes ([dc743b9](https://github.com/zenrocklabs/zenbtc/commit/dc743b9d1b1dd664ccde8b81c441c8a5b84bef61))
+
+
+### Reverts
+
+* Revert "fix: devnet cleanup (revert later)" ([3014832](https://github.com/zenrocklabs/zenbtc/commit/3014832f3215df8fda78435b5837496b93105010))
+
 ## [1.17.6](https://github.com/zenrocklabs/zenbtc/compare/v1.17.5...v1.17.6) (2025-05-29)
 
 
