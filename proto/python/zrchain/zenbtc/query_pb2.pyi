@@ -60,6 +60,18 @@ class QueryPendingMintTransactionsResponse(_message.Message):
     pending_mint_transactions: _containers.RepeatedCompositeFieldContainer[_mint_pb2.PendingMintTransaction]
     def __init__(self, pending_mint_transactions: _Optional[_Iterable[_Union[_mint_pb2.PendingMintTransaction, _Mapping]]] = ...) -> None: ...
 
+class QueryPendingMintTransactionRequest(_message.Message):
+    __slots__ = ("tx_hash",)
+    TX_HASH_FIELD_NUMBER: _ClassVar[int]
+    tx_hash: str
+    def __init__(self, tx_hash: _Optional[str] = ...) -> None: ...
+
+class QueryPendingMintTransactionResponse(_message.Message):
+    __slots__ = ("pending_mint_transaction",)
+    PENDING_MINT_TRANSACTION_FIELD_NUMBER: _ClassVar[int]
+    pending_mint_transaction: _mint_pb2.PendingMintTransaction
+    def __init__(self, pending_mint_transaction: _Optional[_Union[_mint_pb2.PendingMintTransaction, _Mapping]] = ...) -> None: ...
+
 class QuerySupplyRequest(_message.Message):
     __slots__ = ()
     def __init__(self) -> None: ...

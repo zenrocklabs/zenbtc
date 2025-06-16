@@ -26,6 +26,8 @@ type QueryClient interface {
 	GetRedemptions(ctx context.Context, in *QueryRedemptionsRequest, opts ...grpc.CallOption) (*QueryRedemptionsResponse, error)
 	// Queries a list of PendingMintTransactions items.
 	QueryPendingMintTransactions(ctx context.Context, in *QueryPendingMintTransactionsRequest, opts ...grpc.CallOption) (*QueryPendingMintTransactionsResponse, error)
+	// Queries a list of PendingMintTransactions items.
+	QueryPendingMintTransaction(ctx context.Context, in *QueryPendingMintTransactionRequest, opts ...grpc.CallOption) (*QueryPendingMintTransactionResponse, error)
 	// Queries the current supply of zenBTC.
 	QuerySupply(ctx context.Context, in *QuerySupplyRequest, opts ...grpc.CallOption) (*QuerySupplyResponse, error)
 	// Queries a list of BurnEvents items.
@@ -76,6 +78,15 @@ func (c *queryClient) QueryPendingMintTransactions(ctx context.Context, in *Quer
 	return out, nil
 }
 
+func (c *queryClient) QueryPendingMintTransaction(ctx context.Context, in *QueryPendingMintTransactionRequest, opts ...grpc.CallOption) (*QueryPendingMintTransactionResponse, error) {
+	out := new(QueryPendingMintTransactionResponse)
+	err := c.cc.Invoke(ctx, "/zrchain.zenbtc.Query/QueryPendingMintTransaction", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *queryClient) QuerySupply(ctx context.Context, in *QuerySupplyRequest, opts ...grpc.CallOption) (*QuerySupplyResponse, error) {
 	out := new(QuerySupplyResponse)
 	err := c.cc.Invoke(ctx, "/zrchain.zenbtc.Query/QuerySupply", in, out, opts...)
@@ -106,6 +117,8 @@ type QueryServer interface {
 	GetRedemptions(context.Context, *QueryRedemptionsRequest) (*QueryRedemptionsResponse, error)
 	// Queries a list of PendingMintTransactions items.
 	QueryPendingMintTransactions(context.Context, *QueryPendingMintTransactionsRequest) (*QueryPendingMintTransactionsResponse, error)
+	// Queries a list of PendingMintTransactions items.
+	QueryPendingMintTransaction(context.Context, *QueryPendingMintTransactionRequest) (*QueryPendingMintTransactionResponse, error)
 	// Queries the current supply of zenBTC.
 	QuerySupply(context.Context, *QuerySupplyRequest) (*QuerySupplyResponse, error)
 	// Queries a list of BurnEvents items.
@@ -128,6 +141,9 @@ func (UnimplementedQueryServer) GetRedemptions(context.Context, *QueryRedemption
 }
 func (UnimplementedQueryServer) QueryPendingMintTransactions(context.Context, *QueryPendingMintTransactionsRequest) (*QueryPendingMintTransactionsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method QueryPendingMintTransactions not implemented")
+}
+func (UnimplementedQueryServer) QueryPendingMintTransaction(context.Context, *QueryPendingMintTransactionRequest) (*QueryPendingMintTransactionResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method QueryPendingMintTransaction not implemented")
 }
 func (UnimplementedQueryServer) QuerySupply(context.Context, *QuerySupplyRequest) (*QuerySupplyResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method QuerySupply not implemented")
@@ -220,6 +236,24 @@ func _Query_QueryPendingMintTransactions_Handler(srv interface{}, ctx context.Co
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Query_QueryPendingMintTransaction_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryPendingMintTransactionRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(QueryServer).QueryPendingMintTransaction(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/zrchain.zenbtc.Query/QueryPendingMintTransaction",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(QueryServer).QueryPendingMintTransaction(ctx, req.(*QueryPendingMintTransactionRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Query_QuerySupply_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(QuerySupplyRequest)
 	if err := dec(in); err != nil {
@@ -278,6 +312,10 @@ var Query_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "QueryPendingMintTransactions",
 			Handler:    _Query_QueryPendingMintTransactions_Handler,
+		},
+		{
+			MethodName: "QueryPendingMintTransaction",
+			Handler:    _Query_QueryPendingMintTransaction_Handler,
 		},
 		{
 			MethodName: "QuerySupply",

@@ -36,6 +36,14 @@ func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 					PositionalArgs: []*autocliv1.PositionalArgDescriptor{},
 				},
 				{
+					RpcMethod: "QueryPendingMintTransaction",
+					Use:       "pending-mint-transaction [tx-hash]",
+					Short:     "Query a pending mint transaction by tx hash",
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{
+						{ProtoField: "tx_hash"},
+					},
+				},
+				{
 					RpcMethod:      "QuerySupply",
 					Use:            "supply",
 					Short:          "Query Supply",

@@ -34,6 +34,11 @@ service Query {
     option (google.api.http).get = "/zenbtc/pending_mint_transactions";
   }
 
+  // Queries a list of PendingMintTransactions items.
+  rpc QueryPendingMintTransaction(QueryPendingMintTransactionRequest) returns (QueryPendingMintTransactionResponse) {
+    option (google.api.http).get = "/zenbtc/pending_mint_transaction/{tx_hash}";
+  }
+
   // Queries the current supply of zenBTC.
   rpc QuerySupply(QuerySupplyRequest) returns (QuerySupplyResponse) {
     option (google.api.http).get = "/zenbtc/supply";
@@ -79,6 +84,14 @@ message QueryPendingMintTransactionsRequest {
 
 message QueryPendingMintTransactionsResponse {
   repeated PendingMintTransaction pending_mint_transactions = 1;
+}
+
+message QueryPendingMintTransactionRequest {
+  string tx_hash = 1;
+}
+
+message QueryPendingMintTransactionResponse {
+  PendingMintTransaction pending_mint_transaction = 1;
 }
 
 message QuerySupplyRequest {}
