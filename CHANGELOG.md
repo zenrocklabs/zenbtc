@@ -1,3 +1,10 @@
+## [1.17.10](https://github.com/zenrocklabs/zenbtc/compare/v1.17.9...v1.17.10) (2025-06-16)
+
+
+### Bug Fixes
+
+* add query for `PendingMintTransaction` by hash ([b092244](https://github.com/zenrocklabs/zenbtc/commit/b092244e333e21f778607d3443c7d709f46f8eb6))
+
 ## [1.17.9](https://github.com/zenrocklabs/zenbtc/compare/v1.17.8...v1.17.9) (2025-06-16)
 
 
