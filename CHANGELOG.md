@@ -1,3 +1,10 @@
+## [1.17.8](https://github.com/zenrocklabs/zenbtc/compare/v1.17.7...v1.17.8) (2025-06-16)
+
+
+### Bug Fixes
+
+* add migration to fix invalid burn events ([bd98b0e](https://github.com/zenrocklabs/zenbtc/commit/bd98b0e50b52b915391bfbc49f7d87c474780d1e))
+
 ## [1.17.7](https://github.com/zenrocklabs/zenbtc/compare/v1.17.6...v1.17.7) (2025-05-30)
 
 
