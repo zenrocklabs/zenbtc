@@ -1,3 +1,10 @@
+## [1.17.9](https://github.com/zenrocklabs/zenbtc/compare/v1.17.8...v1.17.9) (2025-06-16)
+
+
+### Bug Fixes
+
+* add `tx_hash` field to `PendingMintTransaction` for queries ([4a3d25a](https://github.com/zenrocklabs/zenbtc/commit/4a3d25a158142976ed90879121a17dc4e59a5dbd))
+
 ## [1.17.8](https://github.com/zenrocklabs/zenbtc/compare/v1.17.7...v1.17.8) (2025-06-16)
 
 
