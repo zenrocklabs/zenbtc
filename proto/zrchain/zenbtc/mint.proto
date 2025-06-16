@@ -38,6 +38,7 @@ message PendingMintTransaction {
   uint64 zrchain_tx_id = 10;
   int64 block_height = 11;
   int64 awaiting_event_since = 12;
+  string tx_hash = 13;
 }
 
 enum MintTransactionStatus {
