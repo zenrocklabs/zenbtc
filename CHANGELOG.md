@@ -1,3 +1,10 @@
+## [1.17.11](https://github.com/zenrocklabs/zenbtc/compare/v1.17.10...v1.17.11) (2025-06-18)
+
+
+### Bug Fixes
+
+* migration for zrchain `v6rev9` ([ba48f9b](https://github.com/zenrocklabs/zenbtc/commit/ba48f9b5290c0a2316b8ecb72572f07be6dc6aa1))
+
 ## [1.17.10](https://github.com/zenrocklabs/zenbtc/compare/v1.17.9...v1.17.10) (2025-06-16)
 
 
