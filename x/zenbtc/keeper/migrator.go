@@ -74,5 +74,5 @@ func (m Migrator) Migrate5to6(ctx sdk.Context) error {
 
 // Migrate6to7 migrates x/zenbtc from consensus version 6 to 7.
 func (m Migrator) Migrate6to7(ctx sdk.Context) error {
-	return v7.PurgeInvalidBurnEvents(ctx, m.keeper.BurnEvents, m.keeper.FirstPendingBurnEvent)
+	return v7.PurgeInvalidState(ctx, m.keeper.BurnEvents, m.keeper.FirstPendingBurnEvent, m.keeper.Redemptions, m.keeper.FirstPendingRedemption)
 }
