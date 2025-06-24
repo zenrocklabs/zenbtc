@@ -20,7 +20,7 @@ require (
 	cosmossdk.io/log v1.4.1
 	cosmossdk.io/math v1.5.1
 	cosmossdk.io/store v1.1.1
-	github.com/Layr-Labs/eigenlayer-contracts v1.1.1
+	github.com/Layr-Labs/eigenlayer-contracts v1.2.0
 	github.com/Layr-Labs/eigenlayer-rewards-proofs v0.2.14-0.20250219175207-db412abfccef
 	github.com/Layr-Labs/eigensdk-go v0.1.12
 	github.com/Zenrock-Foundation/zrchain/v6 v6.3.11
