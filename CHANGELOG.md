@@ -1,3 +1,10 @@
+## [1.17.12](https://github.com/zenrocklabs/zenbtc/compare/v1.17.11...v1.17.12) (2025-06-25)
+
+
+### Bug Fixes
+
+* allow regtest and regnet as chainName ([80ca488](https://github.com/zenrocklabs/zenbtc/commit/80ca4886d5babd5a18b25f534030f5a704951872))
+
 ## [1.17.11](https://github.com/zenrocklabs/zenbtc/compare/v1.17.10...v1.17.11) (2025-06-18)
 
 
