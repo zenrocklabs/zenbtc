@@ -1,3 +1,10 @@
+## [1.17.13](https://github.com/zenrocklabs/zenbtc/compare/v1.17.12...v1.17.13) (2025-07-03)
+
+
+### Bug Fixes
+
+* `go.sum` ([70d896e](https://github.com/zenrocklabs/zenbtc/commit/70d896e61bf75733910b32554525735876db2642))
+
 ## [1.17.12](https://github.com/zenrocklabs/zenbtc/compare/v1.17.11...v1.17.12) (2025-06-25)
 
 
