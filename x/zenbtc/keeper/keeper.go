@@ -172,16 +172,16 @@ func (k Keeper) WalkBurnEvents(ctx context.Context, fn func(id uint64, burnEvent
 	return k.BurnEvents.Walk(ctx, nil, fn)
 }
 
-func (k Keeper) GetPendingMintTransactionsStore() collections.Map[uint64, types.PendingMintTransaction] {
-	return k.PendingMintTransactionsMap
+func (k Keeper) GetRedemption(ctx context.Context, id uint64) (types.Redemption, error) {
+	return k.Redemptions.Get(ctx, id)
 }
 
-func (k Keeper) GetBurnEventsStore() collections.Map[uint64, types.BurnEvent] {
-	return k.BurnEvents
+func (k Keeper) GetPendingMintTransaction(ctx context.Context, id uint64) (types.PendingMintTransaction, error) {
+	return k.PendingMintTransactionsMap.Get(ctx, id)
 }
 
-func (k Keeper) GetRedemptionsStore() collections.Map[uint64, types.Redemption] {
-	return k.Redemptions
+func (k Keeper) HasPendingMintTransaction(ctx context.Context, id uint64) (bool, error) {
+	return k.PendingMintTransactionsMap.Has(ctx, id)
 }
 
 // GetFirstPendingMintTransaction returns the ID of the first pending mint transaction
