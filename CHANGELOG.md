@@ -1,3 +1,10 @@
+## [1.17.14](https://github.com/zenrocklabs/zenbtc/compare/v1.17.13...v1.17.14) (2025-07-03)
+
+
+### Bug Fixes
+
+* get collection functions ([98d4567](https://github.com/zenrocklabs/zenbtc/commit/98d4567ddd02bfdba355a33ebe6d37a599802507))
+
 ## [1.17.13](https://github.com/zenrocklabs/zenbtc/compare/v1.17.12...v1.17.13) (2025-07-03)
 
 
