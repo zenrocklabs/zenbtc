@@ -28,6 +28,32 @@ const _ = proto.GoGoProtoPackageIsVersion3 // please upgrade the proto package
 type GenesisState struct {
 	// params defines all the parameters of the module.
 	Params Params `protobuf:"bytes,1,opt,name=params,proto3" json:"params"`
+	// lock_transactions defines the lock transactions of the module.
+	LockTransactions []LockTransaction `protobuf:"bytes,2,rep,name=lock_transactions,json=lockTransactions,proto3" json:"lock_transactions"`
+	// pending_mint_transactions defines the pending mint transactions of the module.
+	PendingMintTransactions []PendingMintTransaction `protobuf:"bytes,3,rep,name=pending_mint_transactions,json=pendingMintTransactions,proto3" json:"pending_mint_transactions"`
+	// first_pending_eth_mint_transaction defines the first pending Ethereum mint transaction of the module.
+	FirstPendingEthMintTransaction uint64 `protobuf:"varint,4,opt,name=first_pending_eth_mint_transaction,json=firstPendingEthMintTransaction,proto3" json:"first_pending_eth_mint_transaction,omitempty"`
+	// first_pending_sol_mint_transaction defines the first pending Solana mint transaction of the module.
+	FirstPendingSolMintTransaction uint64 `protobuf:"varint,5,opt,name=first_pending_sol_mint_transaction,json=firstPendingSolMintTransaction,proto3" json:"first_pending_sol_mint_transaction,omitempty"`
+	// pending_mint_transaction_count defines the count of pending mint transactions of the module.
+	PendingMintTransactionCount uint64 `protobuf:"varint,6,opt,name=pending_mint_transaction_count,json=pendingMintTransactionCount,proto3" json:"pending_mint_transaction_count,omitempty"`
+	// burn_events defines the burn events of the module.
+	BurnEvents []BurnEvent `protobuf:"bytes,7,rep,name=burn_events,json=burnEvents,proto3" json:"burn_events"`
+	// first_pending_burn_event defines the first pending burn event of the module.
+	FirstPendingBurnEvent uint64 `protobuf:"varint,8,opt,name=first_pending_burn_event,json=firstPendingBurnEvent,proto3" json:"first_pending_burn_event,omitempty"`
+	// burn_event_count defines the count of burn events of the module.
+	BurnEventCount uint64 `protobuf:"varint,9,opt,name=burn_event_count,json=burnEventCount,proto3" json:"burn_event_count,omitempty"`
+	// redemptions defines the redemptions of the module.
+	Redemptions []Redemption `protobuf:"bytes,10,rep,name=redemptions,proto3" json:"redemptions"`
+	// first_pending_redemption defines the first pending redemption of the module.
+	FirstPendingRedemption uint64 `protobuf:"varint,11,opt,name=first_pending_redemption,json=firstPendingRedemption,proto3" json:"first_pending_redemption,omitempty"`
+	// first_redemption_awaiting_sign defines the first redemption awaiting sign of the module.
+	FirstRedemptionAwaitingSign uint64 `protobuf:"varint,12,opt,name=first_redemption_awaiting_sign,json=firstRedemptionAwaitingSign,proto3" json:"first_redemption_awaiting_sign,omitempty"`
+	// supply defines the supply of the module.
+	Supply Supply `protobuf:"bytes,13,opt,name=supply,proto3" json:"supply"`
+	// first_pending_stake_transaction defines the first pending stake transaction of the module.
+	FirstPendingStakeTransaction uint64 `protobuf:"varint,14,opt,name=first_pending_stake_transaction,json=firstPendingStakeTransaction,proto3" json:"first_pending_stake_transaction,omitempty"`
 }
 
 func (m *GenesisState) Reset()         { *m = GenesisState{} }
@@ -70,6 +96,97 @@ func (m *GenesisState) GetParams() Params {
 	return Params{}
 }
 
+func (m *GenesisState) GetLockTransactions() []LockTransaction {
+	if m != nil {
+		return m.LockTransactions
+	}
+	return nil
+}
+
+func (m *GenesisState) GetPendingMintTransactions() []PendingMintTransaction {
+	if m != nil {
+		return m.PendingMintTransactions
+	}
+	return nil
+}
+
+func (m *GenesisState) GetFirstPendingEthMintTransaction() uint64 {
+	if m != nil {
+		return m.FirstPendingEthMintTransaction
+	}
+	return 0
+}
+
+func (m *GenesisState) GetFirstPendingSolMintTransaction() uint64 {
+	if m != nil {
+		return m.FirstPendingSolMintTransaction
+	}
+	return 0
+}
+
+func (m *GenesisState) GetPendingMintTransactionCount() uint64 {
+	if m != nil {
+		return m.PendingMintTransactionCount
+	}
+	return 0
+}
+
+func (m *GenesisState) GetBurnEvents() []BurnEvent {
+	if m != nil {
+		return m.BurnEvents
+	}
+	return nil
+}
+
+func (m *GenesisState) GetFirstPendingBurnEvent() uint64 {
+	if m != nil {
+		return m.FirstPendingBurnEvent
+	}
+	return 0
+}
+
+func (m *GenesisState) GetBurnEventCount() uint64 {
+	if m != nil {
+		return m.BurnEventCount
+	}
+	return 0
+}
+
+func (m *GenesisState) GetRedemptions() []Redemption {
+	if m != nil {
+		return m.Redemptions
+	}
+	return nil
+}
+
+func (m *GenesisState) GetFirstPendingRedemption() uint64 {
+	if m != nil {
+		return m.FirstPendingRedemption
+	}
+	return 0
+}
+
+func (m *GenesisState) GetFirstRedemptionAwaitingSign() uint64 {
+	if m != nil {
+		return m.FirstRedemptionAwaitingSign
+	}
+	return 0
+}
+
+func (m *GenesisState) GetSupply() Supply {
+	if m != nil {
+		return m.Supply
+	}
+	return Supply{}
+}
+
+func (m *GenesisState) GetFirstPendingStakeTransaction() uint64 {
+	if m != nil {
+		return m.FirstPendingStakeTransaction
+	}
+	return 0
+}
+
 func init() {
 	proto.RegisterType((*GenesisState)(nil), "zrchain.zenbtc.GenesisState")
 }
@@ -77,20 +194,42 @@ func init() {
 func init() { proto.RegisterFile("zrchain/zenbtc/genesis.proto", fileDescriptor_fa21ece0a519645b) }
 
 var fileDescriptor_fa21ece0a519645b = []byte{
-	// 208 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0x92, 0xa9, 0x2a, 0x4a, 0xce,
-	0x48, 0xcc, 0xcc, 0xd3, 0xaf, 0x4a, 0xcd, 0x4b, 0x2a, 0x49, 0xd6, 0x4f, 0x4f, 0xcd, 0x4b, 0x2d,
-	0xce, 0x2c, 0xd6, 0x2b, 0x28, 0xca, 0x2f, 0xc9, 0x17, 0xe2, 0x83, 0xca, 0xea, 0x41, 0x64, 0xa5,
-	0x04, 0x13, 0x73, 0x33, 0xf3, 0xf2, 0xf5, 0xc1, 0x24, 0x44, 0x89, 0x94, 0x48, 0x7a, 0x7e, 0x7a,
-	0x3e, 0x98, 0xa9, 0x0f, 0x62, 0x41, 0x45, 0xa5, 0xd1, 0x8c, 0x2d, 0x48, 0x2c, 0x4a, 0xcc, 0x85,
-	0x9a, 0xaa, 0xe4, 0xc9, 0xc5, 0xe3, 0x0e, 0xb1, 0x26, 0xb8, 0x24, 0xb1, 0x24, 0x55, 0xc8, 0x92,
-	0x8b, 0x0d, 0x22, 0x2f, 0xc1, 0xa8, 0xc0, 0xa8, 0xc1, 0x6d, 0x24, 0xa6, 0x87, 0x6a, 0xad, 0x5e,
-	0x00, 0x58, 0xd6, 0x89, 0xf3, 0xc4, 0x3d, 0x79, 0x86, 0x15, 0xcf, 0x37, 0x68, 0x31, 0x06, 0x41,
-	0x35, 0x38, 0xb9, 0x9d, 0x78, 0x24, 0xc7, 0x78, 0xe1, 0x91, 0x1c, 0xe3, 0x83, 0x47, 0x72, 0x8c,
-	0x13, 0x1e, 0xcb, 0x31, 0x5c, 0x78, 0x2c, 0xc7, 0x70, 0xe3, 0xb1, 0x1c, 0x43, 0x94, 0x4e, 0x7a,
-	0x66, 0x49, 0x46, 0x69, 0x92, 0x5e, 0x72, 0x7e, 0x2e, 0xc8, 0x11, 0x45, 0xf9, 0xc9, 0xd9, 0x39,
-	0x89, 0x49, 0xc5, 0x30, 0x07, 0x55, 0xc0, 0x18, 0x25, 0x95, 0x05, 0xa9, 0xc5, 0x49, 0x6c, 0x60,
-	0x97, 0x19, 0x03, 0x02, 0x00, 0x00, 0xff, 0xff, 0x68, 0x19, 0x70, 0xce, 0x0f, 0x01, 0x00, 0x00,
+	// 550 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x74, 0x54, 0xcf, 0x6e, 0xd3, 0x30,
+	0x18, 0x6f, 0xd8, 0xe8, 0x98, 0x3b, 0xaa, 0xcd, 0x82, 0xe1, 0x76, 0x53, 0x5a, 0xed, 0x80, 0x2a,
+	0x84, 0x5a, 0x69, 0x1c, 0x80, 0x23, 0x9b, 0xca, 0x24, 0x04, 0x12, 0x6a, 0x91, 0x90, 0xb8, 0x44,
+	0x4e, 0x66, 0x52, 0xab, 0x89, 0x1d, 0xc5, 0x0e, 0xb0, 0x3d, 0x05, 0x8f, 0xc1, 0x91, 0xc7, 0xd8,
+	0x71, 0x47, 0x4e, 0x08, 0xb5, 0x07, 0x5e, 0x63, 0x8a, 0x9d, 0x34, 0x89, 0xd3, 0x5e, 0x2a, 0x2b,
+	0xbf, 0x3f, 0xdf, 0xef, 0xfb, 0xfa, 0xd9, 0xe0, 0xf8, 0x3a, 0xf6, 0x66, 0x98, 0xb2, 0xd1, 0x35,
+	0x61, 0xae, 0xf4, 0x46, 0x3e, 0x61, 0x44, 0x50, 0x31, 0x8c, 0x62, 0x2e, 0x39, 0x6c, 0x67, 0xe8,
+	0x50, 0xa3, 0xdd, 0x03, 0x1c, 0x52, 0xc6, 0x47, 0xea, 0x57, 0x53, 0xba, 0x8f, 0x7c, 0xee, 0x73,
+	0x75, 0x1c, 0xa5, 0xa7, 0xec, 0xeb, 0x91, 0x61, 0x1b, 0xe1, 0x18, 0x87, 0x62, 0x03, 0x28, 0x92,
+	0x28, 0x0a, 0xae, 0x32, 0xb0, 0x6f, 0x80, 0x31, 0xb9, 0x24, 0x61, 0x24, 0x29, 0x67, 0xb9, 0xbc,
+	0x63, 0x30, 0x42, 0xca, 0xa4, 0x86, 0x4e, 0x16, 0x3b, 0x60, 0xef, 0x42, 0x77, 0x30, 0x95, 0x58,
+	0x12, 0xf8, 0x1a, 0x34, 0x75, 0x69, 0x64, 0xf5, 0xad, 0x41, 0xeb, 0xf4, 0x70, 0x58, 0xed, 0x68,
+	0xf8, 0x51, 0xa1, 0x67, 0xbb, 0x37, 0x7f, 0x7b, 0x8d, 0x5f, 0xff, 0x7f, 0x3f, 0xb3, 0x26, 0x99,
+	0x00, 0x7e, 0x06, 0x07, 0x01, 0xf7, 0xe6, 0x8e, 0x8c, 0x31, 0x13, 0xd8, 0x53, 0x09, 0xd0, 0xbd,
+	0xfe, 0xd6, 0xa0, 0x75, 0xda, 0x33, 0x5d, 0xde, 0x73, 0x6f, 0xfe, 0xa9, 0xe0, 0x95, 0xed, 0xf6,
+	0x83, 0x2a, 0x26, 0x60, 0x08, 0x3a, 0x11, 0x61, 0x97, 0x94, 0xf9, 0x4e, 0x1a, 0xbd, 0x5a, 0x60,
+	0x4b, 0x15, 0x78, 0x5a, 0x8b, 0xa9, 0x05, 0x1f, 0x28, 0x93, 0x1b, 0xea, 0x3c, 0x89, 0xd6, 0x52,
+	0x04, 0x7c, 0x07, 0x4e, 0xbe, 0xd2, 0x58, 0x48, 0x27, 0x2f, 0x4a, 0xe4, 0xac, 0x56, 0x18, 0x6d,
+	0xf7, 0xad, 0xc1, 0xf6, 0xc4, 0x56, 0xcc, 0xac, 0xd8, 0x58, 0xce, 0x0c, 0xb3, 0xba, 0x97, 0xe0,
+	0x41, 0xdd, 0xeb, 0x7e, 0xdd, 0x6b, 0xca, 0x03, 0xd3, 0xeb, 0x1c, 0xd8, 0x9b, 0xc6, 0xe0, 0x78,
+	0x3c, 0x61, 0x12, 0x35, 0x95, 0xcf, 0xd1, 0xfa, 0xc6, 0xce, 0x53, 0x0a, 0x1c, 0x83, 0x96, 0x9b,
+	0xc4, 0xcc, 0x21, 0xdf, 0x08, 0x93, 0x02, 0xed, 0xa8, 0xe9, 0x75, 0xcc, 0xe9, 0x9d, 0x25, 0x31,
+	0x1b, 0xa7, 0x8c, 0xf2, 0xc0, 0x80, 0x9b, 0x7f, 0x15, 0xf0, 0x25, 0x40, 0xd5, 0xbe, 0x0a, 0x53,
+	0xf4, 0x40, 0xa5, 0x78, 0x5c, 0xee, 0x66, 0xe5, 0x07, 0x07, 0x60, 0xbf, 0xa0, 0x66, 0xb1, 0x77,
+	0x95, 0xa0, 0xbd, 0xb2, 0xd7, 0x49, 0x2f, 0x40, 0xab, 0xb4, 0xca, 0x08, 0xa8, 0xa4, 0x5d, 0x33,
+	0xe9, 0x64, 0x45, 0x29, 0x47, 0x2d, 0x2b, 0xe1, 0x2b, 0x33, 0x6b, 0x01, 0xa2, 0x96, 0x2a, 0x7d,
+	0x58, 0xce, 0x5a, 0x38, 0xa6, 0x13, 0xd7, 0xca, 0x42, 0xe1, 0xe0, 0xef, 0x98, 0x4a, 0xf5, 0x4f,
+	0x52, 0x9f, 0xa1, 0x3d, 0x3d, 0x71, 0xc5, 0x2a, 0x84, 0x6f, 0x32, 0xce, 0x94, 0xfa, 0x2c, 0xbd,
+	0x51, 0xfa, 0xbe, 0xa2, 0x87, 0xeb, 0x6f, 0xd4, 0x54, 0xa1, 0x95, 0x1b, 0xa5, 0x05, 0x70, 0x0c,
+	0x7a, 0xc6, 0xf6, 0x48, 0x3c, 0x27, 0x95, 0xd5, 0x69, 0xab, 0x00, 0xc7, 0x95, 0xd5, 0x49, 0x49,
+	0xe5, 0xa5, 0x7f, 0x7b, 0xb3, 0xb0, 0xad, 0xdb, 0x85, 0x6d, 0xfd, 0x5b, 0xd8, 0xd6, 0xcf, 0xa5,
+	0xdd, 0xb8, 0x5d, 0xda, 0x8d, 0x3f, 0x4b, 0xbb, 0xf1, 0xe5, 0xb9, 0x4f, 0xe5, 0x2c, 0x71, 0x87,
+	0x1e, 0x0f, 0xd3, 0xc7, 0x21, 0xe6, 0xde, 0x3c, 0xc0, 0xae, 0xc8, 0x1f, 0x8a, 0x1f, 0xf9, 0x41,
+	0x5e, 0x45, 0x44, 0xb8, 0x4d, 0xf5, 0x66, 0xbc, 0xb8, 0x0b, 0x00, 0x00, 0xff, 0xff, 0xae, 0x0d,
+	0xbe, 0xf4, 0x03, 0x05, 0x00, 0x00,
 }
 
 func (m *GenesisState) Marshal() (dAtA []byte, err error) {
@@ -113,6 +252,112 @@ func (m *GenesisState) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	_ = i
 	var l int
 	_ = l
+	if m.FirstPendingStakeTransaction != 0 {
+		i = encodeVarintGenesis(dAtA, i, uint64(m.FirstPendingStakeTransaction))
+		i--
+		dAtA[i] = 0x70
+	}
+	{
+		size, err := m.Supply.MarshalToSizedBuffer(dAtA[:i])
+		if err != nil {
+			return 0, err
+		}
+		i -= size
+		i = encodeVarintGenesis(dAtA, i, uint64(size))
+	}
+	i--
+	dAtA[i] = 0x6a
+	if m.FirstRedemptionAwaitingSign != 0 {
+		i = encodeVarintGenesis(dAtA, i, uint64(m.FirstRedemptionAwaitingSign))
+		i--
+		dAtA[i] = 0x60
+	}
+	if m.FirstPendingRedemption != 0 {
+		i = encodeVarintGenesis(dAtA, i, uint64(m.FirstPendingRedemption))
+		i--
+		dAtA[i] = 0x58
+	}
+	if len(m.Redemptions) > 0 {
+		for iNdEx := len(m.Redemptions) - 1; iNdEx >= 0; iNdEx-- {
+			{
+				size, err := m.Redemptions[iNdEx].MarshalToSizedBuffer(dAtA[:i])
+				if err != nil {
+					return 0, err
+				}
+				i -= size
+				i = encodeVarintGenesis(dAtA, i, uint64(size))
+			}
+			i--
+			dAtA[i] = 0x52
+		}
+	}
+	if m.BurnEventCount != 0 {
+		i = encodeVarintGenesis(dAtA, i, uint64(m.BurnEventCount))
+		i--
+		dAtA[i] = 0x48
+	}
+	if m.FirstPendingBurnEvent != 0 {
+		i = encodeVarintGenesis(dAtA, i, uint64(m.FirstPendingBurnEvent))
+		i--
+		dAtA[i] = 0x40
+	}
+	if len(m.BurnEvents) > 0 {
+		for iNdEx := len(m.BurnEvents) - 1; iNdEx >= 0; iNdEx-- {
+			{
+				size, err := m.BurnEvents[iNdEx].MarshalToSizedBuffer(dAtA[:i])
+				if err != nil {
+					return 0, err
+				}
+				i -= size
+				i = encodeVarintGenesis(dAtA, i, uint64(size))
+			}
+			i--
+			dAtA[i] = 0x3a
+		}
+	}
+	if m.PendingMintTransactionCount != 0 {
+		i = encodeVarintGenesis(dAtA, i, uint64(m.PendingMintTransactionCount))
+		i--
+		dAtA[i] = 0x30
+	}
+	if m.FirstPendingSolMintTransaction != 0 {
+		i = encodeVarintGenesis(dAtA, i, uint64(m.FirstPendingSolMintTransaction))
+		i--
+		dAtA[i] = 0x28
+	}
+	if m.FirstPendingEthMintTransaction != 0 {
+		i = encodeVarintGenesis(dAtA, i, uint64(m.FirstPendingEthMintTransaction))
+		i--
+		dAtA[i] = 0x20
+	}
+	if len(m.PendingMintTransactions) > 0 {
+		for iNdEx := len(m.PendingMintTransactions) - 1; iNdEx >= 0; iNdEx-- {
+			{
+				size, err := m.PendingMintTransactions[iNdEx].MarshalToSizedBuffer(dAtA[:i])
+				if err != nil {
+					return 0, err
+				}
+				i -= size
+				i = encodeVarintGenesis(dAtA, i, uint64(size))
+			}
+			i--
+			dAtA[i] = 0x1a
+		}
+	}
+	if len(m.LockTransactions) > 0 {
+		for iNdEx := len(m.LockTransactions) - 1; iNdEx >= 0; iNdEx-- {
+			{
+				size, err := m.LockTransactions[iNdEx].MarshalToSizedBuffer(dAtA[:i])
+				if err != nil {
+					return 0, err
+				}
+				i -= size
+				i = encodeVarintGenesis(dAtA, i, uint64(size))
+			}
+			i--
+			dAtA[i] = 0x12
+		}
+	}
 	{
 		size, err := m.Params.MarshalToSizedBuffer(dAtA[:i])
 		if err != nil {
@@ -145,6 +390,56 @@ func (m *GenesisState) Size() (n int) {
 	_ = l
 	l = m.Params.Size()
 	n += 1 + l + sovGenesis(uint64(l))
+	if len(m.LockTransactions) > 0 {
+		for _, e := range m.LockTransactions {
+			l = e.Size()
+			n += 1 + l + sovGenesis(uint64(l))
+		}
+	}
+	if len(m.PendingMintTransactions) > 0 {
+		for _, e := range m.PendingMintTransactions {
+			l = e.Size()
+			n += 1 + l + sovGenesis(uint64(l))
+		}
+	}
+	if m.FirstPendingEthMintTransaction != 0 {
+		n += 1 + sovGenesis(uint64(m.FirstPendingEthMintTransaction))
+	}
+	if m.FirstPendingSolMintTransaction != 0 {
+		n += 1 + sovGenesis(uint64(m.FirstPendingSolMintTransaction))
+	}
+	if m.PendingMintTransactionCount != 0 {
+		n += 1 + sovGenesis(uint64(m.PendingMintTransactionCount))
+	}
+	if len(m.BurnEvents) > 0 {
+		for _, e := range m.BurnEvents {
+			l = e.Size()
+			n += 1 + l + sovGenesis(uint64(l))
+		}
+	}
+	if m.FirstPendingBurnEvent != 0 {
+		n += 1 + sovGenesis(uint64(m.FirstPendingBurnEvent))
+	}
+	if m.BurnEventCount != 0 {
+		n += 1 + sovGenesis(uint64(m.BurnEventCount))
+	}
+	if len(m.Redemptions) > 0 {
+		for _, e := range m.Redemptions {
+			l = e.Size()
+			n += 1 + l + sovGenesis(uint64(l))
+		}
+	}
+	if m.FirstPendingRedemption != 0 {
+		n += 1 + sovGenesis(uint64(m.FirstPendingRedemption))
+	}
+	if m.FirstRedemptionAwaitingSign != 0 {
+		n += 1 + sovGenesis(uint64(m.FirstRedemptionAwaitingSign))
+	}
+	l = m.Supply.Size()
+	n += 1 + l + sovGenesis(uint64(l))
+	if m.FirstPendingStakeTransaction != 0 {
+		n += 1 + sovGenesis(uint64(m.FirstPendingStakeTransaction))
+	}
 	return n
 }
 
@@ -216,6 +511,327 @@ func (m *GenesisState) Unmarshal(dAtA []byte) error {
 				return err
 			}
 			iNdEx = postIndex
+		case 2:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field LockTransactions", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowGenesis
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthGenesis
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthGenesis
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.LockTransactions = append(m.LockTransactions, LockTransaction{})
+			if err := m.LockTransactions[len(m.LockTransactions)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		case 3:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field PendingMintTransactions", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowGenesis
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthGenesis
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthGenesis
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.PendingMintTransactions = append(m.PendingMintTransactions, PendingMintTransaction{})
+			if err := m.PendingMintTransactions[len(m.PendingMintTransactions)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		case 4:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field FirstPendingEthMintTransaction", wireType)
+			}
+			m.FirstPendingEthMintTransaction = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowGenesis
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.FirstPendingEthMintTransaction |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		case 5:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field FirstPendingSolMintTransaction", wireType)
+			}
+			m.FirstPendingSolMintTransaction = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowGenesis
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.FirstPendingSolMintTransaction |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		case 6:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field PendingMintTransactionCount", wireType)
+			}
+			m.PendingMintTransactionCount = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowGenesis
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.PendingMintTransactionCount |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		case 7:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field BurnEvents", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowGenesis
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthGenesis
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthGenesis
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.BurnEvents = append(m.BurnEvents, BurnEvent{})
+			if err := m.BurnEvents[len(m.BurnEvents)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		case 8:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field FirstPendingBurnEvent", wireType)
+			}
+			m.FirstPendingBurnEvent = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowGenesis
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.FirstPendingBurnEvent |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		case 9:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field BurnEventCount", wireType)
+			}
+			m.BurnEventCount = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowGenesis
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.BurnEventCount |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		case 10:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Redemptions", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowGenesis
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthGenesis
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthGenesis
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Redemptions = append(m.Redemptions, Redemption{})
+			if err := m.Redemptions[len(m.Redemptions)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		case 11:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field FirstPendingRedemption", wireType)
+			}
+			m.FirstPendingRedemption = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowGenesis
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.FirstPendingRedemption |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		case 12:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field FirstRedemptionAwaitingSign", wireType)
+			}
+			m.FirstRedemptionAwaitingSign = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowGenesis
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.FirstRedemptionAwaitingSign |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		case 13:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Supply", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowGenesis
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthGenesis
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthGenesis
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if err := m.Supply.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		case 14:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field FirstPendingStakeTransaction", wireType)
+			}
+			m.FirstPendingStakeTransaction = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowGenesis
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.FirstPendingStakeTransaction |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
 		default:
 			iNdEx = preIndex
 			skippy, err := skipGenesis(dAtA[iNdEx:])
