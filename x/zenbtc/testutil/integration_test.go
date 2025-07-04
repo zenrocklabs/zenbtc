@@ -375,13 +375,13 @@ func (s *IntegrationTestSuite) Test_ZenbtcKeeper_GetParams() {
 }
 
 func (s *IntegrationTestSuite) Test_ZenbtcKeeper_StoreGetters() {
-	pendingMintStore := s.zenbtcKeeper.GetPendingMintTransactionsStore()
+	pendingMintStore := s.zenbtcKeeper.PendingMintTransactionsMap
 	s.Require().NotNil(pendingMintStore)
 
-	burnEventsStore := s.zenbtcKeeper.GetBurnEventsStore()
+	burnEventsStore := s.zenbtcKeeper.BurnEvents
 	s.Require().NotNil(burnEventsStore)
 
-	redemptionsStore := s.zenbtcKeeper.GetRedemptionsStore()
+	redemptionsStore := s.zenbtcKeeper.Redemptions
 	s.Require().NotNil(redemptionsStore)
 }
 
