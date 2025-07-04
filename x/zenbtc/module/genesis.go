@@ -28,7 +28,7 @@ func InitGenesis(ctx sdk.Context, k keeper.Keeper, genState types.GenesisState) 
 	}
 
 	for _, pendingMintTx := range genState.PendingMintTransactions {
-		if err := k.SetPendingMintTransaction(ctx, pendingMintTx); err != nil {
+		if err := k.PendingMintTransactionsMap.Set(ctx, pendingMintTx.Id, pendingMintTx); err != nil {
 			panic(err)
 		}
 	}

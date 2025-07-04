@@ -20,7 +20,7 @@ func DefaultGenesis() *types.GenesisState {
 }
 
 func (k Keeper) ExportState(ctx context.Context, genState *types.GenesisState) error {
-	lockTxStore, err := k.LockTransactionStore.Iterate(ctx, nil)
+	lockTxStore, err := k.LockTransactions.Iterate(ctx, nil)
 	if err != nil {
 		return err
 	}
