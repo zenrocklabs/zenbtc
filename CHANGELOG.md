@@ -1,3 +1,10 @@
+## [1.17.16](https://github.com/zenrocklabs/zenbtc/compare/v1.17.15...v1.17.16) (2025-07-04)
+
+
+### Bug Fixes
+
+* published zenbtc to buf ([646ab90](https://github.com/zenrocklabs/zenbtc/commit/646ab906efa9da9375c8435f1bcdad6f88f2107d))
+
 ## [1.17.15](https://github.com/zenrocklabs/zenbtc/compare/v1.17.14...v1.17.15) (2025-07-04)
 
 
