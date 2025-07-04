@@ -6,7 +6,6 @@ deps:
   - buf.build/cosmos/cosmos-proto
   - buf.build/cosmos/gogo-proto
   - buf.build/googleapis/googleapis
-  - buf.build/tendermint/tendermint
 lint:
   except:
     - UNARY_RPC
@@ -21,3 +20,4 @@ lint:
     - COMMENTS
     - FILE_LOWER_SNAKE_CASE
 version: v1
+name: buf.build/zenrock-labs/zenbtc
