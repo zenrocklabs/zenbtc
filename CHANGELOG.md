@@ -1,3 +1,10 @@
+## [1.17.15](https://github.com/zenrocklabs/zenbtc/compare/v1.17.14...v1.17.15) (2025-07-04)
+
+
+### Bug Fixes
+
+* merge master ([e1a995f](https://github.com/zenrocklabs/zenbtc/commit/e1a995f93acaa29cbd2e4a2db00cde385029daa5))
+
 ## [1.17.14](https://github.com/zenrocklabs/zenbtc/compare/v1.17.13...v1.17.14) (2025-07-03)
 
 
