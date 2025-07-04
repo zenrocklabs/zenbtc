@@ -1,3 +1,11 @@
+## [1.17.17](https://github.com/zenrocklabs/zenbtc/compare/v1.17.16...v1.17.17) (2025-07-04)
+
+
+### Bug Fixes
+
+* used non-deprecated stores ([ce0ea21](https://github.com/zenrocklabs/zenbtc/commit/ce0ea214752b5dceddf83d4b40b25d788a8aed0c))
+* zenbtc export ([b60cfb9](https://github.com/zenrocklabs/zenbtc/commit/b60cfb95f6c9ac624a96470be45408e6042385e1))
+
 ## [1.17.16](https://github.com/zenrocklabs/zenbtc/compare/v1.17.15...v1.17.16) (2025-07-04)
 
 
