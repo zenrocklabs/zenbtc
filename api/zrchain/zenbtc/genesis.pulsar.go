@@ -14,15 +14,245 @@ import (
 	sync "sync"
 )
 
+var _ protoreflect.List = (*_GenesisState_2_list)(nil)
+
+type _GenesisState_2_list struct {
+	list *[]*LockTransaction
+}
+
+func (x *_GenesisState_2_list) Len() int {
+	if x.list == nil {
+		return 0
+	}
+	return len(*x.list)
+}
+
+func (x *_GenesisState_2_list) Get(i int) protoreflect.Value {
+	return protoreflect.ValueOfMessage((*x.list)[i].ProtoReflect())
+}
+
+func (x *_GenesisState_2_list) Set(i int, value protoreflect.Value) {
+	valueUnwrapped := value.Message()
+	concreteValue := valueUnwrapped.Interface().(*LockTransaction)
+	(*x.list)[i] = concreteValue
+}
+
+func (x *_GenesisState_2_list) Append(value protoreflect.Value) {
+	valueUnwrapped := value.Message()
+	concreteValue := valueUnwrapped.Interface().(*LockTransaction)
+	*x.list = append(*x.list, concreteValue)
+}
+
+func (x *_GenesisState_2_list) AppendMutable() protoreflect.Value {
+	v := new(LockTransaction)
+	*x.list = append(*x.list, v)
+	return protoreflect.ValueOfMessage(v.ProtoReflect())
+}
+
+func (x *_GenesisState_2_list) Truncate(n int) {
+	for i := n; i < len(*x.list); i++ {
+		(*x.list)[i] = nil
+	}
+	*x.list = (*x.list)[:n]
+}
+
+func (x *_GenesisState_2_list) NewElement() protoreflect.Value {
+	v := new(LockTransaction)
+	return protoreflect.ValueOfMessage(v.ProtoReflect())
+}
+
+func (x *_GenesisState_2_list) IsValid() bool {
+	return x.list != nil
+}
+
+var _ protoreflect.List = (*_GenesisState_3_list)(nil)
+
+type _GenesisState_3_list struct {
+	list *[]*PendingMintTransaction
+}
+
+func (x *_GenesisState_3_list) Len() int {
+	if x.list == nil {
+		return 0
+	}
+	return len(*x.list)
+}
+
+func (x *_GenesisState_3_list) Get(i int) protoreflect.Value {
+	return protoreflect.ValueOfMessage((*x.list)[i].ProtoReflect())
+}
+
+func (x *_GenesisState_3_list) Set(i int, value protoreflect.Value) {
+	valueUnwrapped := value.Message()
+	concreteValue := valueUnwrapped.Interface().(*PendingMintTransaction)
+	(*x.list)[i] = concreteValue
+}
+
+func (x *_GenesisState_3_list) Append(value protoreflect.Value) {
+	valueUnwrapped := value.Message()
+	concreteValue := valueUnwrapped.Interface().(*PendingMintTransaction)
+	*x.list = append(*x.list, concreteValue)
+}
+
+func (x *_GenesisState_3_list) AppendMutable() protoreflect.Value {
+	v := new(PendingMintTransaction)
+	*x.list = append(*x.list, v)
+	return protoreflect.ValueOfMessage(v.ProtoReflect())
+}
+
+func (x *_GenesisState_3_list) Truncate(n int) {
+	for i := n; i < len(*x.list); i++ {
+		(*x.list)[i] = nil
+	}
+	*x.list = (*x.list)[:n]
+}
+
+func (x *_GenesisState_3_list) NewElement() protoreflect.Value {
+	v := new(PendingMintTransaction)
+	return protoreflect.ValueOfMessage(v.ProtoReflect())
+}
+
+func (x *_GenesisState_3_list) IsValid() bool {
+	return x.list != nil
+}
+
+var _ protoreflect.List = (*_GenesisState_7_list)(nil)
+
+type _GenesisState_7_list struct {
+	list *[]*BurnEvent
+}
+
+func (x *_GenesisState_7_list) Len() int {
+	if x.list == nil {
+		return 0
+	}
+	return len(*x.list)
+}
+
+func (x *_GenesisState_7_list) Get(i int) protoreflect.Value {
+	return protoreflect.ValueOfMessage((*x.list)[i].ProtoReflect())
+}
+
+func (x *_GenesisState_7_list) Set(i int, value protoreflect.Value) {
+	valueUnwrapped := value.Message()
+	concreteValue := valueUnwrapped.Interface().(*BurnEvent)
+	(*x.list)[i] = concreteValue
+}
+
+func (x *_GenesisState_7_list) Append(value protoreflect.Value) {
+	valueUnwrapped := value.Message()
+	concreteValue := valueUnwrapped.Interface().(*BurnEvent)
+	*x.list = append(*x.list, concreteValue)
+}
+
+func (x *_GenesisState_7_list) AppendMutable() protoreflect.Value {
+	v := new(BurnEvent)
+	*x.list = append(*x.list, v)
+	return protoreflect.ValueOfMessage(v.ProtoReflect())
+}
+
+func (x *_GenesisState_7_list) Truncate(n int) {
+	for i := n; i < len(*x.list); i++ {
+		(*x.list)[i] = nil
+	}
+	*x.list = (*x.list)[:n]
+}
+
+func (x *_GenesisState_7_list) NewElement() protoreflect.Value {
+	v := new(BurnEvent)
+	return protoreflect.ValueOfMessage(v.ProtoReflect())
+}
+
+func (x *_GenesisState_7_list) IsValid() bool {
+	return x.list != nil
+}
+
+var _ protoreflect.List = (*_GenesisState_10_list)(nil)
+
+type _GenesisState_10_list struct {
+	list *[]*Redemption
+}
+
+func (x *_GenesisState_10_list) Len() int {
+	if x.list == nil {
+		return 0
+	}
+	return len(*x.list)
+}
+
+func (x *_GenesisState_10_list) Get(i int) protoreflect.Value {
+	return protoreflect.ValueOfMessage((*x.list)[i].ProtoReflect())
+}
+
+func (x *_GenesisState_10_list) Set(i int, value protoreflect.Value) {
+	valueUnwrapped := value.Message()
+	concreteValue := valueUnwrapped.Interface().(*Redemption)
+	(*x.list)[i] = concreteValue
+}
+
+func (x *_GenesisState_10_list) Append(value protoreflect.Value) {
+	valueUnwrapped := value.Message()
+	concreteValue := valueUnwrapped.Interface().(*Redemption)
+	*x.list = append(*x.list, concreteValue)
+}
+
+func (x *_GenesisState_10_list) AppendMutable() protoreflect.Value {
+	v := new(Redemption)
+	*x.list = append(*x.list, v)
+	return protoreflect.ValueOfMessage(v.ProtoReflect())
+}
+
+func (x *_GenesisState_10_list) Truncate(n int) {
+	for i := n; i < len(*x.list); i++ {
+		(*x.list)[i] = nil
+	}
+	*x.list = (*x.list)[:n]
+}
+
+func (x *_GenesisState_10_list) NewElement() protoreflect.Value {
+	v := new(Redemption)
+	return protoreflect.ValueOfMessage(v.ProtoReflect())
+}
+
+func (x *_GenesisState_10_list) IsValid() bool {
+	return x.list != nil
+}
+
 var (
-	md_GenesisState        protoreflect.MessageDescriptor
-	fd_GenesisState_params protoreflect.FieldDescriptor
+	md_GenesisState                                    protoreflect.MessageDescriptor
+	fd_GenesisState_params                             protoreflect.FieldDescriptor
+	fd_GenesisState_lock_transactions                  protoreflect.FieldDescriptor
+	fd_GenesisState_pending_mint_transactions          protoreflect.FieldDescriptor
+	fd_GenesisState_first_pending_eth_mint_transaction protoreflect.FieldDescriptor
+	fd_GenesisState_first_pending_sol_mint_transaction protoreflect.FieldDescriptor
+	fd_GenesisState_pending_mint_transaction_count     protoreflect.FieldDescriptor
+	fd_GenesisState_burn_events                        protoreflect.FieldDescriptor
+	fd_GenesisState_first_pending_burn_event           protoreflect.FieldDescriptor
+	fd_GenesisState_burn_event_count                   protoreflect.FieldDescriptor
+	fd_GenesisState_redemptions                        protoreflect.FieldDescriptor
+	fd_GenesisState_first_pending_redemption           protoreflect.FieldDescriptor
+	fd_GenesisState_first_redemption_awaiting_sign     protoreflect.FieldDescriptor
+	fd_GenesisState_supply                             protoreflect.FieldDescriptor
+	fd_GenesisState_first_pending_stake_transaction    protoreflect.FieldDescriptor
 )
 
 func init() {
 	file_zrchain_zenbtc_genesis_proto_init()
 	md_GenesisState = File_zrchain_zenbtc_genesis_proto.Messages().ByName("GenesisState")
 	fd_GenesisState_params = md_GenesisState.Fields().ByName("params")
+	fd_GenesisState_lock_transactions = md_GenesisState.Fields().ByName("lock_transactions")
+	fd_GenesisState_pending_mint_transactions = md_GenesisState.Fields().ByName("pending_mint_transactions")
+	fd_GenesisState_first_pending_eth_mint_transaction = md_GenesisState.Fields().ByName("first_pending_eth_mint_transaction")
+	fd_GenesisState_first_pending_sol_mint_transaction = md_GenesisState.Fields().ByName("first_pending_sol_mint_transaction")
+	fd_GenesisState_pending_mint_transaction_count = md_GenesisState.Fields().ByName("pending_mint_transaction_count")
+	fd_GenesisState_burn_events = md_GenesisState.Fields().ByName("burn_events")
+	fd_GenesisState_first_pending_burn_event = md_GenesisState.Fields().ByName("first_pending_burn_event")
+	fd_GenesisState_burn_event_count = md_GenesisState.Fields().ByName("burn_event_count")
+	fd_GenesisState_redemptions = md_GenesisState.Fields().ByName("redemptions")
+	fd_GenesisState_first_pending_redemption = md_GenesisState.Fields().ByName("first_pending_redemption")
+	fd_GenesisState_first_redemption_awaiting_sign = md_GenesisState.Fields().ByName("first_redemption_awaiting_sign")
+	fd_GenesisState_supply = md_GenesisState.Fields().ByName("supply")
+	fd_GenesisState_first_pending_stake_transaction = md_GenesisState.Fields().ByName("first_pending_stake_transaction")
 }
 
 var _ protoreflect.Message = (*fastReflection_GenesisState)(nil)
@@ -96,6 +326,84 @@ func (x *fastReflection_GenesisState) Range(f func(protoreflect.FieldDescriptor,
 			return
 		}
 	}
+	if len(x.LockTransactions) != 0 {
+		value := protoreflect.ValueOfList(&_GenesisState_2_list{list: &x.LockTransactions})
+		if !f(fd_GenesisState_lock_transactions, value) {
+			return
+		}
+	}
+	if len(x.PendingMintTransactions) != 0 {
+		value := protoreflect.ValueOfList(&_GenesisState_3_list{list: &x.PendingMintTransactions})
+		if !f(fd_GenesisState_pending_mint_transactions, value) {
+			return
+		}
+	}
+	if x.FirstPendingEthMintTransaction != uint64(0) {
+		value := protoreflect.ValueOfUint64(x.FirstPendingEthMintTransaction)
+		if !f(fd_GenesisState_first_pending_eth_mint_transaction, value) {
+			return
+		}
+	}
+	if x.FirstPendingSolMintTransaction != uint64(0) {
+		value := protoreflect.ValueOfUint64(x.FirstPendingSolMintTransaction)
+		if !f(fd_GenesisState_first_pending_sol_mint_transaction, value) {
+			return
+		}
+	}
+	if x.PendingMintTransactionCount != uint64(0) {
+		value := protoreflect.ValueOfUint64(x.PendingMintTransactionCount)
+		if !f(fd_GenesisState_pending_mint_transaction_count, value) {
+			return
+		}
+	}
+	if len(x.BurnEvents) != 0 {
+		value := protoreflect.ValueOfList(&_GenesisState_7_list{list: &x.BurnEvents})
+		if !f(fd_GenesisState_burn_events, value) {
+			return
+		}
+	}
+	if x.FirstPendingBurnEvent != uint64(0) {
+		value := protoreflect.ValueOfUint64(x.FirstPendingBurnEvent)
+		if !f(fd_GenesisState_first_pending_burn_event, value) {
+			return
+		}
+	}
+	if x.BurnEventCount != uint64(0) {
+		value := protoreflect.ValueOfUint64(x.BurnEventCount)
+		if !f(fd_GenesisState_burn_event_count, value) {
+			return
+		}
+	}
+	if len(x.Redemptions) != 0 {
+		value := protoreflect.ValueOfList(&_GenesisState_10_list{list: &x.Redemptions})
+		if !f(fd_GenesisState_redemptions, value) {
+			return
+		}
+	}
+	if x.FirstPendingRedemption != uint64(0) {
+		value := protoreflect.ValueOfUint64(x.FirstPendingRedemption)
+		if !f(fd_GenesisState_first_pending_redemption, value) {
+			return
+		}
+	}
+	if x.FirstRedemptionAwaitingSign != uint64(0) {
+		value := protoreflect.ValueOfUint64(x.FirstRedemptionAwaitingSign)
+		if !f(fd_GenesisState_first_redemption_awaiting_sign, value) {
+			return
+		}
+	}
+	if x.Supply != nil {
+		value := protoreflect.ValueOfMessage(x.Supply.ProtoReflect())
+		if !f(fd_GenesisState_supply, value) {
+			return
+		}
+	}
+	if x.FirstPendingStakeTransaction != uint64(0) {
+		value := protoreflect.ValueOfUint64(x.FirstPendingStakeTransaction)
+		if !f(fd_GenesisState_first_pending_stake_transaction, value) {
+			return
+		}
+	}
 }
 
 // Has reports whether a field is populated.
@@ -113,6 +421,32 @@ func (x *fastReflection_GenesisState) Has(fd protoreflect.FieldDescriptor) bool 
 	switch fd.FullName() {
 	case "zrchain.zenbtc.GenesisState.params":
 		return x.Params != nil
+	case "zrchain.zenbtc.GenesisState.lock_transactions":
+		return len(x.LockTransactions) != 0
+	case "zrchain.zenbtc.GenesisState.pending_mint_transactions":
+		return len(x.PendingMintTransactions) != 0
+	case "zrchain.zenbtc.GenesisState.first_pending_eth_mint_transaction":
+		return x.FirstPendingEthMintTransaction != uint64(0)
+	case "zrchain.zenbtc.GenesisState.first_pending_sol_mint_transaction":
+		return x.FirstPendingSolMintTransaction != uint64(0)
+	case "zrchain.zenbtc.GenesisState.pending_mint_transaction_count":
+		return x.PendingMintTransactionCount != uint64(0)
+	case "zrchain.zenbtc.GenesisState.burn_events":
+		return len(x.BurnEvents) != 0
+	case "zrchain.zenbtc.GenesisState.first_pending_burn_event":
+		return x.FirstPendingBurnEvent != uint64(0)
+	case "zrchain.zenbtc.GenesisState.burn_event_count":
+		return x.BurnEventCount != uint64(0)
+	case "zrchain.zenbtc.GenesisState.redemptions":
+		return len(x.Redemptions) != 0
+	case "zrchain.zenbtc.GenesisState.first_pending_redemption":
+		return x.FirstPendingRedemption != uint64(0)
+	case "zrchain.zenbtc.GenesisState.first_redemption_awaiting_sign":
+		return x.FirstRedemptionAwaitingSign != uint64(0)
+	case "zrchain.zenbtc.GenesisState.supply":
+		return x.Supply != nil
+	case "zrchain.zenbtc.GenesisState.first_pending_stake_transaction":
+		return x.FirstPendingStakeTransaction != uint64(0)
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: zrchain.zenbtc.GenesisState"))
@@ -131,6 +465,32 @@ func (x *fastReflection_GenesisState) Clear(fd protoreflect.FieldDescriptor) {
 	switch fd.FullName() {
 	case "zrchain.zenbtc.GenesisState.params":
 		x.Params = nil
+	case "zrchain.zenbtc.GenesisState.lock_transactions":
+		x.LockTransactions = nil
+	case "zrchain.zenbtc.GenesisState.pending_mint_transactions":
+		x.PendingMintTransactions = nil
+	case "zrchain.zenbtc.GenesisState.first_pending_eth_mint_transaction":
+		x.FirstPendingEthMintTransaction = uint64(0)
+	case "zrchain.zenbtc.GenesisState.first_pending_sol_mint_transaction":
+		x.FirstPendingSolMintTransaction = uint64(0)
+	case "zrchain.zenbtc.GenesisState.pending_mint_transaction_count":
+		x.PendingMintTransactionCount = uint64(0)
+	case "zrchain.zenbtc.GenesisState.burn_events":
+		x.BurnEvents = nil
+	case "zrchain.zenbtc.GenesisState.first_pending_burn_event":
+		x.FirstPendingBurnEvent = uint64(0)
+	case "zrchain.zenbtc.GenesisState.burn_event_count":
+		x.BurnEventCount = uint64(0)
+	case "zrchain.zenbtc.GenesisState.redemptions":
+		x.Redemptions = nil
+	case "zrchain.zenbtc.GenesisState.first_pending_redemption":
+		x.FirstPendingRedemption = uint64(0)
+	case "zrchain.zenbtc.GenesisState.first_redemption_awaiting_sign":
+		x.FirstRedemptionAwaitingSign = uint64(0)
+	case "zrchain.zenbtc.GenesisState.supply":
+		x.Supply = nil
+	case "zrchain.zenbtc.GenesisState.first_pending_stake_transaction":
+		x.FirstPendingStakeTransaction = uint64(0)
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: zrchain.zenbtc.GenesisState"))
@@ -150,6 +510,57 @@ func (x *fastReflection_GenesisState) Get(descriptor protoreflect.FieldDescripto
 	case "zrchain.zenbtc.GenesisState.params":
 		value := x.Params
 		return protoreflect.ValueOfMessage(value.ProtoReflect())
+	case "zrchain.zenbtc.GenesisState.lock_transactions":
+		if len(x.LockTransactions) == 0 {
+			return protoreflect.ValueOfList(&_GenesisState_2_list{})
+		}
+		listValue := &_GenesisState_2_list{list: &x.LockTransactions}
+		return protoreflect.ValueOfList(listValue)
+	case "zrchain.zenbtc.GenesisState.pending_mint_transactions":
+		if len(x.PendingMintTransactions) == 0 {
+			return protoreflect.ValueOfList(&_GenesisState_3_list{})
+		}
+		listValue := &_GenesisState_3_list{list: &x.PendingMintTransactions}
+		return protoreflect.ValueOfList(listValue)
+	case "zrchain.zenbtc.GenesisState.first_pending_eth_mint_transaction":
+		value := x.FirstPendingEthMintTransaction
+		return protoreflect.ValueOfUint64(value)
+	case "zrchain.zenbtc.GenesisState.first_pending_sol_mint_transaction":
+		value := x.FirstPendingSolMintTransaction
+		return protoreflect.ValueOfUint64(value)
+	case "zrchain.zenbtc.GenesisState.pending_mint_transaction_count":
+		value := x.PendingMintTransactionCount
+		return protoreflect.ValueOfUint64(value)
+	case "zrchain.zenbtc.GenesisState.burn_events":
+		if len(x.BurnEvents) == 0 {
+			return protoreflect.ValueOfList(&_GenesisState_7_list{})
+		}
+		listValue := &_GenesisState_7_list{list: &x.BurnEvents}
+		return protoreflect.ValueOfList(listValue)
+	case "zrchain.zenbtc.GenesisState.first_pending_burn_event":
+		value := x.FirstPendingBurnEvent
+		return protoreflect.ValueOfUint64(value)
+	case "zrchain.zenbtc.GenesisState.burn_event_count":
+		value := x.BurnEventCount
+		return protoreflect.ValueOfUint64(value)
+	case "zrchain.zenbtc.GenesisState.redemptions":
+		if len(x.Redemptions) == 0 {
+			return protoreflect.ValueOfList(&_GenesisState_10_list{})
+		}
+		listValue := &_GenesisState_10_list{list: &x.Redemptions}
+		return protoreflect.ValueOfList(listValue)
+	case "zrchain.zenbtc.GenesisState.first_pending_redemption":
+		value := x.FirstPendingRedemption
+		return protoreflect.ValueOfUint64(value)
+	case "zrchain.zenbtc.GenesisState.first_redemption_awaiting_sign":
+		value := x.FirstRedemptionAwaitingSign
+		return protoreflect.ValueOfUint64(value)
+	case "zrchain.zenbtc.GenesisState.supply":
+		value := x.Supply
+		return protoreflect.ValueOfMessage(value.ProtoReflect())
+	case "zrchain.zenbtc.GenesisState.first_pending_stake_transaction":
+		value := x.FirstPendingStakeTransaction
+		return protoreflect.ValueOfUint64(value)
 	default:
 		if descriptor.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: zrchain.zenbtc.GenesisState"))
@@ -172,6 +583,40 @@ func (x *fastReflection_GenesisState) Set(fd protoreflect.FieldDescriptor, value
 	switch fd.FullName() {
 	case "zrchain.zenbtc.GenesisState.params":
 		x.Params = value.Message().Interface().(*Params)
+	case "zrchain.zenbtc.GenesisState.lock_transactions":
+		lv := value.List()
+		clv := lv.(*_GenesisState_2_list)
+		x.LockTransactions = *clv.list
+	case "zrchain.zenbtc.GenesisState.pending_mint_transactions":
+		lv := value.List()
+		clv := lv.(*_GenesisState_3_list)
+		x.PendingMintTransactions = *clv.list
+	case "zrchain.zenbtc.GenesisState.first_pending_eth_mint_transaction":
+		x.FirstPendingEthMintTransaction = value.Uint()
+	case "zrchain.zenbtc.GenesisState.first_pending_sol_mint_transaction":
+		x.FirstPendingSolMintTransaction = value.Uint()
+	case "zrchain.zenbtc.GenesisState.pending_mint_transaction_count":
+		x.PendingMintTransactionCount = value.Uint()
+	case "zrchain.zenbtc.GenesisState.burn_events":
+		lv := value.List()
+		clv := lv.(*_GenesisState_7_list)
+		x.BurnEvents = *clv.list
+	case "zrchain.zenbtc.GenesisState.first_pending_burn_event":
+		x.FirstPendingBurnEvent = value.Uint()
+	case "zrchain.zenbtc.GenesisState.burn_event_count":
+		x.BurnEventCount = value.Uint()
+	case "zrchain.zenbtc.GenesisState.redemptions":
+		lv := value.List()
+		clv := lv.(*_GenesisState_10_list)
+		x.Redemptions = *clv.list
+	case "zrchain.zenbtc.GenesisState.first_pending_redemption":
+		x.FirstPendingRedemption = value.Uint()
+	case "zrchain.zenbtc.GenesisState.first_redemption_awaiting_sign":
+		x.FirstRedemptionAwaitingSign = value.Uint()
+	case "zrchain.zenbtc.GenesisState.supply":
+		x.Supply = value.Message().Interface().(*Supply)
+	case "zrchain.zenbtc.GenesisState.first_pending_stake_transaction":
+		x.FirstPendingStakeTransaction = value.Uint()
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: zrchain.zenbtc.GenesisState"))
@@ -197,6 +642,51 @@ func (x *fastReflection_GenesisState) Mutable(fd protoreflect.FieldDescriptor) p
 			x.Params = new(Params)
 		}
 		return protoreflect.ValueOfMessage(x.Params.ProtoReflect())
+	case "zrchain.zenbtc.GenesisState.lock_transactions":
+		if x.LockTransactions == nil {
+			x.LockTransactions = []*LockTransaction{}
+		}
+		value := &_GenesisState_2_list{list: &x.LockTransactions}
+		return protoreflect.ValueOfList(value)
+	case "zrchain.zenbtc.GenesisState.pending_mint_transactions":
+		if x.PendingMintTransactions == nil {
+			x.PendingMintTransactions = []*PendingMintTransaction{}
+		}
+		value := &_GenesisState_3_list{list: &x.PendingMintTransactions}
+		return protoreflect.ValueOfList(value)
+	case "zrchain.zenbtc.GenesisState.burn_events":
+		if x.BurnEvents == nil {
+			x.BurnEvents = []*BurnEvent{}
+		}
+		value := &_GenesisState_7_list{list: &x.BurnEvents}
+		return protoreflect.ValueOfList(value)
+	case "zrchain.zenbtc.GenesisState.redemptions":
+		if x.Redemptions == nil {
+			x.Redemptions = []*Redemption{}
+		}
+		value := &_GenesisState_10_list{list: &x.Redemptions}
+		return protoreflect.ValueOfList(value)
+	case "zrchain.zenbtc.GenesisState.supply":
+		if x.Supply == nil {
+			x.Supply = new(Supply)
+		}
+		return protoreflect.ValueOfMessage(x.Supply.ProtoReflect())
+	case "zrchain.zenbtc.GenesisState.first_pending_eth_mint_transaction":
+		panic(fmt.Errorf("field first_pending_eth_mint_transaction of message zrchain.zenbtc.GenesisState is not mutable"))
+	case "zrchain.zenbtc.GenesisState.first_pending_sol_mint_transaction":
+		panic(fmt.Errorf("field first_pending_sol_mint_transaction of message zrchain.zenbtc.GenesisState is not mutable"))
+	case "zrchain.zenbtc.GenesisState.pending_mint_transaction_count":
+		panic(fmt.Errorf("field pending_mint_transaction_count of message zrchain.zenbtc.GenesisState is not mutable"))
+	case "zrchain.zenbtc.GenesisState.first_pending_burn_event":
+		panic(fmt.Errorf("field first_pending_burn_event of message zrchain.zenbtc.GenesisState is not mutable"))
+	case "zrchain.zenbtc.GenesisState.burn_event_count":
+		panic(fmt.Errorf("field burn_event_count of message zrchain.zenbtc.GenesisState is not mutable"))
+	case "zrchain.zenbtc.GenesisState.first_pending_redemption":
+		panic(fmt.Errorf("field first_pending_redemption of message zrchain.zenbtc.GenesisState is not mutable"))
+	case "zrchain.zenbtc.GenesisState.first_redemption_awaiting_sign":
+		panic(fmt.Errorf("field first_redemption_awaiting_sign of message zrchain.zenbtc.GenesisState is not mutable"))
+	case "zrchain.zenbtc.GenesisState.first_pending_stake_transaction":
+		panic(fmt.Errorf("field first_pending_stake_transaction of message zrchain.zenbtc.GenesisState is not mutable"))
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: zrchain.zenbtc.GenesisState"))
@@ -213,6 +703,37 @@ func (x *fastReflection_GenesisState) NewField(fd protoreflect.FieldDescriptor) 
 	case "zrchain.zenbtc.GenesisState.params":
 		m := new(Params)
 		return protoreflect.ValueOfMessage(m.ProtoReflect())
+	case "zrchain.zenbtc.GenesisState.lock_transactions":
+		list := []*LockTransaction{}
+		return protoreflect.ValueOfList(&_GenesisState_2_list{list: &list})
+	case "zrchain.zenbtc.GenesisState.pending_mint_transactions":
+		list := []*PendingMintTransaction{}
+		return protoreflect.ValueOfList(&_GenesisState_3_list{list: &list})
+	case "zrchain.zenbtc.GenesisState.first_pending_eth_mint_transaction":
+		return protoreflect.ValueOfUint64(uint64(0))
+	case "zrchain.zenbtc.GenesisState.first_pending_sol_mint_transaction":
+		return protoreflect.ValueOfUint64(uint64(0))
+	case "zrchain.zenbtc.GenesisState.pending_mint_transaction_count":
+		return protoreflect.ValueOfUint64(uint64(0))
+	case "zrchain.zenbtc.GenesisState.burn_events":
+		list := []*BurnEvent{}
+		return protoreflect.ValueOfList(&_GenesisState_7_list{list: &list})
+	case "zrchain.zenbtc.GenesisState.first_pending_burn_event":
+		return protoreflect.ValueOfUint64(uint64(0))
+	case "zrchain.zenbtc.GenesisState.burn_event_count":
+		return protoreflect.ValueOfUint64(uint64(0))
+	case "zrchain.zenbtc.GenesisState.redemptions":
+		list := []*Redemption{}
+		return protoreflect.ValueOfList(&_GenesisState_10_list{list: &list})
+	case "zrchain.zenbtc.GenesisState.first_pending_redemption":
+		return protoreflect.ValueOfUint64(uint64(0))
+	case "zrchain.zenbtc.GenesisState.first_redemption_awaiting_sign":
+		return protoreflect.ValueOfUint64(uint64(0))
+	case "zrchain.zenbtc.GenesisState.supply":
+		m := new(Supply)
+		return protoreflect.ValueOfMessage(m.ProtoReflect())
+	case "zrchain.zenbtc.GenesisState.first_pending_stake_transaction":
+		return protoreflect.ValueOfUint64(uint64(0))
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: zrchain.zenbtc.GenesisState"))
@@ -286,6 +807,58 @@ func (x *fastReflection_GenesisState) ProtoMethods() *protoiface.Methods {
 			l = options.Size(x.Params)
 			n += 1 + l + runtime.Sov(uint64(l))
 		}
+		if len(x.LockTransactions) > 0 {
+			for _, e := range x.LockTransactions {
+				l = options.Size(e)
+				n += 1 + l + runtime.Sov(uint64(l))
+			}
+		}
+		if len(x.PendingMintTransactions) > 0 {
+			for _, e := range x.PendingMintTransactions {
+				l = options.Size(e)
+				n += 1 + l + runtime.Sov(uint64(l))
+			}
+		}
+		if x.FirstPendingEthMintTransaction != 0 {
+			n += 1 + runtime.Sov(uint64(x.FirstPendingEthMintTransaction))
+		}
+		if x.FirstPendingSolMintTransaction != 0 {
+			n += 1 + runtime.Sov(uint64(x.FirstPendingSolMintTransaction))
+		}
+		if x.PendingMintTransactionCount != 0 {
+			n += 1 + runtime.Sov(uint64(x.PendingMintTransactionCount))
+		}
+		if len(x.BurnEvents) > 0 {
+			for _, e := range x.BurnEvents {
+				l = options.Size(e)
+				n += 1 + l + runtime.Sov(uint64(l))
+			}
+		}
+		if x.FirstPendingBurnEvent != 0 {
+			n += 1 + runtime.Sov(uint64(x.FirstPendingBurnEvent))
+		}
+		if x.BurnEventCount != 0 {
+			n += 1 + runtime.Sov(uint64(x.BurnEventCount))
+		}
+		if len(x.Redemptions) > 0 {
+			for _, e := range x.Redemptions {
+				l = options.Size(e)
+				n += 1 + l + runtime.Sov(uint64(l))
+			}
+		}
+		if x.FirstPendingRedemption != 0 {
+			n += 1 + runtime.Sov(uint64(x.FirstPendingRedemption))
+		}
+		if x.FirstRedemptionAwaitingSign != 0 {
+			n += 1 + runtime.Sov(uint64(x.FirstRedemptionAwaitingSign))
+		}
+		if x.Supply != nil {
+			l = options.Size(x.Supply)
+			n += 1 + l + runtime.Sov(uint64(l))
+		}
+		if x.FirstPendingStakeTransaction != 0 {
+			n += 1 + runtime.Sov(uint64(x.FirstPendingStakeTransaction))
+		}
 		if x.unknownFields != nil {
 			n += len(x.unknownFields)
 		}
@@ -314,6 +887,124 @@ func (x *fastReflection_GenesisState) ProtoMethods() *protoiface.Methods {
 		if x.unknownFields != nil {
 			i -= len(x.unknownFields)
 			copy(dAtA[i:], x.unknownFields)
+		}
+		if x.FirstPendingStakeTransaction != 0 {
+			i = runtime.EncodeVarint(dAtA, i, uint64(x.FirstPendingStakeTransaction))
+			i--
+			dAtA[i] = 0x70
+		}
+		if x.Supply != nil {
+			encoded, err := options.Marshal(x.Supply)
+			if err != nil {
+				return protoiface.MarshalOutput{
+					NoUnkeyedLiterals: input.NoUnkeyedLiterals,
+					Buf:               input.Buf,
+				}, err
+			}
+			i -= len(encoded)
+			copy(dAtA[i:], encoded)
+			i = runtime.EncodeVarint(dAtA, i, uint64(len(encoded)))
+			i--
+			dAtA[i] = 0x6a
+		}
+		if x.FirstRedemptionAwaitingSign != 0 {
+			i = runtime.EncodeVarint(dAtA, i, uint64(x.FirstRedemptionAwaitingSign))
+			i--
+			dAtA[i] = 0x60
+		}
+		if x.FirstPendingRedemption != 0 {
+			i = runtime.EncodeVarint(dAtA, i, uint64(x.FirstPendingRedemption))
+			i--
+			dAtA[i] = 0x58
+		}
+		if len(x.Redemptions) > 0 {
+			for iNdEx := len(x.Redemptions) - 1; iNdEx >= 0; iNdEx-- {
+				encoded, err := options.Marshal(x.Redemptions[iNdEx])
+				if err != nil {
+					return protoiface.MarshalOutput{
+						NoUnkeyedLiterals: input.NoUnkeyedLiterals,
+						Buf:               input.Buf,
+					}, err
+				}
+				i -= len(encoded)
+				copy(dAtA[i:], encoded)
+				i = runtime.EncodeVarint(dAtA, i, uint64(len(encoded)))
+				i--
+				dAtA[i] = 0x52
+			}
+		}
+		if x.BurnEventCount != 0 {
+			i = runtime.EncodeVarint(dAtA, i, uint64(x.BurnEventCount))
+			i--
+			dAtA[i] = 0x48
+		}
+		if x.FirstPendingBurnEvent != 0 {
+			i = runtime.EncodeVarint(dAtA, i, uint64(x.FirstPendingBurnEvent))
+			i--
+			dAtA[i] = 0x40
+		}
+		if len(x.BurnEvents) > 0 {
+			for iNdEx := len(x.BurnEvents) - 1; iNdEx >= 0; iNdEx-- {
+				encoded, err := options.Marshal(x.BurnEvents[iNdEx])
+				if err != nil {
+					return protoiface.MarshalOutput{
+						NoUnkeyedLiterals: input.NoUnkeyedLiterals,
+						Buf:               input.Buf,
+					}, err
+				}
+				i -= len(encoded)
+				copy(dAtA[i:], encoded)
+				i = runtime.EncodeVarint(dAtA, i, uint64(len(encoded)))
+				i--
+				dAtA[i] = 0x3a
+			}
+		}
+		if x.PendingMintTransactionCount != 0 {
+			i = runtime.EncodeVarint(dAtA, i, uint64(x.PendingMintTransactionCount))
+			i--
+			dAtA[i] = 0x30
+		}
+		if x.FirstPendingSolMintTransaction != 0 {
+			i = runtime.EncodeVarint(dAtA, i, uint64(x.FirstPendingSolMintTransaction))
+			i--
+			dAtA[i] = 0x28
+		}
+		if x.FirstPendingEthMintTransaction != 0 {
+			i = runtime.EncodeVarint(dAtA, i, uint64(x.FirstPendingEthMintTransaction))
+			i--
+			dAtA[i] = 0x20
+		}
+		if len(x.PendingMintTransactions) > 0 {
+			for iNdEx := len(x.PendingMintTransactions) - 1; iNdEx >= 0; iNdEx-- {
+				encoded, err := options.Marshal(x.PendingMintTransactions[iNdEx])
+				if err != nil {
+					return protoiface.MarshalOutput{
+						NoUnkeyedLiterals: input.NoUnkeyedLiterals,
+						Buf:               input.Buf,
+					}, err
+				}
+				i -= len(encoded)
+				copy(dAtA[i:], encoded)
+				i = runtime.EncodeVarint(dAtA, i, uint64(len(encoded)))
+				i--
+				dAtA[i] = 0x1a
+			}
+		}
+		if len(x.LockTransactions) > 0 {
+			for iNdEx := len(x.LockTransactions) - 1; iNdEx >= 0; iNdEx-- {
+				encoded, err := options.Marshal(x.LockTransactions[iNdEx])
+				if err != nil {
+					return protoiface.MarshalOutput{
+						NoUnkeyedLiterals: input.NoUnkeyedLiterals,
+						Buf:               input.Buf,
+					}, err
+				}
+				i -= len(encoded)
+				copy(dAtA[i:], encoded)
+				i = runtime.EncodeVarint(dAtA, i, uint64(len(encoded)))
+				i--
+				dAtA[i] = 0x12
+			}
 		}
 		if x.Params != nil {
 			encoded, err := options.Marshal(x.Params)
@@ -414,6 +1105,330 @@ func (x *fastReflection_GenesisState) ProtoMethods() *protoiface.Methods {
 					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, err
 				}
 				iNdEx = postIndex
+			case 2:
+				if wireType != 2 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field LockTransactions", wireType)
+				}
+				var msglen int
+				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
+					}
+					if iNdEx >= l {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+					}
+					b := dAtA[iNdEx]
+					iNdEx++
+					msglen |= int(b&0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+				if msglen < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				postIndex := iNdEx + msglen
+				if postIndex < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				if postIndex > l {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+				}
+				x.LockTransactions = append(x.LockTransactions, &LockTransaction{})
+				if err := options.Unmarshal(dAtA[iNdEx:postIndex], x.LockTransactions[len(x.LockTransactions)-1]); err != nil {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, err
+				}
+				iNdEx = postIndex
+			case 3:
+				if wireType != 2 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field PendingMintTransactions", wireType)
+				}
+				var msglen int
+				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
+					}
+					if iNdEx >= l {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+					}
+					b := dAtA[iNdEx]
+					iNdEx++
+					msglen |= int(b&0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+				if msglen < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				postIndex := iNdEx + msglen
+				if postIndex < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				if postIndex > l {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+				}
+				x.PendingMintTransactions = append(x.PendingMintTransactions, &PendingMintTransaction{})
+				if err := options.Unmarshal(dAtA[iNdEx:postIndex], x.PendingMintTransactions[len(x.PendingMintTransactions)-1]); err != nil {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, err
+				}
+				iNdEx = postIndex
+			case 4:
+				if wireType != 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field FirstPendingEthMintTransaction", wireType)
+				}
+				x.FirstPendingEthMintTransaction = 0
+				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
+					}
+					if iNdEx >= l {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+					}
+					b := dAtA[iNdEx]
+					iNdEx++
+					x.FirstPendingEthMintTransaction |= uint64(b&0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+			case 5:
+				if wireType != 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field FirstPendingSolMintTransaction", wireType)
+				}
+				x.FirstPendingSolMintTransaction = 0
+				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
+					}
+					if iNdEx >= l {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+					}
+					b := dAtA[iNdEx]
+					iNdEx++
+					x.FirstPendingSolMintTransaction |= uint64(b&0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+			case 6:
+				if wireType != 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field PendingMintTransactionCount", wireType)
+				}
+				x.PendingMintTransactionCount = 0
+				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
+					}
+					if iNdEx >= l {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+					}
+					b := dAtA[iNdEx]
+					iNdEx++
+					x.PendingMintTransactionCount |= uint64(b&0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+			case 7:
+				if wireType != 2 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field BurnEvents", wireType)
+				}
+				var msglen int
+				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
+					}
+					if iNdEx >= l {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+					}
+					b := dAtA[iNdEx]
+					iNdEx++
+					msglen |= int(b&0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+				if msglen < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				postIndex := iNdEx + msglen
+				if postIndex < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				if postIndex > l {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+				}
+				x.BurnEvents = append(x.BurnEvents, &BurnEvent{})
+				if err := options.Unmarshal(dAtA[iNdEx:postIndex], x.BurnEvents[len(x.BurnEvents)-1]); err != nil {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, err
+				}
+				iNdEx = postIndex
+			case 8:
+				if wireType != 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field FirstPendingBurnEvent", wireType)
+				}
+				x.FirstPendingBurnEvent = 0
+				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
+					}
+					if iNdEx >= l {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+					}
+					b := dAtA[iNdEx]
+					iNdEx++
+					x.FirstPendingBurnEvent |= uint64(b&0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+			case 9:
+				if wireType != 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field BurnEventCount", wireType)
+				}
+				x.BurnEventCount = 0
+				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
+					}
+					if iNdEx >= l {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+					}
+					b := dAtA[iNdEx]
+					iNdEx++
+					x.BurnEventCount |= uint64(b&0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+			case 10:
+				if wireType != 2 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field Redemptions", wireType)
+				}
+				var msglen int
+				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
+					}
+					if iNdEx >= l {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+					}
+					b := dAtA[iNdEx]
+					iNdEx++
+					msglen |= int(b&0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+				if msglen < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				postIndex := iNdEx + msglen
+				if postIndex < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				if postIndex > l {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+				}
+				x.Redemptions = append(x.Redemptions, &Redemption{})
+				if err := options.Unmarshal(dAtA[iNdEx:postIndex], x.Redemptions[len(x.Redemptions)-1]); err != nil {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, err
+				}
+				iNdEx = postIndex
+			case 11:
+				if wireType != 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field FirstPendingRedemption", wireType)
+				}
+				x.FirstPendingRedemption = 0
+				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
+					}
+					if iNdEx >= l {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+					}
+					b := dAtA[iNdEx]
+					iNdEx++
+					x.FirstPendingRedemption |= uint64(b&0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+			case 12:
+				if wireType != 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field FirstRedemptionAwaitingSign", wireType)
+				}
+				x.FirstRedemptionAwaitingSign = 0
+				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
+					}
+					if iNdEx >= l {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+					}
+					b := dAtA[iNdEx]
+					iNdEx++
+					x.FirstRedemptionAwaitingSign |= uint64(b&0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+			case 13:
+				if wireType != 2 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field Supply", wireType)
+				}
+				var msglen int
+				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
+					}
+					if iNdEx >= l {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+					}
+					b := dAtA[iNdEx]
+					iNdEx++
+					msglen |= int(b&0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+				if msglen < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				postIndex := iNdEx + msglen
+				if postIndex < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				if postIndex > l {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+				}
+				if x.Supply == nil {
+					x.Supply = &Supply{}
+				}
+				if err := options.Unmarshal(dAtA[iNdEx:postIndex], x.Supply); err != nil {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, err
+				}
+				iNdEx = postIndex
+			case 14:
+				if wireType != 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field FirstPendingStakeTransaction", wireType)
+				}
+				x.FirstPendingStakeTransaction = 0
+				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
+					}
+					if iNdEx >= l {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+					}
+					b := dAtA[iNdEx]
+					iNdEx++
+					x.FirstPendingStakeTransaction |= uint64(b&0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
 			default:
 				iNdEx = preIndex
 				skippy, err := runtime.Skip(dAtA[iNdEx:])
@@ -470,6 +1485,32 @@ type GenesisState struct {
 
 	// params defines all the parameters of the module.
 	Params *Params `protobuf:"bytes,1,opt,name=params,proto3" json:"params,omitempty"`
+	// lock_transactions defines the lock transactions of the module.
+	LockTransactions []*LockTransaction `protobuf:"bytes,2,rep,name=lock_transactions,json=lockTransactions,proto3" json:"lock_transactions,omitempty"`
+	// pending_mint_transactions defines the pending mint transactions of the module.
+	PendingMintTransactions []*PendingMintTransaction `protobuf:"bytes,3,rep,name=pending_mint_transactions,json=pendingMintTransactions,proto3" json:"pending_mint_transactions,omitempty"`
+	// first_pending_eth_mint_transaction defines the first pending Ethereum mint transaction of the module.
+	FirstPendingEthMintTransaction uint64 `protobuf:"varint,4,opt,name=first_pending_eth_mint_transaction,json=firstPendingEthMintTransaction,proto3" json:"first_pending_eth_mint_transaction,omitempty"`
+	// first_pending_sol_mint_transaction defines the first pending Solana mint transaction of the module.
+	FirstPendingSolMintTransaction uint64 `protobuf:"varint,5,opt,name=first_pending_sol_mint_transaction,json=firstPendingSolMintTransaction,proto3" json:"first_pending_sol_mint_transaction,omitempty"`
+	// pending_mint_transaction_count defines the count of pending mint transactions of the module.
+	PendingMintTransactionCount uint64 `protobuf:"varint,6,opt,name=pending_mint_transaction_count,json=pendingMintTransactionCount,proto3" json:"pending_mint_transaction_count,omitempty"`
+	// burn_events defines the burn events of the module.
+	BurnEvents []*BurnEvent `protobuf:"bytes,7,rep,name=burn_events,json=burnEvents,proto3" json:"burn_events,omitempty"`
+	// first_pending_burn_event defines the first pending burn event of the module.
+	FirstPendingBurnEvent uint64 `protobuf:"varint,8,opt,name=first_pending_burn_event,json=firstPendingBurnEvent,proto3" json:"first_pending_burn_event,omitempty"`
+	// burn_event_count defines the count of burn events of the module.
+	BurnEventCount uint64 `protobuf:"varint,9,opt,name=burn_event_count,json=burnEventCount,proto3" json:"burn_event_count,omitempty"`
+	// redemptions defines the redemptions of the module.
+	Redemptions []*Redemption `protobuf:"bytes,10,rep,name=redemptions,proto3" json:"redemptions,omitempty"`
+	// first_pending_redemption defines the first pending redemption of the module.
+	FirstPendingRedemption uint64 `protobuf:"varint,11,opt,name=first_pending_redemption,json=firstPendingRedemption,proto3" json:"first_pending_redemption,omitempty"`
+	// first_redemption_awaiting_sign defines the first redemption awaiting sign of the module.
+	FirstRedemptionAwaitingSign uint64 `protobuf:"varint,12,opt,name=first_redemption_awaiting_sign,json=firstRedemptionAwaitingSign,proto3" json:"first_redemption_awaiting_sign,omitempty"`
+	// supply defines the supply of the module.
+	Supply *Supply `protobuf:"bytes,13,opt,name=supply,proto3" json:"supply,omitempty"`
+	// first_pending_stake_transaction defines the first pending stake transaction of the module.
+	FirstPendingStakeTransaction uint64 `protobuf:"varint,14,opt,name=first_pending_stake_transaction,json=firstPendingStakeTransaction,proto3" json:"first_pending_stake_transaction,omitempty"`
 }
 
 func (x *GenesisState) Reset() {
@@ -499,6 +1540,97 @@ func (x *GenesisState) GetParams() *Params {
 	return nil
 }
 
+func (x *GenesisState) GetLockTransactions() []*LockTransaction {
+	if x != nil {
+		return x.LockTransactions
+	}
+	return nil
+}
+
+func (x *GenesisState) GetPendingMintTransactions() []*PendingMintTransaction {
+	if x != nil {
+		return x.PendingMintTransactions
+	}
+	return nil
+}
+
+func (x *GenesisState) GetFirstPendingEthMintTransaction() uint64 {
+	if x != nil {
+		return x.FirstPendingEthMintTransaction
+	}
+	return 0
+}
+
+func (x *GenesisState) GetFirstPendingSolMintTransaction() uint64 {
+	if x != nil {
+		return x.FirstPendingSolMintTransaction
+	}
+	return 0
+}
+
+func (x *GenesisState) GetPendingMintTransactionCount() uint64 {
+	if x != nil {
+		return x.PendingMintTransactionCount
+	}
+	return 0
+}
+
+func (x *GenesisState) GetBurnEvents() []*BurnEvent {
+	if x != nil {
+		return x.BurnEvents
+	}
+	return nil
+}
+
+func (x *GenesisState) GetFirstPendingBurnEvent() uint64 {
+	if x != nil {
+		return x.FirstPendingBurnEvent
+	}
+	return 0
+}
+
+func (x *GenesisState) GetBurnEventCount() uint64 {
+	if x != nil {
+		return x.BurnEventCount
+	}
+	return 0
+}
+
+func (x *GenesisState) GetRedemptions() []*Redemption {
+	if x != nil {
+		return x.Redemptions
+	}
+	return nil
+}
+
+func (x *GenesisState) GetFirstPendingRedemption() uint64 {
+	if x != nil {
+		return x.FirstPendingRedemption
+	}
+	return 0
+}
+
+func (x *GenesisState) GetFirstRedemptionAwaitingSign() uint64 {
+	if x != nil {
+		return x.FirstRedemptionAwaitingSign
+	}
+	return 0
+}
+
+func (x *GenesisState) GetSupply() *Supply {
+	if x != nil {
+		return x.Supply
+	}
+	return nil
+}
+
+func (x *GenesisState) GetFirstPendingStakeTransaction() uint64 {
+	if x != nil {
+		return x.FirstPendingStakeTransaction
+	}
+	return 0
+}
+
 var File_zrchain_zenbtc_genesis_proto protoreflect.FileDescriptor
 
 var file_zrchain_zenbtc_genesis_proto_rawDesc = []byte{
@@ -509,22 +1641,85 @@ var file_zrchain_zenbtc_genesis_proto_rawDesc = []byte{
 	0x6f, 0x1a, 0x14, 0x67, 0x6f, 0x67, 0x6f, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2f, 0x67, 0x6f, 0x67,
 	0x6f, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x1a, 0x1b, 0x7a, 0x72, 0x63, 0x68, 0x61, 0x69, 0x6e,
 	0x2f, 0x7a, 0x65, 0x6e, 0x62, 0x74, 0x63, 0x2f, 0x70, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x2e, 0x70,
-	0x72, 0x6f, 0x74, 0x6f, 0x22, 0x49, 0x0a, 0x0c, 0x47, 0x65, 0x6e, 0x65, 0x73, 0x69, 0x73, 0x53,
-	0x74, 0x61, 0x74, 0x65, 0x12, 0x39, 0x0a, 0x06, 0x70, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x18, 0x01,
-	0x20, 0x01, 0x28, 0x0b, 0x32, 0x16, 0x2e, 0x7a, 0x72, 0x63, 0x68, 0x61, 0x69, 0x6e, 0x2e, 0x7a,
-	0x65, 0x6e, 0x62, 0x74, 0x63, 0x2e, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x42, 0x09, 0xc8, 0xde,
-	0x1f, 0x00, 0xa8, 0xe7, 0xb0, 0x2a, 0x01, 0x52, 0x06, 0x70, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x42,
-	0x9c, 0x01, 0x0a, 0x12, 0x63, 0x6f, 0x6d, 0x2e, 0x7a, 0x72, 0x63, 0x68, 0x61, 0x69, 0x6e, 0x2e,
-	0x7a, 0x65, 0x6e, 0x62, 0x74, 0x63, 0x42, 0x0c, 0x47, 0x65, 0x6e, 0x65, 0x73, 0x69, 0x73, 0x50,
-	0x72, 0x6f, 0x74, 0x6f, 0x50, 0x01, 0x5a, 0x1f, 0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x73, 0x64,
-	0x6b, 0x2e, 0x69, 0x6f, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x7a, 0x72, 0x63, 0x68, 0x61, 0x69, 0x6e,
-	0x2f, 0x7a, 0x65, 0x6e, 0x62, 0x74, 0x63, 0xa2, 0x02, 0x03, 0x5a, 0x5a, 0x58, 0xaa, 0x02, 0x0e,
-	0x5a, 0x72, 0x63, 0x68, 0x61, 0x69, 0x6e, 0x2e, 0x5a, 0x65, 0x6e, 0x62, 0x74, 0x63, 0xca, 0x02,
-	0x0e, 0x5a, 0x72, 0x63, 0x68, 0x61, 0x69, 0x6e, 0x5c, 0x5a, 0x65, 0x6e, 0x62, 0x74, 0x63, 0xe2,
-	0x02, 0x1a, 0x5a, 0x72, 0x63, 0x68, 0x61, 0x69, 0x6e, 0x5c, 0x5a, 0x65, 0x6e, 0x62, 0x74, 0x63,
-	0x5c, 0x47, 0x50, 0x42, 0x4d, 0x65, 0x74, 0x61, 0x64, 0x61, 0x74, 0x61, 0xea, 0x02, 0x0f, 0x5a,
-	0x72, 0x63, 0x68, 0x61, 0x69, 0x6e, 0x3a, 0x3a, 0x5a, 0x65, 0x6e, 0x62, 0x74, 0x63, 0x62, 0x06,
-	0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x72, 0x6f, 0x74, 0x6f, 0x1a, 0x1b, 0x7a, 0x72, 0x63, 0x68, 0x61, 0x69, 0x6e, 0x2f, 0x7a, 0x65,
+	0x6e, 0x62, 0x74, 0x63, 0x2f, 0x73, 0x75, 0x70, 0x70, 0x6c, 0x79, 0x2e, 0x70, 0x72, 0x6f, 0x74,
+	0x6f, 0x1a, 0x20, 0x7a, 0x72, 0x63, 0x68, 0x61, 0x69, 0x6e, 0x2f, 0x7a, 0x65, 0x6e, 0x62, 0x74,
+	0x63, 0x2f, 0x72, 0x65, 0x64, 0x65, 0x6d, 0x70, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x2e, 0x70, 0x72,
+	0x6f, 0x74, 0x6f, 0x1a, 0x19, 0x7a, 0x72, 0x63, 0x68, 0x61, 0x69, 0x6e, 0x2f, 0x7a, 0x65, 0x6e,
+	0x62, 0x74, 0x63, 0x2f, 0x6d, 0x69, 0x6e, 0x74, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x22, 0xe2,
+	0x07, 0x0a, 0x0c, 0x47, 0x65, 0x6e, 0x65, 0x73, 0x69, 0x73, 0x53, 0x74, 0x61, 0x74, 0x65, 0x12,
+	0x39, 0x0a, 0x06, 0x70, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32,
+	0x16, 0x2e, 0x7a, 0x72, 0x63, 0x68, 0x61, 0x69, 0x6e, 0x2e, 0x7a, 0x65, 0x6e, 0x62, 0x74, 0x63,
+	0x2e, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x42, 0x09, 0xc8, 0xde, 0x1f, 0x00, 0xa8, 0xe7, 0xb0,
+	0x2a, 0x01, 0x52, 0x06, 0x70, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x12, 0x57, 0x0a, 0x11, 0x6c, 0x6f,
+	0x63, 0x6b, 0x5f, 0x74, 0x72, 0x61, 0x6e, 0x73, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x18,
+	0x02, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x1f, 0x2e, 0x7a, 0x72, 0x63, 0x68, 0x61, 0x69, 0x6e, 0x2e,
+	0x7a, 0x65, 0x6e, 0x62, 0x74, 0x63, 0x2e, 0x4c, 0x6f, 0x63, 0x6b, 0x54, 0x72, 0x61, 0x6e, 0x73,
+	0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x42, 0x09, 0xc8, 0xde, 0x1f, 0x00, 0xa8, 0xe7, 0xb0, 0x2a,
+	0x01, 0x52, 0x10, 0x6c, 0x6f, 0x63, 0x6b, 0x54, 0x72, 0x61, 0x6e, 0x73, 0x61, 0x63, 0x74, 0x69,
+	0x6f, 0x6e, 0x73, 0x12, 0x6d, 0x0a, 0x19, 0x70, 0x65, 0x6e, 0x64, 0x69, 0x6e, 0x67, 0x5f, 0x6d,
+	0x69, 0x6e, 0x74, 0x5f, 0x74, 0x72, 0x61, 0x6e, 0x73, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x73,
+	0x18, 0x03, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x26, 0x2e, 0x7a, 0x72, 0x63, 0x68, 0x61, 0x69, 0x6e,
+	0x2e, 0x7a, 0x65, 0x6e, 0x62, 0x74, 0x63, 0x2e, 0x50, 0x65, 0x6e, 0x64, 0x69, 0x6e, 0x67, 0x4d,
+	0x69, 0x6e, 0x74, 0x54, 0x72, 0x61, 0x6e, 0x73, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x42, 0x09,
+	0xc8, 0xde, 0x1f, 0x00, 0xa8, 0xe7, 0xb0, 0x2a, 0x01, 0x52, 0x17, 0x70, 0x65, 0x6e, 0x64, 0x69,
+	0x6e, 0x67, 0x4d, 0x69, 0x6e, 0x74, 0x54, 0x72, 0x61, 0x6e, 0x73, 0x61, 0x63, 0x74, 0x69, 0x6f,
+	0x6e, 0x73, 0x12, 0x4a, 0x0a, 0x22, 0x66, 0x69, 0x72, 0x73, 0x74, 0x5f, 0x70, 0x65, 0x6e, 0x64,
+	0x69, 0x6e, 0x67, 0x5f, 0x65, 0x74, 0x68, 0x5f, 0x6d, 0x69, 0x6e, 0x74, 0x5f, 0x74, 0x72, 0x61,
+	0x6e, 0x73, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x18, 0x04, 0x20, 0x01, 0x28, 0x04, 0x52, 0x1e,
+	0x66, 0x69, 0x72, 0x73, 0x74, 0x50, 0x65, 0x6e, 0x64, 0x69, 0x6e, 0x67, 0x45, 0x74, 0x68, 0x4d,
+	0x69, 0x6e, 0x74, 0x54, 0x72, 0x61, 0x6e, 0x73, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x12, 0x4a,
+	0x0a, 0x22, 0x66, 0x69, 0x72, 0x73, 0x74, 0x5f, 0x70, 0x65, 0x6e, 0x64, 0x69, 0x6e, 0x67, 0x5f,
+	0x73, 0x6f, 0x6c, 0x5f, 0x6d, 0x69, 0x6e, 0x74, 0x5f, 0x74, 0x72, 0x61, 0x6e, 0x73, 0x61, 0x63,
+	0x74, 0x69, 0x6f, 0x6e, 0x18, 0x05, 0x20, 0x01, 0x28, 0x04, 0x52, 0x1e, 0x66, 0x69, 0x72, 0x73,
+	0x74, 0x50, 0x65, 0x6e, 0x64, 0x69, 0x6e, 0x67, 0x53, 0x6f, 0x6c, 0x4d, 0x69, 0x6e, 0x74, 0x54,
+	0x72, 0x61, 0x6e, 0x73, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x12, 0x43, 0x0a, 0x1e, 0x70, 0x65,
+	0x6e, 0x64, 0x69, 0x6e, 0x67, 0x5f, 0x6d, 0x69, 0x6e, 0x74, 0x5f, 0x74, 0x72, 0x61, 0x6e, 0x73,
+	0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x5f, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x18, 0x06, 0x20, 0x01,
+	0x28, 0x04, 0x52, 0x1b, 0x70, 0x65, 0x6e, 0x64, 0x69, 0x6e, 0x67, 0x4d, 0x69, 0x6e, 0x74, 0x54,
+	0x72, 0x61, 0x6e, 0x73, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x43, 0x6f, 0x75, 0x6e, 0x74, 0x12,
+	0x45, 0x0a, 0x0b, 0x62, 0x75, 0x72, 0x6e, 0x5f, 0x65, 0x76, 0x65, 0x6e, 0x74, 0x73, 0x18, 0x07,
+	0x20, 0x03, 0x28, 0x0b, 0x32, 0x19, 0x2e, 0x7a, 0x72, 0x63, 0x68, 0x61, 0x69, 0x6e, 0x2e, 0x7a,
+	0x65, 0x6e, 0x62, 0x74, 0x63, 0x2e, 0x42, 0x75, 0x72, 0x6e, 0x45, 0x76, 0x65, 0x6e, 0x74, 0x42,
+	0x09, 0xc8, 0xde, 0x1f, 0x00, 0xa8, 0xe7, 0xb0, 0x2a, 0x01, 0x52, 0x0a, 0x62, 0x75, 0x72, 0x6e,
+	0x45, 0x76, 0x65, 0x6e, 0x74, 0x73, 0x12, 0x37, 0x0a, 0x18, 0x66, 0x69, 0x72, 0x73, 0x74, 0x5f,
+	0x70, 0x65, 0x6e, 0x64, 0x69, 0x6e, 0x67, 0x5f, 0x62, 0x75, 0x72, 0x6e, 0x5f, 0x65, 0x76, 0x65,
+	0x6e, 0x74, 0x18, 0x08, 0x20, 0x01, 0x28, 0x04, 0x52, 0x15, 0x66, 0x69, 0x72, 0x73, 0x74, 0x50,
+	0x65, 0x6e, 0x64, 0x69, 0x6e, 0x67, 0x42, 0x75, 0x72, 0x6e, 0x45, 0x76, 0x65, 0x6e, 0x74, 0x12,
+	0x28, 0x0a, 0x10, 0x62, 0x75, 0x72, 0x6e, 0x5f, 0x65, 0x76, 0x65, 0x6e, 0x74, 0x5f, 0x63, 0x6f,
+	0x75, 0x6e, 0x74, 0x18, 0x09, 0x20, 0x01, 0x28, 0x04, 0x52, 0x0e, 0x62, 0x75, 0x72, 0x6e, 0x45,
+	0x76, 0x65, 0x6e, 0x74, 0x43, 0x6f, 0x75, 0x6e, 0x74, 0x12, 0x47, 0x0a, 0x0b, 0x72, 0x65, 0x64,
+	0x65, 0x6d, 0x70, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x18, 0x0a, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x1a,
+	0x2e, 0x7a, 0x72, 0x63, 0x68, 0x61, 0x69, 0x6e, 0x2e, 0x7a, 0x65, 0x6e, 0x62, 0x74, 0x63, 0x2e,
+	0x52, 0x65, 0x64, 0x65, 0x6d, 0x70, 0x74, 0x69, 0x6f, 0x6e, 0x42, 0x09, 0xc8, 0xde, 0x1f, 0x00,
+	0xa8, 0xe7, 0xb0, 0x2a, 0x01, 0x52, 0x0b, 0x72, 0x65, 0x64, 0x65, 0x6d, 0x70, 0x74, 0x69, 0x6f,
+	0x6e, 0x73, 0x12, 0x38, 0x0a, 0x18, 0x66, 0x69, 0x72, 0x73, 0x74, 0x5f, 0x70, 0x65, 0x6e, 0x64,
+	0x69, 0x6e, 0x67, 0x5f, 0x72, 0x65, 0x64, 0x65, 0x6d, 0x70, 0x74, 0x69, 0x6f, 0x6e, 0x18, 0x0b,
+	0x20, 0x01, 0x28, 0x04, 0x52, 0x16, 0x66, 0x69, 0x72, 0x73, 0x74, 0x50, 0x65, 0x6e, 0x64, 0x69,
+	0x6e, 0x67, 0x52, 0x65, 0x64, 0x65, 0x6d, 0x70, 0x74, 0x69, 0x6f, 0x6e, 0x12, 0x43, 0x0a, 0x1e,
+	0x66, 0x69, 0x72, 0x73, 0x74, 0x5f, 0x72, 0x65, 0x64, 0x65, 0x6d, 0x70, 0x74, 0x69, 0x6f, 0x6e,
+	0x5f, 0x61, 0x77, 0x61, 0x69, 0x74, 0x69, 0x6e, 0x67, 0x5f, 0x73, 0x69, 0x67, 0x6e, 0x18, 0x0c,
+	0x20, 0x01, 0x28, 0x04, 0x52, 0x1b, 0x66, 0x69, 0x72, 0x73, 0x74, 0x52, 0x65, 0x64, 0x65, 0x6d,
+	0x70, 0x74, 0x69, 0x6f, 0x6e, 0x41, 0x77, 0x61, 0x69, 0x74, 0x69, 0x6e, 0x67, 0x53, 0x69, 0x67,
+	0x6e, 0x12, 0x39, 0x0a, 0x06, 0x73, 0x75, 0x70, 0x70, 0x6c, 0x79, 0x18, 0x0d, 0x20, 0x01, 0x28,
+	0x0b, 0x32, 0x16, 0x2e, 0x7a, 0x72, 0x63, 0x68, 0x61, 0x69, 0x6e, 0x2e, 0x7a, 0x65, 0x6e, 0x62,
+	0x74, 0x63, 0x2e, 0x53, 0x75, 0x70, 0x70, 0x6c, 0x79, 0x42, 0x09, 0xc8, 0xde, 0x1f, 0x00, 0xa8,
+	0xe7, 0xb0, 0x2a, 0x01, 0x52, 0x06, 0x73, 0x75, 0x70, 0x70, 0x6c, 0x79, 0x12, 0x45, 0x0a, 0x1f,
+	0x66, 0x69, 0x72, 0x73, 0x74, 0x5f, 0x70, 0x65, 0x6e, 0x64, 0x69, 0x6e, 0x67, 0x5f, 0x73, 0x74,
+	0x61, 0x6b, 0x65, 0x5f, 0x74, 0x72, 0x61, 0x6e, 0x73, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x18,
+	0x0e, 0x20, 0x01, 0x28, 0x04, 0x52, 0x1c, 0x66, 0x69, 0x72, 0x73, 0x74, 0x50, 0x65, 0x6e, 0x64,
+	0x69, 0x6e, 0x67, 0x53, 0x74, 0x61, 0x6b, 0x65, 0x54, 0x72, 0x61, 0x6e, 0x73, 0x61, 0x63, 0x74,
+	0x69, 0x6f, 0x6e, 0x42, 0x9c, 0x01, 0x0a, 0x12, 0x63, 0x6f, 0x6d, 0x2e, 0x7a, 0x72, 0x63, 0x68,
+	0x61, 0x69, 0x6e, 0x2e, 0x7a, 0x65, 0x6e, 0x62, 0x74, 0x63, 0x42, 0x0c, 0x47, 0x65, 0x6e, 0x65,
+	0x73, 0x69, 0x73, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x50, 0x01, 0x5a, 0x1f, 0x63, 0x6f, 0x73, 0x6d,
+	0x6f, 0x73, 0x73, 0x64, 0x6b, 0x2e, 0x69, 0x6f, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x7a, 0x72, 0x63,
+	0x68, 0x61, 0x69, 0x6e, 0x2f, 0x7a, 0x65, 0x6e, 0x62, 0x74, 0x63, 0xa2, 0x02, 0x03, 0x5a, 0x5a,
+	0x58, 0xaa, 0x02, 0x0e, 0x5a, 0x72, 0x63, 0x68, 0x61, 0x69, 0x6e, 0x2e, 0x5a, 0x65, 0x6e, 0x62,
+	0x74, 0x63, 0xca, 0x02, 0x0e, 0x5a, 0x72, 0x63, 0x68, 0x61, 0x69, 0x6e, 0x5c, 0x5a, 0x65, 0x6e,
+	0x62, 0x74, 0x63, 0xe2, 0x02, 0x1a, 0x5a, 0x72, 0x63, 0x68, 0x61, 0x69, 0x6e, 0x5c, 0x5a, 0x65,
+	0x6e, 0x62, 0x74, 0x63, 0x5c, 0x47, 0x50, 0x42, 0x4d, 0x65, 0x74, 0x61, 0x64, 0x61, 0x74, 0x61,
+	0xea, 0x02, 0x0f, 0x5a, 0x72, 0x63, 0x68, 0x61, 0x69, 0x6e, 0x3a, 0x3a, 0x5a, 0x65, 0x6e, 0x62,
+	0x74, 0x63, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -541,16 +1736,26 @@ func file_zrchain_zenbtc_genesis_proto_rawDescGZIP() []byte {
 
 var file_zrchain_zenbtc_genesis_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
 var file_zrchain_zenbtc_genesis_proto_goTypes = []interface{}{
-	(*GenesisState)(nil), // 0: zrchain.zenbtc.GenesisState
-	(*Params)(nil),       // 1: zrchain.zenbtc.Params
+	(*GenesisState)(nil),           // 0: zrchain.zenbtc.GenesisState
+	(*Params)(nil),                 // 1: zrchain.zenbtc.Params
+	(*LockTransaction)(nil),        // 2: zrchain.zenbtc.LockTransaction
+	(*PendingMintTransaction)(nil), // 3: zrchain.zenbtc.PendingMintTransaction
+	(*BurnEvent)(nil),              // 4: zrchain.zenbtc.BurnEvent
+	(*Redemption)(nil),             // 5: zrchain.zenbtc.Redemption
+	(*Supply)(nil),                 // 6: zrchain.zenbtc.Supply
 }
 var file_zrchain_zenbtc_genesis_proto_depIdxs = []int32{
 	1, // 0: zrchain.zenbtc.GenesisState.params:type_name -> zrchain.zenbtc.Params
-	1, // [1:1] is the sub-list for method output_type
-	1, // [1:1] is the sub-list for method input_type
-	1, // [1:1] is the sub-list for extension type_name
-	1, // [1:1] is the sub-list for extension extendee
-	0, // [0:1] is the sub-list for field type_name
+	2, // 1: zrchain.zenbtc.GenesisState.lock_transactions:type_name -> zrchain.zenbtc.LockTransaction
+	3, // 2: zrchain.zenbtc.GenesisState.pending_mint_transactions:type_name -> zrchain.zenbtc.PendingMintTransaction
+	4, // 3: zrchain.zenbtc.GenesisState.burn_events:type_name -> zrchain.zenbtc.BurnEvent
+	5, // 4: zrchain.zenbtc.GenesisState.redemptions:type_name -> zrchain.zenbtc.Redemption
+	6, // 5: zrchain.zenbtc.GenesisState.supply:type_name -> zrchain.zenbtc.Supply
+	6, // [6:6] is the sub-list for method output_type
+	6, // [6:6] is the sub-list for method input_type
+	6, // [6:6] is the sub-list for extension type_name
+	6, // [6:6] is the sub-list for extension extendee
+	0, // [0:6] is the sub-list for field type_name
 }
 
 func init() { file_zrchain_zenbtc_genesis_proto_init() }
@@ -559,6 +1764,9 @@ func file_zrchain_zenbtc_genesis_proto_init() {
 		return
 	}
 	file_zrchain_zenbtc_params_proto_init()
+	file_zrchain_zenbtc_supply_proto_init()
+	file_zrchain_zenbtc_redemptions_proto_init()
+	file_zrchain_zenbtc_mint_proto_init()
 	if !protoimpl.UnsafeEnabled {
 		file_zrchain_zenbtc_genesis_proto_msgTypes[0].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*GenesisState); i {

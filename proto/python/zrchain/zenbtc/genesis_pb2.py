@@ -25,9 +25,12 @@ _sym_db = _symbol_database.Default()
 from amino import amino_pb2 as amino_dot_amino__pb2
 from gogoproto import gogo_pb2 as gogoproto_dot_gogo__pb2
 from zrchain.zenbtc import params_pb2 as zrchain_dot_zenbtc_dot_params__pb2
+from zrchain.zenbtc import supply_pb2 as zrchain_dot_zenbtc_dot_supply__pb2
+from zrchain.zenbtc import redemptions_pb2 as zrchain_dot_zenbtc_dot_redemptions__pb2
+from zrchain.zenbtc import mint_pb2 as zrchain_dot_zenbtc_dot_mint__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x1czrchain/zenbtc/genesis.proto\x12\x0ezrchain.zenbtc\x1a\x11\x61mino/amino.proto\x1a\x14gogoproto/gogo.proto\x1a\x1bzrchain/zenbtc/params.proto\"I\n\x0cGenesisState\x12\x39\n\x06params\x18\x01 \x01(\x0b\x32\x16.zrchain.zenbtc.ParamsB\t\xc8\xde\x1f\x00\xa8\xe7\xb0*\x01R\x06paramsB.Z,github.com/zenrocklabs/zenbtc/x/zenbtc/typesb\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x1czrchain/zenbtc/genesis.proto\x12\x0ezrchain.zenbtc\x1a\x11\x61mino/amino.proto\x1a\x14gogoproto/gogo.proto\x1a\x1bzrchain/zenbtc/params.proto\x1a\x1bzrchain/zenbtc/supply.proto\x1a zrchain/zenbtc/redemptions.proto\x1a\x19zrchain/zenbtc/mint.proto\"\xe2\x07\n\x0cGenesisState\x12\x39\n\x06params\x18\x01 \x01(\x0b\x32\x16.zrchain.zenbtc.ParamsB\t\xc8\xde\x1f\x00\xa8\xe7\xb0*\x01R\x06params\x12W\n\x11lock_transactions\x18\x02 \x03(\x0b\x32\x1f.zrchain.zenbtc.LockTransactionB\t\xc8\xde\x1f\x00\xa8\xe7\xb0*\x01R\x10lockTransactions\x12m\n\x19pending_mint_transactions\x18\x03 \x03(\x0b\x32&.zrchain.zenbtc.PendingMintTransactionB\t\xc8\xde\x1f\x00\xa8\xe7\xb0*\x01R\x17pendingMintTransactions\x12J\n\"first_pending_eth_mint_transaction\x18\x04 \x01(\x04R\x1e\x66irstPendingEthMintTransaction\x12J\n\"first_pending_sol_mint_transaction\x18\x05 \x01(\x04R\x1e\x66irstPendingSolMintTransaction\x12\x43\n\x1epending_mint_transaction_count\x18\x06 \x01(\x04R\x1bpendingMintTransactionCount\x12\x45\n\x0b\x62urn_events\x18\x07 \x03(\x0b\x32\x19.zrchain.zenbtc.BurnEventB\t\xc8\xde\x1f\x00\xa8\xe7\xb0*\x01R\nburnEvents\x12\x37\n\x18\x66irst_pending_burn_event\x18\x08 \x01(\x04R\x15\x66irstPendingBurnEvent\x12(\n\x10\x62urn_event_count\x18\t \x01(\x04R\x0e\x62urnEventCount\x12G\n\x0bredemptions\x18\n \x03(\x0b\x32\x1a.zrchain.zenbtc.RedemptionB\t\xc8\xde\x1f\x00\xa8\xe7\xb0*\x01R\x0bredemptions\x12\x38\n\x18\x66irst_pending_redemption\x18\x0b \x01(\x04R\x16\x66irstPendingRedemption\x12\x43\n\x1e\x66irst_redemption_awaiting_sign\x18\x0c \x01(\x04R\x1b\x66irstRedemptionAwaitingSign\x12\x39\n\x06supply\x18\r \x01(\x0b\x32\x16.zrchain.zenbtc.SupplyB\t\xc8\xde\x1f\x00\xa8\xe7\xb0*\x01R\x06supply\x12\x45\n\x1f\x66irst_pending_stake_transaction\x18\x0e \x01(\x04R\x1c\x66irstPendingStakeTransactionB.Z,github.com/zenrocklabs/zenbtc/x/zenbtc/typesb\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
@@ -37,6 +40,16 @@ if not _descriptor._USE_C_DESCRIPTORS:
   _globals['DESCRIPTOR']._serialized_options = b'Z,github.com/zenrocklabs/zenbtc/x/zenbtc/types'
   _globals['_GENESISSTATE'].fields_by_name['params']._loaded_options = None
   _globals['_GENESISSTATE'].fields_by_name['params']._serialized_options = b'\310\336\037\000\250\347\260*\001'
-  _globals['_GENESISSTATE']._serialized_start=118
-  _globals['_GENESISSTATE']._serialized_end=191
+  _globals['_GENESISSTATE'].fields_by_name['lock_transactions']._loaded_options = None
+  _globals['_GENESISSTATE'].fields_by_name['lock_transactions']._serialized_options = b'\310\336\037\000\250\347\260*\001'
+  _globals['_GENESISSTATE'].fields_by_name['pending_mint_transactions']._loaded_options = None
+  _globals['_GENESISSTATE'].fields_by_name['pending_mint_transactions']._serialized_options = b'\310\336\037\000\250\347\260*\001'
+  _globals['_GENESISSTATE'].fields_by_name['burn_events']._loaded_options = None
+  _globals['_GENESISSTATE'].fields_by_name['burn_events']._serialized_options = b'\310\336\037\000\250\347\260*\001'
+  _globals['_GENESISSTATE'].fields_by_name['redemptions']._loaded_options = None
+  _globals['_GENESISSTATE'].fields_by_name['redemptions']._serialized_options = b'\310\336\037\000\250\347\260*\001'
+  _globals['_GENESISSTATE'].fields_by_name['supply']._loaded_options = None
+  _globals['_GENESISSTATE'].fields_by_name['supply']._serialized_options = b'\310\336\037\000\250\347\260*\001'
+  _globals['_GENESISSTATE']._serialized_start=209
+  _globals['_GENESISSTATE']._serialized_end=1203
 # @@protoc_insertion_point(module_scope)
