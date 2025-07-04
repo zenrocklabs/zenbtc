@@ -237,7 +237,7 @@ func WalletTypeFromChainName(msg *types.MsgVerifyDepositBlockInclusion) treasury
 	switch msg.ChainName {
 	case "mainnet":
 		return treasurytypes.WalletType_WALLET_TYPE_BTC_MAINNET
-	case "regtest":
+	case "regtest", "regnet":
 		return treasurytypes.WalletType_WALLET_TYPE_BTC_REGNET
 	case "testnet", "testnet3", "testnet4":
 		return treasurytypes.WalletType_WALLET_TYPE_BTC_TESTNET
