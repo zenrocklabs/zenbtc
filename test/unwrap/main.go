@@ -10,6 +10,7 @@ import (
 	"os"
 	"strings"
 
+	"github.com/VenimirPetkov/goem/ethereum"
 	"github.com/btcsuite/btcd/chaincfg"
 	"github.com/btcsuite/btcutil"
 	"github.com/btcsuite/btcutil/bech32"
@@ -18,10 +19,6 @@ import (
 	"github.com/ethereum/go-ethereum/crypto"
 	"github.com/ethereum/go-ethereum/ethclient"
 	bindings "github.com/zenrocklabs/zenbtc/bindings"
-)
-
-const (
-	HOLESKY_CHAIN_ID = 17000
 )
 
 func main() {
@@ -46,13 +43,13 @@ func main() {
 		log.Fatalf("Failed to connect to Ethereum client: %v", err)
 	}
 
-	// Verify we're on Holesky
+	// Verify we're on Hoodi
 	chainID, err := client.ChainID(context.Background())
 	if err != nil {
 		log.Fatalf("Failed to get chain ID: %v", err)
 	}
-	if chainID.Int64() != HOLESKY_CHAIN_ID {
-		log.Fatalf("Wrong network: expected Holesky (chain ID %d), got chain ID %d", HOLESKY_CHAIN_ID, chainID.Int64())
+	if chainID.Cmp(ethereum.HoodiChainId) != 0 {
+		log.Fatalf("Wrong network: expected Hoodi (chain ID %s), got chain ID %s", ethereum.HoodiChainId.String(), chainID.String())
 	}
 
 	// Process private key
@@ -71,7 +68,7 @@ func main() {
 	address := crypto.PubkeyToAddress(*publicKeyECDSA)
 
 	// Create auth
-	auth, err := bind.NewKeyedTransactorWithChainID(privateKey, big.NewInt(HOLESKY_CHAIN_ID))
+	auth, err := bind.NewKeyedTransactorWithChainID(privateKey, ethereum.HoodiChainId)
 	if err != nil {
 		log.Fatalf("Failed to create auth: %v", err)
 	}
