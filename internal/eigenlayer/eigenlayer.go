@@ -110,7 +110,7 @@ var (
 			ELRewardsCoordinatorAddress: "0x29e8572678e0c272350aa0b4B8f304E47EBcd5e7",
 			RockBTCAddress:              "0xA7AdF06a1D3a2CA827D4EddA96a1520054713E1c",
 			RockBTCStrategyAddress:      "0xA0119075188e7add0D885a14981B9EF300865D0c",
-			ProofStoreBaseURL:           "https://eigenlabs-rewards-testnet-hoodi.s3.amazonaws.com", // TODO: Update when we have the actual Hoodi URL
+			ProofStoreBaseURL:           "https://eigenlabs-rewards-testnet-hoodi.s3.amazonaws.com",
 		},
 	}
 )
