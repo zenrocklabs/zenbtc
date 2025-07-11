@@ -8,6 +8,7 @@ import (
 	"time"
 
 	"github.com/pkg/errors"
+	"github.com/zenrocklabs/goem/ethereum"
 	"github.com/zenrocklabs/zenbtc/internal/chain"
 
 	"github.com/ethereum/go-ethereum/common"
@@ -57,6 +58,9 @@ func NewEigenlayerClient(logger eigensdkLogger.Logger, ethClient *ethclient.Clie
 	if chainId.Int64() == MainnetChainId {
 		networkname = "mainnet"
 		environment = "prod"
+	} else if chainId.Int64() == HoodiChainId {
+		networkname = "hoodi"
+		environment = "testnet"
 	}
 
 	return &eigenlayerClient{
@@ -79,8 +83,9 @@ type ChainMetadata struct {
 }
 
 var (
-	MainnetChainId int64 = 1
-	HoleskyChainId int64 = 17000
+	MainnetChainId int64 = ethereum.MainnetChainId.Int64()
+	HoleskyChainId int64 = ethereum.HoleskyChainId.Int64()
+	HoodiChainId   int64 = ethereum.HoodiChainId.Int64()
 
 	ChainMetadataMap = map[int64]ChainMetadata{
 		MainnetChainId: {
@@ -98,6 +103,14 @@ var (
 			RockBTCAddress:              "0x863062D86e42Dd0BAC3E59B3847f86a862392514",
 			RockBTCStrategyAddress:      "0x909C0e4284F6F3cD5c0a807071C7c0DE3Bbd7585",
 			ProofStoreBaseURL:           "https://eigenlabs-rewards-testnet-holesky.s3.amazonaws.com",
+		},
+		HoodiChainId: {
+			DelegationManagerAddress:    "0x867837a9722C512e0862d8c2E15b8bE220E8b87d",
+			AVSDirectoryAddress:         "0xD58f6844f79eB1fbd9f7091d05f7cb30d3363926",
+			ELRewardsCoordinatorAddress: "0x29e8572678e0c272350aa0b4B8f304E47EBcd5e7",
+			RockBTCAddress:              "0xA7AdF06a1D3a2CA827D4EddA96a1520054713E1c",
+			RockBTCStrategyAddress:      "0xA0119075188e7add0D885a14981B9EF300865D0c",
+			ProofStoreBaseURL:           "https://eigenlabs-rewards-testnet-hoodi.s3.amazonaws.com",
 		},
 	}
 )
