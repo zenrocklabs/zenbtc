@@ -10,7 +10,6 @@ import (
 	"os"
 	"strings"
 
-	"github.com/VenimirPetkov/goem/ethereum"
 	"github.com/btcsuite/btcd/chaincfg"
 	"github.com/btcsuite/btcutil"
 	"github.com/btcsuite/btcutil/bech32"
@@ -18,6 +17,7 @@ import (
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/crypto"
 	"github.com/ethereum/go-ethereum/ethclient"
+	"github.com/zenrocklabs/goem/ethereum"
 	bindings "github.com/zenrocklabs/zenbtc/bindings"
 )
 
