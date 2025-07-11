@@ -108,8 +108,8 @@ var (
 			DelegationManagerAddress:    "0x867837a9722C512e0862d8c2E15b8bE220E8b87d",
 			AVSDirectoryAddress:         "0xD58f6844f79eB1fbd9f7091d05f7cb30d3363926",
 			ELRewardsCoordinatorAddress: "0x29e8572678e0c272350aa0b4B8f304E47EBcd5e7",
-			RockBTCAddress:              "",                                                         // TODO: Update when we have the actual Hoodi RockBTC address
-			RockBTCStrategyAddress:      "",                                                         // TODO: Update when we have the actual Hoodi strategy address
+			RockBTCAddress:              "0xA7AdF06a1D3a2CA827D4EddA96a1520054713E1c",
+			RockBTCStrategyAddress:      "0xA0119075188e7add0D885a14981B9EF300865D0c",
 			ProofStoreBaseURL:           "https://eigenlabs-rewards-testnet-hoodi.s3.amazonaws.com", // TODO: Update when we have the actual Hoodi URL
 		},
 	}
