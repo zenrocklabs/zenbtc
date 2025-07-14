@@ -23,7 +23,6 @@ require (
 	github.com/Layr-Labs/eigenlayer-contracts v1.1.1
 	github.com/Layr-Labs/eigenlayer-rewards-proofs v0.2.14-0.20250219175207-db412abfccef
 	github.com/Layr-Labs/eigensdk-go v0.1.12
-	github.com/zenrocklabs/goem v1.1.0
 	github.com/Zenrock-Foundation/zrchain/v6 v6.3.11
 	github.com/btcsuite/btcd v0.24.2
 	github.com/btcsuite/btcd/chaincfg/chainhash v1.1.0
@@ -39,6 +38,7 @@ require (
 	github.com/pkg/errors v0.9.1
 	github.com/stretchr/testify v1.10.0
 	github.com/urfave/cli/v2 v2.27.4
+	github.com/zenrocklabs/goem v1.1.0
 	google.golang.org/genproto/googleapis/api v0.0.0-20250324211829-b45e905df463
 	google.golang.org/grpc v1.71.0
 	google.golang.org/protobuf v1.36.6
