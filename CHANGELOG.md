@@ -1,3 +1,10 @@
+## [1.17.18](https://github.com/zenrocklabs/zenbtc/compare/v1.17.17...v1.17.18) (2025-07-21)
+
+
+### Bug Fixes
+
+* rename chainID field to caip2chainID to prevent overlap ([30ab116](https://github.com/zenrocklabs/zenbtc/commit/30ab116afb7d15a21321cc52f5316f9c0082ecc8))
+
 ## [1.17.17](https://github.com/zenrocklabs/zenbtc/compare/v1.17.16...v1.17.17) (2025-07-04)
 
 
