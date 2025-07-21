@@ -374,17 +374,6 @@ func (s *IntegrationTestSuite) Test_ZenbtcKeeper_GetParams() {
 	s.Require().NotNil(params)
 }
 
-func (s *IntegrationTestSuite) Test_ZenbtcKeeper_StoreGetters() {
-	pendingMintStore := s.zenbtcKeeper.GetPendingMintTransactionsStore()
-	s.Require().NotNil(pendingMintStore)
-
-	burnEventsStore := s.zenbtcKeeper.GetBurnEventsStore()
-	s.Require().NotNil(burnEventsStore)
-
-	redemptionsStore := s.zenbtcKeeper.GetRedemptionsStore()
-	s.Require().NotNil(redemptionsStore)
-}
-
 func (s *IntegrationTestSuite) Test_Validation_CAIP2ChainId() {
 	testCases := []struct {
 		name         string

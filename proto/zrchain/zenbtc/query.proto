@@ -108,7 +108,7 @@ message QueryBurnEventsRequest {
   uint64 start_index = 1;
   string txID = 2;
   uint64 logIndex = 3;
-  string chainID = 4;
+  string caip2chainID = 4;
   BurnStatus status = 5;
 }
 

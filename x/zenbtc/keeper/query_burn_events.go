@@ -20,7 +20,7 @@ func (k Keeper) QueryBurnEvents(ctx context.Context, req *types.QueryBurnEventsR
 	if err := k.BurnEvents.Walk(ctx, queryRange.StartInclusive(req.StartIndex), func(_ uint64, burnEvent types.BurnEvent) (bool, error) {
 		if (req.TxID == "" || burnEvent.TxID == req.TxID) &&
 			(req.LogIndex == 0 || burnEvent.LogIndex == req.LogIndex) &&
-			(req.ChainID == "" || burnEvent.ChainID == req.ChainID) &&
+			(req.Caip2ChainID == "" || burnEvent.ChainID == req.Caip2ChainID) &&
 			(req.Status == types.BurnStatus_BURN_STATUS_UNSPECIFIED || burnEvent.Status == req.Status) {
 
 			matchingBurnEvents = append(matchingBurnEvents, &burnEvent)
