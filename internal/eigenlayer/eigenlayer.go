@@ -53,10 +53,10 @@ func NewEigenlayerClient(logger eigensdkLogger.Logger, ethClient *ethclient.Clie
 		return nil, err
 	}
 
-	networkname := "hoodi"
-	environment := "testnet"
+	networkname := ethereum.HoodiNetworkName
+	environment := ethereum.HoodiEnvironment
 	if chainId.Int64() == MainnetChainId {
-		networkname = "mainnet"
+		networkname = ethereum.MainnetNetworkName
 		environment = "prod"
 	}
 
