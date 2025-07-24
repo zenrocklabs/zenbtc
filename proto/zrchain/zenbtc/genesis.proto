@@ -19,12 +19,12 @@ message GenesisState {
     (amino.dont_omitempty) = true
   ];
   // lock_transactions defines the lock transactions of the module.
-  repeated LockTransaction lock_transactions = 2 [
+  map<string, LockTransaction> lock_transactions = 2 [
     (gogoproto.nullable) = false,
     (amino.dont_omitempty) = true
   ];
   // pending_mint_transactions defines the pending mint transactions of the module.
-  repeated PendingMintTransaction pending_mint_transactions = 3 [
+  map<uint64, PendingMintTransaction> pending_mint_transactions = 3 [
     (gogoproto.nullable) = false,
     (amino.dont_omitempty) = true
   ];
@@ -35,7 +35,7 @@ message GenesisState {
   // pending_mint_transaction_count defines the count of pending mint transactions of the module.
   uint64 pending_mint_transaction_count = 6;
   // burn_events defines the burn events of the module.
-  repeated BurnEvent burn_events = 7 [
+  map<uint64, BurnEvent> burn_events = 7 [
     (gogoproto.nullable) = false,
     (amino.dont_omitempty) = true
   ];
@@ -44,7 +44,7 @@ message GenesisState {
   // burn_event_count defines the count of burn events of the module.
   uint64 burn_event_count = 9;
   // redemptions defines the redemptions of the module.
-  repeated Redemption redemptions = 10 [
+  map<uint64, Redemption> redemptions = 10 [
     (gogoproto.nullable) = false,
     (amino.dont_omitempty) = true
   ];

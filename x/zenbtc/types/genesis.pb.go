@@ -29,9 +29,9 @@ type GenesisState struct {
 	// params defines all the parameters of the module.
 	Params Params `protobuf:"bytes,1,opt,name=params,proto3" json:"params"`
 	// lock_transactions defines the lock transactions of the module.
-	LockTransactions []LockTransaction `protobuf:"bytes,2,rep,name=lock_transactions,json=lockTransactions,proto3" json:"lock_transactions"`
+	LockTransactions map[string]LockTransaction `protobuf:"bytes,2,rep,name=lock_transactions,json=lockTransactions,proto3" json:"lock_transactions" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
 	// pending_mint_transactions defines the pending mint transactions of the module.
-	PendingMintTransactions []PendingMintTransaction `protobuf:"bytes,3,rep,name=pending_mint_transactions,json=pendingMintTransactions,proto3" json:"pending_mint_transactions"`
+	PendingMintTransactions map[uint64]PendingMintTransaction `protobuf:"bytes,3,rep,name=pending_mint_transactions,json=pendingMintTransactions,proto3" json:"pending_mint_transactions" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
 	// first_pending_eth_mint_transaction defines the first pending Ethereum mint transaction of the module.
 	FirstPendingEthMintTransaction uint64 `protobuf:"varint,4,opt,name=first_pending_eth_mint_transaction,json=firstPendingEthMintTransaction,proto3" json:"first_pending_eth_mint_transaction,omitempty"`
 	// first_pending_sol_mint_transaction defines the first pending Solana mint transaction of the module.
@@ -39,13 +39,13 @@ type GenesisState struct {
 	// pending_mint_transaction_count defines the count of pending mint transactions of the module.
 	PendingMintTransactionCount uint64 `protobuf:"varint,6,opt,name=pending_mint_transaction_count,json=pendingMintTransactionCount,proto3" json:"pending_mint_transaction_count,omitempty"`
 	// burn_events defines the burn events of the module.
-	BurnEvents []BurnEvent `protobuf:"bytes,7,rep,name=burn_events,json=burnEvents,proto3" json:"burn_events"`
+	BurnEvents map[uint64]BurnEvent `protobuf:"bytes,7,rep,name=burn_events,json=burnEvents,proto3" json:"burn_events" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
 	// first_pending_burn_event defines the first pending burn event of the module.
 	FirstPendingBurnEvent uint64 `protobuf:"varint,8,opt,name=first_pending_burn_event,json=firstPendingBurnEvent,proto3" json:"first_pending_burn_event,omitempty"`
 	// burn_event_count defines the count of burn events of the module.
 	BurnEventCount uint64 `protobuf:"varint,9,opt,name=burn_event_count,json=burnEventCount,proto3" json:"burn_event_count,omitempty"`
 	// redemptions defines the redemptions of the module.
-	Redemptions []Redemption `protobuf:"bytes,10,rep,name=redemptions,proto3" json:"redemptions"`
+	Redemptions map[uint64]Redemption `protobuf:"bytes,10,rep,name=redemptions,proto3" json:"redemptions" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
 	// first_pending_redemption defines the first pending redemption of the module.
 	FirstPendingRedemption uint64 `protobuf:"varint,11,opt,name=first_pending_redemption,json=firstPendingRedemption,proto3" json:"first_pending_redemption,omitempty"`
 	// first_redemption_awaiting_sign defines the first redemption awaiting sign of the module.
@@ -96,14 +96,14 @@ func (m *GenesisState) GetParams() Params {
 	return Params{}
 }
 
-func (m *GenesisState) GetLockTransactions() []LockTransaction {
+func (m *GenesisState) GetLockTransactions() map[string]LockTransaction {
 	if m != nil {
 		return m.LockTransactions
 	}
 	return nil
 }
 
-func (m *GenesisState) GetPendingMintTransactions() []PendingMintTransaction {
+func (m *GenesisState) GetPendingMintTransactions() map[uint64]PendingMintTransaction {
 	if m != nil {
 		return m.PendingMintTransactions
 	}
@@ -131,7 +131,7 @@ func (m *GenesisState) GetPendingMintTransactionCount() uint64 {
 	return 0
 }
 
-func (m *GenesisState) GetBurnEvents() []BurnEvent {
+func (m *GenesisState) GetBurnEvents() map[uint64]BurnEvent {
 	if m != nil {
 		return m.BurnEvents
 	}
@@ -152,7 +152,7 @@ func (m *GenesisState) GetBurnEventCount() uint64 {
 	return 0
 }
 
-func (m *GenesisState) GetRedemptions() []Redemption {
+func (m *GenesisState) GetRedemptions() map[uint64]Redemption {
 	if m != nil {
 		return m.Redemptions
 	}
@@ -189,47 +189,58 @@ func (m *GenesisState) GetFirstPendingStakeTransaction() uint64 {
 
 func init() {
 	proto.RegisterType((*GenesisState)(nil), "zrchain.zenbtc.GenesisState")
+	proto.RegisterMapType((map[uint64]BurnEvent)(nil), "zrchain.zenbtc.GenesisState.BurnEventsEntry")
+	proto.RegisterMapType((map[string]LockTransaction)(nil), "zrchain.zenbtc.GenesisState.LockTransactionsEntry")
+	proto.RegisterMapType((map[uint64]PendingMintTransaction)(nil), "zrchain.zenbtc.GenesisState.PendingMintTransactionsEntry")
+	proto.RegisterMapType((map[uint64]Redemption)(nil), "zrchain.zenbtc.GenesisState.RedemptionsEntry")
 }
 
 func init() { proto.RegisterFile("zrchain/zenbtc/genesis.proto", fileDescriptor_fa21ece0a519645b) }
 
 var fileDescriptor_fa21ece0a519645b = []byte{
-	// 550 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x74, 0x54, 0xcf, 0x6e, 0xd3, 0x30,
-	0x18, 0x6f, 0xd8, 0xe8, 0x98, 0x3b, 0xaa, 0xcd, 0x82, 0xe1, 0x76, 0x53, 0x5a, 0xed, 0x80, 0x2a,
-	0x84, 0x5a, 0x69, 0x1c, 0x80, 0x23, 0x9b, 0xca, 0x24, 0x04, 0x12, 0x6a, 0x91, 0x90, 0xb8, 0x44,
-	0x4e, 0x66, 0x52, 0xab, 0x89, 0x1d, 0xc5, 0x0e, 0xb0, 0x3d, 0x05, 0x8f, 0xc1, 0x91, 0xc7, 0xd8,
-	0x71, 0x47, 0x4e, 0x08, 0xb5, 0x07, 0x5e, 0x63, 0x8a, 0x9d, 0x34, 0x89, 0xd3, 0x5e, 0x2a, 0x2b,
-	0xbf, 0x3f, 0xdf, 0xef, 0xfb, 0xfa, 0xd9, 0xe0, 0xf8, 0x3a, 0xf6, 0x66, 0x98, 0xb2, 0xd1, 0x35,
-	0x61, 0xae, 0xf4, 0x46, 0x3e, 0x61, 0x44, 0x50, 0x31, 0x8c, 0x62, 0x2e, 0x39, 0x6c, 0x67, 0xe8,
-	0x50, 0xa3, 0xdd, 0x03, 0x1c, 0x52, 0xc6, 0x47, 0xea, 0x57, 0x53, 0xba, 0x8f, 0x7c, 0xee, 0x73,
-	0x75, 0x1c, 0xa5, 0xa7, 0xec, 0xeb, 0x91, 0x61, 0x1b, 0xe1, 0x18, 0x87, 0x62, 0x03, 0x28, 0x92,
-	0x28, 0x0a, 0xae, 0x32, 0xb0, 0x6f, 0x80, 0x31, 0xb9, 0x24, 0x61, 0x24, 0x29, 0x67, 0xb9, 0xbc,
-	0x63, 0x30, 0x42, 0xca, 0xa4, 0x86, 0x4e, 0x16, 0x3b, 0x60, 0xef, 0x42, 0x77, 0x30, 0x95, 0x58,
-	0x12, 0xf8, 0x1a, 0x34, 0x75, 0x69, 0x64, 0xf5, 0xad, 0x41, 0xeb, 0xf4, 0x70, 0x58, 0xed, 0x68,
-	0xf8, 0x51, 0xa1, 0x67, 0xbb, 0x37, 0x7f, 0x7b, 0x8d, 0x5f, 0xff, 0x7f, 0x3f, 0xb3, 0x26, 0x99,
-	0x00, 0x7e, 0x06, 0x07, 0x01, 0xf7, 0xe6, 0x8e, 0x8c, 0x31, 0x13, 0xd8, 0x53, 0x09, 0xd0, 0xbd,
-	0xfe, 0xd6, 0xa0, 0x75, 0xda, 0x33, 0x5d, 0xde, 0x73, 0x6f, 0xfe, 0xa9, 0xe0, 0x95, 0xed, 0xf6,
-	0x83, 0x2a, 0x26, 0x60, 0x08, 0x3a, 0x11, 0x61, 0x97, 0x94, 0xf9, 0x4e, 0x1a, 0xbd, 0x5a, 0x60,
-	0x4b, 0x15, 0x78, 0x5a, 0x8b, 0xa9, 0x05, 0x1f, 0x28, 0x93, 0x1b, 0xea, 0x3c, 0x89, 0xd6, 0x52,
-	0x04, 0x7c, 0x07, 0x4e, 0xbe, 0xd2, 0x58, 0x48, 0x27, 0x2f, 0x4a, 0xe4, 0xac, 0x56, 0x18, 0x6d,
-	0xf7, 0xad, 0xc1, 0xf6, 0xc4, 0x56, 0xcc, 0xac, 0xd8, 0x58, 0xce, 0x0c, 0xb3, 0xba, 0x97, 0xe0,
-	0x41, 0xdd, 0xeb, 0x7e, 0xdd, 0x6b, 0xca, 0x03, 0xd3, 0xeb, 0x1c, 0xd8, 0x9b, 0xc6, 0xe0, 0x78,
-	0x3c, 0x61, 0x12, 0x35, 0x95, 0xcf, 0xd1, 0xfa, 0xc6, 0xce, 0x53, 0x0a, 0x1c, 0x83, 0x96, 0x9b,
-	0xc4, 0xcc, 0x21, 0xdf, 0x08, 0x93, 0x02, 0xed, 0xa8, 0xe9, 0x75, 0xcc, 0xe9, 0x9d, 0x25, 0x31,
-	0x1b, 0xa7, 0x8c, 0xf2, 0xc0, 0x80, 0x9b, 0x7f, 0x15, 0xf0, 0x25, 0x40, 0xd5, 0xbe, 0x0a, 0x53,
-	0xf4, 0x40, 0xa5, 0x78, 0x5c, 0xee, 0x66, 0xe5, 0x07, 0x07, 0x60, 0xbf, 0xa0, 0x66, 0xb1, 0x77,
-	0x95, 0xa0, 0xbd, 0xb2, 0xd7, 0x49, 0x2f, 0x40, 0xab, 0xb4, 0xca, 0x08, 0xa8, 0xa4, 0x5d, 0x33,
-	0xe9, 0x64, 0x45, 0x29, 0x47, 0x2d, 0x2b, 0xe1, 0x2b, 0x33, 0x6b, 0x01, 0xa2, 0x96, 0x2a, 0x7d,
-	0x58, 0xce, 0x5a, 0x38, 0xa6, 0x13, 0xd7, 0xca, 0x42, 0xe1, 0xe0, 0xef, 0x98, 0x4a, 0xf5, 0x4f,
-	0x52, 0x9f, 0xa1, 0x3d, 0x3d, 0x71, 0xc5, 0x2a, 0x84, 0x6f, 0x32, 0xce, 0x94, 0xfa, 0x2c, 0xbd,
-	0x51, 0xfa, 0xbe, 0xa2, 0x87, 0xeb, 0x6f, 0xd4, 0x54, 0xa1, 0x95, 0x1b, 0xa5, 0x05, 0x70, 0x0c,
-	0x7a, 0xc6, 0xf6, 0x48, 0x3c, 0x27, 0x95, 0xd5, 0x69, 0xab, 0x00, 0xc7, 0x95, 0xd5, 0x49, 0x49,
-	0xe5, 0xa5, 0x7f, 0x7b, 0xb3, 0xb0, 0xad, 0xdb, 0x85, 0x6d, 0xfd, 0x5b, 0xd8, 0xd6, 0xcf, 0xa5,
-	0xdd, 0xb8, 0x5d, 0xda, 0x8d, 0x3f, 0x4b, 0xbb, 0xf1, 0xe5, 0xb9, 0x4f, 0xe5, 0x2c, 0x71, 0x87,
-	0x1e, 0x0f, 0xd3, 0xc7, 0x21, 0xe6, 0xde, 0x3c, 0xc0, 0xae, 0xc8, 0x1f, 0x8a, 0x1f, 0xf9, 0x41,
-	0x5e, 0x45, 0x44, 0xb8, 0x4d, 0xf5, 0x66, 0xbc, 0xb8, 0x0b, 0x00, 0x00, 0xff, 0xff, 0xae, 0x0d,
-	0xbe, 0xf4, 0x03, 0x05, 0x00, 0x00,
+	// 661 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x7c, 0x55, 0x4f, 0x6f, 0xd3, 0x30,
+	0x1c, 0x6d, 0xf6, 0x0f, 0xe6, 0x8e, 0xd1, 0x59, 0x6c, 0x78, 0xdd, 0x94, 0x55, 0x3b, 0xa0, 0x0a,
+	0x8d, 0x16, 0x0d, 0x21, 0x36, 0xc4, 0x85, 0x4d, 0x05, 0x09, 0x81, 0x34, 0xb5, 0x1c, 0xa6, 0x5d,
+	0x2a, 0x37, 0x33, 0xa9, 0x69, 0x6a, 0x47, 0x89, 0x33, 0xe8, 0x4e, 0x7c, 0x04, 0x3e, 0x06, 0x47,
+	0xbe, 0x01, 0xd7, 0x1d, 0x77, 0xe4, 0x84, 0xd0, 0x7a, 0xe0, 0x6b, 0xa0, 0xd8, 0x69, 0xe3, 0x38,
+	0x59, 0x2f, 0x95, 0xd5, 0xf7, 0x7e, 0xef, 0xbd, 0x9f, 0xf3, 0xfb, 0x25, 0x60, 0xfb, 0x32, 0x70,
+	0xfa, 0x98, 0xb2, 0xe6, 0x25, 0x61, 0x3d, 0xe1, 0x34, 0x5d, 0xc2, 0x48, 0x48, 0xc3, 0x86, 0x1f,
+	0x70, 0xc1, 0xe1, 0x6a, 0x82, 0x36, 0x14, 0x5a, 0x5d, 0xc3, 0x43, 0xca, 0x78, 0x53, 0xfe, 0x2a,
+	0x4a, 0xf5, 0x81, 0xcb, 0x5d, 0x2e, 0x8f, 0xcd, 0xf8, 0x94, 0xfc, 0xbb, 0x65, 0xc8, 0xfa, 0x38,
+	0xc0, 0xc3, 0xf0, 0x16, 0x30, 0x8c, 0x7c, 0xdf, 0x1b, 0x25, 0x60, 0xcd, 0x00, 0x03, 0x72, 0x4e,
+	0x86, 0xbe, 0xa0, 0x9c, 0x4d, 0xca, 0x37, 0x0d, 0xc6, 0x90, 0x32, 0xa1, 0xa0, 0xdd, 0x5f, 0x65,
+	0xb0, 0xf2, 0x56, 0x75, 0xd0, 0x11, 0x58, 0x10, 0x78, 0x08, 0x96, 0x94, 0x35, 0xb2, 0x6a, 0x56,
+	0xbd, 0xbc, 0xbf, 0xd1, 0xc8, 0x76, 0xd4, 0x38, 0x91, 0xe8, 0xd1, 0xf2, 0xd5, 0x9f, 0x9d, 0xd2,
+	0x8f, 0x7f, 0x3f, 0x1f, 0x5b, 0xed, 0xa4, 0x00, 0x7e, 0x06, 0x6b, 0x1e, 0x77, 0x06, 0x5d, 0x11,
+	0x60, 0x16, 0x62, 0x47, 0x26, 0x40, 0x73, 0xb5, 0xf9, 0x7a, 0x79, 0x7f, 0xdf, 0x54, 0xd1, 0x3d,
+	0x1b, 0xef, 0xb9, 0x33, 0xf8, 0xa8, 0x15, 0xb5, 0x98, 0x08, 0x46, 0xba, 0x43, 0xc5, 0x33, 0x18,
+	0xf0, 0x9b, 0x05, 0x36, 0x7d, 0xc2, 0xce, 0x29, 0x73, 0xbb, 0x71, 0x3b, 0x59, 0xd3, 0x79, 0x69,
+	0x7a, 0x38, 0xd3, 0xf4, 0x44, 0x55, 0x7f, 0xa0, 0x4c, 0xcc, 0xf4, 0x7e, 0xe8, 0x17, 0x13, 0xe1,
+	0x3b, 0xb0, 0xfb, 0x89, 0x06, 0xa1, 0xe8, 0x4e, 0x72, 0x10, 0xd1, 0xcf, 0x65, 0x41, 0x0b, 0x35,
+	0xab, 0xbe, 0xd0, 0xb6, 0x25, 0x33, 0xb1, 0x6c, 0x89, 0xbe, 0x21, 0x96, 0xd7, 0x0a, 0xb9, 0x97,
+	0xd7, 0x5a, 0xcc, 0x6b, 0x75, 0xb8, 0x67, 0x6a, 0x1d, 0x03, 0xfb, 0xb6, 0x9b, 0xe9, 0x3a, 0x3c,
+	0x62, 0x02, 0x2d, 0x49, 0x9d, 0xad, 0xe2, 0xc6, 0x8e, 0x63, 0x0a, 0x3c, 0x05, 0xe5, 0x5e, 0x14,
+	0xb0, 0x2e, 0xb9, 0x20, 0x4c, 0x84, 0xe8, 0x8e, 0xbc, 0xd0, 0xbd, 0x99, 0x17, 0x7a, 0x14, 0x05,
+	0xac, 0x25, 0xe9, 0xb9, 0x3b, 0x04, 0xbd, 0x29, 0x06, 0x5f, 0x00, 0x94, 0x6d, 0x35, 0xf5, 0x41,
+	0x77, 0x65, 0xb0, 0x75, 0xbd, 0xc1, 0xa9, 0x2a, 0xac, 0x83, 0x4a, 0x4a, 0x4d, 0x3a, 0x59, 0x96,
+	0x05, 0xab, 0x53, 0x79, 0x15, 0xfe, 0x0c, 0x94, 0xb5, 0x25, 0x40, 0x40, 0x86, 0x7f, 0x32, 0x33,
+	0x7c, 0x3b, 0xe5, 0xe7, 0xd2, 0xeb, 0x62, 0xf0, 0xc0, 0x8c, 0x9f, 0x82, 0xa8, 0x2c, 0xd3, 0x6c,
+	0xe8, 0xf1, 0x53, 0xdd, 0xf8, 0xb9, 0xa8, 0xca, 0xb4, 0xa2, 0x8b, 0xbf, 0x60, 0x2a, 0xe4, 0xf3,
+	0xa6, 0x2e, 0x43, 0x2b, 0xea, 0xb9, 0x48, 0x56, 0x5a, 0xf8, 0x3a, 0xe1, 0x74, 0xa8, 0xcb, 0xe2,
+	0xf5, 0x54, 0xcb, 0x8f, 0xee, 0x15, 0xaf, 0x67, 0x47, 0xa2, 0x99, 0xf5, 0x54, 0x05, 0xb0, 0x05,
+	0x76, 0x8c, 0x19, 0x13, 0x78, 0x40, 0x32, 0x03, 0xb6, 0x2a, 0x03, 0x6c, 0x67, 0x06, 0x2c, 0x26,
+	0x69, 0xe3, 0x51, 0x3d, 0x07, 0xeb, 0x85, 0xfb, 0x0a, 0x2b, 0x60, 0x7e, 0x40, 0x46, 0xf2, 0xb5,
+	0xb1, 0xdc, 0x8e, 0x8f, 0xf0, 0x39, 0x58, 0xbc, 0xc0, 0x5e, 0x44, 0xd0, 0x9c, 0xcc, 0xba, 0x63,
+	0x66, 0x35, 0x74, 0xda, 0x8a, 0xfd, 0x72, 0xee, 0xc0, 0xaa, 0x06, 0x60, 0x7b, 0xd6, 0x82, 0xea,
+	0x66, 0x0b, 0xca, 0xec, 0x55, 0xd6, 0xec, 0x51, 0xee, 0xbd, 0x55, 0x28, 0xa7, 0x7b, 0x9e, 0x82,
+	0xfb, 0xc6, 0x0c, 0x17, 0xd8, 0x34, 0xb3, 0x36, 0x9b, 0xa6, 0xcd, 0x54, 0x41, 0x57, 0x3e, 0x03,
+	0x15, 0x73, 0xc0, 0x0a, 0xa4, 0x9f, 0x66, 0xa5, 0xab, 0xa6, 0x74, 0x2a, 0xa1, 0x69, 0x1f, 0xbd,
+	0xb9, 0xba, 0xb1, 0xad, 0xeb, 0x1b, 0xdb, 0xfa, 0x7b, 0x63, 0x5b, 0xdf, 0xc7, 0x76, 0xe9, 0x7a,
+	0x6c, 0x97, 0x7e, 0x8f, 0xed, 0xd2, 0xd9, 0x9e, 0x4b, 0x45, 0x3f, 0xea, 0x35, 0x1c, 0x3e, 0x8c,
+	0xdf, 0xfc, 0x01, 0x77, 0x06, 0x1e, 0xee, 0x85, 0x93, 0xaf, 0xc0, 0xd7, 0xc9, 0x41, 0x8c, 0x7c,
+	0x12, 0xf6, 0x96, 0xe4, 0x07, 0xe1, 0xd9, 0xff, 0x00, 0x00, 0x00, 0xff, 0xff, 0xee, 0xf7, 0xcb,
+	0x02, 0xe0, 0x06, 0x00, 0x00,
 }
 
 func (m *GenesisState) Marshal() (dAtA []byte, err error) {
@@ -278,15 +289,23 @@ func (m *GenesisState) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 		dAtA[i] = 0x58
 	}
 	if len(m.Redemptions) > 0 {
-		for iNdEx := len(m.Redemptions) - 1; iNdEx >= 0; iNdEx-- {
+		for k := range m.Redemptions {
+			v := m.Redemptions[k]
+			baseI := i
 			{
-				size, err := m.Redemptions[iNdEx].MarshalToSizedBuffer(dAtA[:i])
+				size, err := (&v).MarshalToSizedBuffer(dAtA[:i])
 				if err != nil {
 					return 0, err
 				}
 				i -= size
 				i = encodeVarintGenesis(dAtA, i, uint64(size))
 			}
+			i--
+			dAtA[i] = 0x12
+			i = encodeVarintGenesis(dAtA, i, uint64(k))
+			i--
+			dAtA[i] = 0x8
+			i = encodeVarintGenesis(dAtA, i, uint64(baseI-i))
 			i--
 			dAtA[i] = 0x52
 		}
@@ -302,15 +321,23 @@ func (m *GenesisState) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 		dAtA[i] = 0x40
 	}
 	if len(m.BurnEvents) > 0 {
-		for iNdEx := len(m.BurnEvents) - 1; iNdEx >= 0; iNdEx-- {
+		for k := range m.BurnEvents {
+			v := m.BurnEvents[k]
+			baseI := i
 			{
-				size, err := m.BurnEvents[iNdEx].MarshalToSizedBuffer(dAtA[:i])
+				size, err := (&v).MarshalToSizedBuffer(dAtA[:i])
 				if err != nil {
 					return 0, err
 				}
 				i -= size
 				i = encodeVarintGenesis(dAtA, i, uint64(size))
 			}
+			i--
+			dAtA[i] = 0x12
+			i = encodeVarintGenesis(dAtA, i, uint64(k))
+			i--
+			dAtA[i] = 0x8
+			i = encodeVarintGenesis(dAtA, i, uint64(baseI-i))
 			i--
 			dAtA[i] = 0x3a
 		}
@@ -331,9 +358,11 @@ func (m *GenesisState) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 		dAtA[i] = 0x20
 	}
 	if len(m.PendingMintTransactions) > 0 {
-		for iNdEx := len(m.PendingMintTransactions) - 1; iNdEx >= 0; iNdEx-- {
+		for k := range m.PendingMintTransactions {
+			v := m.PendingMintTransactions[k]
+			baseI := i
 			{
-				size, err := m.PendingMintTransactions[iNdEx].MarshalToSizedBuffer(dAtA[:i])
+				size, err := (&v).MarshalToSizedBuffer(dAtA[:i])
 				if err != nil {
 					return 0, err
 				}
@@ -341,19 +370,35 @@ func (m *GenesisState) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 				i = encodeVarintGenesis(dAtA, i, uint64(size))
 			}
 			i--
+			dAtA[i] = 0x12
+			i = encodeVarintGenesis(dAtA, i, uint64(k))
+			i--
+			dAtA[i] = 0x8
+			i = encodeVarintGenesis(dAtA, i, uint64(baseI-i))
+			i--
 			dAtA[i] = 0x1a
 		}
 	}
 	if len(m.LockTransactions) > 0 {
-		for iNdEx := len(m.LockTransactions) - 1; iNdEx >= 0; iNdEx-- {
+		for k := range m.LockTransactions {
+			v := m.LockTransactions[k]
+			baseI := i
 			{
-				size, err := m.LockTransactions[iNdEx].MarshalToSizedBuffer(dAtA[:i])
+				size, err := (&v).MarshalToSizedBuffer(dAtA[:i])
 				if err != nil {
 					return 0, err
 				}
 				i -= size
 				i = encodeVarintGenesis(dAtA, i, uint64(size))
 			}
+			i--
+			dAtA[i] = 0x12
+			i -= len(k)
+			copy(dAtA[i:], k)
+			i = encodeVarintGenesis(dAtA, i, uint64(len(k)))
+			i--
+			dAtA[i] = 0xa
+			i = encodeVarintGenesis(dAtA, i, uint64(baseI-i))
 			i--
 			dAtA[i] = 0x12
 		}
@@ -391,15 +436,21 @@ func (m *GenesisState) Size() (n int) {
 	l = m.Params.Size()
 	n += 1 + l + sovGenesis(uint64(l))
 	if len(m.LockTransactions) > 0 {
-		for _, e := range m.LockTransactions {
-			l = e.Size()
-			n += 1 + l + sovGenesis(uint64(l))
+		for k, v := range m.LockTransactions {
+			_ = k
+			_ = v
+			l = v.Size()
+			mapEntrySize := 1 + len(k) + sovGenesis(uint64(len(k))) + 1 + l + sovGenesis(uint64(l))
+			n += mapEntrySize + 1 + sovGenesis(uint64(mapEntrySize))
 		}
 	}
 	if len(m.PendingMintTransactions) > 0 {
-		for _, e := range m.PendingMintTransactions {
-			l = e.Size()
-			n += 1 + l + sovGenesis(uint64(l))
+		for k, v := range m.PendingMintTransactions {
+			_ = k
+			_ = v
+			l = v.Size()
+			mapEntrySize := 1 + sovGenesis(uint64(k)) + 1 + l + sovGenesis(uint64(l))
+			n += mapEntrySize + 1 + sovGenesis(uint64(mapEntrySize))
 		}
 	}
 	if m.FirstPendingEthMintTransaction != 0 {
@@ -412,9 +463,12 @@ func (m *GenesisState) Size() (n int) {
 		n += 1 + sovGenesis(uint64(m.PendingMintTransactionCount))
 	}
 	if len(m.BurnEvents) > 0 {
-		for _, e := range m.BurnEvents {
-			l = e.Size()
-			n += 1 + l + sovGenesis(uint64(l))
+		for k, v := range m.BurnEvents {
+			_ = k
+			_ = v
+			l = v.Size()
+			mapEntrySize := 1 + sovGenesis(uint64(k)) + 1 + l + sovGenesis(uint64(l))
+			n += mapEntrySize + 1 + sovGenesis(uint64(mapEntrySize))
 		}
 	}
 	if m.FirstPendingBurnEvent != 0 {
@@ -424,9 +478,12 @@ func (m *GenesisState) Size() (n int) {
 		n += 1 + sovGenesis(uint64(m.BurnEventCount))
 	}
 	if len(m.Redemptions) > 0 {
-		for _, e := range m.Redemptions {
-			l = e.Size()
-			n += 1 + l + sovGenesis(uint64(l))
+		for k, v := range m.Redemptions {
+			_ = k
+			_ = v
+			l = v.Size()
+			mapEntrySize := 1 + sovGenesis(uint64(k)) + 1 + l + sovGenesis(uint64(l))
+			n += mapEntrySize + 1 + sovGenesis(uint64(mapEntrySize))
 		}
 	}
 	if m.FirstPendingRedemption != 0 {
@@ -540,10 +597,105 @@ func (m *GenesisState) Unmarshal(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.LockTransactions = append(m.LockTransactions, LockTransaction{})
-			if err := m.LockTransactions[len(m.LockTransactions)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
-				return err
+			if m.LockTransactions == nil {
+				m.LockTransactions = make(map[string]LockTransaction)
 			}
+			var mapkey string
+			mapvalue := &LockTransaction{}
+			for iNdEx < postIndex {
+				entryPreIndex := iNdEx
+				var wire uint64
+				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return ErrIntOverflowGenesis
+					}
+					if iNdEx >= l {
+						return io.ErrUnexpectedEOF
+					}
+					b := dAtA[iNdEx]
+					iNdEx++
+					wire |= uint64(b&0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+				fieldNum := int32(wire >> 3)
+				if fieldNum == 1 {
+					var stringLenmapkey uint64
+					for shift := uint(0); ; shift += 7 {
+						if shift >= 64 {
+							return ErrIntOverflowGenesis
+						}
+						if iNdEx >= l {
+							return io.ErrUnexpectedEOF
+						}
+						b := dAtA[iNdEx]
+						iNdEx++
+						stringLenmapkey |= uint64(b&0x7F) << shift
+						if b < 0x80 {
+							break
+						}
+					}
+					intStringLenmapkey := int(stringLenmapkey)
+					if intStringLenmapkey < 0 {
+						return ErrInvalidLengthGenesis
+					}
+					postStringIndexmapkey := iNdEx + intStringLenmapkey
+					if postStringIndexmapkey < 0 {
+						return ErrInvalidLengthGenesis
+					}
+					if postStringIndexmapkey > l {
+						return io.ErrUnexpectedEOF
+					}
+					mapkey = string(dAtA[iNdEx:postStringIndexmapkey])
+					iNdEx = postStringIndexmapkey
+				} else if fieldNum == 2 {
+					var mapmsglen int
+					for shift := uint(0); ; shift += 7 {
+						if shift >= 64 {
+							return ErrIntOverflowGenesis
+						}
+						if iNdEx >= l {
+							return io.ErrUnexpectedEOF
+						}
+						b := dAtA[iNdEx]
+						iNdEx++
+						mapmsglen |= int(b&0x7F) << shift
+						if b < 0x80 {
+							break
+						}
+					}
+					if mapmsglen < 0 {
+						return ErrInvalidLengthGenesis
+					}
+					postmsgIndex := iNdEx + mapmsglen
+					if postmsgIndex < 0 {
+						return ErrInvalidLengthGenesis
+					}
+					if postmsgIndex > l {
+						return io.ErrUnexpectedEOF
+					}
+					mapvalue = &LockTransaction{}
+					if err := mapvalue.Unmarshal(dAtA[iNdEx:postmsgIndex]); err != nil {
+						return err
+					}
+					iNdEx = postmsgIndex
+				} else {
+					iNdEx = entryPreIndex
+					skippy, err := skipGenesis(dAtA[iNdEx:])
+					if err != nil {
+						return err
+					}
+					if (skippy < 0) || (iNdEx+skippy) < 0 {
+						return ErrInvalidLengthGenesis
+					}
+					if (iNdEx + skippy) > postIndex {
+						return io.ErrUnexpectedEOF
+					}
+					iNdEx += skippy
+				}
+			}
+			m.LockTransactions[mapkey] = *mapvalue
 			iNdEx = postIndex
 		case 3:
 			if wireType != 2 {
@@ -574,10 +726,91 @@ func (m *GenesisState) Unmarshal(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.PendingMintTransactions = append(m.PendingMintTransactions, PendingMintTransaction{})
-			if err := m.PendingMintTransactions[len(m.PendingMintTransactions)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
-				return err
+			if m.PendingMintTransactions == nil {
+				m.PendingMintTransactions = make(map[uint64]PendingMintTransaction)
 			}
+			var mapkey uint64
+			mapvalue := &PendingMintTransaction{}
+			for iNdEx < postIndex {
+				entryPreIndex := iNdEx
+				var wire uint64
+				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return ErrIntOverflowGenesis
+					}
+					if iNdEx >= l {
+						return io.ErrUnexpectedEOF
+					}
+					b := dAtA[iNdEx]
+					iNdEx++
+					wire |= uint64(b&0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+				fieldNum := int32(wire >> 3)
+				if fieldNum == 1 {
+					for shift := uint(0); ; shift += 7 {
+						if shift >= 64 {
+							return ErrIntOverflowGenesis
+						}
+						if iNdEx >= l {
+							return io.ErrUnexpectedEOF
+						}
+						b := dAtA[iNdEx]
+						iNdEx++
+						mapkey |= uint64(b&0x7F) << shift
+						if b < 0x80 {
+							break
+						}
+					}
+				} else if fieldNum == 2 {
+					var mapmsglen int
+					for shift := uint(0); ; shift += 7 {
+						if shift >= 64 {
+							return ErrIntOverflowGenesis
+						}
+						if iNdEx >= l {
+							return io.ErrUnexpectedEOF
+						}
+						b := dAtA[iNdEx]
+						iNdEx++
+						mapmsglen |= int(b&0x7F) << shift
+						if b < 0x80 {
+							break
+						}
+					}
+					if mapmsglen < 0 {
+						return ErrInvalidLengthGenesis
+					}
+					postmsgIndex := iNdEx + mapmsglen
+					if postmsgIndex < 0 {
+						return ErrInvalidLengthGenesis
+					}
+					if postmsgIndex > l {
+						return io.ErrUnexpectedEOF
+					}
+					mapvalue = &PendingMintTransaction{}
+					if err := mapvalue.Unmarshal(dAtA[iNdEx:postmsgIndex]); err != nil {
+						return err
+					}
+					iNdEx = postmsgIndex
+				} else {
+					iNdEx = entryPreIndex
+					skippy, err := skipGenesis(dAtA[iNdEx:])
+					if err != nil {
+						return err
+					}
+					if (skippy < 0) || (iNdEx+skippy) < 0 {
+						return ErrInvalidLengthGenesis
+					}
+					if (iNdEx + skippy) > postIndex {
+						return io.ErrUnexpectedEOF
+					}
+					iNdEx += skippy
+				}
+			}
+			m.PendingMintTransactions[mapkey] = *mapvalue
 			iNdEx = postIndex
 		case 4:
 			if wireType != 0 {
@@ -665,10 +898,91 @@ func (m *GenesisState) Unmarshal(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.BurnEvents = append(m.BurnEvents, BurnEvent{})
-			if err := m.BurnEvents[len(m.BurnEvents)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
-				return err
+			if m.BurnEvents == nil {
+				m.BurnEvents = make(map[uint64]BurnEvent)
 			}
+			var mapkey uint64
+			mapvalue := &BurnEvent{}
+			for iNdEx < postIndex {
+				entryPreIndex := iNdEx
+				var wire uint64
+				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return ErrIntOverflowGenesis
+					}
+					if iNdEx >= l {
+						return io.ErrUnexpectedEOF
+					}
+					b := dAtA[iNdEx]
+					iNdEx++
+					wire |= uint64(b&0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+				fieldNum := int32(wire >> 3)
+				if fieldNum == 1 {
+					for shift := uint(0); ; shift += 7 {
+						if shift >= 64 {
+							return ErrIntOverflowGenesis
+						}
+						if iNdEx >= l {
+							return io.ErrUnexpectedEOF
+						}
+						b := dAtA[iNdEx]
+						iNdEx++
+						mapkey |= uint64(b&0x7F) << shift
+						if b < 0x80 {
+							break
+						}
+					}
+				} else if fieldNum == 2 {
+					var mapmsglen int
+					for shift := uint(0); ; shift += 7 {
+						if shift >= 64 {
+							return ErrIntOverflowGenesis
+						}
+						if iNdEx >= l {
+							return io.ErrUnexpectedEOF
+						}
+						b := dAtA[iNdEx]
+						iNdEx++
+						mapmsglen |= int(b&0x7F) << shift
+						if b < 0x80 {
+							break
+						}
+					}
+					if mapmsglen < 0 {
+						return ErrInvalidLengthGenesis
+					}
+					postmsgIndex := iNdEx + mapmsglen
+					if postmsgIndex < 0 {
+						return ErrInvalidLengthGenesis
+					}
+					if postmsgIndex > l {
+						return io.ErrUnexpectedEOF
+					}
+					mapvalue = &BurnEvent{}
+					if err := mapvalue.Unmarshal(dAtA[iNdEx:postmsgIndex]); err != nil {
+						return err
+					}
+					iNdEx = postmsgIndex
+				} else {
+					iNdEx = entryPreIndex
+					skippy, err := skipGenesis(dAtA[iNdEx:])
+					if err != nil {
+						return err
+					}
+					if (skippy < 0) || (iNdEx+skippy) < 0 {
+						return ErrInvalidLengthGenesis
+					}
+					if (iNdEx + skippy) > postIndex {
+						return io.ErrUnexpectedEOF
+					}
+					iNdEx += skippy
+				}
+			}
+			m.BurnEvents[mapkey] = *mapvalue
 			iNdEx = postIndex
 		case 8:
 			if wireType != 0 {
@@ -737,10 +1051,91 @@ func (m *GenesisState) Unmarshal(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.Redemptions = append(m.Redemptions, Redemption{})
-			if err := m.Redemptions[len(m.Redemptions)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
-				return err
+			if m.Redemptions == nil {
+				m.Redemptions = make(map[uint64]Redemption)
 			}
+			var mapkey uint64
+			mapvalue := &Redemption{}
+			for iNdEx < postIndex {
+				entryPreIndex := iNdEx
+				var wire uint64
+				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return ErrIntOverflowGenesis
+					}
+					if iNdEx >= l {
+						return io.ErrUnexpectedEOF
+					}
+					b := dAtA[iNdEx]
+					iNdEx++
+					wire |= uint64(b&0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+				fieldNum := int32(wire >> 3)
+				if fieldNum == 1 {
+					for shift := uint(0); ; shift += 7 {
+						if shift >= 64 {
+							return ErrIntOverflowGenesis
+						}
+						if iNdEx >= l {
+							return io.ErrUnexpectedEOF
+						}
+						b := dAtA[iNdEx]
+						iNdEx++
+						mapkey |= uint64(b&0x7F) << shift
+						if b < 0x80 {
+							break
+						}
+					}
+				} else if fieldNum == 2 {
+					var mapmsglen int
+					for shift := uint(0); ; shift += 7 {
+						if shift >= 64 {
+							return ErrIntOverflowGenesis
+						}
+						if iNdEx >= l {
+							return io.ErrUnexpectedEOF
+						}
+						b := dAtA[iNdEx]
+						iNdEx++
+						mapmsglen |= int(b&0x7F) << shift
+						if b < 0x80 {
+							break
+						}
+					}
+					if mapmsglen < 0 {
+						return ErrInvalidLengthGenesis
+					}
+					postmsgIndex := iNdEx + mapmsglen
+					if postmsgIndex < 0 {
+						return ErrInvalidLengthGenesis
+					}
+					if postmsgIndex > l {
+						return io.ErrUnexpectedEOF
+					}
+					mapvalue = &Redemption{}
+					if err := mapvalue.Unmarshal(dAtA[iNdEx:postmsgIndex]); err != nil {
+						return err
+					}
+					iNdEx = postmsgIndex
+				} else {
+					iNdEx = entryPreIndex
+					skippy, err := skipGenesis(dAtA[iNdEx:])
+					if err != nil {
+						return err
+					}
+					if (skippy < 0) || (iNdEx+skippy) < 0 {
+						return ErrInvalidLengthGenesis
+					}
+					if (iNdEx + skippy) > postIndex {
+						return io.ErrUnexpectedEOF
+					}
+					iNdEx += skippy
+				}
+			}
+			m.Redemptions[mapkey] = *mapvalue
 			iNdEx = postIndex
 		case 11:
 			if wireType != 0 {
