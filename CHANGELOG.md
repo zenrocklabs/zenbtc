@@ -1,3 +1,10 @@
+## [1.17.19](https://github.com/zenrocklabs/zenbtc/compare/v1.17.18...v1.17.19) (2025-07-28)
+
+
+### Bug Fixes
+
+* exports and genesis ([79c4bb5](https://github.com/zenrocklabs/zenbtc/commit/79c4bb5adf6674666221d07b86ae880719f7b02e))
+
 ## [1.17.18](https://github.com/zenrocklabs/zenbtc/compare/v1.17.17...v1.17.18) (2025-07-21)
 
 
