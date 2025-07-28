@@ -20,22 +20,14 @@ func DefaultGenesis() *types.GenesisState {
 }
 
 func (k Keeper) ExportState(ctx context.Context, genState *types.GenesisState) error {
-	lockTxStore, err := k.LockTransactions.Iterate(ctx, nil)
+	var err error
+
+	genState.LockTransactions, err = k.GetLockTransactionsMap(ctx)
 	if err != nil {
 		return err
 	}
 
-	genState.LockTransactions, err = lockTxStore.Values()
-	if err != nil {
-		return err
-	}
-
-	pendingMintTxStore, err := k.PendingMintTransactionsMap.Iterate(ctx, nil)
-	if err != nil {
-		return err
-	}
-
-	genState.PendingMintTransactions, err = pendingMintTxStore.Values()
+	genState.PendingMintTransactions, err = k.GetPendingMintTransactionsMap(ctx)
 	if err != nil {
 		return err
 	}
@@ -55,12 +47,7 @@ func (k Keeper) ExportState(ctx context.Context, genState *types.GenesisState) e
 		return err
 	}
 
-	burnEventStore, err := k.BurnEvents.Iterate(ctx, nil)
-	if err != nil {
-		return err
-	}
-
-	genState.BurnEvents, err = burnEventStore.Values()
+	genState.BurnEvents, err = k.GetBurnEventsMap(ctx)
 	if err != nil {
 		return err
 	}
@@ -75,12 +62,7 @@ func (k Keeper) ExportState(ctx context.Context, genState *types.GenesisState) e
 		return err
 	}
 
-	redemptionStore, err := k.Redemptions.Iterate(ctx, nil)
-	if err != nil {
-		return err
-	}
-
-	genState.Redemptions, err = redemptionStore.Values()
+	genState.Redemptions, err = k.GetRedemptionsMap(ctx)
 	if err != nil {
 		return err
 	}

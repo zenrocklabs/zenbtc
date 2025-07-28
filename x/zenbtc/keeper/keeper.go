@@ -255,3 +255,39 @@ func (k Keeper) SetAuthority(authority string) {
 func (k Keeper) GetParams(ctx context.Context) (types.Params, error) {
 	return k.Params.Get(ctx)
 }
+
+func (k Keeper) GetLockTransactionsMap(ctx context.Context) (map[string]types.LockTransaction, error) {
+	lockTxMap := make(map[string]types.LockTransaction)
+	err := k.LockTransactions.Walk(ctx, nil, func(key string, value types.LockTransaction) (bool, error) {
+		lockTxMap[key] = value
+		return false, nil
+	})
+	return lockTxMap, err
+}
+
+func (k Keeper) GetPendingMintTransactionsMap(ctx context.Context) (map[uint64]types.PendingMintTransaction, error) {
+	pendingMintTxMap := make(map[uint64]types.PendingMintTransaction)
+	err := k.PendingMintTransactionsMap.Walk(ctx, nil, func(key uint64, value types.PendingMintTransaction) (bool, error) {
+		pendingMintTxMap[key] = value
+		return false, nil
+	})
+	return pendingMintTxMap, err
+}
+
+func (k Keeper) GetBurnEventsMap(ctx context.Context) (map[uint64]types.BurnEvent, error) {
+	burnEventMap := make(map[uint64]types.BurnEvent)
+	err := k.BurnEvents.Walk(ctx, nil, func(key uint64, value types.BurnEvent) (bool, error) {
+		burnEventMap[key] = value
+		return false, nil
+	})
+	return burnEventMap, err
+}
+
+func (k Keeper) GetRedemptionsMap(ctx context.Context) (map[uint64]types.Redemption, error) {
+	redemptionMap := make(map[uint64]types.Redemption)
+	err := k.Redemptions.Walk(ctx, nil, func(key uint64, value types.Redemption) (bool, error) {
+		redemptionMap[key] = value
+		return false, nil
+	})
+	return redemptionMap, err
+}
