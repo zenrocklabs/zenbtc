@@ -14,7 +14,7 @@ you can find the cli in the following repo https://github.com/Layr-Labs/eigenlay
 
 once the cli is build, execute the following command:
 ```
-./bin/eigenlayer rewards set-claimer -b -a <address_from_previous_command> -ea <operator_address> -n holesky -k <path_to_ecdsa_key_file_from_sidecar> -v --eth-rpc-url https://ethereum-holesky-rpc.publicnode.com 
+./bin/eigenlayer rewards set-claimer -b -a <address_from_previous_command> -ea <operator_address> -n hoodi -k <path_to_ecdsa_key_file_from_sidecar> -v --eth-rpc-url https://ethereum-hoodi-rpc.publicnode.com 
 ```
 
 for mainnet, use 

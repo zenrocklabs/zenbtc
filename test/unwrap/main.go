@@ -17,11 +17,8 @@ import (
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/crypto"
 	"github.com/ethereum/go-ethereum/ethclient"
+	"github.com/zenrocklabs/goem/ethereum"
 	bindings "github.com/zenrocklabs/zenbtc/bindings"
-)
-
-const (
-	HOLESKY_CHAIN_ID = 17000
 )
 
 func main() {
@@ -29,7 +26,7 @@ func main() {
 	privateKeyHex := flag.String("private-key", "", "Private key in hex format (with or without 0x prefix)")
 	btcAddress := flag.String("btc-address", "tb1qypwjx7yj5jz0gw0vh76348ypa2ns7tfwsnhlh9", "Bitcoin testnet address")
 	amount := flag.String("amount", "100000", "Amount to unwrap (in satoshis)")
-	rpcURL := flag.String("rpc-url", "https://rpc.ankr.com/eth_holesky", "Ethereum RPC URL")
+	rpcURL := flag.String("rpc-url", "https://rpc.ankr.com/eth_hoodi", "Ethereum RPC URL")
 	contractAddr := flag.String("contract", "0xEe6dd71ccf66E3F920a4D49a57020e0F89659407", "ZenBTC contract address")
 
 	flag.Parse()
@@ -46,13 +43,13 @@ func main() {
 		log.Fatalf("Failed to connect to Ethereum client: %v", err)
 	}
 
-	// Verify we're on Holesky
+	// Verify we're on Hoodi
 	chainID, err := client.ChainID(context.Background())
 	if err != nil {
 		log.Fatalf("Failed to get chain ID: %v", err)
 	}
-	if chainID.Int64() != HOLESKY_CHAIN_ID {
-		log.Fatalf("Wrong network: expected Holesky (chain ID %d), got chain ID %d", HOLESKY_CHAIN_ID, chainID.Int64())
+	if chainID.Cmp(ethereum.HoodiChainId) != 0 {
+		log.Fatalf("Wrong network: expected Hoodi (chain ID %s), got chain ID %s", ethereum.HoodiChainId.String(), chainID.String())
 	}
 
 	// Process private key
@@ -71,7 +68,7 @@ func main() {
 	address := crypto.PubkeyToAddress(*publicKeyECDSA)
 
 	// Create auth
-	auth, err := bind.NewKeyedTransactorWithChainID(privateKey, big.NewInt(HOLESKY_CHAIN_ID))
+	auth, err := bind.NewKeyedTransactorWithChainID(privateKey, ethereum.HoodiChainId)
 	if err != nil {
 		log.Fatalf("Failed to create auth: %v", err)
 	}
