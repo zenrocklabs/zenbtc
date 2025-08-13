@@ -2,9 +2,9 @@ eth_config:
   mnemonic: "...insert mnemonic..."
   derivation_path: "m/44'/60'/0'/0/0"
   
-  # holesky, only for claiming and unwrapping
-  weth_address: 0x94373a4919b3240d86ea41593d5eba789fef3848 
-  rpc_url: https://ethereum-holesky-rpc.publicnode.com
+  # hoodi, only for claiming and unwrapping
+  weth_address: 0x962EE10D3F66D8fB020e8d0eD0aa36367d25626F 
+  rpc_url: https://ethereum-hoodi-rpc.publicnode.com
   operators:
     - ...
   

@@ -8,6 +8,7 @@ import (
 	"time"
 
 	"github.com/pkg/errors"
+	"github.com/zenrocklabs/goem/ethereum"
 	"github.com/zenrocklabs/zenbtc/internal/chain"
 
 	"github.com/ethereum/go-ethereum/common"
@@ -52,10 +53,10 @@ func NewEigenlayerClient(logger eigensdkLogger.Logger, ethClient *ethclient.Clie
 		return nil, err
 	}
 
-	networkname := "holesky"
-	environment := "testnet"
+	networkname := ethereum.HoodiNetworkName
+	environment := ethereum.HoodiEnvironment
 	if chainId.Int64() == MainnetChainId {
-		networkname = "mainnet"
+		networkname = ethereum.MainnetNetworkName
 		environment = "prod"
 	}
 
@@ -79,8 +80,8 @@ type ChainMetadata struct {
 }
 
 var (
-	MainnetChainId int64 = 1
-	HoleskyChainId int64 = 17000
+	MainnetChainId int64 = ethereum.MainnetChainId.Int64()
+	HoodiChainId   int64 = ethereum.HoodiChainId.Int64()
 
 	ChainMetadataMap = map[int64]ChainMetadata{
 		MainnetChainId: {
@@ -91,13 +92,13 @@ var (
 			RockBTCStrategyAddress:      "0xa5430Ca83713F877B77b54d5A24FD3D230DF854B",
 			ProofStoreBaseURL:           "https://eigenlabs-rewards-mainnet-ethereum.s3.amazonaws.com",
 		},
-		HoleskyChainId: {
-			DelegationManagerAddress:    "0xA44151489861Fe9e3055d95adC98FbD462B948e7",
-			AVSDirectoryAddress:         "0x055733000064333CaDDbC92763c58BF0192fFeBf",
-			ELRewardsCoordinatorAddress: "0xAcc1fb458a1317E886dB376Fc8141540537E68fE",
-			RockBTCAddress:              "0x863062D86e42Dd0BAC3E59B3847f86a862392514",
-			RockBTCStrategyAddress:      "0x909C0e4284F6F3cD5c0a807071C7c0DE3Bbd7585",
-			ProofStoreBaseURL:           "https://eigenlabs-rewards-testnet-holesky.s3.amazonaws.com",
+		HoodiChainId: {
+			DelegationManagerAddress:    "0x867837a9722C512e0862d8c2E15b8bE220E8b87d",
+			AVSDirectoryAddress:         "0xD58f6844f79eB1fbd9f7091d05f7cb30d3363926",
+			ELRewardsCoordinatorAddress: "0x29e8572678e0c272350aa0b4B8f304E47EBcd5e7",
+			RockBTCAddress:              "0xA7AdF06a1D3a2CA827D4EddA96a1520054713E1c",
+			RockBTCStrategyAddress:      "0xA0119075188e7add0D885a14981B9EF300865D0c",
+			ProofStoreBaseURL:           "https://eigenlabs-rewards-testnet-hoodi.s3.amazonaws.com",
 		},
 	}
 )
