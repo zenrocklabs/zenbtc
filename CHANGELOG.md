@@ -1,3 +1,10 @@
+# [1.18.0](https://github.com/zenrocklabs/zenbtc/compare/v1.17.19...v1.18.0) (2025-08-25)
+
+
+### Features
+
+* add event store program ID to params ([61d97bb](https://github.com/zenrocklabs/zenbtc/commit/61d97bbf39389a314e243f7e906ebabd69e7964e))
+
 ## [1.17.19](https://github.com/zenrocklabs/zenbtc/compare/v1.17.18...v1.17.19) (2025-07-28)
 
 
