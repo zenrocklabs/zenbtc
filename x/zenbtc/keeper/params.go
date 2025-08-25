@@ -24,15 +24,16 @@ var (
 	// DefaultStakerKeyID = 0
 	// DefaultBurnerKeyID = 0
 	DefaultSolana = &types.Solana{
-		SignerKeyId:        7,
-		ProgramId:          "3jo4mdc6QbGRigia2jvmKShbmz3aWq4Y8bgUXfur5StT",
-		NonceAuthorityKey:  8,
-		NonceAccountKey:    9,
-		MintAddress:        "9oBkgQUkq8jvzK98D7Uib6GYSZZmjnZ6QEGJRrAeKnDj",
-		FeeWallet:          "FzqGcRG98v1KhKxatX2Abb2z1aJ2rViQwBK5GHByKCAd",
-		Fee:                0,
-		MultisigKeyAddress: "8cmZY2id22vxpXs2H3YYQNARuPHNuYwa7jipW1q1v9Fy",
-		Btl:                20,
+		SignerKeyId:         7,
+		ProgramId:           "3jo4mdc6QbGRigia2jvmKShbmz3aWq4Y8bgUXfur5StT",
+		NonceAuthorityKey:   8,
+		NonceAccountKey:     9,
+		MintAddress:         "9oBkgQUkq8jvzK98D7Uib6GYSZZmjnZ6QEGJRrAeKnDj",
+		FeeWallet:           "FzqGcRG98v1KhKxatX2Abb2z1aJ2rViQwBK5GHByKCAd",
+		Fee:                 0,
+		MultisigKeyAddress:  "8cmZY2id22vxpXs2H3YYQNARuPHNuYwa7jipW1q1v9Fy",
+		Btl:                 20,
+		EventStoreProgramId: "Hsu6LJz42sZhs2GvF9yzD6L9n2AZTeHnjDx6Cp4DvEdf",
 	}
 )
 

@@ -1126,16 +1126,17 @@ func (x *fastReflection_Params) ProtoMethods() *protoiface.Methods {
 }
 
 var (
-	md_Solana                      protoreflect.MessageDescriptor
-	fd_Solana_signer_key_id        protoreflect.FieldDescriptor
-	fd_Solana_program_id           protoreflect.FieldDescriptor
-	fd_Solana_nonce_account_key    protoreflect.FieldDescriptor
-	fd_Solana_nonce_authority_key  protoreflect.FieldDescriptor
-	fd_Solana_mint_address         protoreflect.FieldDescriptor
-	fd_Solana_fee_wallet           protoreflect.FieldDescriptor
-	fd_Solana_fee                  protoreflect.FieldDescriptor
-	fd_Solana_multisig_key_address protoreflect.FieldDescriptor
-	fd_Solana_btl                  protoreflect.FieldDescriptor
+	md_Solana                        protoreflect.MessageDescriptor
+	fd_Solana_signer_key_id          protoreflect.FieldDescriptor
+	fd_Solana_program_id             protoreflect.FieldDescriptor
+	fd_Solana_nonce_account_key      protoreflect.FieldDescriptor
+	fd_Solana_nonce_authority_key    protoreflect.FieldDescriptor
+	fd_Solana_mint_address           protoreflect.FieldDescriptor
+	fd_Solana_fee_wallet             protoreflect.FieldDescriptor
+	fd_Solana_fee                    protoreflect.FieldDescriptor
+	fd_Solana_multisig_key_address   protoreflect.FieldDescriptor
+	fd_Solana_btl                    protoreflect.FieldDescriptor
+	fd_Solana_event_store_program_id protoreflect.FieldDescriptor
 )
 
 func init() {
@@ -1150,6 +1151,7 @@ func init() {
 	fd_Solana_fee = md_Solana.Fields().ByName("fee")
 	fd_Solana_multisig_key_address = md_Solana.Fields().ByName("multisig_key_address")
 	fd_Solana_btl = md_Solana.Fields().ByName("btl")
+	fd_Solana_event_store_program_id = md_Solana.Fields().ByName("event_store_program_id")
 }
 
 var _ protoreflect.Message = (*fastReflection_Solana)(nil)
@@ -1271,6 +1273,12 @@ func (x *fastReflection_Solana) Range(f func(protoreflect.FieldDescriptor, proto
 			return
 		}
 	}
+	if x.EventStoreProgramId != "" {
+		value := protoreflect.ValueOfString(x.EventStoreProgramId)
+		if !f(fd_Solana_event_store_program_id, value) {
+			return
+		}
+	}
 }
 
 // Has reports whether a field is populated.
@@ -1304,6 +1312,8 @@ func (x *fastReflection_Solana) Has(fd protoreflect.FieldDescriptor) bool {
 		return x.MultisigKeyAddress != ""
 	case "zrchain.zenbtc.Solana.btl":
 		return x.Btl != int64(0)
+	case "zrchain.zenbtc.Solana.event_store_program_id":
+		return x.EventStoreProgramId != ""
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: zrchain.zenbtc.Solana"))
@@ -1338,6 +1348,8 @@ func (x *fastReflection_Solana) Clear(fd protoreflect.FieldDescriptor) {
 		x.MultisigKeyAddress = ""
 	case "zrchain.zenbtc.Solana.btl":
 		x.Btl = int64(0)
+	case "zrchain.zenbtc.Solana.event_store_program_id":
+		x.EventStoreProgramId = ""
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: zrchain.zenbtc.Solana"))
@@ -1381,6 +1393,9 @@ func (x *fastReflection_Solana) Get(descriptor protoreflect.FieldDescriptor) pro
 	case "zrchain.zenbtc.Solana.btl":
 		value := x.Btl
 		return protoreflect.ValueOfInt64(value)
+	case "zrchain.zenbtc.Solana.event_store_program_id":
+		value := x.EventStoreProgramId
+		return protoreflect.ValueOfString(value)
 	default:
 		if descriptor.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: zrchain.zenbtc.Solana"))
@@ -1419,6 +1434,8 @@ func (x *fastReflection_Solana) Set(fd protoreflect.FieldDescriptor, value proto
 		x.MultisigKeyAddress = value.Interface().(string)
 	case "zrchain.zenbtc.Solana.btl":
 		x.Btl = value.Int()
+	case "zrchain.zenbtc.Solana.event_store_program_id":
+		x.EventStoreProgramId = value.Interface().(string)
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: zrchain.zenbtc.Solana"))
@@ -1457,6 +1474,8 @@ func (x *fastReflection_Solana) Mutable(fd protoreflect.FieldDescriptor) protore
 		panic(fmt.Errorf("field multisig_key_address of message zrchain.zenbtc.Solana is not mutable"))
 	case "zrchain.zenbtc.Solana.btl":
 		panic(fmt.Errorf("field btl of message zrchain.zenbtc.Solana is not mutable"))
+	case "zrchain.zenbtc.Solana.event_store_program_id":
+		panic(fmt.Errorf("field event_store_program_id of message zrchain.zenbtc.Solana is not mutable"))
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: zrchain.zenbtc.Solana"))
@@ -1488,6 +1507,8 @@ func (x *fastReflection_Solana) NewField(fd protoreflect.FieldDescriptor) protor
 		return protoreflect.ValueOfString("")
 	case "zrchain.zenbtc.Solana.btl":
 		return protoreflect.ValueOfInt64(int64(0))
+	case "zrchain.zenbtc.Solana.event_store_program_id":
+		return protoreflect.ValueOfString("")
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: zrchain.zenbtc.Solana"))
@@ -1588,6 +1609,10 @@ func (x *fastReflection_Solana) ProtoMethods() *protoiface.Methods {
 		if x.Btl != 0 {
 			n += 1 + runtime.Sov(uint64(x.Btl))
 		}
+		l = len(x.EventStoreProgramId)
+		if l > 0 {
+			n += 1 + l + runtime.Sov(uint64(l))
+		}
 		if x.unknownFields != nil {
 			n += len(x.unknownFields)
 		}
@@ -1616,6 +1641,13 @@ func (x *fastReflection_Solana) ProtoMethods() *protoiface.Methods {
 		if x.unknownFields != nil {
 			i -= len(x.unknownFields)
 			copy(dAtA[i:], x.unknownFields)
+		}
+		if len(x.EventStoreProgramId) > 0 {
+			i -= len(x.EventStoreProgramId)
+			copy(dAtA[i:], x.EventStoreProgramId)
+			i = runtime.EncodeVarint(dAtA, i, uint64(len(x.EventStoreProgramId)))
+			i--
+			dAtA[i] = 0x52
 		}
 		if x.Btl != 0 {
 			i = runtime.EncodeVarint(dAtA, i, uint64(x.Btl))
@@ -1942,6 +1974,38 @@ func (x *fastReflection_Solana) ProtoMethods() *protoiface.Methods {
 						break
 					}
 				}
+			case 10:
+				if wireType != 2 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field EventStoreProgramId", wireType)
+				}
+				var stringLen uint64
+				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
+					}
+					if iNdEx >= l {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+					}
+					b := dAtA[iNdEx]
+					iNdEx++
+					stringLen |= uint64(b&0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+				intStringLen := int(stringLen)
+				if intStringLen < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				postIndex := iNdEx + intStringLen
+				if postIndex < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				if postIndex > l {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+				}
+				x.EventStoreProgramId = string(dAtA[iNdEx:postIndex])
+				iNdEx = postIndex
 			default:
 				iNdEx = preIndex
 				skippy, err := runtime.Skip(dAtA[iNdEx:])
@@ -2120,6 +2184,8 @@ type Solana struct {
 	Fee                uint64 `protobuf:"varint,7,opt,name=fee,proto3" json:"fee,omitempty"`
 	MultisigKeyAddress string `protobuf:"bytes,8,opt,name=multisig_key_address,json=multisigKeyAddress,proto3" json:"multisig_key_address,omitempty"`
 	Btl                int64  `protobuf:"varint,9,opt,name=btl,proto3" json:"btl,omitempty"`
+	// EventStoreProgramID is the program id for the on-chain event store
+	EventStoreProgramId string `protobuf:"bytes,10,opt,name=event_store_program_id,json=eventStoreProgramId,proto3" json:"event_store_program_id,omitempty"`
 }
 
 func (x *Solana) Reset() {
@@ -2205,6 +2271,13 @@ func (x *Solana) GetBtl() int64 {
 	return 0
 }
 
+func (x *Solana) GetEventStoreProgramId() string {
+	if x != nil {
+		return x.EventStoreProgramId
+	}
+	return ""
+}
+
 var File_zrchain_zenbtc_params_proto protoreflect.FileDescriptor
 
 var file_zrchain_zenbtc_params_proto_rawDesc = []byte{
@@ -2245,7 +2318,7 @@ var file_zrchain_zenbtc_params_proto_rawDesc = []byte{
 	0x63, 0x68, 0x61, 0x69, 0x6e, 0x2e, 0x7a, 0x65, 0x6e, 0x62, 0x74, 0x63, 0x2e, 0x53, 0x6f, 0x6c,
 	0x61, 0x6e, 0x61, 0x52, 0x06, 0x73, 0x6f, 0x6c, 0x61, 0x6e, 0x61, 0x3a, 0x20, 0xe8, 0xa0, 0x1f,
 	0x01, 0x8a, 0xe7, 0xb0, 0x2a, 0x17, 0x7a, 0x72, 0x63, 0x68, 0x61, 0x69, 0x6e, 0x2f, 0x78, 0x2f,
-	0x7a, 0x65, 0x6e, 0x62, 0x74, 0x63, 0x2f, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x22, 0xc5, 0x02,
+	0x7a, 0x65, 0x6e, 0x62, 0x74, 0x63, 0x2f, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x22, 0xfa, 0x02,
 	0x0a, 0x06, 0x53, 0x6f, 0x6c, 0x61, 0x6e, 0x61, 0x12, 0x22, 0x0a, 0x0d, 0x73, 0x69, 0x67, 0x6e,
 	0x65, 0x72, 0x5f, 0x6b, 0x65, 0x79, 0x5f, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x04, 0x52,
 	0x0b, 0x73, 0x69, 0x67, 0x6e, 0x65, 0x72, 0x4b, 0x65, 0x79, 0x49, 0x64, 0x12, 0x1d, 0x0a, 0x0a,
@@ -2265,18 +2338,21 @@ var file_zrchain_zenbtc_params_proto_rawDesc = []byte{
 	0x75, 0x6c, 0x74, 0x69, 0x73, 0x69, 0x67, 0x5f, 0x6b, 0x65, 0x79, 0x5f, 0x61, 0x64, 0x64, 0x72,
 	0x65, 0x73, 0x73, 0x18, 0x08, 0x20, 0x01, 0x28, 0x09, 0x52, 0x12, 0x6d, 0x75, 0x6c, 0x74, 0x69,
 	0x73, 0x69, 0x67, 0x4b, 0x65, 0x79, 0x41, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x12, 0x10, 0x0a,
-	0x03, 0x62, 0x74, 0x6c, 0x18, 0x09, 0x20, 0x01, 0x28, 0x03, 0x52, 0x03, 0x62, 0x74, 0x6c, 0x3a,
-	0x04, 0xe8, 0xa0, 0x1f, 0x01, 0x42, 0x9b, 0x01, 0x0a, 0x12, 0x63, 0x6f, 0x6d, 0x2e, 0x7a, 0x72,
-	0x63, 0x68, 0x61, 0x69, 0x6e, 0x2e, 0x7a, 0x65, 0x6e, 0x62, 0x74, 0x63, 0x42, 0x0b, 0x50, 0x61,
-	0x72, 0x61, 0x6d, 0x73, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x50, 0x01, 0x5a, 0x1f, 0x63, 0x6f, 0x73,
-	0x6d, 0x6f, 0x73, 0x73, 0x64, 0x6b, 0x2e, 0x69, 0x6f, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x7a, 0x72,
-	0x63, 0x68, 0x61, 0x69, 0x6e, 0x2f, 0x7a, 0x65, 0x6e, 0x62, 0x74, 0x63, 0xa2, 0x02, 0x03, 0x5a,
-	0x5a, 0x58, 0xaa, 0x02, 0x0e, 0x5a, 0x72, 0x63, 0x68, 0x61, 0x69, 0x6e, 0x2e, 0x5a, 0x65, 0x6e,
-	0x62, 0x74, 0x63, 0xca, 0x02, 0x0e, 0x5a, 0x72, 0x63, 0x68, 0x61, 0x69, 0x6e, 0x5c, 0x5a, 0x65,
-	0x6e, 0x62, 0x74, 0x63, 0xe2, 0x02, 0x1a, 0x5a, 0x72, 0x63, 0x68, 0x61, 0x69, 0x6e, 0x5c, 0x5a,
-	0x65, 0x6e, 0x62, 0x74, 0x63, 0x5c, 0x47, 0x50, 0x42, 0x4d, 0x65, 0x74, 0x61, 0x64, 0x61, 0x74,
-	0x61, 0xea, 0x02, 0x0f, 0x5a, 0x72, 0x63, 0x68, 0x61, 0x69, 0x6e, 0x3a, 0x3a, 0x5a, 0x65, 0x6e,
-	0x62, 0x74, 0x63, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x03, 0x62, 0x74, 0x6c, 0x18, 0x09, 0x20, 0x01, 0x28, 0x03, 0x52, 0x03, 0x62, 0x74, 0x6c, 0x12,
+	0x33, 0x0a, 0x16, 0x65, 0x76, 0x65, 0x6e, 0x74, 0x5f, 0x73, 0x74, 0x6f, 0x72, 0x65, 0x5f, 0x70,
+	0x72, 0x6f, 0x67, 0x72, 0x61, 0x6d, 0x5f, 0x69, 0x64, 0x18, 0x0a, 0x20, 0x01, 0x28, 0x09, 0x52,
+	0x13, 0x65, 0x76, 0x65, 0x6e, 0x74, 0x53, 0x74, 0x6f, 0x72, 0x65, 0x50, 0x72, 0x6f, 0x67, 0x72,
+	0x61, 0x6d, 0x49, 0x64, 0x3a, 0x04, 0xe8, 0xa0, 0x1f, 0x01, 0x42, 0x9b, 0x01, 0x0a, 0x12, 0x63,
+	0x6f, 0x6d, 0x2e, 0x7a, 0x72, 0x63, 0x68, 0x61, 0x69, 0x6e, 0x2e, 0x7a, 0x65, 0x6e, 0x62, 0x74,
+	0x63, 0x42, 0x0b, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x50, 0x01,
+	0x5a, 0x1f, 0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x73, 0x64, 0x6b, 0x2e, 0x69, 0x6f, 0x2f, 0x61,
+	0x70, 0x69, 0x2f, 0x7a, 0x72, 0x63, 0x68, 0x61, 0x69, 0x6e, 0x2f, 0x7a, 0x65, 0x6e, 0x62, 0x74,
+	0x63, 0xa2, 0x02, 0x03, 0x5a, 0x5a, 0x58, 0xaa, 0x02, 0x0e, 0x5a, 0x72, 0x63, 0x68, 0x61, 0x69,
+	0x6e, 0x2e, 0x5a, 0x65, 0x6e, 0x62, 0x74, 0x63, 0xca, 0x02, 0x0e, 0x5a, 0x72, 0x63, 0x68, 0x61,
+	0x69, 0x6e, 0x5c, 0x5a, 0x65, 0x6e, 0x62, 0x74, 0x63, 0xe2, 0x02, 0x1a, 0x5a, 0x72, 0x63, 0x68,
+	0x61, 0x69, 0x6e, 0x5c, 0x5a, 0x65, 0x6e, 0x62, 0x74, 0x63, 0x5c, 0x47, 0x50, 0x42, 0x4d, 0x65,
+	0x74, 0x61, 0x64, 0x61, 0x74, 0x61, 0xea, 0x02, 0x0f, 0x5a, 0x72, 0x63, 0x68, 0x61, 0x69, 0x6e,
+	0x3a, 0x3a, 0x5a, 0x65, 0x6e, 0x62, 0x74, 0x63, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
