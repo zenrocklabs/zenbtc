@@ -1,3 +1,10 @@
+# [1.19.0](https://github.com/zenrocklabs/zenbtc/compare/v1.18.0...v1.19.0) (2025-09-17)
+
+
+### Features
+
+* bedrock refactor ([299637e](https://github.com/zenrocklabs/zenbtc/commit/299637ed9cb50cb896da6673e946b8d35efbdf8e))
+
 # [1.18.0](https://github.com/zenrocklabs/zenbtc/compare/v1.17.19...v1.18.0) (2025-08-25)
 
 
