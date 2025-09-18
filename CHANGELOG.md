@@ -1,3 +1,10 @@
+## [1.19.1](https://github.com/zenrocklabs/zenbtc/compare/v1.19.0...v1.19.1) (2025-09-18)
+
+
+### Bug Fixes
+
+* caip checks ([d6b3b53](https://github.com/zenrocklabs/zenbtc/commit/d6b3b53702a89458d9030076acd26450692df085))
+
 # [1.19.0](https://github.com/zenrocklabs/zenbtc/compare/v1.18.0...v1.19.0) (2025-09-17)
 
 
