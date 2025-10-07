@@ -152,6 +152,11 @@ func (k Keeper) WalkRedemptions(ctx context.Context, fn func(id uint64, redempti
 	return k.Redemptions.Walk(ctx, nil, fn)
 }
 
+func (k Keeper) WalkRedemptionsDescending(ctx context.Context, fn func(id uint64, redemption types.Redemption) (stop bool, err error)) error {
+	rng := new(collections.Range[uint64]).Descending()
+	return k.Redemptions.Walk(ctx, rng, fn)
+}
+
 func (k Keeper) GetSupply(ctx context.Context) (types.Supply, error) {
 	return k.Supply.Get(ctx)
 }
