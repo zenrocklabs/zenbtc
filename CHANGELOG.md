@@ -1,3 +1,10 @@
+## [1.19.3](https://github.com/zenrocklabs/zenbtc/compare/v1.19.2...v1.19.3) (2025-10-07)
+
+
+### Bug Fixes
+
+* devnet migration ([dadcca5](https://github.com/zenrocklabs/zenbtc/commit/dadcca5e8bd3da3314d258ae1b9c10d261fbda11))
+
 ## [1.19.2](https://github.com/zenrocklabs/zenbtc/compare/v1.19.1...v1.19.2) (2025-10-03)
 
 
