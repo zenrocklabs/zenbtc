@@ -9,6 +9,7 @@ import (
 	v6 "github.com/zenrocklabs/zenbtc/x/zenbtc/migrations/v6"
 	v7 "github.com/zenrocklabs/zenbtc/x/zenbtc/migrations/v7"
 	v8 "github.com/zenrocklabs/zenbtc/x/zenbtc/migrations/v8"
+	v9 "github.com/zenrocklabs/zenbtc/x/zenbtc/migrations/v9"
 )
 
 // Migrator is a struct for handling in-place store migrations.
@@ -81,4 +82,9 @@ func (m Migrator) Migrate6to7(ctx sdk.Context) error {
 // Migrate7to8 migrates x/zenbtc from consensus version 7 to 8.
 func (m Migrator) Migrate7to8(ctx sdk.Context) error {
 	return v8.RemoveStakedMints(ctx, m.keeper.PendingMintTransactionsMap, m.keeper.FirstPendingSolMintTransaction)
+}
+
+// Migrate8to9 migrates x/zenbtc from consensus version 8 to 9.
+func (m Migrator) Migrate8to9(ctx sdk.Context) error {
+	return v9.RemoveBurnedEvents(ctx, m.keeper.BurnEvents, m.keeper.FirstPendingBurnEvent)
 }

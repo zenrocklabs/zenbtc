@@ -22,7 +22,7 @@ import (
 	"github.com/zenrocklabs/zenbtc/x/zenbtc/types"
 )
 
-const consensusVersion = 8
+const consensusVersion = 9
 
 var (
 	_ module.AppModuleBasic      = (*AppModule)(nil)
@@ -152,6 +152,10 @@ func (am AppModule) RegisterServices(cfg module.Configurator) {
 
 	if err := cfg.RegisterMigration(types.ModuleName, 7, m.Migrate7to8); err != nil {
 		panic(fmt.Sprintf("failed to migrate x/%s from version 7 to 8: %v", types.ModuleName, err))
+	}
+
+	if err := cfg.RegisterMigration(types.ModuleName, 8, m.Migrate8to9); err != nil {
+		panic(fmt.Sprintf("failed to migrate x/%s from version 8 to 9: %v", types.ModuleName, err))
 	}
 }
 
