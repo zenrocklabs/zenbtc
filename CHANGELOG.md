@@ -1,3 +1,10 @@
+# [1.20.0](https://github.com/zenrocklabs/zenbtc/compare/v1.19.3...v1.20.0) (2025-10-07)
+
+
+### Features
+
+* WalkRedemptionsDescending ([8082ea2](https://github.com/zenrocklabs/zenbtc/commit/8082ea26d731bb1a5d8ea77ebdf5c8d62d04470e))
+
 ## [1.19.3](https://github.com/zenrocklabs/zenbtc/compare/v1.19.2...v1.19.3) (2025-10-07)
 
 
