@@ -1,3 +1,10 @@
+## [1.20.1](https://github.com/zenrocklabs/zenbtc/compare/v1.20.0...v1.20.1) (2025-10-08)
+
+
+### Bug Fixes
+
+* devnet redemption state ([9cb41fb](https://github.com/zenrocklabs/zenbtc/commit/9cb41fb323e00480e0a10c8f109fbf369392919f))
+
 # [1.20.0](https://github.com/zenrocklabs/zenbtc/compare/v1.19.3...v1.20.0) (2025-10-07)
 
 
